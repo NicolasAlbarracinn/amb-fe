@@ -1,64 +1,52 @@
-import React, { useEffect, useState } from 'react';
-
-import { InputAdornment, makeStyles } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
-
+import React, { useEffect, useState, useMemo } from 'react';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomInput from 'components/CustomInput/CustomInput';
-import { dangerColor } from 'utils/styles';
+import { verifyLength } from './validators';
+import { IInputProps } from './types';
 
-const styles = {
-  danger: {
-    color: dangerColor[0] + '!important',
-  },
-};
+const TextInput = ({ id, label, value, length = [0, 25], isRequired, onChange, endAdornmentIcon }: IInputProps) => {
+  const [isValidLength, setIsValidLength] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
-const useStyles = makeStyles(styles);
-
-const TextInput = ({ isRequired, handler, id, length, labelText }) => {
-  const [lengthState, setLengthState] = useState(false);
-  const [value, setValue] = useState(false);
-
-  const classes = useStyles();
-
-  const verifyLength = (value, length) => {
-    if (value.length >= length[0] && value.length <= length[1]) {
-      return true;
-    }
-    return false;
-  };
+  const message = useMemo(() => (isEmpty ? 'Campo Requerido' : !isValidLength ? `maximo de ${length[1]}` : undefined), [
+    isEmpty,
+    isValidLength,
+    length,
+  ]);
 
   useEffect(() => {
-    if (lengthState || !isRequired) {
-      handler({ id, value });
-    }
-  }, [handler, id, isRequired, lengthState, value]);
+    setErrorMessage(message);
+  }, [message]);
 
   const handleOnChange = e => {
-    if (verifyLength(e.target.value, length)) {
-      setLengthState(true);
-    } else {
-      setLengthState(false);
+    setIsValidLength(verifyLength(e.target.value, length));
+    onChange({ id: e.target.id, value: e.target.value });
+  };
+
+  const handlerOnBlur = e => {
+    if (isRequired) {
+      setIsEmpty(e.target.value.trim().length <= 0);
     }
-    setValue(e.target.value);
   };
 
   return (
     <CustomInput
-      success={lengthState || isRequired}
-      error={!lengthState && isRequired}
-      labelText={labelText}
+      success={isValidLength || isRequired}
+      error={!isValidLength || isEmpty}
+      labelText={label}
+      helperText={errorMessage}
       id={id}
       formControlProps={{
         fullWidth: true,
+        required: isRequired,
       }}
       inputProps={{
-        onChange: e => handleOnChange(e),
+        value,
         type: 'text',
-        endAdornment: !lengthState ? (
-          <InputAdornment position="end">
-            <Close className={classes.danger} />
-          </InputAdornment>
-        ) : undefined,
+        endAdornment: <InputAdornment position="end">{endAdornmentIcon}</InputAdornment>,
+        onChange: handleOnChange,
+        onBlur: handlerOnBlur,
       }}
     />
   );

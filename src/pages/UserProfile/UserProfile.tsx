@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-
-import PermIdentity from '@material-ui/icons/PermIdentity';
+import React, { useEffect, useState } from 'react';
 
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
-import CustomInput from 'components/CustomInput/CustomInput';
 import Clearfix from 'components/Clearfix/Clearfix';
 import Card from 'components/Card/Card';
 import CardBody from 'components/Card/CardBody';
@@ -13,6 +10,12 @@ import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import EmailInput from 'components/Form/EmailInput';
 import TextInput from 'components/Form/TextInput';
+import PictureUpload from 'components/CustomUpload/PictureUpload';
+
+import Face from '@material-ui/icons/Face';
+import RecordVoiceOver from '@material-ui/icons/RecordVoiceOver';
+import Email from '@material-ui/icons/Email';
+import PermIdentity from '@material-ui/icons/PermIdentity';
 
 import { useStyles } from './styles';
 
@@ -20,24 +23,44 @@ const initialForm = {
   email: '',
   firstName: '',
   lastName: '',
+  image: '',
 };
 
-const UserProfile = ({ handleSubmit }) => {
+type SubmitFunction = (arg: any) => void;
+
+interface IUserProfile {
+  handleSubmit: SubmitFunction;
+  formValues: typeof initialForm;
+}
+
+const UserProfile = ({ handleSubmit, formValues }: IUserProfile) => {
   const classes = useStyles();
-  let form = initialForm;
+  const [inputValues, setInputValues] = useState(initialForm);
+
+  useEffect(() => {
+    console.log(formValues);
+    setInputValues(formValues);
+  }, [formValues]);
+
+  useEffect(() => {
+    console.log(inputValues);
+  }, [inputValues]);
 
   const onChangeHanlder = ({ id, value }) => {
-    form[id] = value;
+    setInputValues(prevState => ({
+      ...prevState,
+      [id]: value,
+    }));
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    handleSubmit(form);
+    handleSubmit(inputValues);
   };
 
   return (
     <div>
-      <GridContainer>
+      <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="rose" icon>
@@ -50,28 +73,38 @@ const UserProfile = ({ handleSubmit }) => {
             </CardHeader>
             <CardBody>
               <form onSubmit={e => onSubmit(e)}>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <EmailInput isRequired={true} emailHandler={onChangeHanlder} />
+                <GridContainer justify="center">
+                  <GridItem xs={12} sm={4}>
+                    <PictureUpload id="image" onChange={onChangeHanlder} image={inputValues.image} />
                   </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
+                  <GridItem xs={12} sm={6}>
                     <TextInput
-                      length={[0, 25]}
-                      labelText="Nombre"
                       id="firstName"
+                      label="nombre"
                       isRequired={true}
-                      handler={onChangeHanlder}
+                      onChange={onChangeHanlder}
+                      value={inputValues.firstName}
+                      length={[0, 25]}
+                      endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
+                    />
+                    <TextInput
+                      id="lastName"
+                      label="apellido"
+                      isRequired={true}
+                      onChange={onChangeHanlder}
+                      value={inputValues.lastName}
+                      length={[0, 25]}
+                      endAdornmentIcon={<RecordVoiceOver className={classes.inputAdornmentIcon} />}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <TextInput
-                      length={[0, 25]}
-                      labelText="Apellido"
-                      id="lastName"
+                  <GridItem xs={12} sm={12} md={12} lg={10}>
+                    <EmailInput
+                      id="email"
+                      label="Email"
                       isRequired={true}
-                      handler={onChangeHanlder}
+                      onChange={onChangeHanlder}
+                      value={inputValues.email}
+                      endAdornmentIcon={<Email className={classes.inputAdornmentIcon} />}
                     />
                   </GridItem>
                 </GridContainer>

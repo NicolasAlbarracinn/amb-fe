@@ -1,45 +1,36 @@
+import React, { useState } from 'react';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomInput from 'components/CustomInput/CustomInput';
-import React, { useEffect, useState } from 'react';
+import { verifyEmail } from './validators';
+import { IInputProps } from './types';
 
-const EmailInput = ({ isRequired, emailHandler }) => {
-  const [registerEmail, setregisterEmail] = useState('');
-  const [registerEmailState, setregisterEmailState] = useState(false);
-
-  const verifyEmail = value => {
-    var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (emailRex.test(value)) {
-      return true;
-    }
-    return false;
-  };
-
-  useEffect(() => {
-    if (registerEmailState || !isRequired) {
-      emailHandler({ id: 'email', value: registerEmail });
-    }
-  }, [emailHandler, isRequired, registerEmail, registerEmailState]);
+const EmailInput = ({ id, label, value, isRequired, onChange, endAdornmentIcon }: IInputProps) => {
+  const [isValidEmail, setIsValidEmail] = useState(true);
 
   const handleOnChange = e => {
-    if (verifyEmail(e.target.value)) {
-      setregisterEmailState(true);
-    } else {
-      setregisterEmailState(false);
-    }
-    setregisterEmail(e.target.value);
+    setIsValidEmail(verifyEmail(e.target.value));
+    onChange({ id: e.target.id, value: e.target.value });
   };
 
   return (
     <CustomInput
-      success={registerEmailState || isRequired}
-      error={!registerEmailState && isRequired}
+      success={isValidEmail || isRequired}
+      error={!isValidEmail && isRequired}
       labelText={isRequired ? 'Email *' : 'Email'}
-      id="registeremail"
+      helperText={!isValidEmail ? 'Formato invalido' : ''}
+      id={id}
       formControlProps={{
         fullWidth: true,
       }}
       inputProps={{
-        onChange: e => handleOnChange(e),
+        value,
         type: 'email',
+        endAdornment: (
+          <InputAdornment position="end" style={{ color: '#555' }}>
+            {endAdornmentIcon}
+          </InputAdornment>
+        ),
+        onChange: handleOnChange,
       }}
     />
   );

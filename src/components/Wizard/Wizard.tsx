@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, useState } from 'react';
 import cx from 'classnames';
 
 // @material-ui/core components
@@ -8,6 +8,56 @@ import Button from 'components/CustomButtons/Button';
 import Card from 'components/Card/Card';
 
 import wizardStyle from './styles';
+
+type dinamicObject = { [key: string]: any };
+type colors = 'primary' | 'warning' | 'danger' | 'success' | 'info' | 'rose';
+
+interface ISteps {
+  stepName: string;
+  stepComponent: object;
+  stepId: string;
+}
+
+interface IWizProps {
+  classes: dinamicObject;
+  steps: ISteps[];
+  color: colors;
+  title?: string;
+  subtitle?: string;
+  previousButtonClasses?: string;
+  previousButtonText?: string;
+  nextButtonClasses?: string;
+  nextButtonText?: string;
+  finishButtonClasses?: string;
+  finishButtonText?: string;
+  finishButtonClick?: Function;
+  validate?: boolean;
+}
+
+//TODO: Refactor
+const Wiz = ({ steps, color }: IWizProps) => {
+  const isStepsLegngthDifThanThree = steps.length !== 3 ? '50%' : `${100 / 3}%`;
+  const isStepsLengthEqualTwo = steps.length === 2 ? '50%' : `${100 / 3}%`;
+  const initialWidth =
+    steps.length === 1 ? '100%' : window.innerWidth < 600 ? isStepsLegngthDifThanThree : isStepsLengthEqualTwo;
+
+  const [currentStep, setCurrentStep] = useState(0);
+  const [stepColor, setStepColor] = useState(color);
+  const [nextButton, setNextButton] = useState(steps.length > 1);
+  const [previousButton, setPreviousButton] = useState(steps.length === 1);
+  const [finishButton, setFinishButton] = useState(0);
+  const [width, setWidth] = useState(initialWidth);
+  const [movingTabStyle, setMovingTabStyle] = useState<dinamicObject>({
+    transition: 'transform 0s',
+  });
+  const [allStates, setAllStates] = useState<dinamicObject>({});
+
+  const navigationStepChange = () => {};
+  const refreshAnimation = () => {};
+  const previousButtonClick = () => {};
+  const finishButtonClick = () => {};
+  const updateWidth = () => {};
+};
 
 class Wizard extends Component<any, any, any> {
   constructor(props) {
