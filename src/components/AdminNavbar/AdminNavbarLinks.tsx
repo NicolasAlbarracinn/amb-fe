@@ -72,7 +72,6 @@ const AdminNavBarLinks = props => {
   return (
     <div className={wrapper}>
       <CustomInput
-        rtlActive={rtlActive}
         formControlProps={{
           className: classes.top + ' ' + classes.search,
         }}

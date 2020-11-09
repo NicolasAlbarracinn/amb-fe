@@ -66,8 +66,6 @@ const Login = () => {
         </CardHeader>
         <CardBody>
           <CustomInput
-            value={email}
-            onChange={setEmail}
             labelText="Email"
             id="email"
             formControlProps={{
@@ -79,11 +77,11 @@ const Login = () => {
                   <Email className={classes.inputAdornmentIcon} />
                 </InputAdornment>
               ),
+              value: email,
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value),
             }}
           />
           <CustomInput
-            value={password}
-            onChange={setPassword}
             labelText="Password"
             id="password"
             formControlProps={{
@@ -97,6 +95,8 @@ const Login = () => {
               ),
               type: 'password',
               autoComplete: 'off',
+              value: password,
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value),
             }}
           />
         </CardBody>
