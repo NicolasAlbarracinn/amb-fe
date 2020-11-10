@@ -42,6 +42,7 @@ class Step2 extends React.Component {
     return this.state;
   }
   handleSimple = event => {
+    console.log(event);
     this.setState({ [event.target.name]: event.target.value });
   };
   handleChange = name => event => {

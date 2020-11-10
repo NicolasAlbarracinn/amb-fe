@@ -1,4 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects'; // select, delay
 import Cookies from 'universal-cookie';
 
@@ -26,7 +27,14 @@ export function* getAccountRequest(action: PayloadAction<GetAccountRequest>) {
 
   try {
     const response: GetAccountResponse = yield call(request, requestURL, requestOptions);
-    yield put(actions.getAccountSuccess(response));
+    if (response.status === 'success') {
+      yield put(actions.getAccountSuccess(response.user));
+    } else {
+      yield put(actions.getAccountFailed());
+      toast.error('Algo salio mal.', {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   } catch (err) {
     yield put(actions.getAccountFailed());
   }

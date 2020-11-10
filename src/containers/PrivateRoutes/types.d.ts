@@ -5,17 +5,9 @@ export type GetAccountRequest = {
 };
 
 export type GetAccountResponse = {
-  data: {
-    account: {
-      mappings: {
-        account: {
-          properties: GetAccountDataResponse;
-        };
-      };
-    };
-  };
+  user: any;
   error: boolean;
-  success: boolean;
+  status: string;
 };
 
 export type GetAccountDataResponse = {

@@ -5,23 +5,28 @@ import { verifyLength } from './validators';
 import { IInputProps } from './types';
 
 const TextInput = ({ id, label, value, length = [0, 25], isRequired, onChange, endAdornmentIcon }: IInputProps) => {
-  const [isValidLength, setIsValidLength] = useState(true);
+  const [isValidLength, setIsValidLength] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
 
-  const message = useMemo(() => (isEmpty ? 'Campo Requerido' : !isValidLength ? `maximo de ${length[1]}` : undefined), [
-    isEmpty,
-    isValidLength,
-    length,
-  ]);
+  const message = useMemo(() => {
+    if (isEmpty) {
+      return 'Campo requerido';
+    }
+    if (value.length > length[1]) {
+      return `Maximo ${length[1]} caracteres`;
+    }
+    return '';
+  }, [isEmpty, length, value.length]);
 
   useEffect(() => {
     setErrorMessage(message);
   }, [message]);
 
   const handleOnChange = e => {
-    setIsValidLength(verifyLength(e.target.value, length));
-    onChange({ id: e.target.id, value: e.target.value });
+    const isValid = verifyLength(e.target.value, length);
+    setIsValidLength(isValid);
+    onChange({ id: e.target.id, value: e.target.value, isValid });
   };
 
   const handlerOnBlur = e => {
@@ -32,14 +37,13 @@ const TextInput = ({ id, label, value, length = [0, 25], isRequired, onChange, e
 
   return (
     <CustomInput
-      success={isValidLength || isRequired}
-      error={!isValidLength || isEmpty}
-      labelText={label}
+      success={isValidLength && !isEmpty}
+      error={(!isValidLength || isEmpty) && value.length !== 0}
+      labelText={<span>{label}</span>}
       helperText={errorMessage}
       id={id}
       formControlProps={{
         fullWidth: true,
-        required: isRequired,
       }}
       inputProps={{
         value,

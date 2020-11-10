@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 // nodejs library to set properties for components
 import classNames from 'classnames';
 // @material-ui/core components
@@ -11,7 +11,7 @@ import { useStyles } from './styles';
 
 interface ICustomInput {
   formControlProps: FormControlProps;
-  labelText?: string;
+  labelText?: any;
   id?: string;
   labelProps?: InputLabelProps;
   inputProps?: InputBaseComponentProps;
