@@ -1,5 +1,5 @@
-import React from 'react';
-import { useTable } from 'react-table';
+import React, { useEffect } from 'react';
+import { useTable, useSortBy } from 'react-table';
 import classnames from 'classnames';
 
 interface IColumns {
@@ -10,12 +10,24 @@ interface IColumns {
 interface ITable {
   columns: IColumns[];
   data: any;
+  handlerSortBy: Function;
 }
 
-const Table = ({ columns, data }: ITable) => {
-  const tableInstance = useTable({ columns, data });
+const Table = ({ columns, data, handlerSortBy }: ITable) => {
+  const tableInstance = useTable({ columns, data, manualSortBy: true, autoResetSortBy: false }, useSortBy);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state: { sortBy },
+  } = tableInstance;
+
+  useEffect(() => {
+    handlerSortBy(sortBy);
+  }, [sortBy]);
 
   return (
     <div className="ReactTable -striped -highlight">
@@ -25,6 +37,7 @@ const Table = ({ columns, data }: ITable) => {
             <tr {...headerGroup.getHeaderGroupProps()} className="rt-tr">
               {headerGroup.headers.map((column, key) => (
                 <th
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
                   className={classnames('rt-th rt-resizable-header', {
                     '-cursor-pointer': headerGroup.headers.length - 1 !== key,
                     '-sort-asc': column.isSorted && !column.isSortedDesc,

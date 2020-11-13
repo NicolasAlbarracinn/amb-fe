@@ -1,5 +1,5 @@
 import AffiliatesEditor from 'pages/AffiliatesPage/AffiliatesEditor';
-import Dashboard from 'pages/Dashboard/Dashboard';
+import AffiliatesList from 'pages/AffiliatesPage/AffiliatesList';
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
@@ -12,7 +12,7 @@ const Affiliates = () => {
 
   return (
     <Switch>
-      <Route path="/app/affiliates/list" component={Dashboard} />
+      <Route path="/app/affiliates/list" component={AffiliatesList} />
       <Route path="/app/affiliates/new" component={AffiliatesEditor} />
     </Switch>
   );
