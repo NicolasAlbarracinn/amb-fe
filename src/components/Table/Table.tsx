@@ -27,7 +27,7 @@ const Table = ({ columns, data, handlerSortBy }: ITable) => {
 
   useEffect(() => {
     handlerSortBy(sortBy);
-  }, [sortBy]);
+  }, [sortBy, handlerSortBy]);
 
   return (
     <div className="ReactTable -striped -highlight">
