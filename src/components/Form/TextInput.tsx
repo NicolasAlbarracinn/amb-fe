@@ -1,8 +1,17 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, ReactNode } from 'react';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomInput from 'components/CustomInput/CustomInput';
 import { verifyLength } from './validators';
-import { IInputProps } from './types';
+
+interface IInputProps {
+  id: string;
+  label: string;
+  value: string;
+  isRequired: boolean;
+  onChange: Function;
+  length?: number[];
+  endAdornmentIcon?: ReactNode;
+}
 
 const TextInput = ({ id, label, value, length = [0, 25], isRequired, onChange, endAdornmentIcon }: IInputProps) => {
   const [isValidLength, setIsValidLength] = useState(false);

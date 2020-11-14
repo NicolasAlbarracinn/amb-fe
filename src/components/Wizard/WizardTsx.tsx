@@ -1,13 +1,8 @@
-import React, { Component, createRef, useState } from 'react';
-import cx from 'classnames';
+import { Card, Button } from '@material-ui/core';
+import React, { Component, createRef, useCallback, useEffect, useState } from 'react';
+import { render } from 'react-dom';
 
-// @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles';
-// core components
-import Button from 'components/CustomButtons/Button';
-import Card from 'components/Card/Card';
-
-import wizardStyle from './styles';
+import { useStyles } from './styles';
 
 type dinamicObject = { [key: string]: any };
 type colors = 'primary' | 'warning' | 'danger' | 'success' | 'info' | 'rose';
@@ -20,7 +15,7 @@ interface ISteps {
 
 interface IWizProps {
   classes: dinamicObject;
-  steps: ISteps[];
+  steps: any;
   color: colors;
   title?: string;
   subtitle?: string;
@@ -34,8 +29,8 @@ interface IWizProps {
   validate?: boolean;
 }
 
-//TODO: Refactor
-const Wiz = ({ steps, color }: IWizProps) => {
+const Wizard = ({ steps, color }: IWizProps) => {
+  const classes = useStyles();
   const isStepsLegngthDifThanThree = steps.length !== 3 ? '50%' : `${100 / 3}%`;
   const isStepsLengthEqualTwo = steps.length === 2 ? '50%' : `${100 / 3}%`;
   const initialWidth =
@@ -52,70 +47,27 @@ const Wiz = ({ steps, color }: IWizProps) => {
   });
   const [allStates, setAllStates] = useState<dinamicObject>({});
 
-  const navigationStepChange = () => {};
-  const refreshAnimation = () => {};
-  const previousButtonClick = () => {};
-  const finishButtonClick = () => {};
-  const updateWidth = () => {};
-};
+  const wizard = createRef<HTMLDivElement>();
 
-class Wizard extends Component<any, any, any> {
-  constructor(props) {
-    super(props);
-    var width;
-    if (this.props.steps.length === 1) {
-      width = '100%';
-    } else {
-      if (window.innerWidth < 600) {
-        if (this.props.steps.length !== 3) {
-          width = '50%';
-        } else {
-          width = 100 / 3 + '%';
-        }
-      } else {
-        if (this.props.steps.length === 2) {
-          width = '50%';
-        } else {
-          width = 100 / 3 + '%';
-        }
-      }
-    }
-    this.state = {
-      currentStep: 0,
-      color: this.props.color,
-      nextButton: this.props.steps.length > 1 ? true : false,
-      previousButton: false,
-      finishButton: this.props.steps.length === 1 ? true : false,
-      width: width,
-      movingTabStyle: {
-        transition: 'transform 0s',
-      },
-      allStates: {},
+  const updateWidth = (): any => {
+    refreshAnimation(currentStep);
+  };
+
+  useEffect(() => {
+    refreshAnimation(0);
+    window.addEventListener('resize', updateWidth());
+    return () => {
+      window.removeEventListener('resize', updateWidth());
     };
-    this.navigationStepChange = this.navigationStepChange.bind(this);
-    this.refreshAnimation = this.refreshAnimation.bind(this);
-    this.previousButtonClick = this.previousButtonClick.bind(this);
-    this.previousButtonClick = this.previousButtonClick.bind(this);
-    this.finishButtonClick = this.finishButtonClick.bind(this);
-    this.updateWidth = this.updateWidth.bind(this);
-  }
-  wizard = createRef<HTMLDivElement>();
-  componentDidMount() {
-    this.refreshAnimation(0);
-    window.addEventListener('resize', this.updateWidth);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWidth);
-  }
-  updateWidth() {
-    this.refreshAnimation(this.state.currentStep);
-  }
-  navigationStepChange(key) {
-    if (this.props.steps) {
-      var validationState = true;
-      if (key > this.state.currentStep) {
-        for (var i = this.state.currentStep; i < key; i++) {
-          if (this[this.props.steps[i].stepId].sendState !== undefined) {
+  }, [refreshAnimation, updateWidth]);
+
+  const navigationStepChange = key => {
+    if (steps) {
+      const validationState = true;
+      if (key > currentStep) {
+        for (var i = currentStep; i < key; i++) {
+          if (steps[i].stepId.sendState !== undefined) {
+            setAllStates({});
             this.setState({
               allStates: {
                 ...this.state.allStates,
@@ -142,8 +94,9 @@ class Wizard extends Component<any, any, any> {
         this.refreshAnimation(key);
       }
     }
-  }
-  nextButtonClick() {
+  };
+
+  const nextButtonClick = () => {
     console.log(this.props);
     if (
       (this.props.validate &&
@@ -171,8 +124,9 @@ class Wizard extends Component<any, any, any> {
       });
       this.refreshAnimation(key);
     }
-  }
-  previousButtonClick() {
+  };
+
+  const previousButtonClick = () => {
     if (this[this.props.steps[this.state.currentStep].stepId].sendState !== undefined) {
       this.setState({
         allStates: {
@@ -193,8 +147,9 @@ class Wizard extends Component<any, any, any> {
       });
       this.refreshAnimation(key);
     }
-  }
-  finishButtonClick() {
+  };
+
+  const finishButtonClick = () => {
     if (
       (this.props.validate === false && this.props.finishButtonClick !== undefined) ||
       (this.props.validate &&
@@ -217,8 +172,9 @@ class Wizard extends Component<any, any, any> {
         },
       );
     }
-  }
-  refreshAnimation(index) {
+  };
+
+  const refreshAnimation = useCallback(index => {
     var total = this.props.steps.length;
     var li_width = 100 / total;
     var total_steps = this.props.steps.length;
@@ -260,79 +216,76 @@ class Wizard extends Component<any, any, any> {
       transition: 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)',
     };
     this.setState({ movingTabStyle: movingTabStyle });
-  }
-  render() {
-    const { classes, title, subtitle, color, steps } = this.props;
-    return (
-      <div className={classes.wizardContainer} ref={this.wizard}>
-        <Card className={classes.card}>
-          <div className={classes.wizardHeader}>
-            <h3 className={classes.title}>{title}</h3>
-            <h5 className={classes.subtitle}>{subtitle}</h5>
-          </div>
-          <div className={classes.wizardNavigation}>
-            <ul className={classes.nav}>
-              {steps.map((prop, key) => {
-                return (
-                  <li className={classes.steps} key={key} style={{ width: this.state.width }}>
-                    <a
-                      href="#pablo"
-                      className={classes.stepsAnchor}
-                      onClick={e => {
-                        e.preventDefault();
-                        this.navigationStepChange(key);
-                      }}
-                    >
-                      {prop.stepName}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className={classes.movingTab + ' ' + classes[color]} style={this.state.movingTabStyle}>
-              {steps[this.state.currentStep].stepName}
-            </div>
-          </div>
-          <div className={classes.content}>
+  }, []);
+
+  const { classes, title, subtitle, color, steps } = this.props;
+  return (
+    <div className={classes.wizardContainer} ref={this.wizard}>
+      <Card className={classes.card}>
+        <div className={classes.wizardHeader}>
+          <h3 className={classes.title}>{title}</h3>
+          <h5 className={classes.subtitle}>{subtitle}</h5>
+        </div>
+        <div className={classes.wizardNavigation}>
+          <ul className={classes.nav}>
             {steps.map((prop, key) => {
-              const stepContentClasses = cx({
-                [classes.stepContentActive]: this.state.currentStep === key,
-                [classes.stepContent]: this.state.currentStep !== key,
-              });
               return (
-                <div className={stepContentClasses} key={key}>
-                  <prop.stepComponent innerRef={node => (this[prop.stepId] = node)} allStates={this.state.allStates} />
-                </div>
+                <li className={classes.steps} key={key} style={{ width: this.state.width }}>
+                  <a
+                    href="#pablo"
+                    className={classes.stepsAnchor}
+                    onClick={e => {
+                      e.preventDefault();
+                      this.navigationStepChange(key);
+                    }}
+                  >
+                    {prop.stepName}
+                  </a>
+                </li>
               );
             })}
+          </ul>
+          <div className={classes.movingTab + ' ' + classes[color]} style={this.state.movingTabStyle}>
+            {steps[this.state.currentStep].stepName}
           </div>
-          <div className={classes.footer}>
-            <div className={classes.left}>
-              {this.state.previousButton ? (
-                <Button className={this.props.previousButtonClasses} onClick={() => this.previousButtonClick()}>
-                  {this.props.previousButtonText}
-                </Button>
-              ) : null}
-            </div>
-            <div className={classes.right}>
-              {this.state.nextButton ? (
-                <Button color="rose" className={this.props.nextButtonClasses} onClick={() => this.nextButtonClick()}>
-                  {this.props.nextButtonText}
-                </Button>
-              ) : null}
-              {this.state.finishButton ? (
-                //@ts-ignore
-                <Button color="rose" className={this.finishButtonClasses} onClick={() => this.finishButtonClick()}>
-                  {this.props.finishButtonText}
-                </Button>
-              ) : null}
-            </div>
-            <div className={classes.clearfix} />
+        </div>
+        <div className={classes.content}>
+          {steps.map((prop, key) => {
+            const stepContentClasses = cx({
+              [classes.stepContentActive]: this.state.currentStep === key,
+              [classes.stepContent]: this.state.currentStep !== key,
+            });
+            return (
+              <div className={stepContentClasses} key={key}>
+                <prop.stepComponent innerRef={node => (this[prop.stepId] = node)} allStates={this.state.allStates} />
+              </div>
+            );
+          })}
+        </div>
+        <div className={classes.footer}>
+          <div className={classes.left}>
+            {this.state.previousButton ? (
+              <Button className={this.props.previousButtonClasses} onClick={() => this.previousButtonClick()}>
+                {this.props.previousButtonText}
+              </Button>
+            ) : null}
           </div>
-        </Card>
-      </div>
-    );
-  }
-}
-
-export default withStyles(wizardStyle)(Wizard);
+          <div className={classes.right}>
+            {this.state.nextButton ? (
+              <Button color="rose" className={this.props.nextButtonClasses} onClick={() => this.nextButtonClick()}>
+                {this.props.nextButtonText}
+              </Button>
+            ) : null}
+            {this.state.finishButton ? (
+              //@ts-ignore
+              <Button color="rose" className={this.finishButtonClasses} onClick={() => this.finishButtonClick()}>
+                {this.props.finishButtonText}
+              </Button>
+            ) : null}
+          </div>
+          <div className={classes.clearfix} />
+        </div>
+      </Card>
+    </div>
+  );
+};
