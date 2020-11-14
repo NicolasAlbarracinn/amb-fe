@@ -1,6 +1,8 @@
-export interface AffiliatesState {
+import { IAffiliate } from './types';
+
+export interface IAffiliatesState {
   loading: boolean;
-  affiliatesList: any;
+  affiliatesList: IAffiliate[];
 }
 
-export type ContainerState = LoginState;
+export type ContainerState = AffiliatesState;

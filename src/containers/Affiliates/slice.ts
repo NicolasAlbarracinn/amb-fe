@@ -3,10 +3,13 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { QueryParameters } from 'types/RootState';
 
+import { IAffiliatesState } from './pageState';
+import { IAffiliate } from './types';
+
 // The initial state of the GithubRepoForm container
-export const initialState: any = {
+export const initialState: IAffiliatesState = {
   loading: true,
-  affiliates: [],
+  affiliatesList: [],
 };
 
 const AffiliatesSlice = createSlice({
@@ -16,13 +19,13 @@ const AffiliatesSlice = createSlice({
     getAffiliatedInfoRequest(state, action: PayloadAction<QueryParameters>) {
       state.loading = true;
     },
-    getAffiliatedInfoSuccess(state, action: PayloadAction<any>) {
+    getAffiliatedInfoSuccess(state, action: PayloadAction<IAffiliate[]>) {
       state.loading = false;
-      state.affiliates = action.payload;
+      state.affiliatesList = action.payload;
     },
     getAffiliatedInfoFailed(state) {
       state.loading = false;
-      state.affiliates = [];
+      state.affiliatesList = [];
     },
   },
 });

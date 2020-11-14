@@ -21,9 +21,17 @@ const Affiliates = () => {
     dispatch(actions.getAffiliatedInfoRequest({}));
   }, [dispatch]);
 
+  const handlerSort = (sortBy?: { field: string; value: string }) => {
+    dispatch(actions.getAffiliatedInfoRequest({ sortBy }));
+  };
+
   return (
     <Switch>
-      <Route path="/app/affiliates/list" render={() => <AffiliatesList affiliates={affiliatesList} />} />
+      <Route
+        path="/app/affiliates/list"
+        render={() => <AffiliatesList affiliates={affiliatesList} handlerSort={handlerSort} />}
+        handlerSort={handlerSort}
+      />
       <Route path="/app/affiliates/new" component={AffiliatesEditor} />
     </Switch>
   );

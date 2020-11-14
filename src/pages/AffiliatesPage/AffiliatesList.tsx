@@ -13,20 +13,44 @@ import Table from 'components/Table/Table';
 
 const headers = () => [
   {
-    Header: 'Name',
-    accessor: 'name',
+    Header: 'N° socio',
+    accessor: 'patnerNumber',
   },
   {
-    Header: 'Address',
-    accessor: 'address',
+    Header: 'N° Legajo ',
+    accessor: 'folderNumber',
   },
   {
-    Header: 'Date',
-    accessor: 'date',
+    Header: 'Fecha de ingreso',
+    accessor: 'admissionDate',
   },
   {
-    Header: 'Order #',
-    accessor: 'order',
+    Header: 'cuil',
+    accessor: 'cuil',
+  },
+  {
+    Header: 'dni',
+    accessor: 'dni',
+  },
+  {
+    Header: 'Distribucion',
+    accessor: 'distribution',
+  },
+  {
+    Header: 'Metodo de pago',
+    accessor: 'paymentMethod',
+  },
+  {
+    Header: 'Nombre socio',
+    accessor: 'personalInfo.firstName',
+  },
+  {
+    Header: 'apellido socio',
+    accessor: 'personalInfo.lastName',
+  },
+  {
+    Header: 'comercializador',
+    accessor: 'comercializador',
   },
 ];
 
@@ -35,17 +59,28 @@ const headers = () => [
 //Add pagination
 //Add search bar
 
-const AffiliatesList = ({ affiliates }) => {
+enum SortByCriterias {
+  DESC = 'desc',
+  ASC = 'asc',
+}
+
+const AffiliatesList = ({ affiliates, handlerSort }) => {
   const columns = React.useMemo(headers, []);
   const data = React.useMemo(() => affiliates, [affiliates]);
 
   const handlerSortBy = sortBy => {
-    console.log(sortBy);
+    if (!sortBy.length) {
+      handlerSort();
+      return;
+    }
+
+    const criteria = sortBy[0].desc ? SortByCriterias.DESC : SortByCriterias.ASC;
+    handlerSort({ field: sortBy[0].id, value: criteria });
   };
 
   return (
     <GridContainer justify="center">
-      <GridItem xs={12} sm={8}>
+      <GridItem xs={12} sm={12}>
         <Card>
           <CardHeader color="primary" icon>
             <CardIcon color="primary">

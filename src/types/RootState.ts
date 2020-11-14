@@ -2,7 +2,7 @@
 
 import { LoginState } from 'containers/Login/pageState';
 import { AuthState } from 'containers/PrivateRoutes/pageState';
-import { AffiliatesState } from 'containers/Affiliates/pageState';
+import { IAffiliatesState } from 'containers/Affiliates/pageState';
 
 /* 
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
@@ -14,7 +14,7 @@ export interface RootState {
   auth?: AuthState;
   login?: LoginState;
   profile?: any;
-  affiliates?: AffiliatesState;
+  affiliates?: IAffiliatesState;
 }
 
 export interface QueryParameters {
