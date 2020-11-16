@@ -1,4 +1,4 @@
-import React, { useState, useEffectm ReactNode } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 // @material-ui/icons
 import Face from '@material-ui/icons/Face';
@@ -31,7 +31,7 @@ type SubmitFunction = (arg: any) => void;
 interface IStep1 {
   handleSubmit: SubmitFunction;
   formValues: typeof initialForm;
-  compone: REeact
+  compone: ReactNode;
 }
 
 const initialForm = {
@@ -40,7 +40,7 @@ const initialForm = {
   lastName: '',
 };
 
-const Step1 = ({ handleSubmit, formValues }: IStep1) => {
+const Step1 = ({ handleSubmit, formValues }: any) => {
   const classes = useStyles();
   const [inputValues, setInputValues] = useState(initialForm);
 

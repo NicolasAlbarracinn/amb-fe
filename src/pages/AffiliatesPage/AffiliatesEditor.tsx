@@ -1,18 +1,18 @@
 import React from 'react';
 
 // core components
-import Wizard from 'components/Wizard/Wizard';
+import Wizard from 'components/Wizard/WizardTsx';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 
-import Step1 from './AffiliatesSteps/Step1.js';
+import Step1 from './AffiliatesSteps/Step1';
 import Step2 from './AffiliatesSteps/Step2.js';
 import Step3 from './AffiliatesSteps/Step3.js';
 
-export default function AffiliatesEditor() {
+const AffiliatesEditor = () => {
   return (
     <GridContainer justify="center">
-      <GridItem xs={12} sm={10}>
+      <GridItem xs={12} sm={8}>
         <Wizard
           validate
           steps={[
@@ -25,8 +25,7 @@ export default function AffiliatesEditor() {
           finishButtonClick={e => alert(e)}
           color="rose"
           previousButtonText="Anterior"
-          previousButtonClasses=""
-          nextButtonClasses=""
+          previousButtonClasses={{ color: 'rose' }}
           nextButtonText="Proximo"
           finishButtonClasses=""
           finishButtonText="Terminar"
@@ -34,4 +33,6 @@ export default function AffiliatesEditor() {
       </GridItem>
     </GridContainer>
   );
-}
+};
+
+export default AffiliatesEditor;

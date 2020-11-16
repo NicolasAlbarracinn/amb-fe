@@ -172,4 +172,5 @@ export const useStyles = makeStyles(() => ({
       content: '" "',
     },
     clear: 'both',
+  },
 }));
