@@ -44,9 +44,9 @@ const Step1 = ({ handleSubmit, formValues }: any) => {
   const classes = useStyles();
   const [inputValues, setInputValues] = useState(initialForm);
 
-  useEffect(() => {
+  /*useEffect(() => {
     setInputValues(formValues);
-  }, [formValues]);
+  }, [formValues]);*/
 
   const onChangeHanlder = ({ id, value }) => {
     setInputValues(prevState => ({
@@ -64,6 +64,7 @@ const Step1 = ({ handleSubmit, formValues }: any) => {
         <PictureUpload id="image" onChange={onChangeHanlder} />
       </GridItem>
       <GridItem xs={12} sm={6}>
+        {console.log(inputValues)}
         <TextInput
           id="firstName"
           label="nombre"
