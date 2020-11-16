@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomInput from 'components/CustomInput/CustomInput';
 import { verifyEmail } from './validators';
-import { IInputProps } from './types';
 
-const EmailInput = ({ id, label, value, isRequired, onChange, endAdornmentIcon }: IInputProps) => {
+const EmailInput = ({ id, label, value, isRequired, onChange, endAdornmentIcon }: any) => {
   const [isValidEmail, setIsValidEmail] = useState(true);
 
   const handleOnChange = e => {

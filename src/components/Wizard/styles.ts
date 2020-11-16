@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core';
 import {
   blackColor,
   dangerColor,
@@ -11,7 +12,7 @@ import {
   hexToRgb,
 } from 'utils/styles';
 
-const wizardStyle: any = {
+export const useStyles = makeStyles(() => ({
   wizardContainer: {},
   card: {
     display: 'inline-block',
@@ -72,7 +73,7 @@ const wizardStyle: any = {
     lineHeight: '18px',
     textTransform: 'uppercase',
     fontSize: '12px',
-    fontWeight: '500',
+    fontWeight: 500,
     minWidth: '100px',
     textAlign: 'center',
     color: grayColor[6] + ' !important',
@@ -100,7 +101,7 @@ const wizardStyle: any = {
     borderRadius: '4px',
     color: whiteColor,
     cursor: 'pointer',
-    fontWeight: '500',
+    fontWeight: 500,
   },
   primary: {
     backgroundColor: primaryColor[0],
@@ -160,10 +161,10 @@ const wizardStyle: any = {
     padding: '0 15px',
   },
   left: {
-    float: 'left!important',
+    float: 'left!important' as 'left',
   },
   right: {
-    float: 'right!important',
+    float: 'right!important' as 'right',
   },
   clearfix: {
     '&:after,&:before': {
@@ -172,6 +173,4 @@ const wizardStyle: any = {
     },
     clear: 'both',
   },
-};
-
-export default wizardStyle;
+}));
