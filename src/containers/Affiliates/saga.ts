@@ -5,14 +5,17 @@ import Cookies from 'universal-cookie';
 
 import { GET_AFFILIATED_INFO } from 'utils/endpoints';
 import { request } from 'utils/request';
-
+import { QueryParameters } from 'types/RootState';
 import { actions } from './slice';
 
 const cookies = new Cookies();
 
-export function* getAffiliatedInfoRequest(action: PayloadAction<any>) {
+export function* getAffiliatedInfoRequest(action: PayloadAction<QueryParameters>) {
   const token = cookies.get('token');
-  const requestURL = `${GET_AFFILIATED_INFO}?id=${action.payload}`;
+  const { sortBy } = action.payload;
+  const sortQuery = sortBy ? `sortFiel=${sortBy.field}&sortCriteria=${sortBy.value}` : '';
+  const requestURL = `${GET_AFFILIATED_INFO}?${sortQuery}`;
+
   try {
     const requestOptions: RequestInit = {
       method: 'GET',
@@ -22,7 +25,7 @@ export function* getAffiliatedInfoRequest(action: PayloadAction<any>) {
       },
     };
     const response = yield call(request, requestURL, requestOptions);
-    yield put(actions.getAffiliatedInfoSuccess());
+    yield put(actions.getAffiliatedInfoSuccess(response.data));
   } catch (err) {
     yield put(actions.getAffiliatedInfoFailed());
     toast.error('Algo salio mal.', {
