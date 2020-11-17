@@ -11,7 +11,8 @@ interface IInputProps {
   onChange: Function;
   length?: number[];
   endAdornmentIcon?: ReactNode;
-  hasErrors?: boolean;
+  hasError?: boolean;
+  inputType?: string;
 }
 
 const TextInput = ({
@@ -22,21 +23,22 @@ const TextInput = ({
   isRequired,
   onChange,
   endAdornmentIcon,
-  hasErrors,
+  hasError,
+  inputType = 'text',
 }: IInputProps) => {
   const [isValidLength, setIsValidLength] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const message = useMemo(() => {
-    if (isEmpty) {
+    if (isEmpty || hasError) {
       return 'Campo requerido';
     }
     if (value.length > length[1]) {
       return `Maximo ${length[1]} caracteres`;
     }
     return '';
-  }, [isEmpty, length, value.length]);
+  }, [hasError, isEmpty, length, value.length]);
 
   useEffect(() => {
     setErrorMessage(message);
@@ -57,7 +59,7 @@ const TextInput = ({
   return (
     <CustomInput
       success={isValidLength && !isEmpty}
-      error={((!isValidLength || isEmpty) && value.length !== 0) || hasErrors}
+      error={((!isValidLength || isEmpty) && value.length !== 0) || hasError}
       labelText={<span>{label}</span>}
       helperText={errorMessage}
       id={id}
@@ -66,7 +68,7 @@ const TextInput = ({
       }}
       inputProps={{
         value,
-        type: 'text',
+        type: inputType,
         endAdornment: <InputAdornment position="end">{endAdornmentIcon}</InputAdornment>,
         onChange: handleOnChange,
         onBlur: handlerOnBlur,

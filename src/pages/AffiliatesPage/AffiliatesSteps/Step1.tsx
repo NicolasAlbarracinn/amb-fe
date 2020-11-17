@@ -168,12 +168,13 @@ const Step1 = () => {
         <GridItem xs={12} sm={2}>
           <TextInput
             id="associateNumber"
-            hasErrors={hasErrors}
+            hasError={hasErrors}
             label="N de socio"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.associateNumber.value}
-            length={[2, 25]}
+            length={[0, 25]}
+            inputType="number"
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -182,6 +183,7 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="documentType"
+            hasError={hasErrors}
             label="Tipo de Documento"
             mainSelectLabel="Selecione su tipo de documento"
             value={personalData.documentType.value}
@@ -195,28 +197,33 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <TextInput
             id="documentNumber"
+            hasError={hasErrors}
             label="N de documento"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.documentNumber.value}
-            length={[2, 25]}
+            inputType="number"
+            length={[7, 8]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
             id="procedureNumber"
+            hasError={hasErrors}
             label="N de tramite"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.procedureNumber.value}
-            length={[2, 25]}
+            length={[0, 25]}
+            inputType="number"
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={2}>
           <SelectInput
             id="gender"
+            hasError={hasErrors}
             label="Genero"
             mainSelectLabel="Selecione su genero"
             value={personalData.gender.value}
@@ -230,39 +237,44 @@ const Step1 = () => {
         <GridItem xs={12} sm={2}>
           <TextInput
             id="cuil"
+            hasError={hasErrors}
             label="N de CUIL"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.cuil.value}
-            length={[2, 25]}
+            inputType="number"
+            length={[10, 11]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={2}>
           <TextInput
             id="name"
+            hasError={hasErrors}
             label="Nombre"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.name.value}
-            length={[2, 25]}
+            length={[0, 25]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={2}>
           <TextInput
             id="lastName"
+            hasError={hasErrors}
             label="Apellido"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.lastName.value}
-            length={[2, 25]}
+            length={[0, 25]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
             id="country"
+            hasError={hasErrors}
             label="Nacionalidad"
             mainSelectLabel="Selecione su nacionalidad"
             value={personalData.country.value}
@@ -276,6 +288,7 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <SelectInput
             id="birthPlace"
+            hasError={hasErrors}
             label="Lugar de Nacimiento"
             mainSelectLabel="Selecione su lugar de nacimiento"
             value={personalData.birthPlace.value}
@@ -289,6 +302,7 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <SelectInput
             id="civilState"
+            hasError={hasErrors}
             label="Estado Civil"
             mainSelectLabel="Selecione su lugar de estado civil"
             value={personalData.civilState.value}
@@ -302,6 +316,7 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <EmailInput
             id="email"
+            hasError={hasErrors}
             label="Email"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -312,6 +327,7 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <TextInput
             id="phone"
+            hasError={hasErrors}
             label="Telefono"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -323,6 +339,7 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <TextInput
             id="personalPhone"
+            hasError={hasErrors}
             label="Telefono"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -334,50 +351,57 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <TextInput
             id="salary"
+            hasError={hasErrors}
             label="Sueldo Bruto"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.salary.value}
-            length={[2, 25]}
+            length={[0, 25]}
+            inputType="number"
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
           <TextInput
             id="netSalary"
+            hasError={hasErrors}
             label="Sueldo Neto"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.netSalary.value}
-            length={[2, 25]}
+            length={[0, 25]}
+            inputType="number"
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
           <TextInput
             id="socialQuota"
+            hasError={hasErrors}
             label="Cuota Social"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.socialQuota.value}
-            length={[2, 25]}
+            length={[0, 25]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
           <TextInput
             id="otherPerferences"
+            hasError={hasErrors}
             label="Otros Pereferenciales"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.otherPerferences.value}
-            length={[2, 25]}
+            length={[0, 25]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="paymentType"
+            hasError={hasErrors}
             label="Forma de Cobro C$"
             mainSelectLabel="Selecione Forma de Cobro C$"
             value={personalData.paymentType.value}
@@ -391,6 +415,7 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="recoveryPaymentType"
+            hasError={hasErrors}
             label="Forma de Cobro Recupero C$"
             mainSelectLabel="Selecione Forma de Cobro Recupero C$"
             value={personalData.recoveryPaymentType.value}

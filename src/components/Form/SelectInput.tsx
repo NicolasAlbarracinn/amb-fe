@@ -1,16 +1,25 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import React from 'react';
+import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 
 import { useStyles } from './selectInputStyles';
+interface IInputProps {
+  id: string;
+  label: string;
+  mainSelectLabel: string;
+  value: string;
+  items: { value: string; label: string }[];
+  handleSelect: Function;
+  hasError?: boolean;
+}
 
-const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id }) => {
+const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, hasError }: IInputProps) => {
   const classes = useStyles();
   const handleOnChange = e => {
     handleSelect({ id, value: e.target.value, isValid: true });
   };
 
   return (
-    <FormControl fullWidth className={classes.selectFormControl}>
+    <FormControl error={hasError} fullWidth className={classes.selectFormControl}>
       {label && (
         <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
           {label}
@@ -52,6 +61,7 @@ const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id })
           </MenuItem>
         ))}
       </Select>
+      {hasError && <FormHelperText>Campo Requerido</FormHelperText>}
     </FormControl>
   );
 };
