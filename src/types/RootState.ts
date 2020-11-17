@@ -3,6 +3,7 @@
 import { LoginState } from 'containers/Login/pageState';
 import { AuthState } from 'containers/PrivateRoutes/pageState';
 import { IAffiliatesState } from 'containers/Affiliates/pageState';
+import { PaginationState } from 'components/Pagination/pageState';
 
 /* 
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
@@ -15,14 +16,5 @@ export interface RootState {
   login?: LoginState;
   profile?: any;
   affiliates?: IAffiliatesState;
-}
-
-export interface QueryParameters {
-  sortBy?: {
-    field: string;
-    value: string;
-  };
-  limit?: number;
-  offset?: number;
-  filter?: string;
+  pagination?: PaginationState;
 }

@@ -5,16 +5,17 @@ import Cookies from 'universal-cookie';
 
 import { GET_AFFILIATED_INFO } from 'utils/endpoints';
 import { request } from 'utils/request';
-import { QueryParameters } from 'types/RootState';
+import { QueryParameters } from 'types/types';
+import { queryBuilder } from 'utils/queryBuilder';
 import { actions } from './slice';
 
 const cookies = new Cookies();
 
 export function* getAffiliatedInfoRequest(action: PayloadAction<QueryParameters>) {
   const token = cookies.get('token');
-  const { sortBy } = action.payload;
-  const sortQuery = sortBy ? `sortFiel=${sortBy.field}&sortCriteria=${sortBy.value}` : '';
-  const requestURL = `${GET_AFFILIATED_INFO}?${sortQuery}`;
+  const { sortBy, limit, offset, filter } = action.payload;
+  const query = queryBuilder({ sortBy, limit, offset, filter });
+  const requestURL = `${GET_AFFILIATED_INFO}?${query}`;
 
   try {
     const requestOptions: RequestInit = {

@@ -8,9 +8,10 @@ import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-
 import Table from 'components/Table/Table';
 import Pagination from 'components/Pagination/Pagination';
+
+import { SortByCriterias } from 'utils/constants';
 
 const headers = () => [
   {
@@ -59,11 +60,6 @@ const headers = () => [
 //Add funtionality for sort by function
 //Add pagination
 //Add search bar
-
-enum SortByCriterias {
-  DESC = 'desc',
-  ASC = 'asc',
-}
 
 const AffiliatesList = ({ affiliates, handlerSort }) => {
   const columns = React.useMemo(headers, []);

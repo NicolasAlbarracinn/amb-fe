@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
 import { createSlice } from 'utils/@reduxjs/toolkit';
-import { QueryParameters } from 'types/RootState';
+import { QueryParameters } from 'types/types';
 
 import { IAffiliatesState } from './pageState';
 import { IAffiliate } from './types';
