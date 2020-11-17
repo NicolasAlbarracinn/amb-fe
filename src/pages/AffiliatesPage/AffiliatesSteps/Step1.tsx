@@ -138,16 +138,15 @@ const initialForm = {
 const Step1 = () => {
   const classes = useStyles();
   const [personalData, setpersonalData] = useState(initialForm);
-  const [hasErrors, setHasErrors] = useState(false);
+  const [loadError, setLoadError] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(personalData).some(key => key[1].isValid === false);
-    console.log(personalData);
     if (isFormInvalid) {
-      setHasErrors(true);
       dispatch(wizardActions.setStep({ stepId: 'personalData', data: personalData, isValid: false }));
+      setLoadError(true);
     } else {
       dispatch(wizardActions.setStep({ stepId: 'personalData', data: personalData, isValid: true, type: 'next' }));
     }
@@ -162,19 +161,20 @@ const Step1 = () => {
       },
     }));
   };
-
+  console.log(personalData);
   return (
     <>
       <GridContainer>
         <GridItem xs={12} sm={2}>
           <TextInput
             id="associateNumber"
-            hasError={hasErrors}
+            isValid={personalData.associateNumber.isValid}
+            loadError={loadError}
             label="N de socio"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.associateNumber.value}
-            length={[0, 25]}
+            length={[1, 25]}
             inputType="number"
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
@@ -184,7 +184,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="documentType"
-            hasError={hasErrors}
+            isValid={personalData.documentType.isValid}
+            loadError={loadError}
             label="Tipo de Documento"
             mainSelectLabel="Selecione su tipo de documento"
             value={personalData.documentType.value}
@@ -198,7 +199,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <TextInput
             id="documentNumber"
-            hasError={hasErrors}
+            isValid={personalData.documentNumber.isValid}
+            loadError={loadError}
             label="N de documento"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -211,7 +213,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <TextInput
             id="procedureNumber"
-            hasError={hasErrors}
+            isValid={personalData.procedureNumber.isValid}
+            loadError={loadError}
             label="N de tramite"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -224,7 +227,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={2}>
           <SelectInput
             id="gender"
-            hasError={hasErrors}
+            isValid={personalData.gender.isValid}
+            loadError={loadError}
             label="Genero"
             mainSelectLabel="Selecione su genero"
             value={personalData.gender.value}
@@ -238,7 +242,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={2}>
           <TextInput
             id="cuil"
-            hasError={hasErrors}
+            isValid={personalData.cuil.isValid}
+            loadError={loadError}
             label="N de CUIL"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -251,7 +256,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={2}>
           <TextInput
             id="name"
-            hasError={hasErrors}
+            isValid={personalData.name.isValid}
+            loadError={loadError}
             label="Nombre"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -263,7 +269,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={2}>
           <TextInput
             id="lastName"
-            hasError={hasErrors}
+            isValid={personalData.lastName.isValid}
+            loadError={loadError}
             label="Apellido"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -275,7 +282,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <SelectInput
             id="country"
-            hasError={hasErrors}
+            isValid={personalData.country.isValid}
+            loadError={loadError}
             label="Nacionalidad"
             mainSelectLabel="Selecione su nacionalidad"
             value={personalData.country.value}
@@ -289,7 +297,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <SelectInput
             id="birthPlace"
-            hasError={hasErrors}
+            isValid={personalData.birthPlace.isValid}
+            loadError={loadError}
             label="Lugar de Nacimiento"
             mainSelectLabel="Selecione su lugar de nacimiento"
             value={personalData.birthPlace.value}
@@ -303,7 +312,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <SelectInput
             id="civilState"
-            hasError={hasErrors}
+            isValid={personalData.civilState.isValid}
+            loadError={loadError}
             label="Estado Civil"
             mainSelectLabel="Selecione su lugar de estado civil"
             value={personalData.civilState.value}
@@ -317,7 +327,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <EmailInput
             id="email"
-            hasError={hasErrors}
+            isValid={personalData.email.isValid}
+            loadError={loadError}
             label="Email"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -328,7 +339,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <TextInput
             id="phone"
-            hasError={hasErrors}
+            isValid={personalData.phone.isValid}
+            loadError={loadError}
             label="Telefono"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -340,7 +352,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={3}>
           <TextInput
             id="personalPhone"
-            hasError={hasErrors}
+            isValid={personalData.personalPhone.isValid}
+            loadError={loadError}
             label="Telefono"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -352,7 +365,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <TextInput
             id="salary"
-            hasError={hasErrors}
+            isValid={personalData.salary.isValid}
+            loadError={loadError}
             label="Sueldo Bruto"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -365,7 +379,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <TextInput
             id="netSalary"
-            hasError={hasErrors}
+            isValid={personalData.netSalary.isValid}
+            loadError={loadError}
             label="Sueldo Neto"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -378,7 +393,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <TextInput
             id="socialQuota"
-            hasError={hasErrors}
+            isValid={personalData.socialQuota.isValid}
+            loadError={loadError}
             label="Cuota Social"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -390,7 +406,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <TextInput
             id="otherPerferences"
-            hasError={hasErrors}
+            isValid={personalData.otherPerferences.isValid}
+            loadError={loadError}
             label="Otros Pereferenciales"
             isRequired={true}
             onChange={onChangeHanlder}
@@ -402,7 +419,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="paymentType"
-            hasError={hasErrors}
+            isValid={personalData.documentType.isValid}
+            loadError={loadError}
             label="Forma de Cobro C$"
             mainSelectLabel="Selecione Forma de Cobro C$"
             value={personalData.paymentType.value}
@@ -416,7 +434,8 @@ const Step1 = () => {
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="recoveryPaymentType"
-            hasError={hasErrors}
+            isValid={personalData.documentType.isValid}
+            loadError={loadError}
             label="Forma de Cobro Recupero C$"
             mainSelectLabel="Selecione Forma de Cobro Recupero C$"
             value={personalData.recoveryPaymentType.value}

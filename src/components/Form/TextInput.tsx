@@ -11,8 +11,9 @@ interface IInputProps {
   onChange: Function;
   length?: number[];
   endAdornmentIcon?: ReactNode;
-  hasError?: boolean;
+  isValid?: boolean;
   inputType?: string;
+  loadError?: boolean;
 }
 
 const TextInput = ({
@@ -23,51 +24,30 @@ const TextInput = ({
   isRequired,
   onChange,
   endAdornmentIcon,
-  hasError = false,
+  isValid = true,
   inputType = 'text',
+  loadError = false,
 }: IInputProps) => {
-  const [firstLoad, setFirstLoad] = useState(true);
-  const [isValidLength, setIsValidLength] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const message = useMemo(() => {
-    if (isEmpty || hasError) {
+    if (isValid) {
       return 'Campo requerido';
     }
     if (value.length > length[1]) {
       return `Maximo ${length[1]} caracteres`;
     }
     return '';
-  }, [hasError, isEmpty, length, value.length]);
-
-  useEffect(() => {
-    if (value !== '') {
-      setIsEmpty(false);
-      setIsValidLength(verifyLength(value, length));
-      setFirstLoad(false);
-    }
-    if (hasError) {
-      setFirstLoad(false);
-    }
-    setErrorMessage(message);
-  }, [hasError, length, message, value]);
+  }, [isValid, length, value.length]);
 
   const handleOnChange = e => {
-    onChange({ id: e.target.id, value: e.target.value, isValid: verifyLength(value, length) });
-  };
-
-  const handlerOnBlur = e => {
-    if (isRequired) {
-      setIsEmpty(e.target.value.trim().length <= 0);
-      setFirstLoad(false);
-    }
+    onChange({ id: e.target.id, value: e.target.value, isValid: verifyLength(e.target.value, length) });
   };
 
   return (
     <CustomInput
-      success={isValidLength && !isEmpty}
-      error={(!isValidLength || isEmpty) && hasError && !firstLoad}
+      success={isValid}
+      error={!isValid && loadError}
       labelText={<span>{label}</span>}
       id={id}
       formControlProps={{
@@ -78,7 +58,6 @@ const TextInput = ({
         type: inputType,
         endAdornment: <InputAdornment position="end">{endAdornmentIcon}</InputAdornment>,
         onChange: handleOnChange,
-        onBlur: handlerOnBlur,
       }}
     />
   );
