@@ -144,6 +144,7 @@ const Step1 = () => {
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(personalData).some(key => key[1].isValid === false);
+    console.log(personalData);
     if (isFormInvalid) {
       setHasErrors(true);
       dispatch(wizardActions.setStep({ stepId: 'personalData', data: personalData, isValid: false }));

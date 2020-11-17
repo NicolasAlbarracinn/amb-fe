@@ -38,13 +38,8 @@ const UserProfile = ({ handleSubmit, formValues }: IUserProfile) => {
   const [inputValues, setInputValues] = useState(initialForm);
 
   useEffect(() => {
-    console.log(formValues);
     setInputValues(formValues);
   }, [formValues]);
-
-  useEffect(() => {
-    console.log(inputValues);
-  }, [inputValues]);
 
   const onChangeHanlder = ({ id, value }) => {
     setInputValues(prevState => ({

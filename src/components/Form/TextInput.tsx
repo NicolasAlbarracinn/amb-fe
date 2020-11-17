@@ -23,9 +23,10 @@ const TextInput = ({
   isRequired,
   onChange,
   endAdornmentIcon,
-  hasError,
+  hasError = false,
   inputType = 'text',
 }: IInputProps) => {
+  const [firstLoad, setFirstLoad] = useState(true);
   const [isValidLength, setIsValidLength] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -41,27 +42,33 @@ const TextInput = ({
   }, [hasError, isEmpty, length, value.length]);
 
   useEffect(() => {
+    if (value !== '') {
+      setIsEmpty(false);
+      setIsValidLength(verifyLength(value, length));
+      setFirstLoad(false);
+    }
+    if (hasError) {
+      setFirstLoad(false);
+    }
     setErrorMessage(message);
-  }, [message]);
+  }, [hasError, length, message, value]);
 
   const handleOnChange = e => {
-    const isValid = verifyLength(e.target.value, length);
-    setIsValidLength(isValid);
-    onChange({ id: e.target.id, value: e.target.value, isValid });
+    onChange({ id: e.target.id, value: e.target.value, isValid: verifyLength(value, length) });
   };
 
   const handlerOnBlur = e => {
     if (isRequired) {
       setIsEmpty(e.target.value.trim().length <= 0);
+      setFirstLoad(false);
     }
   };
 
   return (
     <CustomInput
       success={isValidLength && !isEmpty}
-      error={((!isValidLength || isEmpty) && value.length !== 0) || hasError}
+      error={(!isValidLength || isEmpty) && hasError && !firstLoad}
       labelText={<span>{label}</span>}
-      helperText={errorMessage}
       id={id}
       formControlProps={{
         fullWidth: true,

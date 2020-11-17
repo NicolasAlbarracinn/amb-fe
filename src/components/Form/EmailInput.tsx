@@ -3,11 +3,11 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomInput from 'components/CustomInput/CustomInput';
 import { verifyEmail } from './validators';
 
-const EmailInput = ({ id, label, value, isRequired, onChange, endAdornmentIcon, hasError }: any) => {
+const EmailInput = ({ id, label, value, isRequired, onChange, endAdornmentIcon, hasError = false }: any) => {
   const [isValidEmail, setIsValidEmail] = useState(false);
+  const [firstLoad, setFirstLoad] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
-
   const message = useMemo(() => {
     if (isEmpty || hasError) {
       return 'Campo requerido';
@@ -16,11 +16,18 @@ const EmailInput = ({ id, label, value, isRequired, onChange, endAdornmentIcon, 
   }, [hasError, isEmpty]);
 
   useEffect(() => {
+    if (value !== '') {
+      setIsEmpty(false);
+      setIsValidEmail(verifyEmail(value));
+      setFirstLoad(false);
+    }
+    if (hasError) {
+      setFirstLoad(false);
+    }
     setErrorMessage(message);
-  }, [message]);
+  }, [hasError, message, value]);
 
   const handleOnChange = e => {
-    setIsValidEmail(verifyEmail(e.target.value));
     onChange({ id: e.target.id, value: e.target.value, isValid: verifyEmail(e.target.value) });
   };
 
@@ -28,14 +35,14 @@ const EmailInput = ({ id, label, value, isRequired, onChange, endAdornmentIcon, 
     if (isRequired) {
       setIsEmpty(e.target.value.trim().length <= 0);
     }
+    setFirstLoad(false);
   };
 
   return (
     <CustomInput
       success={isValidEmail && !isEmpty}
-      error={((!isValidEmail || isEmpty) && value.length !== 0) || hasError}
-      labelText={isRequired ? 'Email *' : 'Email'}
-      helperText={errorMessage}
+      error={(!isValidEmail || isEmpty) && hasError && !firstLoad}
+      labelText="Email"
       id={id}
       formControlProps={{
         fullWidth: true,

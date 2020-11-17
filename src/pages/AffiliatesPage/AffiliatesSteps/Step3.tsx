@@ -98,6 +98,7 @@ const Step3 = () => {
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);
+    console.log(workInfo);
     if (isFormInvalid) {
       setHasErrors(true);
       dispatch(wizardActions.setStep({ stepId: 'workInfo', data: workInfo, isValid: false }));

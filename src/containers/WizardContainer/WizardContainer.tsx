@@ -40,7 +40,10 @@ const WizardContainer = memo(
     }, [buttonType, currentStepId, steps, stepsData]);
 
     const navigationStepChange = key => {
-      setCurrentStep(key);
+      if (stepsData[currentStepId]?.isValid) {
+        setCurrentStep(key);
+        return true;
+      }
     };
 
     return (

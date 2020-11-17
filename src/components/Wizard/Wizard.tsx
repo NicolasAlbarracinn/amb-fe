@@ -108,8 +108,10 @@ const Wizard = memo(({ steps, color, title, subtitle, navigationStepChange, curr
   }, [currentStep]);
 
   const handleNavigaton = key => {
-    navigationStepChange(key);
-    refreshAnimation(key);
+    const canRefresh = navigationStepChange(key);
+    if (canRefresh) {
+      refreshAnimation(key);
+    }
   };
 
   return (
