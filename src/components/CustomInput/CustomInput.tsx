@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 // nodejs library to set properties for components
 import classNames from 'classnames';
 // @material-ui/core components

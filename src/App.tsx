@@ -13,7 +13,6 @@ import AdminLayout from 'layouts/AdminLayout';
 
 import LogInPage from 'pages/LoginPage/LoginPage';
 import Dashboard from 'pages/Dashboard/Dashboard';
-import UserProfile from 'pages/UserProfile/UserProfile';
 import Profile from 'containers/Profile/Profile';
 import Affiliates from 'containers/Affiliates/Affiliates';
 

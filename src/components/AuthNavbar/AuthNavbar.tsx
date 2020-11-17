@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
-import { NavLink } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Hidden from '@material-ui/core/Hidden';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-
-import Dashboard from '@material-ui/icons/Dashboard';
 import Menu from '@material-ui/icons/Menu';
-import PersonAdd from '@material-ui/icons/PersonAdd';
-import Fingerprint from '@material-ui/icons/Fingerprint';
-import LockOpen from '@material-ui/icons/LockOpen';
-import MonetizationOn from '@material-ui/icons/MonetizationOn';
 
 import Button from 'components/CustomButtons/Button';
 
