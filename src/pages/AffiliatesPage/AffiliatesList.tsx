@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAffiliatesList } from 'containers/Affiliates/selectors';
+import { actions } from 'containers/Affiliates/slice';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 
 import Assignment from '@material-ui/icons/Assignment';
 
@@ -61,18 +65,30 @@ const headers = () => [
 //Add pagination
 //Add search bar
 
-const AffiliatesList = ({ affiliates, handlerSort }) => {
+const AffiliatesList = () => {
+  const dispatch = useDispatch();
+  const affiliatesList = useSelector(selectAffiliatesList);
+
   const columns = React.useMemo(headers, []);
-  const data = React.useMemo(() => affiliates, [affiliates]);
+  const data = React.useMemo(() => affiliatesList, [affiliatesList]);
+
+  const handlerGetAffiliates = useCallback((sortBy?: { field: string; value: string }) => {
+    dispatch(actions.getAffiliatesListRequest({ sortBy }));
+  }, []);
+
+  useEffect(() => {
+    handlerGetAffiliates();
+  }, []);
 
   const handlerSortBy = sortBy => {
     if (!sortBy.length) {
-      handlerSort();
+      handlerGetAffiliates();
       return;
     }
 
     const criteria = sortBy[0].desc ? SortByCriterias.DESC : SortByCriterias.ASC;
-    handlerSort({ field: sortBy[0].id, value: criteria });
+
+    handlerGetAffiliates({ field: sortBy[0].id, value: criteria });
   };
 
   return (
