@@ -3,8 +3,12 @@ import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
 import { useStyles } from './selectInputStyles';
 
-const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items }) => {
+const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id }) => {
   const classes = useStyles();
+  const handleOnChange = e => {
+    handleSelect({ id, value: e.target.value, isValid: true });
+  };
+
   return (
     <FormControl fullWidth className={classes.selectFormControl}>
       {label && (
@@ -20,7 +24,7 @@ const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items }) => 
           select: classes.select,
         }}
         value={value}
-        onChange={handleSelect}
+        onChange={handleOnChange}
         inputProps={{
           name: 'simpleSelect',
           id: 'simple-select',

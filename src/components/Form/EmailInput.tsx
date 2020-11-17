@@ -8,7 +8,7 @@ const EmailInput = ({ id, label, value, isRequired, onChange, endAdornmentIcon }
 
   const handleOnChange = e => {
     setIsValidEmail(verifyEmail(e.target.value));
-    onChange({ id: e.target.id, value: e.target.value });
+    onChange({ id: e.target.id, value: e.target.value, isValid: verifyEmail(e.target.value) });
   };
 
   return (

@@ -9,6 +9,7 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer, actions } from './slice';
 import { affiliatesSaga } from './saga';
 import { selectAffiliatesList } from './selectors';
+import { selectButtonType, selectStepsData } from 'containers/WizardContainer/selectors';
 
 const Affiliates = () => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -16,10 +17,18 @@ const Affiliates = () => {
 
   const dispatch = useDispatch();
   const affiliatesList = useSelector(selectAffiliatesList);
+  const buttonType = useSelector(selectButtonType);
+  const stepsData = useSelector(selectStepsData);
 
   useEffect(() => {
     dispatch(actions.getAffiliatedInfoRequest({}));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (buttonType === 'complete') {
+      console.log('mandarFrom', stepsData);
+    }
+  }, [buttonType, stepsData]);
 
   const handlerSort = (sortBy?: { field: string; value: string }) => {
     dispatch(actions.getAffiliatedInfoRequest({ sortBy }));

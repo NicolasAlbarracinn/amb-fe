@@ -11,9 +11,19 @@ interface IInputProps {
   onChange: Function;
   length?: number[];
   endAdornmentIcon?: ReactNode;
+  hasErrors?: boolean;
 }
 
-const TextInput = ({ id, label, value, length = [0, 25], isRequired, onChange, endAdornmentIcon }: IInputProps) => {
+const TextInput = ({
+  id,
+  label,
+  value,
+  length = [0, 25],
+  isRequired,
+  onChange,
+  endAdornmentIcon,
+  hasErrors,
+}: IInputProps) => {
   const [isValidLength, setIsValidLength] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
@@ -47,7 +57,7 @@ const TextInput = ({ id, label, value, length = [0, 25], isRequired, onChange, e
   return (
     <CustomInput
       success={isValidLength && !isEmpty}
-      error={(!isValidLength || isEmpty) && value.length !== 0}
+      error={((!isValidLength || isEmpty) && value.length !== 0) || hasErrors}
       labelText={<span>{label}</span>}
       helperText={errorMessage}
       id={id}

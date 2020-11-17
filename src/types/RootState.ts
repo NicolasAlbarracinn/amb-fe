@@ -15,6 +15,7 @@ export interface RootState {
   login?: LoginState;
   profile?: any;
   affiliates?: IAffiliatesState;
+  wizardContainer?: any;
 }
 
 export interface QueryParameters {
