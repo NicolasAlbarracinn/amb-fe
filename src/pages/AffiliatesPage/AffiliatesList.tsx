@@ -10,6 +10,7 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 
 import Table from 'components/Table/Table';
+import Pagination from 'components/Pagination/Pagination';
 
 const headers = () => [
   {
@@ -90,6 +91,8 @@ const AffiliatesList = ({ affiliates, handlerSort }) => {
             <h4 style={{ color: '#000' }}>Lista de Afiliados</h4>
           </CardHeader>
           <CardBody>
+            {/* TODO: Implement the paggination */}
+            <Pagination totalItems={50} numberOfRowsData={[5, 10, 20, 25, 50]} />
             <Table columns={columns} data={data} handlerSortBy={handlerSortBy} />
           </CardBody>
         </Card>
