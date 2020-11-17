@@ -9,17 +9,18 @@ interface IInputProps {
   value: string;
   items: { value: string; label: string }[];
   handleSelect: Function;
-  hasError?: boolean;
+  loadError?: boolean;
+  isValid?: boolean;
 }
 
-const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, hasError }: IInputProps) => {
+const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, loadError, isValid }: IInputProps) => {
   const classes = useStyles();
   const handleOnChange = e => {
     handleSelect({ id, value: e.target.value, isValid: true });
   };
 
   return (
-    <FormControl error={hasError} fullWidth className={classes.selectFormControl}>
+    <FormControl error={!isValid && loadError} fullWidth className={classes.selectFormControl}>
       {label && (
         <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
           {label}
@@ -61,7 +62,7 @@ const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, h
           </MenuItem>
         ))}
       </Select>
-      {hasError && <FormHelperText>Campo Requerido</FormHelperText>}
+      {isValid && <FormHelperText>Campo Requerido</FormHelperText>}
     </FormControl>
   );
 };
