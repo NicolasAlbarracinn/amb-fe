@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAffiliatesList } from 'containers/Affiliates/selectors';
+import { actions } from 'containers/Affiliates/slice';
+import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 
 import Assignment from '@material-ui/icons/Assignment';
 
@@ -8,8 +12,10 @@ import CardIcon from 'components/Card/CardIcon';
 import CardHeader from 'components/Card/CardHeader';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-
 import Table from 'components/Table/Table';
+import Pagination from 'components/Pagination/Pagination';
+
+import { SortByCriterias } from 'utils/constants';
 
 const headers = () => [
   {
@@ -59,23 +65,30 @@ const headers = () => [
 //Add pagination
 //Add search bar
 
-enum SortByCriterias {
-  DESC = 'desc',
-  ASC = 'asc',
-}
+const AffiliatesList = () => {
+  const dispatch = useDispatch();
+  const affiliatesList = useSelector(selectAffiliatesList);
 
-const AffiliatesList = ({ affiliates, handlerSort }) => {
   const columns = React.useMemo(headers, []);
-  const data = React.useMemo(() => affiliates, [affiliates]);
+  const data = React.useMemo(() => affiliatesList, [affiliatesList]);
+
+  const handlerGetAffiliates = useCallback((sortBy?: { field: string; value: string }) => {
+    dispatch(actions.getAffiliatesListRequest({ sortBy }));
+  }, []);
+
+  useEffect(() => {
+    handlerGetAffiliates();
+  }, []);
 
   const handlerSortBy = sortBy => {
     if (!sortBy.length) {
-      handlerSort();
+      handlerGetAffiliates();
       return;
     }
 
     const criteria = sortBy[0].desc ? SortByCriterias.DESC : SortByCriterias.ASC;
-    handlerSort({ field: sortBy[0].id, value: criteria });
+
+    handlerGetAffiliates({ field: sortBy[0].id, value: criteria });
   };
 
   return (
@@ -90,6 +103,8 @@ const AffiliatesList = ({ affiliates, handlerSort }) => {
             <h4 style={{ color: '#000' }}>Lista de Afiliados</h4>
           </CardHeader>
           <CardBody>
+            {/* TODO: Implement the paggination */}
+            <Pagination totalItems={50} numberOfRowsData={[5, 10, 20, 25, 50]} />
             <Table columns={columns} data={data} handlerSortBy={handlerSortBy} />
           </CardBody>
         </Card>

@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
 import { createSlice } from 'utils/@reduxjs/toolkit';
-import { QueryParameters } from 'types/RootState';
+import { QueryParameters } from 'types/types';
 
 import { IAffiliatesState } from './pageState';
 import { IAffiliate } from './types';
@@ -16,14 +16,23 @@ const AffiliatesSlice = createSlice({
   name: 'affiliates',
   initialState,
   reducers: {
-    getAffiliatedInfoRequest(state, action: PayloadAction<QueryParameters>) {
+    getAffiliatedInfoRequest(state, action: PayloadAction<any>) {
       state.loading = true;
     },
-    getAffiliatedInfoSuccess(state, action: PayloadAction<IAffiliate[]>) {
+    getAffiliatedInfoSuccess(state) {
+      state.loading = false;
+    },
+    getAffiliatedInfoFailed(state) {
+      state.loading = false;
+    },
+    getAffiliatesListRequest(state, action: PayloadAction<QueryParameters>) {
+      state.loading = true;
+    },
+    getAffiliatesListSuccess(state, action: PayloadAction<IAffiliate[]>) {
       state.loading = false;
       state.affiliatesList = action.payload;
     },
-    getAffiliatedInfoFailed(state) {
+    getAffiliatesListFailed(state) {
       state.loading = false;
       state.affiliatesList = [];
     },

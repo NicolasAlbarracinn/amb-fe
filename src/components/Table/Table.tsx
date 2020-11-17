@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import classnames from 'classnames';
 
@@ -25,9 +25,13 @@ const Table = ({ columns, data, handlerSortBy }: ITable) => {
     state: { sortBy },
   } = tableInstance;
 
-  useEffect(() => {
+  const sort = useCallback(() => {
     handlerSortBy(sortBy);
-  }, [sortBy, handlerSortBy]);
+  }, [sortBy]);
+
+  useEffect(() => {
+    sort();
+  }, [sort]);
 
   return (
     <div className="ReactTable -striped -highlight">
