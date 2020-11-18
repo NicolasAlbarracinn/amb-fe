@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAffiliatesList } from 'containers/Affiliates/selectors';
 import { actions } from 'containers/Affiliates/slice';
-import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
+import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import Assignment from '@material-ui/icons/Assignment';
 
@@ -68,27 +68,34 @@ const headers = () => [
 const AffiliatesList = () => {
   const dispatch = useDispatch();
   const affiliatesList = useSelector(selectAffiliatesList);
+  const limit = useSelector(selectLimit);
+  const offset = useSelector(selectOffset);
 
   const columns = React.useMemo(headers, []);
   const data = React.useMemo(() => affiliatesList, [affiliatesList]);
 
-  const handlerGetAffiliates = useCallback((sortBy?: { field: string; value: string }) => {
-    dispatch(actions.getAffiliatesListRequest({ sortBy }));
-  }, []);
+  const [sortBy, setSortBy] = useState<{ field: string; value: string }>();
+
+  const handlerGetAffiliates = useCallback(() => {
+    dispatch(actions.getAffiliatesListRequest({ sortBy, limit, offset }));
+  }, [offset, limit, sortBy]);
 
   useEffect(() => {
     handlerGetAffiliates();
   }, []);
 
+  useEffect(() => {
+    handlerGetAffiliates();
+  }, [handlerGetAffiliates]);
+
   const handlerSortBy = sortBy => {
     if (!sortBy.length) {
-      handlerGetAffiliates();
+      setSortBy(undefined);
       return;
     }
 
     const criteria = sortBy[0].desc ? SortByCriterias.DESC : SortByCriterias.ASC;
-
-    handlerGetAffiliates({ field: sortBy[0].id, value: criteria });
+    setSortBy({ field: sortBy[0].id, value: criteria });
   };
 
   return (

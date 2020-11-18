@@ -8,14 +8,14 @@ export const queryBuilder = ({ sortBy, limit, offset, filter }: QueryParameters)
   }
 
   if (offset) {
-    query = query.concat(`&offset=${offset}`);
+    query = query.concat(query.length === 0 ? `offset=${offset}` : `&offset=${offset}`);
   }
   if (limit) {
-    query = query.concat(`&limit=${limit}`);
+    query = query.concat(query.length === 0 ? `limit=${limit}` : `&limit=${limit}`);
   }
 
   if (filter) {
-    query = query.concat(`&filter=${filter}`);
+    query = query.concat(query.length === 0 ? `filter=${filter}` : `&filter=${filter}`);
   }
 
   return query;
