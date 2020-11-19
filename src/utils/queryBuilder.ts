@@ -9,7 +9,7 @@ enum QueriesKey {
 
 export const queryBuilder = ({ sortBy, limit, offset, filter }: QueryParameters) => {
   const queriesList: { [key: string]: string } = {
-    [QueriesKey.SORT_BY]: `sortFiel=${sortBy?.field}&sortCriteria=${sortBy?.value}`,
+    [QueriesKey.SORT_BY]: `sortField=${sortBy?.field}&sortCriteria=${sortBy?.value}`,
     [QueriesKey.OFFSET]: `offset=${offset}`,
     [QueriesKey.LIMIT]: `limit=${limit}`,
     [QueriesKey.FILTER]: `filter=${filter}`,
