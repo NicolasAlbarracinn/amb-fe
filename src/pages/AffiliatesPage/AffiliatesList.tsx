@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAffiliatesList } from 'containers/Affiliates/selectors';
-import { actions } from 'containers/Affiliates/slice';
+import { actions as AffiliatesActions } from 'containers/Affiliates/slice';
 import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import Assignment from '@material-ui/icons/Assignment';
@@ -76,17 +76,9 @@ const AffiliatesList = () => {
 
   const [sortBy, setSortBy] = useState<{ field: string; value: string }>();
 
-  const handlerGetAffiliates = useCallback(() => {
-    dispatch(actions.getAffiliatesListRequest({ sortBy, limit, offset }));
-  }, [offset, limit, sortBy]);
-
   useEffect(() => {
-    handlerGetAffiliates();
-  }, []);
-
-  useEffect(() => {
-    handlerGetAffiliates();
-  }, [handlerGetAffiliates]);
+    dispatch(AffiliatesActions.getAffiliatesListRequest({ sortBy, limit, offset }));
+  }, [sortBy, limit, offset, dispatch]);
 
   const handlerSortBy = sortBy => {
     if (!sortBy.length) {
