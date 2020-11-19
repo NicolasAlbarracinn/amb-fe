@@ -1,22 +1,21 @@
 import { QueryParameters } from 'types/types';
 
+enum QueriesKey {
+  SORT_BY = 'sortBy',
+  LIMIT = 'limit',
+  OFFSET = 'offset',
+  FILTER = 'filter',
+}
+
 export const queryBuilder = ({ sortBy, limit, offset, filter }: QueryParameters) => {
-  let query = '';
+  const queriesList: { [key: string]: string } = {
+    [QueriesKey.SORT_BY]: `sortFiel=${sortBy?.field}&sortCriteria=${sortBy?.value}`,
+    [QueriesKey.OFFSET]: `offset=${offset}`,
+    [QueriesKey.LIMIT]: `limit=${limit}`,
+    [QueriesKey.FILTER]: `filter=${filter}`,
+  };
 
-  if (sortBy) {
-    query = query.concat(`sortFiel=${sortBy.field}&sortCriteria=${sortBy.value}`);
-  }
-
-  if (offset) {
-    query = query.concat(query.length === 0 ? `offset=${offset}` : `&offset=${offset}`);
-  }
-  if (limit) {
-    query = query.concat(query.length === 0 ? `limit=${limit}` : `&limit=${limit}`);
-  }
-
-  if (filter) {
-    query = query.concat(query.length === 0 ? `filter=${filter}` : `&filter=${filter}`);
-  }
-
-  return query;
+  return Object.keys({ sortBy, limit, offset, filter })
+    .map(key => queriesList[key])
+    .join('&');
 };
