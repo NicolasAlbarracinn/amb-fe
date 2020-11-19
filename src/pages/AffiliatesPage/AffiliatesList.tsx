@@ -35,12 +35,12 @@ const headers = () => [
     accessor: 'dni',
   },
   {
-    Header: 'Nombre socio',
+    Header: 'Nombre y apellido',
     accessor: 'personalInfo.firstName',
-  },
-  {
-    Header: 'apellido socio',
-    accessor: 'personalInfo.lastName',
+    Cell: props => {
+      const { firstName, lastName } = props.cell.row.original.personalInfo;
+      return <span>{`${firstName} ${lastName}`}</span>;
+    },
   },
   {
     Header: 'Acciones',
@@ -82,6 +82,7 @@ const AffiliatesList = () => {
   }, [sortBy, limit, offset, dispatch]);
 
   const handlerSortBy = sortBy => {
+    console.log(sortBy);
     if (!sortBy.length) {
       setSortBy(undefined);
       return;
