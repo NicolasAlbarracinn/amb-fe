@@ -6,6 +6,9 @@ import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import Assignment from '@material-ui/icons/Assignment';
 
+import Dvr from '@material-ui/icons/Dvr';
+import Close from '@material-ui/icons/Close';
+
 import Card from 'components/Card/Card';
 import CardBody from 'components/Card/CardBody';
 import CardIcon from 'components/Card/CardIcon';
@@ -14,6 +17,7 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Table from 'components/Table/Table';
 import Pagination from 'components/Pagination/Pagination';
+import Button from 'components/CustomButtons/Button';
 
 import { SortByCriterias } from 'utils/constants';
 
@@ -21,14 +25,6 @@ const headers = () => [
   {
     Header: 'N° socio',
     accessor: 'patnerNumber',
-  },
-  {
-    Header: 'N° Legajo ',
-    accessor: 'folderNumber',
-  },
-  {
-    Header: 'Fecha de ingreso',
-    accessor: 'admissionDate',
   },
   {
     Header: 'cuil',
@@ -39,14 +35,6 @@ const headers = () => [
     accessor: 'dni',
   },
   {
-    Header: 'Distribucion',
-    accessor: 'distribution',
-  },
-  {
-    Header: 'Metodo de pago',
-    accessor: 'paymentMethod',
-  },
-  {
     Header: 'Nombre socio',
     accessor: 'personalInfo.firstName',
   },
@@ -55,8 +43,8 @@ const headers = () => [
     accessor: 'personalInfo.lastName',
   },
   {
-    Header: 'comercializador',
-    accessor: 'comercializador',
+    Header: 'Acciones',
+    accessor: 'actions',
   },
 ];
 
@@ -65,6 +53,19 @@ const headers = () => [
 //Add pagination
 //Add search bar
 
+const actions = (
+  <div className="actions-right">
+    {/* use this button to add a edit kind of action */}
+    <Button justIcon round simple onClick={() => {}} color="warning" className="edit">
+      <Dvr />
+    </Button>{' '}
+    {/* use this button to remove the data row */}
+    <Button justIcon round simple onClick={() => {}} color="danger" className="remove">
+      <Close />
+    </Button>{' '}
+  </div>
+);
+
 const AffiliatesList = () => {
   const dispatch = useDispatch();
   const affiliatesList = useSelector(selectAffiliatesList);
@@ -72,7 +73,7 @@ const AffiliatesList = () => {
   const offset = useSelector(selectOffset);
 
   const columns = React.useMemo(headers, []);
-  const data = React.useMemo(() => affiliatesList, [affiliatesList]);
+  const data = React.useMemo(() => affiliatesList.map(item => ({ ...item, actions })), [affiliatesList]);
 
   const [sortBy, setSortBy] = useState<{ field: string; value: string }>();
 
