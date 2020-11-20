@@ -18,6 +18,7 @@ import GridItem from 'components/Grid/GridItem';
 import Table from 'components/Table/Table';
 import Pagination from 'components/Pagination/Pagination';
 import Button from 'components/CustomButtons/Button';
+import Search from 'components/SearchBar/SearchBar';
 
 import { SortByCriterias } from 'utils/constants';
 
@@ -105,6 +106,7 @@ const AffiliatesList = () => {
           </CardHeader>
           <CardBody>
             {/* TODO: Implement the paggination */}
+            <Search />
             <Pagination totalItems={50} numberOfRowsData={[5, 10, 20, 25, 50]} />
             <Table columns={columns} data={data} handlerSortBy={handlerSortBy} />
           </CardBody>
