@@ -13,16 +13,16 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    name: 'Afiliados',
+    name: 'Socios',
     icon: PeopleIcon,
     state: 'pageCollapse',
     views: [
       {
         path: '/new',
-        name: 'Crear Afiliado',
+        name: 'Crear Socio',
         mini: 'PP',
         component: PeopleIcon,
-        layout: '/app/affiliates',
+        layout: '/app/partners',
       },
     ],
   },

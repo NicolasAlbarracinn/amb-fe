@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAffiliatesList } from 'containers/Affiliates/selectors';
-import { actions as AffiliatesActions } from 'containers/Affiliates/slice';
+import { selectPartnersList } from 'containers/Partners/selectors';
+import { actions as PartnersActions } from 'containers/Partners/slice';
 import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import Assignment from '@material-ui/icons/Assignment';
@@ -65,19 +65,19 @@ const headers = () => [
 //Add pagination
 //Add search bar
 
-const AffiliatesList = () => {
+const PartnersList = () => {
   const dispatch = useDispatch();
-  const affiliatesList = useSelector(selectAffiliatesList);
+  const partnersList = useSelector(selectPartnersList);
   const limit = useSelector(selectLimit);
   const offset = useSelector(selectOffset);
 
   const columns = React.useMemo(headers, []);
-  const data = React.useMemo(() => affiliatesList, [affiliatesList]);
+  const data = React.useMemo(() => partnersList, [partnersList]);
 
   const [sortBy, setSortBy] = useState<{ field: string; value: string }>();
 
   useEffect(() => {
-    dispatch(AffiliatesActions.getAffiliatesListRequest({ sortBy, limit, offset }));
+    dispatch(PartnersActions.getPartnersListRequest({ sortBy, limit, offset }));
   }, [sortBy, limit, offset, dispatch]);
 
   const handlerSortBy = sortBy => {
@@ -99,7 +99,7 @@ const AffiliatesList = () => {
               <Assignment />
             </CardIcon>
             {/* TODO: add styles file */}
-            <h4 style={{ color: '#000' }}>Lista de Afiliados</h4>
+            <h4 style={{ color: '#000' }}>Lista de Socios</h4>
           </CardHeader>
           <CardBody>
             {/* TODO: Implement the paggination */}
@@ -112,4 +112,4 @@ const AffiliatesList = () => {
   );
 };
 
-export default AffiliatesList;
+export default PartnersList;
