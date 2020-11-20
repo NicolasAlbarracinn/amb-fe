@@ -1,5 +1,5 @@
-import React, { useState, ReactNode } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, ReactNode, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles, Theme } from '@material-ui/core';
 import Face from '@material-ui/icons/Face';
@@ -13,6 +13,9 @@ import SelectInput from 'components/Form/SelectInput';
 import Button from 'components/CustomButtons/Button';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
+
+import { actions as partnersActions } from 'containers/Partners/slice';
+import { selectFetchedRenaperData, selectPersonalData, selectRenaperData } from 'containers/Partners/selectors';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -53,10 +56,6 @@ interface IStep1 {
 }
 
 const initialForm = {
-  associateNumber: {
-    value: '',
-    isValid: false,
-  },
   documentType: {
     value: '',
     isValid: false,
@@ -72,6 +71,10 @@ const initialForm = {
   gender: {
     value: '',
     isValid: false,
+  },
+  associateNumber: {
+    value: '',
+    isValid: true,
   },
   cuil: {
     value: '',
@@ -135,12 +138,33 @@ const initialForm = {
   },
 };
 
-const Step1 = () => {
+const PersonalData = () => {
   const classes = useStyles();
-  const [personalData, setpersonalData] = useState(initialForm);
+  const [personalData, setPersonalData] = useState(initialForm);
   const [loadError, setLoadError] = useState(false);
-
+  const renaperData = useSelector(selectPersonalData);
+  const fetchedRenaperData = useSelector(selectFetchedRenaperData);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const { documentNumber, procedureNumber, gender } = personalData;
+    if (documentNumber.isValid && procedureNumber.isValid && gender.isValid && !fetchedRenaperData) {
+      dispatch(
+        partnersActions.getRenaperDataRequest({
+          documentNumber: documentNumber.value,
+          procedureNumber: procedureNumber.value,
+          gender: gender.value,
+        }),
+      );
+    }
+  }, [dispatch, fetchedRenaperData, personalData]);
+
+  useEffect(() => {
+    if (fetchedRenaperData) {
+      setPersonalData(prevState => ({ ...prevState, ...renaperData }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchedRenaperData, renaperData]);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(personalData).some(key => key[1].isValid === false);
@@ -153,7 +177,7 @@ const Step1 = () => {
   };
 
   const onChangeHanlder = ({ id, value, isValid }) => {
-    setpersonalData(prevState => ({
+    setPersonalData(prevState => ({
       ...prevState,
       [id]: {
         value: value,
@@ -161,27 +185,11 @@ const Step1 = () => {
       },
     }));
   };
-  console.log(personalData);
+
   return (
     <>
-      <GridContainer>
-        <GridItem xs={12} sm={2}>
-          <TextInput
-            id="associateNumber"
-            isValid={personalData.associateNumber.isValid}
-            loadError={loadError}
-            label="N de socio"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.associateNumber.value}
-            length={[1, 25]}
-            inputType="number"
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>
-      </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={4}>
+      <GridContainer id="renaper-data" style={{ marginBottom: '3%' }}>
+        {/*<GridItem xs={12} sm={4}>
           <SelectInput
             id="documentType"
             isValid={personalData.documentType.isValid}
@@ -195,13 +203,28 @@ const Step1 = () => {
               { value: 'passaporte', label: 'Passaporte' },
             ]}
           />
-        </GridItem>
+          </GridItem>*/}
+        {/*        <GridItem xs={12} sm={2}>
+          <TextInput
+            id="associateNumber"
+            isValid={personalData.associateNumber.isValid}
+            loadError={loadError}
+            label="N de socio"
+            isRequired={true}
+            onChange={onChangeHanlder}
+            value={personalData.associateNumber.value}
+            length={[1, 25]}
+            inputType="number"
+            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
+          />
+        </GridItem>*/}
         <GridItem xs={12} sm={3}>
           <TextInput
             id="documentNumber"
+            label="N de documento"
             isValid={personalData.documentNumber.isValid}
             loadError={loadError}
-            label="N de documento"
+            disabled={fetchedRenaperData}
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.documentNumber.value}
@@ -212,6 +235,7 @@ const Step1 = () => {
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
+            disabled={fetchedRenaperData}
             id="procedureNumber"
             isValid={personalData.procedureNumber.isValid}
             loadError={loadError}
@@ -226,6 +250,7 @@ const Step1 = () => {
         </GridItem>
         <GridItem xs={12} sm={2}>
           <SelectInput
+            disabled={fetchedRenaperData}
             id="gender"
             isValid={personalData.gender.isValid}
             loadError={loadError}
@@ -235,12 +260,15 @@ const Step1 = () => {
             handleSelect={onChangeHanlder}
             items={[
               { value: 'm', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
+              { value: 'f', label: 'Femenino' },
             ]}
           />
         </GridItem>
+      </GridContainer>
+      <GridContainer id="disabled-data" style={{ marginBottom: '3%' }}>
         <GridItem xs={12} sm={2}>
           <TextInput
+            disabled={true}
             id="cuil"
             isValid={personalData.cuil.isValid}
             loadError={loadError}
@@ -255,6 +283,7 @@ const Step1 = () => {
         </GridItem>
         <GridItem xs={12} sm={2}>
           <TextInput
+            disabled={true}
             id="name"
             isValid={personalData.name.isValid}
             loadError={loadError}
@@ -268,6 +297,7 @@ const Step1 = () => {
         </GridItem>
         <GridItem xs={12} sm={2}>
           <TextInput
+            disabled={true}
             id="lastName"
             isValid={personalData.lastName.isValid}
             loadError={loadError}
@@ -281,6 +311,7 @@ const Step1 = () => {
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
+            disabled={true}
             id="country"
             isValid={personalData.country.isValid}
             loadError={loadError}
@@ -288,14 +319,12 @@ const Step1 = () => {
             mainSelectLabel="Selecione su nacionalidad"
             value={personalData.country.value}
             handleSelect={onChangeHanlder}
-            items={[
-              { value: 'm', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
-            ]}
+            items={[{ value: 'argentina', label: 'Argentina' }]}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
+            disabled={true}
             id="birthPlace"
             isValid={personalData.birthPlace.isValid}
             loadError={loadError}
@@ -303,14 +332,12 @@ const Step1 = () => {
             mainSelectLabel="Selecione su lugar de nacimiento"
             value={personalData.birthPlace.value}
             handleSelect={onChangeHanlder}
-            items={[
-              { value: 'm', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
-            ]}
+            items={[{ value: 'argentina', label: 'Argentina' }]}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
+            disabled={true}
             id="civilState"
             isValid={personalData.civilState.isValid}
             loadError={loadError}
@@ -319,13 +346,14 @@ const Step1 = () => {
             value={personalData.civilState.value}
             handleSelect={onChangeHanlder}
             items={[
-              { value: 'm', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
+              { value: 's', label: 'Soltero' },
+              { value: 'c', label: 'Casado' },
             ]}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <EmailInput
+            disabled={true}
             id="email"
             isValid={personalData.email.isValid}
             loadError={loadError}
@@ -338,6 +366,7 @@ const Step1 = () => {
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
+            disabled={true}
             id="phone"
             isValid={personalData.phone.isValid}
             loadError={loadError}
@@ -351,10 +380,11 @@ const Step1 = () => {
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
+            disabled={true}
             id="personalPhone"
             isValid={personalData.personalPhone.isValid}
             loadError={loadError}
-            label="Telefono"
+            label="Celular"
             isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.personalPhone.value}
@@ -362,6 +392,8 @@ const Step1 = () => {
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
+      </GridContainer>
+      <GridContainer id="enabled-data" style={{ marginBottom: '3%' }}>
         <GridItem xs={12} sm={4}>
           <TextInput
             id="salary"
@@ -461,4 +493,4 @@ const Step1 = () => {
   );
 };
 
-export default Step1;
+export default PersonalData;

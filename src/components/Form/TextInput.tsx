@@ -14,19 +14,20 @@ interface IInputProps {
   isValid?: boolean;
   inputType?: string;
   loadError?: boolean;
+  disabled?: boolean;
 }
 
 const TextInput = ({
   id,
-  label,
   value,
-  length = [0, 25],
-  isRequired,
   onChange,
+  length = [0, 25],
+  label,
   endAdornmentIcon,
   isValid = true,
   inputType = 'text',
   loadError = false,
+  disabled = false,
 }: IInputProps) => {
   const [errorMessage, setErrorMessage] = useState<string>();
 
@@ -54,6 +55,7 @@ const TextInput = ({
         fullWidth: true,
       }}
       inputProps={{
+        disabled,
         value,
         type: inputType,
         endAdornment: <InputAdornment position="end">{endAdornmentIcon}</InputAdornment>,

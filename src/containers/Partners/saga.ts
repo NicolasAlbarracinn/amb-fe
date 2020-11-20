@@ -1,9 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { call, put, takeLatest, all } from 'redux-saga/effects'; // select, delay
+import { call, put, takeLatest } from 'redux-saga/effects'; // select, delay
 import Cookies from 'universal-cookie';
 
-import { GET_PARTNERD_INFO, GET_AFFILEATES_LIST } from 'utils/endpoints';
+import { GET_RENAPER_DATA, GET_AFFILEATES_LIST } from 'utils/endpoints';
 import { request } from 'utils/request';
 import { QueryParameters } from 'types/types';
 import { queryBuilder } from 'utils/queryBuilder';
@@ -11,9 +11,9 @@ import { actions } from './slice';
 
 const cookies = new Cookies();
 
-export function* getPartnerdInfoRequest(action: PayloadAction<QueryParameters>) {
+export function* getRenaperDataRequest(action: PayloadAction<any>) {
   const token = cookies.get('token');
-  const requestURL = `${GET_PARTNERD_INFO}?id=${action.payload}`;
+  const requestURL = `${GET_RENAPER_DATA}?documentNumber=${action.payload.documentNumber}&procedureNumber=${action.payload.procedureNumber}&procedureNumber=${action.payload.gender}`;
 
   try {
     const requestOptions: RequestInit = {
@@ -24,9 +24,9 @@ export function* getPartnerdInfoRequest(action: PayloadAction<QueryParameters>) 
       },
     };
     const response = yield call(request, requestURL, requestOptions);
-    yield put(actions.getPartnerdInfoSuccess());
+    yield put(actions.getRenaperDataSuccess(response.data));
   } catch (err) {
-    yield put(actions.getPartnerdInfoFailed());
+    yield put(actions.getRenaperDataFailed());
     toast.error('Algo salio mal.', {
       position: toast.POSITION.TOP_CENTER,
     });
@@ -57,6 +57,6 @@ export function* getPartnersListRequest(action: PayloadAction<QueryParameters>) 
 }
 
 export function* partnersSaga() {
-  yield takeLatest(actions.getPartnerdInfoRequest.type, getPartnerdInfoRequest);
+  yield takeLatest(actions.getRenaperDataRequest.type, getRenaperDataRequest);
   yield takeLatest(actions.getPartnersListRequest.type, getPartnersListRequest);
 }

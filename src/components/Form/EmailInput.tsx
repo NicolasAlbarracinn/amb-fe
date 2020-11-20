@@ -3,7 +3,16 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import CustomInput from 'components/CustomInput/CustomInput';
 import { verifyEmail } from './validators';
 
-const EmailInput = ({ id, label, value, onChange, endAdornmentIcon, loadError = false, isValid = true }: any) => {
+const EmailInput = ({
+  id,
+  label,
+  value,
+  onChange,
+  endAdornmentIcon,
+  loadError = false,
+  isValid = true,
+  disabled = false,
+}: any) => {
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const message = useMemo(() => {
@@ -27,6 +36,7 @@ const EmailInput = ({ id, label, value, onChange, endAdornmentIcon, loadError = 
         fullWidth: true,
       }}
       inputProps={{
+        disabled,
         value,
         type: 'email',
         endAdornment: (

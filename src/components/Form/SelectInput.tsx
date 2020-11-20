@@ -11,9 +11,20 @@ interface IInputProps {
   handleSelect: Function;
   loadError?: boolean;
   isValid?: boolean;
+  disabled?: boolean;
 }
 
-const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, loadError, isValid }: IInputProps) => {
+const SelectInput = ({
+  label,
+  mainSelectLabel,
+  value,
+  handleSelect,
+  items,
+  id,
+  loadError,
+  isValid,
+  disabled = false,
+}: IInputProps) => {
   const classes = useStyles();
   const handleOnChange = e => {
     handleSelect({ id, value: e.target.value, isValid: true });
@@ -27,6 +38,7 @@ const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, l
         </InputLabel>
       )}
       <Select
+        disabled={disabled}
         MenuProps={{
           className: classes.selectMenu,
         }}
@@ -62,7 +74,7 @@ const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, l
           </MenuItem>
         ))}
       </Select>
-      {isValid && <FormHelperText>Campo Requerido</FormHelperText>}
+      {/*!isValid && <FormHelperText>Campo Requerido</FormHelperText>*/}
     </FormControl>
   );
 };

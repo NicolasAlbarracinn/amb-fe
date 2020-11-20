@@ -89,18 +89,15 @@ const initialForm = {
   },
 };
 
-const Step3 = () => {
+const WorkInfo = () => {
   const classes = useStyles();
   const [workInfo, setWorkInfo] = useState(initialForm);
-  const [hasErrors, setHasErrors] = useState(false);
 
   const dispatch = useDispatch();
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);
-    console.log(workInfo);
     if (isFormInvalid) {
-      setHasErrors(true);
       dispatch(wizardActions.setStep({ stepId: 'workInfo', data: workInfo, isValid: false }));
     } else {
       dispatch(wizardActions.setStep({ stepId: 'workInfo', data: workInfo, isValid: true, type: 'complete' }));
@@ -245,4 +242,4 @@ const Step3 = () => {
   );
 };
 
-export default Step3;
+export default WorkInfo;

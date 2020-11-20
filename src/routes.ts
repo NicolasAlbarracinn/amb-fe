@@ -20,7 +20,7 @@ const dashRoutes = [
       {
         path: '/new',
         name: 'Crear Socio',
-        mini: 'PP',
+        mini: 'CS',
         component: PeopleIcon,
         layout: '/app/partners',
       },

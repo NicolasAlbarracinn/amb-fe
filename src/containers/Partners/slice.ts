@@ -7,22 +7,26 @@ import { IPartnersState } from './pageState';
 import { IPartner } from './types';
 
 // The initial state of the GithubRepoForm container
-export const initialState: IPartnersState = {
+export const initialState: any = {
   loading: true,
   partnersList: [],
+  renaperData: {},
+  fetchedRenaperData: false,
 };
 
 const PartnersSlice = createSlice({
   name: 'partners',
   initialState,
   reducers: {
-    getPartnerdInfoRequest(state, action: PayloadAction<any>) {
+    getRenaperDataRequest(state, action: PayloadAction<any>) {
       state.loading = true;
     },
-    getPartnerdInfoSuccess(state) {
+    getRenaperDataSuccess(state, action: PayloadAction<any>) {
+      state.renaperData = action.payload;
+      state.fetchedRenaperData = true;
       state.loading = false;
     },
-    getPartnerdInfoFailed(state) {
+    getRenaperDataFailed(state) {
       state.loading = false;
     },
     getPartnersListRequest(state, action: PayloadAction<QueryParameters>) {
