@@ -75,8 +75,7 @@ const UserProfile = ({ handleSubmit, formValues }: IUserProfile) => {
                   <GridItem xs={12} sm={6}>
                     <TextInput
                       id="firstName"
-                      label="nombre"
-                      isRequired={true}
+                      label="Nombre"
                       onChange={onChangeHanlder}
                       value={inputValues.firstName}
                       length={[0, 25]}
@@ -84,8 +83,7 @@ const UserProfile = ({ handleSubmit, formValues }: IUserProfile) => {
                     />
                     <TextInput
                       id="lastName"
-                      label="apellido"
-                      isRequired={true}
+                      label="Apellido"
                       onChange={onChangeHanlder}
                       value={inputValues.lastName}
                       length={[0, 25]}
@@ -96,7 +94,6 @@ const UserProfile = ({ handleSubmit, formValues }: IUserProfile) => {
                     <EmailInput
                       id="email"
                       label="Email"
-                      isRequired={true}
                       onChange={onChangeHanlder}
                       value={inputValues.email}
                       endAdornmentIcon={<Email className={classes.inputAdornmentIcon} />}

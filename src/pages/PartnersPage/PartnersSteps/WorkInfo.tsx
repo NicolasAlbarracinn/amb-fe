@@ -11,6 +11,7 @@ import Button from 'components/CustomButtons/Button';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 import SelectInput from 'components/Form/SelectInput';
+import { parseSubmitForm } from 'utils/parseForm';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -63,11 +64,11 @@ const initialForm = {
     value: '',
     isValid: false,
   },
-  bank: {
+  cbu: {
     value: '',
     isValid: false,
   },
-  cbu: {
+  bank: {
     value: '',
     isValid: false,
   },
@@ -98,14 +99,27 @@ const WorkInfo = () => {
   const handleNext = () => {
     const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);
     if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId: 'workInfo', data: workInfo, isValid: false }));
+      dispatch(wizardActions.setStep({ stepId: 'workInfo', data: parseSubmitForm(workInfo), isValid: false }));
     } else {
-      dispatch(wizardActions.setStep({ stepId: 'workInfo', data: workInfo, isValid: true, type: 'complete' }));
+      dispatch(
+        wizardActions.setStep({ stepId: 'workInfo', data: parseSubmitForm(workInfo), isValid: true, type: 'complete' }),
+      );
+    }
+  };
+
+  const handleSubmit = () => {
+    const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);
+    if (!isFormInvalid) {
+      dispatch(
+        wizardActions.setStep({ stepId: 'workInfo', data: parseSubmitForm(workInfo), isValid: true, type: 'submit' }),
+      );
     }
   };
 
   const handlePrevious = () => {
-    dispatch(wizardActions.setStep({ stepId: 'workInfo', data: workInfo, isValid: true, type: 'previous' }));
+    dispatch(
+      wizardActions.setStep({ stepId: 'workInfo', data: parseSubmitForm(workInfo), isValid: true, type: 'previous' }),
+    );
   };
 
   const onChangeHanlder = ({ id, value, isValid }) => {
@@ -120,7 +134,7 @@ const WorkInfo = () => {
 
   return (
     <>
-      <GridContainer>
+      <GridContainer style={{ marginBottom: '3%' }}>
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="repartition"
@@ -132,16 +146,17 @@ const WorkInfo = () => {
               { value: 'm', label: 'Masculino' },
               { value: 'F', label: 'Femenino' },
             ]}
+            isValid={workInfo.repartition.isValid}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
           <TextInput
             id="fileNumber"
             label="Legajo"
-            isRequired={true}
             onChange={onChangeHanlder}
             value={workInfo.fileNumber.value}
             length={[2, 25]}
+            isValid={workInfo.fileNumber.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -149,76 +164,84 @@ const WorkInfo = () => {
           <TextInput
             id="fileItem"
             label="Item Legajo"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={workInfo.fileItem.value}
-            length={[2, 25]}
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={3}>
-          <TextInput
-            id="bank"
-            label="Banco"
-            isRequired={true}
             onChange={onChangeHanlder}
-            value={workInfo.bank.value}
             length={[2, 25]}
+            isValid={workInfo.fileItem.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
-        <GridItem xs={12} sm={3}>
+      </GridContainer>
+      <GridContainer style={{ marginBottom: '3%' }}>
+        <GridItem xs={12} sm={4}>
           <TextInput
             id="cbu"
             label="CBU"
-            isRequired={true}
             onChange={onChangeHanlder}
             value={workInfo.cbu.value}
             length={[2, 25]}
+            isValid={workInfo.cbu.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
-        <GridItem xs={12} sm={1}>
-          <TextInput
-            id="branch"
-            label="Sucursal"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={workInfo.branch.value}
-            length={[2, 25]}
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={3}>
-          <TextInput
-            id="banking"
-            label="Bancaria"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={workInfo.banking.value}
-            length={[2, 25]}
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={2}>
-          <TextInput
-            id="accountNumber"
-            label="N de Cuenta"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={workInfo.accountNumber.value}
-            length={[2, 25]}
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>
+      </GridContainer>
+      {workInfo.cbu.value !== '' && (
+        <GridContainer style={{ marginBottom: '3%' }}>
+          <GridItem xs={12} sm={4}>
+            <TextInput
+              id="bank"
+              label="Banco"
+              onChange={onChangeHanlder}
+              value={workInfo.bank.value}
+              length={[2, 25]}
+              isValid={workInfo.bank.isValid}
+              endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={3}>
+            <TextInput
+              id="branch"
+              label="Sucursal"
+              onChange={onChangeHanlder}
+              value={workInfo.branch.value}
+              length={[2, 25]}
+              isValid={workInfo.branch.isValid}
+              endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={3}>
+            <TextInput
+              id="banking"
+              label="Bancaria"
+              onChange={onChangeHanlder}
+              value={workInfo.banking.value}
+              length={[2, 25]}
+              isValid={workInfo.banking.isValid}
+              endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={2}>
+            <TextInput
+              id="accountNumber"
+              label="N de Cuenta"
+              onChange={onChangeHanlder}
+              value={workInfo.accountNumber.value}
+              length={[2, 25]}
+              isValid={workInfo.accountNumber.isValid}
+              endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
+            />
+          </GridItem>
+        </GridContainer>
+      )}
+      <GridContainer>
         <GridItem xs={12} sm={12}>
           <TextInput
             id="observations"
             label="Observaciones"
-            isRequired={true}
             onChange={onChangeHanlder}
             value={workInfo.observations.value}
             length={[2, 25]}
+            isValid={workInfo.observations.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -231,7 +254,7 @@ const WorkInfo = () => {
         </div>
         <div className={classes.right}>
           {true ? (
-            <Button color="rose" onClick={handleNext}>
+            <Button color="rose" onClick={handleSubmit}>
               Finalizar
             </Button>
           ) : null}

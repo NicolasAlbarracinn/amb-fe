@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects'; // select, delay
 import Cookies from 'universal-cookie';
 
-import { GET_RENAPER_DATA, GET_AFFILEATES_LIST } from 'utils/endpoints';
+import { GET_RENAPER_DATA, GET_AFFILEATES_LIST, SAVE_PARTNER } from 'utils/endpoints';
 import { request } from 'utils/request';
 import { QueryParameters } from 'types/types';
 import { queryBuilder } from 'utils/queryBuilder';
@@ -56,7 +56,33 @@ export function* getPartnersListRequest(action: PayloadAction<QueryParameters>) 
   }
 }
 
+export function* getSavePartnerRequest(action: PayloadAction<any>) {
+  const token = cookies.get('token');
+  const requestURL = `${SAVE_PARTNER}`;
+  try {
+    const requestOptions: RequestInit = {
+      method: 'Post',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(action.payload),
+    };
+    const response = yield call(request, requestURL, requestOptions);
+    yield put(actions.getSavePartnerSuccess(response.data));
+    toast.success(`${response.data.partnerId}`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (err) {
+    yield put(actions.getSavePartnerFailed());
+    toast.error('Algo salio mal.', {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
 export function* partnersSaga() {
   yield takeLatest(actions.getRenaperDataRequest.type, getRenaperDataRequest);
   yield takeLatest(actions.getPartnersListRequest.type, getPartnersListRequest);
+  yield takeLatest(actions.getSavePartnerRequest.type, getSavePartnerRequest);
 }

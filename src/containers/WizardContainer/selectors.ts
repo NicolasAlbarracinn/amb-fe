@@ -16,3 +16,8 @@ export const selectButtonType = createSelector(
   [selectWizardContainer],
   wizardContainerState => wizardContainerState.buttonType,
 );
+
+export const selectSubmitReady = createSelector(
+  [selectWizardContainer],
+  wizardContainerState => wizardContainerState.submitReady,
+);

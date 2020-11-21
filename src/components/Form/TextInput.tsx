@@ -6,28 +6,27 @@ import { verifyLength } from './validators';
 interface IInputProps {
   id: string;
   label: string;
+  inputType?: string;
   value: string;
-  isRequired: boolean;
   onChange: Function;
   length?: number[];
-  endAdornmentIcon?: ReactNode;
   isValid?: boolean;
-  inputType?: string;
   loadError?: boolean;
   disabled?: boolean;
+  endAdornmentIcon?: ReactNode;
 }
 
 const TextInput = ({
   id,
+  label,
+  inputType = 'text',
   value,
   onChange,
   length = [0, 25],
-  label,
-  endAdornmentIcon,
   isValid = true,
-  inputType = 'text',
   loadError = false,
   disabled = false,
+  endAdornmentIcon,
 }: IInputProps) => {
   const [errorMessage, setErrorMessage] = useState<string>();
 

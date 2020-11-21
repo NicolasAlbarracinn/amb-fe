@@ -8,10 +8,10 @@ const EmailInput = ({
   label,
   value,
   onChange,
-  endAdornmentIcon,
-  loadError = false,
   isValid = true,
+  loadError = false,
   disabled = false,
+  endAdornmentIcon,
 }: any) => {
   const [errorMessage, setErrorMessage] = useState<string>();
 

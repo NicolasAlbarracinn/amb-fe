@@ -11,6 +11,7 @@ import Button from 'components/CustomButtons/Button';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 import { selectAdress, selectFetchedRenaperData } from 'containers/Partners/selectors';
+import { parseSubmitForm } from 'utils/parseForm';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -92,7 +93,6 @@ const Adress = () => {
 
   const renaperData = useSelector(selectAdress);
   const fetchedRenaperData = useSelector(selectFetchedRenaperData);
-  console.log(renaperData);
 
   const dispatch = useDispatch();
 
@@ -106,15 +106,17 @@ const Adress = () => {
   const handleNext = () => {
     const isFormInvalid = Object.entries(adress).some(key => key[1].isValid === false);
     if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId: 'adress', data: adress, isValid: false }));
+      dispatch(wizardActions.setStep({ stepId: 'adress', data: parseSubmitForm(adress), isValid: false }));
       setLoadError(true);
     } else {
-      dispatch(wizardActions.setStep({ stepId: 'adress', data: adress, isValid: true, type: 'next' }));
+      dispatch(wizardActions.setStep({ stepId: 'adress', data: parseSubmitForm(adress), isValid: true, type: 'next' }));
     }
   };
 
   const handlePrevious = () => {
-    dispatch(wizardActions.setStep({ stepId: 'adress', data: adress, isValid: true, type: 'previous' }));
+    dispatch(
+      wizardActions.setStep({ stepId: 'adress', data: parseSubmitForm(adress), isValid: true, type: 'previous' }),
+    );
   };
 
   const onChangeHanlder = ({ id, value, isValid }) => {
@@ -134,12 +136,11 @@ const Adress = () => {
           <TextInput
             id="streetAdress"
             label="Calle y N"
-            isValid={adress.streetAdress.isValid}
-            isRequired={true}
-            loadError={loadError}
-            onChange={onChangeHanlder}
             value={adress.streetAdress.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.streetAdress.isValid}
+            loadError={loadError}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -147,10 +148,10 @@ const Adress = () => {
           <TextInput
             id="floor"
             label="Piso"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.floor.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.floor.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -158,10 +159,10 @@ const Adress = () => {
           <TextInput
             id="aptNumber"
             label="Depto"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.aptNumber.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.aptNumber.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -169,10 +170,10 @@ const Adress = () => {
           <TextInput
             id="department"
             label="Departamento"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.department.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.department.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -180,10 +181,10 @@ const Adress = () => {
           <TextInput
             id="location"
             label="Localidad"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.location.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.location.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -191,10 +192,10 @@ const Adress = () => {
           <TextInput
             id="province"
             label="Provincia"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.province.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.location.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -202,21 +203,21 @@ const Adress = () => {
           <TextInput
             id="postalCode"
             label="Codigo Postal"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.postalCode.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.postalCode.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={12}>
           <TextInput
             id="observations"
-            label="Telefono"
-            isRequired={true}
-            onChange={onChangeHanlder}
+            label="Observaciones"
             value={adress.observations.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.observations.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>

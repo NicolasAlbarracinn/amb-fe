@@ -4,25 +4,25 @@ import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mate
 import { useStyles } from './selectInputStyles';
 interface IInputProps {
   id: string;
-  label: string;
-  mainSelectLabel: string;
+  label?: string;
+  mainSelectLabel?: string;
   value: string;
   items: { value: string; label: string }[];
   handleSelect: Function;
-  loadError?: boolean;
   isValid?: boolean;
+  loadError?: boolean;
   disabled?: boolean;
 }
 
 const SelectInput = ({
+  id,
   label,
   mainSelectLabel,
   value,
-  handleSelect,
   items,
-  id,
-  loadError,
+  handleSelect,
   isValid,
+  loadError,
   disabled = false,
 }: IInputProps) => {
   const classes = useStyles();

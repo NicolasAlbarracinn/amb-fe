@@ -12,6 +12,7 @@ export const initialState: any = {
   partnersList: [],
   renaperData: {},
   fetchedRenaperData: false,
+  newPartnerId: '',
 };
 
 const PartnersSlice = createSlice({
@@ -39,6 +40,16 @@ const PartnersSlice = createSlice({
     getPartnersListFailed(state) {
       state.loading = false;
       state.partnersList = [];
+    },
+    getSavePartnerRequest(state, action: PayloadAction<any>) {
+      state.loading = true;
+    },
+    getSavePartnerSuccess(state, action: PayloadAction<IPartner[]>) {
+      state.loading = false;
+      state.newPartnerId = action.payload;
+    },
+    getSavePartnerFailed(state) {
+      state.loading = false;
     },
   },
 });

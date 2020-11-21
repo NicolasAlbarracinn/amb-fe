@@ -15,7 +15,8 @@ import Button from 'components/CustomButtons/Button';
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 
 import { actions as partnersActions } from 'containers/Partners/slice';
-import { selectFetchedRenaperData, selectPersonalData, selectRenaperData } from 'containers/Partners/selectors';
+import { selectFetchedRenaperData, selectPersonalData } from 'containers/Partners/selectors';
+import { parseSubmitForm } from 'utils/parseForm';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -60,6 +61,10 @@ const initialForm = {
     value: '',
     isValid: false,
   },
+  partnerId: {
+    value: '',
+    isValid: true,
+  },
   documentNumber: {
     value: '',
     isValid: false,
@@ -71,10 +76,6 @@ const initialForm = {
   gender: {
     value: '',
     isValid: false,
-  },
-  associateNumber: {
-    value: '',
-    isValid: true,
   },
   cuil: {
     value: '',
@@ -124,15 +125,15 @@ const initialForm = {
     value: '',
     isValid: false,
   },
-  otherPerferences: {
-    value: '',
-    isValid: false,
-  },
   paymentType: {
     value: '',
     isValid: false,
   },
   recoveryPaymentType: {
+    value: '',
+    isValid: false,
+  },
+  otherPerferences: {
     value: '',
     isValid: false,
   },
@@ -169,10 +170,17 @@ const PersonalData = () => {
   const handleNext = () => {
     const isFormInvalid = Object.entries(personalData).some(key => key[1].isValid === false);
     if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId: 'personalData', data: personalData, isValid: false }));
+      dispatch(wizardActions.setStep({ stepId: 'personalData', data: parseSubmitForm(personalData), isValid: false }));
       setLoadError(true);
     } else {
-      dispatch(wizardActions.setStep({ stepId: 'personalData', data: personalData, isValid: true, type: 'next' }));
+      dispatch(
+        wizardActions.setStep({
+          stepId: 'personalData',
+          data: parseSubmitForm(personalData),
+          isValid: true,
+          type: 'next',
+        }),
+      );
     }
   };
 
@@ -206,13 +214,13 @@ const PersonalData = () => {
           </GridItem>*/}
         {/*        <GridItem xs={12} sm={2}>
           <TextInput
-            id="associateNumber"
-            isValid={personalData.associateNumber.isValid}
+            id="partnerId"
+            isValid={personalData.partnerId.isValid}
             loadError={loadError}
             label="N de socio"
             isRequired={true}
             onChange={onChangeHanlder}
-            value={personalData.associateNumber.value}
+            value={personalData.partnerId.value}
             length={[1, 25]}
             inputType="number"
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
@@ -222,173 +230,159 @@ const PersonalData = () => {
           <TextInput
             id="documentNumber"
             label="N de documento"
+            inputType="number"
+            value={personalData.documentNumber.value}
+            onChange={onChangeHanlder}
+            length={[7, 8]}
             isValid={personalData.documentNumber.isValid}
             loadError={loadError}
             disabled={fetchedRenaperData}
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.documentNumber.value}
-            inputType="number"
-            length={[7, 8]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            disabled={fetchedRenaperData}
             id="procedureNumber"
+            label="N de tramite"
+            inputType="number"
+            value={personalData.procedureNumber.value}
+            onChange={onChangeHanlder}
+            length={[10, 12]}
             isValid={personalData.procedureNumber.isValid}
             loadError={loadError}
-            label="N de tramite"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.procedureNumber.value}
-            length={[0, 25]}
-            inputType="number"
+            disabled={fetchedRenaperData}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={2}>
           <SelectInput
-            disabled={fetchedRenaperData}
             id="gender"
-            isValid={personalData.gender.isValid}
-            loadError={loadError}
             label="Genero"
             mainSelectLabel="Selecione su genero"
             value={personalData.gender.value}
-            handleSelect={onChangeHanlder}
             items={[
               { value: 'm', label: 'Masculino' },
               { value: 'f', label: 'Femenino' },
             ]}
+            handleSelect={onChangeHanlder}
+            loadError={loadError}
+            isValid={personalData.gender.isValid}
+            disabled={fetchedRenaperData}
           />
         </GridItem>
       </GridContainer>
       <GridContainer id="disabled-data" style={{ marginBottom: '3%' }}>
         <GridItem xs={12} sm={2}>
           <TextInput
-            disabled={true}
             id="cuil"
+            label="N de CUIL"
+            inputType="number"
+            value={personalData.cuil.value}
+            onChange={onChangeHanlder}
+            length={[10, 11]}
             isValid={personalData.cuil.isValid}
             loadError={loadError}
-            label="N de CUIL"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.cuil.value}
-            inputType="number"
-            length={[10, 11]}
+            disabled={true}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={2}>
           <TextInput
-            disabled={true}
             id="name"
+            label="Nombre"
+            value={personalData.name.value}
+            onChange={onChangeHanlder}
             isValid={personalData.name.isValid}
             loadError={loadError}
-            label="Nombre"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.name.value}
-            length={[0, 25]}
+            disabled={true}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={2}>
           <TextInput
-            disabled={true}
             id="lastName"
-            isValid={personalData.lastName.isValid}
-            loadError={loadError}
             label="Apellido"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={personalData.lastName.value}
-            length={[0, 25]}
+            isValid={personalData.lastName.isValid}
+            onChange={onChangeHanlder}
+            loadError={loadError}
+            disabled={true}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
-            disabled={true}
             id="country"
-            isValid={personalData.country.isValid}
-            loadError={loadError}
             label="Nacionalidad"
             mainSelectLabel="Selecione su nacionalidad"
             value={personalData.country.value}
-            handleSelect={onChangeHanlder}
             items={[{ value: 'argentina', label: 'Argentina' }]}
+            handleSelect={onChangeHanlder}
+            loadError={loadError}
+            isValid={personalData.country.isValid}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
-            disabled={true}
             id="birthPlace"
-            isValid={personalData.birthPlace.isValid}
-            loadError={loadError}
             label="Lugar de Nacimiento"
             mainSelectLabel="Selecione su lugar de nacimiento"
             value={personalData.birthPlace.value}
-            handleSelect={onChangeHanlder}
             items={[{ value: 'argentina', label: 'Argentina' }]}
+            handleSelect={onChangeHanlder}
+            loadError={loadError}
+            isValid={personalData.birthPlace.isValid}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
-            disabled={true}
             id="civilState"
-            isValid={personalData.civilState.isValid}
-            loadError={loadError}
             label="Estado Civil"
             mainSelectLabel="Selecione su lugar de estado civil"
             value={personalData.civilState.value}
-            handleSelect={onChangeHanlder}
             items={[
               { value: 's', label: 'Soltero' },
               { value: 'c', label: 'Casado' },
             ]}
+            handleSelect={onChangeHanlder}
+            loadError={loadError}
+            isValid={personalData.civilState.isValid}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <EmailInput
-            disabled={true}
             id="email"
+            label="Email"
+            value={personalData.email.value}
+            onChange={onChangeHanlder}
             isValid={personalData.email.isValid}
             loadError={loadError}
-            label="Email"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.email.value}
             endAdornmentIcon={<Email className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            disabled={true}
             id="phone"
-            isValid={personalData.phone.isValid}
-            loadError={loadError}
             label="Telefono"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={personalData.phone.value}
+            loadError={loadError}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={personalData.phone.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            disabled={true}
             id="personalPhone"
+            label="Telefono Personal"
+            value={personalData.personalPhone.value}
+            onChange={onChangeHanlder}
+            length={[2, 25]}
             isValid={personalData.personalPhone.isValid}
             loadError={loadError}
-            label="Celular"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.personalPhone.value}
-            length={[2, 25]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -400,7 +394,6 @@ const PersonalData = () => {
             isValid={personalData.salary.isValid}
             loadError={loadError}
             label="Sueldo Bruto"
-            isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.salary.value}
             length={[0, 25]}
@@ -414,7 +407,6 @@ const PersonalData = () => {
             isValid={personalData.netSalary.isValid}
             loadError={loadError}
             label="Sueldo Neto"
-            isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.netSalary.value}
             length={[0, 25]}
@@ -428,22 +420,8 @@ const PersonalData = () => {
             isValid={personalData.socialQuota.isValid}
             loadError={loadError}
             label="Cuota Social"
-            isRequired={true}
             onChange={onChangeHanlder}
             value={personalData.socialQuota.value}
-            length={[0, 25]}
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={4}>
-          <TextInput
-            id="otherPerferences"
-            isValid={personalData.otherPerferences.isValid}
-            loadError={loadError}
-            label="Otros Pereferenciales"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.otherPerferences.value}
             length={[0, 25]}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
@@ -476,6 +454,20 @@ const PersonalData = () => {
               { value: 'm', label: 'Masculino' },
               { value: 'F', label: 'Femenino' },
             ]}
+          />
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12}>
+          <TextInput
+            id="otherPerferences"
+            isValid={personalData.otherPerferences.isValid}
+            loadError={loadError}
+            label="Otros Pereferenciales"
+            onChange={onChangeHanlder}
+            value={personalData.otherPerferences.value}
+            length={[0, 25]}
+            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
       </GridContainer>
