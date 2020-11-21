@@ -25,22 +25,22 @@ import { SortByCriterias } from 'utils/constants';
 const headers = () => [
   {
     Header: 'N° socio',
-    accessor: 'patnerNumber',
+    accessor: 'partnerId',
   },
   {
     Header: 'cuil',
-    accessor: 'cuil',
+    accessor: 'personalData.cuil',
   },
   {
     Header: 'dni',
-    accessor: 'dni',
+    accessor: 'personalData.dni',
   },
   {
     Header: 'Nombre y apellido',
     accessor: 'personalInfo.firstName',
     Cell: props => {
-      const { firstName, lastName } = props.cell.row.original.personalInfo;
-      return <span>{`${firstName} ${lastName}`}</span>;
+      const { name, lastName } = props.cell.row.original.personalData;
+      return <span>{`${name} ${lastName}`}</span>;
     },
   },
   {
@@ -83,7 +83,6 @@ const PartnersList = () => {
   }, [sortBy, limit, offset, dispatch]);
 
   const handlerSortBy = sortBy => {
-    console.log(sortBy);
     if (!sortBy.length) {
       setSortBy(undefined);
       return;
@@ -107,7 +106,7 @@ const PartnersList = () => {
           <CardBody>
             {/* TODO: Implement the paggination */}
             <Search />
-            <Pagination totalItems={50} numberOfRowsData={[5, 10, 20, 25, 50]} />
+            <Pagination totalItems={10} numberOfRowsData={[5, 10, 20, 25, 50]} />
             <Table columns={columns} data={data} handlerSortBy={handlerSortBy} />
           </CardBody>
         </Card>
