@@ -4,16 +4,27 @@ import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mate
 import { useStyles } from './selectInputStyles';
 interface IInputProps {
   id: string;
-  label: string;
-  mainSelectLabel: string;
+  label?: string;
+  mainSelectLabel?: string;
   value: string;
   items: { value: string; label: string }[];
   handleSelect: Function;
-  loadError?: boolean;
   isValid?: boolean;
+  loadError?: boolean;
+  disabled?: boolean;
 }
 
-const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, loadError, isValid }: IInputProps) => {
+const SelectInput = ({
+  id,
+  label,
+  mainSelectLabel,
+  value,
+  items,
+  handleSelect,
+  isValid,
+  loadError,
+  disabled = false,
+}: IInputProps) => {
   const classes = useStyles();
   const handleOnChange = e => {
     handleSelect({ id, value: e.target.value, isValid: true });
@@ -27,6 +38,7 @@ const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, l
         </InputLabel>
       )}
       <Select
+        disabled={disabled}
         MenuProps={{
           className: classes.selectMenu,
         }}
@@ -62,7 +74,7 @@ const SelectInput = ({ label, mainSelectLabel, value, handleSelect, items, id, l
           </MenuItem>
         ))}
       </Select>
-      {isValid && <FormHelperText>Campo Requerido</FormHelperText>}
+      {/*!isValid && <FormHelperText>Campo Requerido</FormHelperText>*/}
     </FormControl>
   );
 };

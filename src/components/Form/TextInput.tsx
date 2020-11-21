@@ -6,27 +6,27 @@ import { verifyLength } from './validators';
 interface IInputProps {
   id: string;
   label: string;
+  inputType?: string;
   value: string;
-  isRequired: boolean;
   onChange: Function;
   length?: number[];
-  endAdornmentIcon?: ReactNode;
   isValid?: boolean;
-  inputType?: string;
   loadError?: boolean;
+  disabled?: boolean;
+  endAdornmentIcon?: ReactNode;
 }
 
 const TextInput = ({
   id,
   label,
-  value,
-  length = [0, 25],
-  isRequired,
-  onChange,
-  endAdornmentIcon,
-  isValid = true,
   inputType = 'text',
+  value,
+  onChange,
+  length = [0, 25],
+  isValid = true,
   loadError = false,
+  disabled = false,
+  endAdornmentIcon,
 }: IInputProps) => {
   const [errorMessage, setErrorMessage] = useState<string>();
 
@@ -54,6 +54,7 @@ const TextInput = ({
         fullWidth: true,
       }}
       inputProps={{
+        disabled,
         value,
         type: inputType,
         endAdornment: <InputAdornment position="end">{endAdornmentIcon}</InputAdornment>,

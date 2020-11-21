@@ -1,0 +1,17 @@
+import { createSelector } from '@reduxjs/toolkit';
+
+import { RootState } from 'types/RootState';
+import { initialState } from './slice';
+
+const selectPartners = (state: RootState) => state.partners || initialState;
+export const selectPartnersList = createSelector([selectPartners], partnersState => partnersState.partnersList);
+export const selectRenaperData = createSelector([selectPartners], partnersState => partnersState.renaperData);
+export const selectPersonalData = createSelector(
+  [selectPartners],
+  partnersState => partnersState.renaperData.personalData,
+);
+export const selectAdress = createSelector([selectPartners], partnersState => partnersState.renaperData.adress);
+export const selectFetchedRenaperData = createSelector(
+  [selectPartners],
+  partnersState => partnersState.fetchedRenaperData,
+);

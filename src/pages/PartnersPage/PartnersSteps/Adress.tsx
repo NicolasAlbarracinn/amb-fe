@@ -1,5 +1,5 @@
-import React, { useState, ReactNode } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, ReactNode, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles, Theme } from '@material-ui/core';
 import Face from '@material-ui/icons/Face';
@@ -10,6 +10,8 @@ import TextInput from 'components/Form/TextInput';
 import Button from 'components/CustomButtons/Button';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
+import { selectAdress, selectFetchedRenaperData } from 'containers/Partners/selectors';
+import { parseSubmitForm } from 'utils/parseForm';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -50,7 +52,7 @@ interface IStep1 {
 }
 
 const initialForm = {
-  streetAddress: {
+  streetAdress: {
     value: '',
     isValid: false,
   },
@@ -84,25 +86,37 @@ const initialForm = {
   },
 };
 
-const Step2 = () => {
+const Adress = () => {
   const classes = useStyles();
   const [adress, setAdress] = useState(initialForm);
-  const [hasErrors, setHasErrors] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+
+  const renaperData = useSelector(selectAdress);
+  const fetchedRenaperData = useSelector(selectFetchedRenaperData);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (fetchedRenaperData) {
+      setAdress(prevState => ({ ...prevState, ...renaperData }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchedRenaperData, renaperData]);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(adress).some(key => key[1].isValid === false);
     if (isFormInvalid) {
-      setHasErrors(true);
-      dispatch(wizardActions.setStep({ stepId: 'adress', data: adress, isValid: false }));
+      dispatch(wizardActions.setStep({ stepId: 'adress', data: parseSubmitForm(adress), isValid: false }));
+      setLoadError(true);
     } else {
-      dispatch(wizardActions.setStep({ stepId: 'adress', data: adress, isValid: true, type: 'next' }));
+      dispatch(wizardActions.setStep({ stepId: 'adress', data: parseSubmitForm(adress), isValid: true, type: 'next' }));
     }
   };
 
   const handlePrevious = () => {
-    dispatch(wizardActions.setStep({ stepId: 'adress', data: adress, isValid: true, type: 'previous' }));
+    dispatch(
+      wizardActions.setStep({ stepId: 'adress', data: parseSubmitForm(adress), isValid: true, type: 'previous' }),
+    );
   };
 
   const onChangeHanlder = ({ id, value, isValid }) => {
@@ -120,12 +134,13 @@ const Step2 = () => {
       <GridContainer>
         <GridItem xs={12} sm={6}>
           <TextInput
-            id="streetAddress"
+            id="streetAdress"
             label="Calle y N"
-            isRequired={true}
+            value={adress.streetAdress.value}
             onChange={onChangeHanlder}
-            value={adress.streetAddress.value}
             length={[2, 25]}
+            isValid={adress.streetAdress.isValid}
+            loadError={loadError}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -133,10 +148,10 @@ const Step2 = () => {
           <TextInput
             id="floor"
             label="Piso"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.floor.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.floor.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -144,10 +159,10 @@ const Step2 = () => {
           <TextInput
             id="aptNumber"
             label="Depto"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.aptNumber.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.aptNumber.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -155,10 +170,10 @@ const Step2 = () => {
           <TextInput
             id="department"
             label="Departamento"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.department.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.department.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -166,10 +181,10 @@ const Step2 = () => {
           <TextInput
             id="location"
             label="Localidad"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.location.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.location.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -177,10 +192,10 @@ const Step2 = () => {
           <TextInput
             id="province"
             label="Provincia"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.province.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.location.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -188,21 +203,21 @@ const Step2 = () => {
           <TextInput
             id="postalCode"
             label="Codigo Postal"
-            isRequired={true}
-            onChange={onChangeHanlder}
             value={adress.postalCode.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.postalCode.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={12}>
           <TextInput
             id="observations"
-            label="Telefono"
-            isRequired={true}
-            onChange={onChangeHanlder}
+            label="Observaciones"
             value={adress.observations.value}
+            onChange={onChangeHanlder}
             length={[2, 25]}
+            isValid={adress.observations.isValid}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -226,4 +241,4 @@ const Step2 = () => {
   );
 };
 
-export default Step2;
+export default Adress;

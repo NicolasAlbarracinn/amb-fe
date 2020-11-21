@@ -7,6 +7,7 @@ export const initialState: any = {
   stepsData: {},
   currentStepId: '',
   buttonType: '',
+  submitReady: false,
 };
 
 const WizardContainerSlice = createSlice({
@@ -21,14 +22,16 @@ const WizardContainerSlice = createSlice({
     setStep(state, action: PayloadAction<any>) {
       state.stepsData = {
         ...state.stepsData,
-        [action.payload.stepId]: {
-          ...[action.payload.stepId],
-          data: action.payload.data,
-          isValid: action.payload.isValid,
-        },
+        [action.payload.stepId]: { ...action.payload.data, isValid: action.payload.isValid },
       };
-      state.buttonType = action.payload.type;
       state.currentStepId = action.payload.stepId;
+      if (action.payload.type === 'submit') {
+        state.submitReady = true;
+        state.buttonType = action.payload.type;
+      } else {
+        state.submitReady = false;
+        state.buttonType = action.payload.type;
+      }
     },
   },
 });

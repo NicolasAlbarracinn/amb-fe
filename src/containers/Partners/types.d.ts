@@ -1,4 +1,4 @@
-export interface IAffiliate {
+export interface IPartner {
   personalInfo: {
     firstName: string;
     lastName: string;
