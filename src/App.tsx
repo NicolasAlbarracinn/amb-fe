@@ -15,6 +15,7 @@ import LogInPage from 'pages/LoginPage/LoginPage';
 import Dashboard from 'pages/Dashboard/Dashboard';
 import Profile from 'containers/Profile/Profile';
 import Partners from 'containers/Partners/Partners';
+import Benefits from 'containers/Benefits/Benefits';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
                 <Route path="/app" exact render={() => <Redirect to="/app/dashboard" />} />
                 <Route path="/app/profile" component={Profile} />
                 <Route path="/app/partners" component={Partners} />
+                <Route path="/app/financing" component={Benefits} />
                 <Route path="/app/dashboard" component={Dashboard} />
               </Switch>
             </AdminLayout>
