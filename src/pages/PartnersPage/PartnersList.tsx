@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectPartnersList } from 'containers/Partners/selectors';
+import { selectPartnersList, selectPartnersListCount } from 'containers/Partners/selectors';
 import { actions as PartnersActions } from 'containers/Partners/slice';
 import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import Assignment from '@material-ui/icons/Assignment';
+
+import Dvr from '@material-ui/icons/Dvr';
+import Close from '@material-ui/icons/Close';
 
 import Card from 'components/Card/Card';
 import CardBody from 'components/Card/CardBody';
@@ -14,49 +17,35 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Table from 'components/Table/Table';
 import Pagination from 'components/Pagination/Pagination';
+import Button from 'components/CustomButtons/Button';
+import Search from 'components/SearchBar/SearchBar';
 
 import { SortByCriterias } from 'utils/constants';
 
 const headers = () => [
   {
     Header: 'N° socio',
-    accessor: 'patnerNumber',
-  },
-  {
-    Header: 'N° Legajo ',
-    accessor: 'folderNumber',
-  },
-  {
-    Header: 'Fecha de ingreso',
-    accessor: 'admissionDate',
+    accessor: 'partnerId',
   },
   {
     Header: 'cuil',
-    accessor: 'cuil',
+    accessor: 'personalData.cuil',
   },
   {
     Header: 'dni',
-    accessor: 'dni',
+    accessor: 'personalData.dni',
   },
   {
-    Header: 'Distribucion',
-    accessor: 'distribution',
-  },
-  {
-    Header: 'Metodo de pago',
-    accessor: 'paymentMethod',
-  },
-  {
-    Header: 'Nombre socio',
+    Header: 'Nombre y apellido',
     accessor: 'personalInfo.firstName',
+    Cell: props => {
+      const { name, lastName } = props.cell.row.original.personalData;
+      return <span>{`${name} ${lastName}`}</span>;
+    },
   },
   {
-    Header: 'apellido socio',
-    accessor: 'personalInfo.lastName',
-  },
-  {
-    Header: 'comercializador',
-    accessor: 'comercializador',
+    Header: 'Acciones',
+    accessor: 'actions',
   },
 ];
 
@@ -65,14 +54,28 @@ const headers = () => [
 //Add pagination
 //Add search bar
 
+const actions = (
+  <div className="actions-right">
+    {/* use this button to add a edit kind of action */}
+    <Button justIcon round simple onClick={() => {}} color="warning" className="edit">
+      <Dvr />
+    </Button>{' '}
+    {/* use this button to remove the data row */}
+    <Button justIcon round simple onClick={() => {}} color="danger" className="remove">
+      <Close />
+    </Button>{' '}
+  </div>
+);
+
 const PartnersList = () => {
   const dispatch = useDispatch();
   const partnersList = useSelector(selectPartnersList);
+  const count = useSelector(selectPartnersListCount);
   const limit = useSelector(selectLimit);
   const offset = useSelector(selectOffset);
 
   const columns = React.useMemo(headers, []);
-  const data = React.useMemo(() => partnersList, [partnersList]);
+  const data = React.useMemo(() => partnersList.map(item => ({ ...item, actions })), [partnersList]);
 
   const [sortBy, setSortBy] = useState<{ field: string; value: string }>();
 
@@ -103,7 +106,8 @@ const PartnersList = () => {
           </CardHeader>
           <CardBody>
             {/* TODO: Implement the paggination */}
-            <Pagination totalItems={50} numberOfRowsData={[5, 10, 20, 25, 50]} />
+            <Search />
+            <Pagination totalItems={count} numberOfRowsData={[5, 10, 20, 25, 50]} />
             <Table columns={columns} data={data} handlerSortBy={handlerSortBy} />
           </CardBody>
         </Card>

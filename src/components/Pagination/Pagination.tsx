@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import classname from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useInjectReducer } from 'utils/redux-injectors';
@@ -64,9 +65,19 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
   return (
     <div className="pagination-top">
       <div className="-pagination">
-        <div className="-center">
+        <div className={classes.center}>
           <GridContainer className={classes.gridContainer}>
-            <GridItem xs={12} sm={2} md={2}>
+            <GridItem xs={12} sm={3}>
+              <button
+                type="button"
+                onClick={() => handlePreviousPage()}
+                disabled={offset + 1 === 1}
+                className={offset + 1 === 1 ? classname([classes.btn, classes.btnDisabled]) : classes.btn}
+              >
+                Previous
+              </button>
+            </GridItem>
+            <GridItem xs={12} sm={6} md={3}>
               <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.formControlMargins}>
                 <Select
                   disabled={false}
@@ -100,7 +111,7 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
                 </Select>
               </FormControl>
             </GridItem>
-            <GridItem xs={12} sm={2} md={2}>
+            <GridItem xs={12} sm={6} md={3}>
               <FormControl fullWidth className={classes.selectFormControl + ' ' + classes.formControlMargins}>
                 <Select
                   MenuProps={{
@@ -135,14 +146,19 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
                 </Select>
               </FormControl>
             </GridItem>
-            <GridItem className={classes.arrowBox} xs={12} sm={3} md={3}>
-              <PaginationArrows
-                from={offset + 1}
-                to={offset + limit}
-                totalItems={totalItems}
-                onClickPrevious={handlePreviousPage}
-                onClickNext={handleNextPage}
-              />
+            <GridItem xs={12} sm={3}>
+              <button
+                type="button"
+                onClick={() => handleNextPage()}
+                disabled={pageSelect >= Math.ceil(totalItems / limit) - 1}
+                className={
+                  pageSelect >= Math.ceil(totalItems / limit) - 1
+                    ? classname([classes.btn, classes.btnDisabled])
+                    : classes.btn
+                }
+              >
+                Next
+              </button>
             </GridItem>
           </GridContainer>
         </div>
