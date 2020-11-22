@@ -13,6 +13,7 @@ export const initialState: any = {
   renaperData: {},
   fetchedRenaperData: false,
   newPartnerId: '',
+  totalPartnerAmount: 0,
 };
 
 const PartnersSlice = createSlice({
@@ -33,9 +34,10 @@ const PartnersSlice = createSlice({
     getPartnersListRequest(state, action: PayloadAction<QueryParameters>) {
       state.loading = true;
     },
-    getPartnersListSuccess(state, action: PayloadAction<IPartner[]>) {
+    getPartnersListSuccess(state, action: PayloadAction<{ list: IPartner[]; count: number }>) {
       state.loading = false;
-      state.partnersList = action.payload;
+      state.partnersList = action.payload.list;
+      state.totalPartnerAmount = action.payload.count;
     },
     getPartnersListFailed(state) {
       state.loading = false;

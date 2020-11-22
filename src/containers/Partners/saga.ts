@@ -47,7 +47,7 @@ export function* getPartnersListRequest(action: PayloadAction<QueryParameters>) 
       },
     };
     const response = yield call(request, requestURL, requestOptions);
-    yield put(actions.getPartnersListSuccess(response.data));
+    yield put(actions.getPartnersListSuccess({ list: response.data, count: response.count }));
   } catch (err) {
     yield put(actions.getPartnersListFailed());
     toast.error('Algo salio mal.', {

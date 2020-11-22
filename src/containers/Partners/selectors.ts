@@ -5,6 +5,10 @@ import { initialState } from './slice';
 
 const selectPartners = (state: RootState) => state.partners || initialState;
 export const selectPartnersList = createSelector([selectPartners], partnersState => partnersState.partnersList);
+export const selectPartnersListCount = createSelector(
+  [selectPartners],
+  partnersState => partnersState.totalPartnerAmount,
+);
 export const selectRenaperData = createSelector([selectPartners], partnersState => partnersState.renaperData);
 export const selectPersonalData = createSelector(
   [selectPartners],
