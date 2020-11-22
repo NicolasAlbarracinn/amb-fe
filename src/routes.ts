@@ -1,6 +1,7 @@
 // @material-ui/icons
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
+import ListIcon from '@material-ui/icons/List';
 import Dashboard from 'pages/Dashboard/Dashboard';
 
 const dashRoutes = [
@@ -22,6 +23,13 @@ const dashRoutes = [
         name: 'Crear Socio',
         mini: 'CS',
         component: PeopleIcon,
+        layout: '/app/partners',
+      },
+      {
+        path: '/list',
+        name: 'Listado de Socios',
+        mini: 'LS',
+        component: ListIcon,
         layout: '/app/partners',
       },
     ],
