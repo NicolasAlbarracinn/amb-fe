@@ -150,8 +150,12 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
               <button
                 type="button"
                 onClick={() => handleNextPage()}
-                disabled={offset + limit === totalItems}
-                className={offset + limit === totalItems ? classname([classes.btn, classes.btnDisabled]) : classes.btn}
+                disabled={pageSelect >= Math.ceil(totalItems / limit) - 1}
+                className={
+                  pageSelect >= Math.ceil(totalItems / limit) - 1
+                    ? classname([classes.btn, classes.btnDisabled])
+                    : classes.btn
+                }
               >
                 Next
               </button>

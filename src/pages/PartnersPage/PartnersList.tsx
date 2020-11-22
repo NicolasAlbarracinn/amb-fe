@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectPartnersList } from 'containers/Partners/selectors';
+import { selectPartnersList, selectPartnersListCount } from 'containers/Partners/selectors';
 import { actions as PartnersActions } from 'containers/Partners/slice';
 import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
@@ -70,6 +70,7 @@ const actions = (
 const PartnersList = () => {
   const dispatch = useDispatch();
   const partnersList = useSelector(selectPartnersList);
+  const count = useSelector(selectPartnersListCount);
   const limit = useSelector(selectLimit);
   const offset = useSelector(selectOffset);
 
@@ -106,7 +107,7 @@ const PartnersList = () => {
           <CardBody>
             {/* TODO: Implement the paggination */}
             <Search />
-            <Pagination totalItems={10} numberOfRowsData={[5, 10, 20, 25, 50]} />
+            <Pagination totalItems={count} numberOfRowsData={[5, 10, 20, 25, 50]} />
             <Table columns={columns} data={data} handlerSortBy={handlerSortBy} />
           </CardBody>
         </Card>
