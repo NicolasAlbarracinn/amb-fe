@@ -43,7 +43,7 @@ export const recuperoCSList = [
   { value: 'voluntario', label: 'Pago Voluntario' },
 ];
 
-export const ministeriosList = [
+export const ministriesList = [
   { value: 'bica', label: 'BICA' },
   { value: 'secretariaLegalTécnica', label: ' Secretaria Legal y Técnica' },
   { value: 'autoridadDelAgua', label: ' de Autoridad del Agua' },
