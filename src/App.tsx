@@ -37,7 +37,7 @@ const App = () => {
                 <Route path="/app" exact render={() => <Redirect to="/app/dashboard" />} />
                 <Route path="/app/profile" component={Profile} />
                 <Route path="/app/partners" component={Partners} />
-                <Route path="/app/financing" component={Benefits} />
+                <Route path="/app/benefits" component={Benefits} />
                 <Route path="/app/dashboard" component={Dashboard} />
               </Switch>
             </AdminLayout>
