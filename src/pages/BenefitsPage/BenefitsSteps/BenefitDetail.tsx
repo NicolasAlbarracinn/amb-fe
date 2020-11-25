@@ -1,124 +1,23 @@
 import React from 'react';
 
-import { makeStyles, Theme } from '@material-ui/core';
-
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import TextInput from 'components/Form/TextInput';
 import SelectInput from 'components/Form/SelectInput';
 import DateInput from 'components/Form/DateInput';
-
 import Button from 'components/CustomButtons/Button';
 
 import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
 import { benefitTypeList, portfoliosList, benefitStatusList } from 'utils/constants';
-
-export const useStyles = makeStyles((theme: Theme) => ({
-  infoText: {
-    fontWeight: 300,
-    margin: '10px 0 30px',
-    textAlign: 'center',
-  },
-  inputAdornmentIcon: {
-    color: '#555',
-  },
-  inputAdornment: {
-    position: 'relative',
-  },
-  footer: {
-    padding: '0 15px',
-  },
-  left: {
-    float: 'left!important' as 'left',
-  },
-  right: {
-    float: 'right!important' as 'right',
-  },
-  clearfix: {
-    '&:after,&:before': {
-      display: 'table',
-      content: '" "',
-    },
-    clear: 'both',
-  },
-}));
-
-const initialForm = {
-  benefitNumber: {
-    value: '',
-    isValid: true,
-  },
-  lotNumber: {
-    value: '',
-    isValid: true,
-  },
-  benefitType: {
-    value: '',
-    isValid: true,
-  },
-  certificateNumber: {
-    value: '',
-    isValid: true,
-  },
-  applicationDate: {
-    value: '',
-    isValid: true,
-  },
-  portfolio: {
-    value: '',
-    isValid: true,
-  },
-  plan: {
-    value: '',
-    isValid: true,
-  },
-  signatureAmount: {
-    value: '',
-    isValid: true,
-  },
-  duesQuantity: {
-    value: '',
-    isValid: true,
-  },
-  duesAmount: {
-    value: '',
-    isValid: true,
-  },
-  amountGranted: {
-    value: '',
-    isValid: true,
-  },
-  observations: {
-    value: '',
-    isValid: true,
-  },
-  benefitStatus: {
-    value: '',
-    isValid: true,
-  },
-  commercializer: {
-    value: '',
-    isValid: true,
-  },
-  grantedPeriod: {
-    value: '',
-    isValid: true,
-  },
-  proceedingGranted: {
-    value: '',
-    isValid: true,
-  },
-  statusDate: {
-    value: '',
-    isValid: true,
-  },
-};
+import { defaultBenefit } from './defaultStates';
+import { useStyles } from 'components/Wizard/stepsStyles';
 
 const BenefitDetail = () => {
   const classes = useStyles();
-  const { inputs: benefit, onChangeHanlder } = useInputChange(initialForm);
+  const { inputs: benefit, onChangeHanlder } = useInputChange(defaultBenefit);
   const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
 
+  //TODO: agregar logica del formulario
   return (
     <>
       <GridContainer>
@@ -167,7 +66,9 @@ const BenefitDetail = () => {
             loadError={loadError}
           />
         </GridItem>
+        {/* siempre el dia actual */}
         <GridItem xs={12} sm={2}>
+          {/* TODO: modificar/termmina input basado en el templeta */}
           <DateInput
             id="applicationDate"
             label="Fecha de solicitud"
@@ -175,7 +76,6 @@ const BenefitDetail = () => {
             isValid={benefit.applicationDate.isValid}
             onChange={onChangeHanlder}
             loadError={loadError}
-            disabled={false}
           />
         </GridItem>
       </GridContainer>
@@ -213,7 +113,6 @@ const BenefitDetail = () => {
             length={[10, 11]}
             isValid={benefit.signatureAmount.isValid}
             loadError={loadError}
-            disabled={true}
           />
         </GridItem>
 
@@ -311,6 +210,7 @@ const BenefitDetail = () => {
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
+          {/* TODO: modificar/termmina input basado en el templeta */}
           <DateInput
             id="statusDate"
             label="Fecha Estado"
@@ -318,7 +218,6 @@ const BenefitDetail = () => {
             isValid={benefit.statusDate.isValid}
             onChange={onChangeHanlder}
             loadError={loadError}
-            disabled={false}
           />
         </GridItem>
       </GridContainer>

@@ -16,9 +16,9 @@ const BenefitsForm = () => {
       <GridItem xs={12} sm={8}>
         <WizardContainer
           steps={[
-            { stepName: 'Datos de la prestación', stepComponent: BenefitDetail, stepId: 'benefitDetail' },
             { stepName: 'Datos del socio', stepComponent: PartnerDetail, stepId: 'partnerDetail' },
             { stepName: 'Datos de reparticion', stepComponent: DistributionDetail, stepId: 'distributionDetail' },
+            { stepName: 'Datos de la prestación', stepComponent: BenefitDetail, stepId: 'benefitDetail' },
           ]}
           title="Agregar Socio"
           subtitle="Complete los campos requeridos para crear un nuevo socio"

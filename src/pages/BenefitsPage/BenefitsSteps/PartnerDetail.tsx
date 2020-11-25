@@ -1,7 +1,5 @@
-import React, { useState, ReactNode, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { makeStyles, Theme } from '@material-ui/core';
 
 import Face from '@material-ui/icons/Face';
 import Email from '@material-ui/icons/Email';
@@ -15,98 +13,43 @@ import DateInput from 'components/Form/DateInput';
 import Button from 'components/CustomButtons/Button';
 
 import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
-
 import { documentTypeList, civilStateList } from 'utils/constants';
+import { defaultPartner } from './defaultStates';
 
-export const useStyles = makeStyles((theme: Theme) => ({
-  infoText: {
-    fontWeight: 300,
-    margin: '10px 0 30px',
-    textAlign: 'center',
-  },
-  inputAdornmentIcon: {
-    color: '#555',
-  },
-  inputAdornment: {
-    position: 'relative',
-  },
-  footer: {
-    padding: '0 15px',
-  },
-  left: {
-    float: 'left!important' as 'left',
-  },
-  right: {
-    float: 'right!important' as 'right',
-  },
-  clearfix: {
-    '&:after,&:before': {
-      display: 'table',
-      content: '" "',
-    },
-    clear: 'both',
-  },
-}));
+import { useStyles } from 'components/Wizard/stepsStyles';
 
-const initialForm = {
-  partnerId: {
-    value: '',
-    isValid: true,
-  },
-  name: {
-    value: '',
-    isValid: false,
-  },
-  lastName: {
-    value: '',
-    isValid: false,
-  },
-  admissionDate: {
-    value: '',
-    isValid: false,
-  },
-  documentType: {
-    value: '',
-    isValid: false,
-  },
-  documentNumber: {
-    value: '',
-    isValid: false,
-  },
-  gender: {
-    value: '',
-    isValid: false,
-  },
-  cuil: {
-    value: '',
-    isValid: false,
-  },
-
-  civilState: {
-    value: '',
-    isValid: false,
-  },
-  status: {
-    value: '',
-    isValid: false,
-  },
-  email: {
-    value: '',
-    isValid: false,
-  },
-};
+import { selectBenefitsData, selectIsDataFetched } from 'containers/Benefits/selectors';
+import { actions as benefitActions } from 'containers/Benefits/slice';
 
 const PartnerDetail = () => {
   const classes = useStyles();
-  const { inputs: partner, onChangeHanlder } = useInputChange(initialForm);
+  const { inputs: partner, onChangeHanlder, updateInputs } = useInputChange(defaultPartner);
   const { loadError, handleNext } = useWizardStep(partner, 'partnerDetail');
+
+  const benefitData = useSelector(selectBenefitsData);
+  const isDataFetched = useSelector(selectIsDataFetched);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const { isValid, value } = partner.partnerId;
+    //Maybe for the isDataFetched condition we could use something like isEmpty function from lodash an verify if benefitData is empty or not
+    if (isValid && !isDataFetched) {
+      dispatch(benefitActions.getUpdateBenefitRequest(value));
+    }
+  }, [dispatch, partner, isDataFetched]);
+
+  useEffect(() => {
+    if (isDataFetched) {
+      updateInputs(benefitData.partner);
+    }
+  }, [isDataFetched, benefitData]);
 
   return (
     <>
       <GridContainer>
         <GridItem xs={12} sm={4}>
           <TextInput
-            id="streetAdress"
+            id="partnerId"
             label="N° de afiliado"
             value={partner.partnerId.value}
             onChange={onChangeHanlder}
@@ -141,6 +84,7 @@ const PartnerDetail = () => {
           />
         </GridItem>
         <GridItem xs={12} sm={2}>
+          {/* TODO: modificar/termmina input basado en el templeta */}
           <DateInput
             id="admissionDate"
             label="Fecha de ingreso"
@@ -148,7 +92,7 @@ const PartnerDetail = () => {
             isValid={partner.admissionDate.isValid}
             onChange={onChangeHanlder}
             loadError={loadError}
-            disabled={false}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
@@ -222,31 +166,32 @@ const PartnerDetail = () => {
             handleSelect={onChangeHanlder}
             loadError={loadError}
             isValid={partner.civilState.isValid}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
           <TextInput
             id="status"
             label="Estado"
-            inputType="number"
-            value={partner.cuil.value}
+            value={partner.status.value}
             onChange={onChangeHanlder}
             length={[10, 11]}
-            isValid={partner.cuil.isValid}
+            isValid={partner.status.isValid}
             loadError={loadError}
             disabled={true}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
+          {/* TODO: modificar/termmina input basado en el templeta */}
           <DateInput
-            id="stau"
+            id="statusDate"
             label="Fecha de Estado"
-            value=""
-            isValid={partner.admissionDate.isValid}
+            value={partner.statusDate.value}
+            isValid={partner.statusDate.isValid}
             onChange={onChangeHanlder}
             loadError={loadError}
-            disabled={false}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
@@ -260,6 +205,7 @@ const PartnerDetail = () => {
             isValid={partner.email.isValid}
             loadError={loadError}
             endAdornmentIcon={<Email className={classes.inputAdornmentIcon} />}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
