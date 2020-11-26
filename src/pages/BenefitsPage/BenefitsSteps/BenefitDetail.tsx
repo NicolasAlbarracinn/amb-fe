@@ -17,6 +17,8 @@ const BenefitDetail = () => {
   const { inputs: benefit, onChangeHanlder } = useInputChange(defaultBenefit);
   const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
 
+  console.log(benefit.benefitType.value);
+
   //TODO: agregar logica del formulario
   return (
     <>
@@ -46,7 +48,7 @@ const BenefitDetail = () => {
         </GridItem>
         <GridItem xs={12} sm={2}>
           <SelectInput
-            id="repartition"
+            id="benefitType"
             label="Tipo"
             mainSelectLabel="Selecione el tipo"
             value={benefit.benefitType.value}
@@ -64,6 +66,7 @@ const BenefitDetail = () => {
             onChange={onChangeHanlder}
             isValid={benefit.certificateNumber.isValid}
             loadError={loadError}
+            disabled={benefit.benefitType.value === benefitTypeList[1].value}
           />
         </GridItem>
         {/* siempre el dia actual */}

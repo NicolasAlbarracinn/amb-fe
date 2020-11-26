@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const defaultBenefit = {
   benefitNumber: {
     value: '',
@@ -16,7 +18,7 @@ export const defaultBenefit = {
     isValid: false,
   },
   applicationDate: {
-    value: '',
+    value: moment(new Date()).format('MM/DD/YYYY'),
     isValid: false,
   },
   portfolio: {
