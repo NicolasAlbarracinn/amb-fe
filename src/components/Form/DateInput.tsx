@@ -1,52 +1,88 @@
-import React, { useEffect, useState, useMemo, ReactNode } from 'react';
-import CustomInput from 'components/CustomInput/CustomInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import React from 'react';
+import classNames from 'classnames';
 
-interface IInputProps {
+import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+
+import MomentUtils from '@date-io/moment';
+import moment from 'moment';
+
+import { useStyles } from '../CustomInput/styles';
+
+interface ICustomDateInput {
   id: string;
-  label: string;
-  inputType?: string;
+  formControlProps?: FormControlProps;
+  label?: string;
   value: string;
   onChange: Function;
   isValid?: boolean;
   loadError?: boolean;
   disabled?: boolean;
-  endAdornmentIcon?: ReactNode;
 }
 
 const DateInput = ({
   id,
   label,
-  inputType = 'date',
   value,
   onChange,
-  isValid = true,
-  loadError = false,
+  isValid,
+  loadError,
   disabled = false,
-  endAdornmentIcon,
-}: IInputProps) => {
-  const handleOnChange = e => {
-    onChange({ id: e.target.id, value: e.target.value });
+  formControlProps = {
+    fullWidth: true,
+  },
+}: ICustomDateInput) => {
+  const classes = useStyles();
+
+  const handleDateChange = date => {
+    const parsedDate = moment(date).format('MM/DD/YYYY');
+    onChange({ id, value: parsedDate, isValid: true });
   };
 
+  const error = !isValid && loadError;
+
+  const labelClasses = classNames({
+    [' ' + classes.labelRootError]: error,
+    [' ' + classes.labelRootSuccess]: isValid && !error,
+  });
+
+  const underlineClasses = classNames({
+    [classes.underlineError]: error,
+    [classes.underlineSuccess]: isValid && !error,
+    [classes.underline]: true,
+  });
+
+  const formControlClasses = !!formControlProps
+    ? classNames(formControlProps.className, classes.formControl)
+    : classes.formControl;
+
   return (
-    <CustomInput
-      success={isValid}
-      error={!isValid && loadError}
-      labelText={<span>{label}</span>}
-      id={id}
-      formControlProps={{
-        fullWidth: true,
-      }}
-      inputProps={{
-        disabled,
-        value,
-        type: inputType,
-        placeholder: '',
-        endAdornment: <InputAdornment position="end">{endAdornmentIcon}</InputAdornment>,
-        onChange: handleOnChange,
-      }}
-    />
+    <MuiPickersUtilsProvider libInstance={moment} locale="es" utils={MomentUtils}>
+      <KeyboardDatePicker
+        disableToolbar
+        variant="inline"
+        format="DD/MM/YYYY"
+        margin="none"
+        id={id}
+        label={label}
+        InputLabelProps={{ className: classes.labelRoot + ' ' + labelClasses }}
+        value={value.length <= 0 ? null : value}
+        onChange={handleDateChange}
+        maxDate={moment(new Date())}
+        KeyboardButtonProps={{
+          'aria-label': 'change date',
+        }}
+        InputProps={{
+          classes: {
+            input: classes.input,
+            disabled: classes.disabled,
+            underline: underlineClasses,
+            formControl: formControlClasses,
+          },
+        }}
+        disabled={disabled}
+      />
+    </MuiPickersUtilsProvider>
   );
 };
 

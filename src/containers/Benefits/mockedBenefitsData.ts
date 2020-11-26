@@ -9,7 +9,7 @@ export const mockedBenefitsData = {
       isValid: true,
     },
     admissionDate: {
-      value: '05/08/2020',
+      value: '08/05/2020',
       isValid: true,
     },
     documentType: {
@@ -37,7 +37,7 @@ export const mockedBenefitsData = {
       isValid: true,
     },
     statusDate: {
-      value: '26/10/2020',
+      value: '10/26/2020',
       isValid: true,
     },
     email: {
