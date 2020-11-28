@@ -81,8 +81,34 @@ export function* getSavePartnerRequest(action: PayloadAction<any>) {
   }
 }
 
+export function* getUpdatePartnerRequest(action: PayloadAction<any>) {
+  const token = cookies.get('token');
+  const requestURL = `${SAVE_PARTNER}`;
+  try {
+    const requestOptions: RequestInit = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(action.payload),
+    };
+    const response = yield call(request, requestURL, requestOptions);
+    yield put(actions.getUpdatePartnerSuccess(response.data));
+    toast.success(`Socio Modificado Existosamente`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (err) {
+    yield put(actions.getUpdatePartnerFailed());
+    toast.error('Algo salio mal.', {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
 export function* partnersSaga() {
   yield takeLatest(actions.getRenaperDataRequest.type, getRenaperDataRequest);
   yield takeLatest(actions.getPartnersListRequest.type, getPartnersListRequest);
   yield takeLatest(actions.getSavePartnerRequest.type, getSavePartnerRequest);
+  yield takeLatest(actions.getUpdatePartnerRequest.type, getUpdatePartnerRequest);
 }

@@ -15,8 +15,8 @@ import Button from 'components/CustomButtons/Button';
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 
 import { actions as partnersActions } from 'containers/Partners/slice';
-import { selectFetchedRenaperData, selectPersonalData } from 'containers/Partners/selectors';
-import { parseSubmitForm } from 'utils/parseForm';
+import { selectFetchedRenaperData, selectPersonalData, selectPartnerId } from 'containers/Partners/selectors';
+import { parseReceivedForm, parseSubmitForm } from 'utils/parseForm';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -144,25 +144,30 @@ const PersonalData = () => {
   const [personalData, setPersonalData] = useState(initialForm);
   const [loadError, setLoadError] = useState(false);
   const renaperData = useSelector(selectPersonalData);
+  const partnerId = useSelector(selectPartnerId);
   const fetchedRenaperData = useSelector(selectFetchedRenaperData);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const { documentNumber, procedureNumber, gender } = personalData;
-    if (documentNumber.isValid && procedureNumber.isValid && gender.isValid && !fetchedRenaperData) {
-      dispatch(
-        partnersActions.getRenaperDataRequest({
-          documentNumber: documentNumber.value,
-          procedureNumber: procedureNumber.value,
-          gender: gender.value,
-        }),
-      );
+    if (!!!partnerId) {
+      const { documentNumber, procedureNumber, gender } = personalData;
+      if (documentNumber.isValid && procedureNumber.isValid && gender.isValid && !fetchedRenaperData) {
+        dispatch(
+          partnersActions.getRenaperDataRequest({
+            documentNumber: documentNumber.value,
+            procedureNumber: procedureNumber.value,
+            gender: gender.value,
+          }),
+        );
+      }
     }
-  }, [dispatch, fetchedRenaperData, personalData]);
+  }, [dispatch, fetchedRenaperData, partnerId, personalData]);
 
   useEffect(() => {
     if (fetchedRenaperData) {
-      setPersonalData(prevState => ({ ...prevState, ...renaperData }));
+      console.log(renaperData);
+      const parsedData = parseReceivedForm(renaperData);
+      setPersonalData(prevState => ({ ...prevState, ...parsedData }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchedRenaperData, renaperData]);
@@ -197,37 +202,40 @@ const PersonalData = () => {
   return (
     <>
       <GridContainer id="renaper-data" style={{ marginBottom: '3%' }}>
-        {/*<GridItem xs={12} sm={4}>
-          <SelectInput
-            id="documentType"
-            isValid={personalData.documentType.isValid}
-            loadError={loadError}
-            label="Tipo de Documento"
-            mainSelectLabel="Selecione su tipo de documento"
-            value={personalData.documentType.value}
-            handleSelect={onChangeHanlder}
-            items={[
-              { value: 'cf', label: 'Cedula Federal' },
-              { value: 'dni', label: 'Documento Nacional de Identidad' },
-              { value: 'lc', label: 'Libreta Civica' },
-              { value: 'le', label: 'Libreta de Enrolamiento' },
-            ]}
-          />
-          </GridItem>*/}
-        {/*        <GridItem xs={12} sm={2}>
-          <TextInput
-            id="partnerId"
-            isValid={personalData.partnerId.isValid}
-            loadError={loadError}
-            label="N de socio"
-            isRequired={true}
-            onChange={onChangeHanlder}
-            value={personalData.partnerId.value}
-            length={[1, 25]}
-            inputType="number"
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>*/}
+        {!!partnerId && (
+          <GridItem xs={12} sm={4}>
+            <TextInput
+              id="partnerId"
+              loadError={loadError}
+              label="N de socio"
+              onChange={onChangeHanlder}
+              value={partnerId}
+              length={[1, 25]}
+              inputType="number"
+              disabled={true}
+              endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
+            />
+          </GridItem>
+        )}
+        {!!partnerId && (
+          <GridItem xs={12} sm={4}>
+            <SelectInput
+              id="documentType"
+              isValid={personalData.documentType.isValid}
+              loadError={loadError}
+              label="Tipo de Documento"
+              mainSelectLabel="Selecione su tipo de documento"
+              value={personalData.documentType.value}
+              handleSelect={onChangeHanlder}
+              items={[
+                { value: 'cf', label: 'Cedula Federal' },
+                { value: 'dni', label: 'Documento Nacional de Identidad' },
+                { value: 'lc', label: 'Libreta Civica' },
+                { value: 'le', label: 'Libreta de Enrolamiento' },
+              ]}
+            />
+          </GridItem>
+        )}
         <GridItem xs={12} sm={3}>
           <TextInput
             id="documentNumber"
@@ -238,7 +246,7 @@ const PersonalData = () => {
             length={[7, 8]}
             isValid={personalData.documentNumber.isValid}
             loadError={loadError}
-            disabled={fetchedRenaperData}
+            disabled={fetchedRenaperData || !!partnerId}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
@@ -252,11 +260,11 @@ const PersonalData = () => {
             length={[10, 12]}
             isValid={personalData.procedureNumber.isValid}
             loadError={loadError}
-            disabled={fetchedRenaperData}
+            disabled={fetchedRenaperData || !!partnerId}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
-        <GridItem xs={12} sm={2}>
+        <GridItem xs={12} sm={3}>
           <SelectInput
             id="gender"
             label="Genero"
@@ -436,7 +444,7 @@ const PersonalData = () => {
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="paymentType"
-            isValid={personalData.documentType.isValid}
+            isValid={personalData.paymentType.isValid}
             loadError={loadError}
             label="Forma de Cobro C$"
             mainSelectLabel="Selecione Forma de Cobro CS"
@@ -453,7 +461,7 @@ const PersonalData = () => {
         <GridItem xs={12} sm={4}>
           <SelectInput
             id="recoveryPaymentType"
-            isValid={personalData.documentType.isValid}
+            isValid={personalData.recoveryPaymentType.isValid}
             loadError={loadError}
             label="Forma de Cobro Recupero CS"
             mainSelectLabel="Selecione Forma de Cobro Recupero C$"

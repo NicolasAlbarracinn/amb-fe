@@ -74,7 +74,7 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
                 disabled={offset + 1 === 1}
                 className={offset + 1 === 1 ? classname([classes.btn, classes.btnDisabled]) : classes.btn}
               >
-                Previous
+                Anterior
               </button>
             </GridItem>
             <GridItem xs={12} sm={6} md={3}>
@@ -104,7 +104,7 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
                         }}
                         value={key}
                       >
-                        Page {key + 1}
+                        Pagina {key + 1}
                       </MenuItem>
                     );
                   })}
@@ -139,7 +139,7 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
                         }}
                         value={prop}
                       >
-                        {prop} rows
+                        {prop} filas
                       </MenuItem>
                     );
                   })}
@@ -157,7 +157,7 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
                     : classes.btn
                 }
               >
-                Next
+                Proximo
               </button>
             </GridItem>
           </GridContainer>

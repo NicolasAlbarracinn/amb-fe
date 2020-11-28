@@ -32,6 +32,7 @@ const PartnersSlice = createSlice({
       state.loading = true;
     },
     getRenaperDataSuccess(state, action: PayloadAction<any>) {
+      console.log('aca');
       state.renaperData = action.payload;
       state.fetchedRenaperData = true;
       state.loading = false;
@@ -60,6 +61,20 @@ const PartnersSlice = createSlice({
     },
     getSavePartnerFailed(state) {
       state.loading = false;
+    },
+    getUpdatePartnerRequest(state, action: PayloadAction<any>) {
+      state.loading = true;
+    },
+    getUpdatePartnerSuccess(state, action: PayloadAction<IPartner[]>) {
+      state.loading = false;
+    },
+    getUpdatePartnerFailed(state) {
+      state.loading = false;
+    },
+    setPartnerData(state, action: PayloadAction<IPartner[]>) {
+      console.log(action.payload);
+      state.renaperData = action.payload;
+      state.fetchedRenaperData = true;
     },
   },
 });

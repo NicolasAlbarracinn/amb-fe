@@ -1,5 +1,5 @@
-import React, { useState, ReactNode } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, ReactNode, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles, Theme } from '@material-ui/core';
 import Face from '@material-ui/icons/Face';
@@ -11,7 +11,8 @@ import Button from 'components/CustomButtons/Button';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 import SelectInput from 'components/Form/SelectInput';
-import { parseSubmitForm } from 'utils/parseForm';
+import { parseReceivedForm, parseSubmitForm } from 'utils/parseForm';
+import { selectWorkInfo, selectFetchedRenaperData } from 'containers/Partners/selectors';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -94,7 +95,18 @@ const WorkInfo = () => {
   const classes = useStyles();
   const [workInfo, setWorkInfo] = useState(initialForm);
 
+  const renaperData = useSelector(selectWorkInfo);
+  const fetchedRenaperData = useSelector(selectFetchedRenaperData);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (fetchedRenaperData) {
+      const parsedData = parseReceivedForm(renaperData);
+      setWorkInfo(prevState => ({ ...prevState, ...parsedData }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchedRenaperData, renaperData]);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);

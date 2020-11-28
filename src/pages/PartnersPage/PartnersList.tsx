@@ -6,7 +6,7 @@ import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import Assignment from '@material-ui/icons/Assignment';
 
-import Dvr from '@material-ui/icons/Dvr';
+import EditIcon from '@material-ui/icons/Edit';
 import Close from '@material-ui/icons/Close';
 
 import Card from 'components/Card/Card';
@@ -21,6 +21,7 @@ import Button from 'components/CustomButtons/Button';
 import Search from 'components/SearchBar/SearchBar';
 
 import { SortByCriterias } from 'utils/constants';
+import { useHistory } from 'react-router-dom';
 
 const headers = () => [
   {
@@ -33,7 +34,7 @@ const headers = () => [
   },
   {
     Header: 'dni',
-    accessor: 'personalData.dni',
+    accessor: 'personalData.documentNumber',
   },
   {
     Header: 'Nombre y apellido',
@@ -46,6 +47,35 @@ const headers = () => [
   {
     Header: 'Acciones',
     accessor: 'actions',
+    Cell: props => {
+      const history = useHistory();
+      const dispatch = useDispatch();
+      return (
+        <div className="actions-right">
+          <Button
+            justIcon
+            round
+            simple
+            onClick={() => {
+              dispatch(
+                PartnersActions.setPartnerData({
+                  ...props.cell.row.original,
+                  partnerId: props.cell.row.original.partnerId,
+                }),
+              );
+              history.push(`/app/partners/${props.cell.row.original.partnerId}`);
+            }}
+            color="warning"
+            className="edit"
+          >
+            <EditIcon />
+          </Button>{' '}
+          <Button justIcon round simple onClick={() => {}} color="danger" className="remove">
+            <Close />
+          </Button>{' '}
+        </div>
+      );
+    },
   },
 ];
 
@@ -53,19 +83,6 @@ const headers = () => [
 //Add funtionality for sort by function
 //Add pagination
 //Add search bar
-
-const actions = (
-  <div className="actions-right">
-    {/* use this button to add a edit kind of action */}
-    <Button justIcon round simple onClick={() => {}} color="warning" className="edit">
-      <Dvr />
-    </Button>{' '}
-    {/* use this button to remove the data row */}
-    <Button justIcon round simple onClick={() => {}} color="danger" className="remove">
-      <Close />
-    </Button>{' '}
-  </div>
-);
 
 const PartnersList = () => {
   const dispatch = useDispatch();
@@ -75,7 +92,7 @@ const PartnersList = () => {
   const offset = useSelector(selectOffset);
 
   const columns = React.useMemo(headers, []);
-  const data = React.useMemo(() => partnersList.map(item => ({ ...item, actions })), [partnersList]);
+  const data = React.useMemo(() => partnersList.map(item => ({ ...item })), [partnersList]);
 
   const [sortBy, setSortBy] = useState<{ field: string; value: string }>();
 

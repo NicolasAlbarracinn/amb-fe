@@ -11,7 +11,7 @@ import Button from 'components/CustomButtons/Button';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 import { selectAdress, selectFetchedRenaperData } from 'containers/Partners/selectors';
-import { parseSubmitForm } from 'utils/parseForm';
+import { parseReceivedForm, parseSubmitForm } from 'utils/parseForm';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -98,7 +98,8 @@ const Adress = () => {
 
   useEffect(() => {
     if (fetchedRenaperData) {
-      setAdress(prevState => ({ ...prevState, ...renaperData }));
+      const parsedData = parseReceivedForm(renaperData);
+      setAdress(prevState => ({ ...prevState, ...parsedData }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchedRenaperData, renaperData]);
@@ -128,7 +129,6 @@ const Adress = () => {
       },
     }));
   };
-
   return (
     <>
       <GridContainer>

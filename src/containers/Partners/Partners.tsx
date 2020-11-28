@@ -9,7 +9,7 @@ import PartnersList from 'pages/PartnersPage/PartnersList';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer, actions } from './slice';
 import { partnersSaga } from './saga';
-import { selectNewPartnerId } from './selectors';
+import { selectNewPartnerId, selectPartnerId } from './selectors';
 
 import { selectSubmitReady, selectStepsData } from 'containers/WizardContainer/selectors';
 
@@ -23,17 +23,18 @@ const Partners = () => {
   const submitReady = useSelector(selectSubmitReady);
   const data = useSelector(selectStepsData);
   const newPartnerId = useSelector(selectNewPartnerId);
+  const partnerId = useSelector(selectPartnerId);
 
   useEffect(() => {
-    return () => {
-      dispatch(actions.reset());
-    };
-  });
-  useEffect(() => {
+    console.log(partnerId);
     if (submitReady) {
-      dispatch(actions.getSavePartnerRequest(data));
+      if (partnerId) {
+        dispatch(actions.getUpdatePartnerRequest({ data, partnerId }));
+      } else {
+        dispatch(actions.getSavePartnerRequest(data));
+      }
     }
-  }, [data, dispatch, submitReady]);
+  }, [data, dispatch, partnerId, submitReady]);
 
   useEffect(() => {
     if (newPartnerId !== '') {
@@ -44,6 +45,7 @@ const Partners = () => {
     <Switch>
       <Route path="/app/partners/list" component={PartnersList} />
       <Route path="/app/partners/new" component={PartnersEditor} />
+      <Route path="/app/partners/:partnerId" component={PartnersEditor} />
     </Switch>
   );
 };
