@@ -20,6 +20,14 @@ const PartnersSlice = createSlice({
   name: 'partners',
   initialState,
   reducers: {
+    reset(state) {
+      state.loading = initialState.loading;
+      state.partnersList = initialState.partnersList;
+      state.renaperData = initialState.renaperData;
+      state.fetchedRenaperData = initialState.fetchedRenaperData;
+      state.newPartnerId = initialState.newPartnerId;
+      state.totalPartnerAmount = initialState.totalPartnerAmount;
+    },
     getRenaperDataRequest(state, action: PayloadAction<any>) {
       state.loading = true;
     },

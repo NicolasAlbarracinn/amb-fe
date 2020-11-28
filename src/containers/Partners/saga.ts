@@ -70,7 +70,7 @@ export function* getSavePartnerRequest(action: PayloadAction<any>) {
     };
     const response = yield call(request, requestURL, requestOptions);
     yield put(actions.getSavePartnerSuccess(response.data));
-    toast.success(`${response.data.partnerId}`, {
+    toast.success(`Se agrego el nuevo socio con id: ${response.data.partnerId}`, {
       position: toast.POSITION.TOP_CENTER,
     });
   } catch (err) {

@@ -3,6 +3,5 @@ export const parseSubmitForm = form => {
   Object.entries(form).forEach((key: any) => {
     parsedForm[key[0]] = key[1].value;
   });
-  console.log(parsedForm);
   return parsedForm;
 };

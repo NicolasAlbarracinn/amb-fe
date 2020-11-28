@@ -19,3 +19,5 @@ export const selectFetchedRenaperData = createSelector(
   [selectPartners],
   partnersState => partnersState.fetchedRenaperData,
 );
+
+export const selectNewPartnerId = createSelector([selectPartners], partnersState => partnersState.newPartnerId);

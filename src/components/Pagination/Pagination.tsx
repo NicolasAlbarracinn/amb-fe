@@ -40,11 +40,11 @@ const Pagination = ({ totalItems, numberOfRowsData }: IPaginationProps) => {
 
   useEffect(() => {
     dispatch(actions.updateOffset({ offset: pageSelect * limit }));
-  }, [pageSelect]);
+  }, [dispatch, limit, pageSelect]);
 
   useEffect(() => {
     dispatch(actions.updateLimit({ limit: numberOfRows }));
-  }, [numberOfRows]);
+  }, [dispatch, numberOfRows]);
 
   const handleLimitChange = (limit: number) => {
     setNumberOfRows(limit);

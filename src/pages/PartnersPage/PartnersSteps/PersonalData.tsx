@@ -207,8 +207,10 @@ const PersonalData = () => {
             value={personalData.documentType.value}
             handleSelect={onChangeHanlder}
             items={[
-              { value: 'dni', label: 'DNI' },
-              { value: 'passaporte', label: 'Passaporte' },
+              { value: 'cf', label: 'Cedula Federal' },
+              { value: 'dni', label: 'Documento Nacional de Identidad' },
+              { value: 'lc', label: 'Libreta Civica' },
+              { value: 'le', label: 'Libreta de Enrolamiento' },
             ]}
           />
           </GridItem>*/}
@@ -343,8 +345,13 @@ const PersonalData = () => {
             mainSelectLabel="Selecione su lugar de estado civil"
             value={personalData.civilState.value}
             items={[
-              { value: 's', label: 'Soltero' },
-              { value: 'c', label: 'Casado' },
+              { value: 'm', label: 'Casado/a' },
+              { value: 'c', label: 'Convivencia' },
+              { value: 'd', label: 'Divorciado/a' },
+              { value: 'sh', label: 'Separada de hecho' },
+              { value: 's', label: 'Soltero/a' },
+              { value: 'v', label: 'Viudo/a' },
+              { value: 'sn', label: 'Sin información' },
             ]}
             handleSelect={onChangeHanlder}
             loadError={loadError}
@@ -432,12 +439,14 @@ const PersonalData = () => {
             isValid={personalData.documentType.isValid}
             loadError={loadError}
             label="Forma de Cobro C$"
-            mainSelectLabel="Selecione Forma de Cobro C$"
+            mainSelectLabel="Selecione Forma de Cobro CS"
             value={personalData.paymentType.value}
             handleSelect={onChangeHanlder}
             items={[
-              { value: 'm', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
+              { value: 'db', label: 'Descuento bancario' },
+              { value: 'dbic', label: 'Descuento BICA' },
+              { value: 'dr', label: 'Descuento RGM' },
+              { value: 'pv', label: 'Pago Voluntario' },
             ]}
           />
         </GridItem>
@@ -446,13 +455,16 @@ const PersonalData = () => {
             id="recoveryPaymentType"
             isValid={personalData.documentType.isValid}
             loadError={loadError}
-            label="Forma de Cobro Recupero C$"
+            label="Forma de Cobro Recupero CS"
             mainSelectLabel="Selecione Forma de Cobro Recupero C$"
             value={personalData.recoveryPaymentType.value}
             handleSelect={onChangeHanlder}
             items={[
-              { value: 'm', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
+              { value: 'db', label: 'Descuento bancario' },
+              { value: 'dbic', label: 'Descuento BICA' },
+              { value: 'dh', label: 'Descuento Haberes' },
+              { value: 'dr', label: 'Descuento RGM' },
+              { value: 'pv', label: 'Pago Voluntario' },
             ]}
           />
         </GridItem>

@@ -143,8 +143,31 @@ const WorkInfo = () => {
             value={workInfo.repartition.value}
             handleSelect={onChangeHanlder}
             items={[
-              { value: 'm', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
+              { value: 'bica', label: 'BICA' },
+              { value: 'slta', label: 'Secretaria Legal y Técnica de Autoridad del Agua' },
+              { value: 'cic', label: 'CIC' },
+              { value: 'cp', label: 'Caja de Policía' },
+              { value: 'ug', label: 'Unidad Gobernador' },
+              { value: 'e', label: 'Educacion' },
+              { value: 'fe', label: 'Fiscalia del Estado' },
+              { value: 'h', label: 'Hipodromo' },
+              { value: 'ioma', label: 'IOMA' },
+              { value: 'ips', label: 'IPS' },
+              { value: 'lot', label: 'Loteria' },
+              { value: 'slyt', label: 'Secretaria Legal y Técnica' },
+              { value: 'ma', label: 'Ministerio Agroindustria' },
+              { value: 'mc', label: 'Ministerio Cultura' },
+              { value: 'mds', label: 'Ministerio Desarrollo Social' },
+              { value: 'mec', label: 'Ministerio Economia' },
+              { value: 'mgo', label: 'Ministerio Gobierno' },
+              { value: 'minf', label: 'Ministerio Infraestructura' },
+              { value: 'mtr', label: 'Ministerio de Trabajo' },
+              { value: 'pol', label: 'Policía' },
+              { value: 'msa', label: 'Ministerio Salud' },
+              { value: 'sgob', label: 'Secretaria de Gobierno' },
+              { value: 'spen', label: 'Servicio Penitenciario' },
+              { value: 'dvi', label: 'Dirección de Vialidad' },
+              { value: 'rgm', label: 'RGM' },
             ]}
             isValid={workInfo.repartition.isValid}
           />
