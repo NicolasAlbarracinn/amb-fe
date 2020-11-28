@@ -22,6 +22,8 @@ import Search from 'components/SearchBar/SearchBar';
 
 import { SortByCriterias } from 'utils/constants';
 import { useHistory } from 'react-router-dom';
+import SelectInput from 'components/Form/SelectInput';
+import { Tooltip } from '@material-ui/core';
 
 const headers = () => [
   {
@@ -29,11 +31,11 @@ const headers = () => [
     accessor: 'partnerId',
   },
   {
-    Header: 'cuil',
+    Header: 'CUIL',
     accessor: 'personalData.cuil',
   },
   {
-    Header: 'dni',
+    Header: 'DNI',
     accessor: 'personalData.documentNumber',
   },
   {
@@ -45,6 +47,31 @@ const headers = () => [
     },
   },
   {
+    Header: 'Estado',
+    accessor: 'status',
+    Cell: props => {
+      const changeStatusHandler = ({ value }) => {
+        console.log(value);
+      };
+      return (
+        <SelectInput
+          id="status"
+          value="a"
+          handleSelect={changeStatusHandler}
+          items={[
+            { value: 'a', label: 'Alta' },
+            { value: 'b', label: 'Baja' },
+            { value: 'f', label: 'Fallecido' },
+            { value: 'q', label: 'Quiebra' },
+            { value: 'r', label: 'Renuncia' },
+            { value: 's', label: 'Suspendido' },
+            { value: 't', label: 'Transitorio' },
+          ]}
+        />
+      );
+    },
+  },
+  {
     Header: 'Acciones',
     accessor: 'actions',
     Cell: props => {
@@ -52,27 +79,26 @@ const headers = () => [
       const dispatch = useDispatch();
       return (
         <div className="actions-right">
-          <Button
-            justIcon
-            round
-            simple
-            onClick={() => {
-              dispatch(
-                PartnersActions.setPartnerData({
-                  ...props.cell.row.original,
-                  partnerId: props.cell.row.original.partnerId,
-                }),
-              );
-              history.push(`/app/partners/${props.cell.row.original.partnerId}`);
-            }}
-            color="warning"
-            className="edit"
-          >
-            <EditIcon />
-          </Button>{' '}
-          <Button justIcon round simple onClick={() => {}} color="danger" className="remove">
-            <Close />
-          </Button>{' '}
+          <Tooltip title="Editar" aria-label="edit">
+            <Button
+              justIcon
+              round
+              simple
+              onClick={() => {
+                dispatch(
+                  PartnersActions.setPartnerData({
+                    ...props.cell.row.original,
+                    partnerId: props.cell.row.original.partnerId,
+                  }),
+                );
+                history.push(`/app/partners/${props.cell.row.original.partnerId}`);
+              }}
+              color="warning"
+              className="edit"
+            >
+              <EditIcon />
+            </Button>
+          </Tooltip>
         </div>
       );
     },

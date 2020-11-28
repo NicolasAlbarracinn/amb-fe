@@ -165,7 +165,6 @@ const PersonalData = () => {
 
   useEffect(() => {
     if (fetchedRenaperData) {
-      console.log(renaperData);
       const parsedData = parseReceivedForm(renaperData);
       setPersonalData(prevState => ({ ...prevState, ...parsedData }));
     }

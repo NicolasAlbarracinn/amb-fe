@@ -26,15 +26,15 @@ const Partners = () => {
   const partnerId = useSelector(selectPartnerId);
 
   useEffect(() => {
-    console.log(partnerId);
     if (submitReady) {
       if (partnerId) {
         dispatch(actions.getUpdatePartnerRequest({ data, partnerId }));
+        history.push('list');
       } else {
         dispatch(actions.getSavePartnerRequest(data));
       }
     }
-  }, [data, dispatch, partnerId, submitReady]);
+  }, [data, dispatch, history, partnerId, submitReady]);
 
   useEffect(() => {
     if (newPartnerId !== '') {
