@@ -3,6 +3,18 @@ export const parseSubmitForm = form => {
   Object.entries(form).forEach((key: any) => {
     parsedForm[key[0]] = key[1].value;
   });
-  console.log(parsedForm);
+  return parsedForm;
+};
+
+export const parseReceivedForm = form => {
+  let parsedForm = {};
+  console.log(form);
+  Object.entries(form).forEach((key: any) => {
+    const value = key[1];
+    parsedForm[key[0]] = {
+      value,
+      isValid: true,
+    };
+  });
   return parsedForm;
 };

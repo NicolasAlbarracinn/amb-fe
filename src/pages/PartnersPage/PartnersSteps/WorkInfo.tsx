@@ -1,5 +1,5 @@
-import React, { useState, ReactNode } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, ReactNode, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { makeStyles, Theme } from '@material-ui/core';
 import Face from '@material-ui/icons/Face';
@@ -11,7 +11,8 @@ import Button from 'components/CustomButtons/Button';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 import SelectInput from 'components/Form/SelectInput';
-import { parseSubmitForm } from 'utils/parseForm';
+import { parseReceivedForm, parseSubmitForm } from 'utils/parseForm';
+import { selectWorkInfo, selectFetchedRenaperData } from 'containers/Partners/selectors';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -94,7 +95,18 @@ const WorkInfo = () => {
   const classes = useStyles();
   const [workInfo, setWorkInfo] = useState(initialForm);
 
+  const renaperData = useSelector(selectWorkInfo);
+  const fetchedRenaperData = useSelector(selectFetchedRenaperData);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (fetchedRenaperData) {
+      const parsedData = parseReceivedForm(renaperData);
+      setWorkInfo(prevState => ({ ...prevState, ...parsedData }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchedRenaperData, renaperData]);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);
@@ -143,8 +155,31 @@ const WorkInfo = () => {
             value={workInfo.repartition.value}
             handleSelect={onChangeHanlder}
             items={[
-              { value: 'm', label: 'Masculino' },
-              { value: 'F', label: 'Femenino' },
+              { value: 'bica', label: 'BICA' },
+              { value: 'slta', label: 'Secretaria Legal y Técnica de Autoridad del Agua' },
+              { value: 'cic', label: 'CIC' },
+              { value: 'cp', label: 'Caja de Policía' },
+              { value: 'ug', label: 'Unidad Gobernador' },
+              { value: 'e', label: 'Educacion' },
+              { value: 'fe', label: 'Fiscalia del Estado' },
+              { value: 'h', label: 'Hipodromo' },
+              { value: 'ioma', label: 'IOMA' },
+              { value: 'ips', label: 'IPS' },
+              { value: 'lot', label: 'Loteria' },
+              { value: 'slyt', label: 'Secretaria Legal y Técnica' },
+              { value: 'ma', label: 'Ministerio Agroindustria' },
+              { value: 'mc', label: 'Ministerio Cultura' },
+              { value: 'mds', label: 'Ministerio Desarrollo Social' },
+              { value: 'mec', label: 'Ministerio Economia' },
+              { value: 'mgo', label: 'Ministerio Gobierno' },
+              { value: 'minf', label: 'Ministerio Infraestructura' },
+              { value: 'mtr', label: 'Ministerio de Trabajo' },
+              { value: 'pol', label: 'Policía' },
+              { value: 'msa', label: 'Ministerio Salud' },
+              { value: 'sgob', label: 'Secretaria de Gobierno' },
+              { value: 'spen', label: 'Servicio Penitenciario' },
+              { value: 'dvi', label: 'Dirección de Vialidad' },
+              { value: 'rgm', label: 'RGM' },
             ]}
             isValid={workInfo.repartition.isValid}
           />
