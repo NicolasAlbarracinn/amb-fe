@@ -40,7 +40,8 @@ const PartnerDetail = () => {
 
   useEffect(() => {
     if (isDataFetched) {
-      updateInputs(benefitData.partner);
+      console.log(benefitData.personalData);
+      updateInputs({ ...benefitData.personalData, admissionDate: benefitData.createdAt, status: 'deudor' });
     }
   }, [isDataFetched, benefitData]);
 
@@ -53,7 +54,7 @@ const PartnerDetail = () => {
             label="N° de afiliado"
             value={partner.partnerId.value}
             onChange={onChangeHanlder}
-            length={[2, 25]}
+            length={[1, 25]}
             isValid={partner.partnerId.isValid}
             loadError={loadError}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
@@ -180,18 +181,6 @@ const PartnerDetail = () => {
             loadError={loadError}
             disabled={true}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={4}>
-          {/* TODO: modificar/termmina input basado en el templeta */}
-          <DateInput
-            id="statusDate"
-            label="Fecha de Estado"
-            value={partner.statusDate.value}
-            isValid={partner.statusDate.isValid}
-            onChange={onChangeHanlder}
-            loadError={loadError}
-            disabled={true}
           />
         </GridItem>
       </GridContainer>

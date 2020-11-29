@@ -167,12 +167,31 @@ export const defaultPartner = {
     value: '',
     isValid: false,
   },
-  statusDate: {
-    value: '',
-    isValid: false,
-  },
   email: {
     value: '',
     isValid: false,
   },
 };
+
+
+// "personalData": {
+//   "documentType": "dni",
+//   "documentNumber": 37278172,
+//   "procedureNumber": 21233943,
+//   "gender": "m",
+//   "cuil": 20372781727,
+//   "name": "Nicolas",
+//   "lastName": "Albarracin",
+//   "country": "argentina",
+//   "birthPlace": "argentina",
+//   "civilState": "s",
+//   "email": "nicodare@gmail.com",
+//   "phone": "1562685678",
+//   "personalPhone": "1562685678",
+//   "salary": 160000,
+//   "netSalary": 11000,
+//   "socialQuota": "6000",
+//   "paymentType": "dr",
+//   "recoveryPaymentType": "dbic",
+//   "otherPerferences": "aaaddd"
+// },
