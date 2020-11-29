@@ -17,7 +17,7 @@ const dashRoutes = [
     collapse: true,
     name: 'Socios',
     icon: PeopleIcon,
-    state: 'pageCollapse',
+    state: 'partnersCollapse',
     views: [
       {
         path: '/new',
@@ -39,7 +39,7 @@ const dashRoutes = [
     collapse: true,
     name: 'Prestaciones',
     icon: AllOut,
-    state: 'pageCollapse',
+    state: 'benefitsCollapse',
     views: [
       {
         path: '/new',
