@@ -1,6 +1,5 @@
-import React from 'react';
-
-import { makeStyles, Theme } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
@@ -12,110 +11,49 @@ import Button from 'components/CustomButtons/Button';
 import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
 import { ministriesList, recuperoCSList } from 'utils/constants';
 
-export const useStyles = makeStyles((theme: Theme) => ({
-  infoText: {
-    fontWeight: 300,
-    margin: '10px 0 30px',
-    textAlign: 'center',
-  },
-  inputAdornmentIcon: {
-    color: '#555',
-  },
-  inputAdornment: {
-    position: 'relative',
-  },
-  footer: {
-    padding: '0 15px',
-  },
-  left: {
-    float: 'left!important' as 'left',
-  },
-  right: {
-    float: 'right!important' as 'right',
-  },
-  clearfix: {
-    '&:after,&:before': {
-      display: 'table',
-      content: '" "',
-    },
-    clear: 'both',
-  },
-}));
+import { defaultDistribution } from './defaultStates';
 
-const initialForm = {
-  distribution: {
-    value: '',
-    isValid: true,
-  },
-  distributionCode: {
-    value: '',
-    isValid: false,
-  },
-  dependence: {
-    value: '',
-    isValid: false,
-  },
-  fileNumber: {
-    value: '',
-    isValid: false,
-  },
-  fileItem: {
-    value: '',
-    isValid: false,
-  },
-  paymentMethod: {
-    value: '',
-    isValid: false,
-  },
-  paymentMethodRecovery: {
-    value: '',
-    isValid: false,
-  },
-  bank: {
-    value: '',
-    isValid: false,
-  },
+import { useStyles } from 'components/Wizard/stepsStyles';
 
-  cbu: {
-    value: '',
-    isValid: false,
-  },
-  bankBranch: {
-    value: '',
-    isValid: false,
-  },
-  acountNumber: {
-    value: '',
-    isValid: false,
-  },
+import { selectBenefitsData, selectIsDataFetched } from 'containers/Benefits/selectors';
 
-  programCode: {
-    value: '',
-    isValid: false,
-  },
-  sequenceNumber: {
-    value: '',
-    isValid: false,
-  },
-};
+import { parseResponseData } from './parseResponseData';
 
 const DistributionDetail = () => {
   const classes = useStyles();
-  const { inputs: distribution, onChangeHanlder } = useInputChange(initialForm);
+  const { inputs: distribution, onChangeHanlder, updateInputs } = useInputChange(defaultDistribution);
   const { loadError, handleNext, handlePrevious } = useWizardStep(distribution, 'distributionDetail');
+
+  const { workInfo } = useSelector(selectBenefitsData);
+  const isDataFetched = useSelector(selectIsDataFetched);
+
+  useEffect(() => {
+    if (isDataFetched) {
+      const updatedInput = parseResponseData(workInfo);
+      updateInputs({
+        ...updatedInput,
+        //This value is wrong on the db
+        repartition: { value: 'bica', isValid: true },
+        //Thit two filed are missing in the db
+        dependence: { value: '12222', isValid: true },
+        distributionCode: { value: 'bica', isValid: true },
+      });
+    }
+  }, [workInfo]);
 
   return (
     <>
       <GridContainer>
         <GridItem xs={12} sm={4}>
           <SelectInput
-            id="distribution"
+            id="repartition"
             label="Repartición"
-            value={distribution.distribution.value}
+            value={distribution.repartition.value}
             items={ministriesList}
             handleSelect={onChangeHanlder}
             loadError={loadError}
-            isValid={distribution.distribution.isValid}
+            isValid={distribution.repartition.isValid}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
@@ -127,6 +65,7 @@ const DistributionDetail = () => {
             length={[2, 25]}
             isValid={distribution.distributionCode.isValid}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
@@ -138,6 +77,7 @@ const DistributionDetail = () => {
             onChange={onChangeHanlder}
             isValid={distribution.dependence.isValid}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
@@ -147,10 +87,11 @@ const DistributionDetail = () => {
             id="fileNumber"
             label="N° Legajo"
             inputType="number"
-            value={distribution.dependence.value}
+            value={distribution.fileNumber.value}
             onChange={onChangeHanlder}
-            isValid={distribution.dependence.isValid}
+            isValid={distribution.fileNumber.isValid}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
@@ -158,10 +99,11 @@ const DistributionDetail = () => {
             id="fileItem"
             label="Item Legajo"
             inputType="number"
-            value={distribution.dependence.value}
+            value={distribution.fileItem.value}
             onChange={onChangeHanlder}
-            isValid={distribution.dependence.isValid}
+            isValid={distribution.fileItem.isValid}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
@@ -190,12 +132,13 @@ const DistributionDetail = () => {
       <GridContainer>
         <GridItem xs={12} sm={3}>
           <TextInput
-            id="bank"
+            id="bankName"
             label="Banco"
-            value={distribution.bank.value}
+            value={distribution.bankName.value}
             onChange={onChangeHanlder}
-            isValid={distribution.bank.isValid}
+            isValid={distribution.bankName.isValid}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
@@ -206,52 +149,58 @@ const DistributionDetail = () => {
             onChange={onChangeHanlder}
             isValid={distribution.cbu.isValid}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            id="bankBranch"
+            id="bankBranchName"
             label="Sucursal bancaria"
-            value={distribution.bankBranch.value}
+            value={distribution.bankBranchName.value}
             onChange={onChangeHanlder}
-            isValid={distribution.bankBranch.isValid}
+            isValid={distribution.bankBranchName.isValid}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            id="acountNumber"
+            id="bankAccountNumber"
             label="N° de cuenta"
-            value={distribution.acountNumber.value}
+            value={distribution.bankAccountNumber.value}
             onChange={onChangeHanlder}
-            isValid={distribution.acountNumber.isValid}
+            isValid={true}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={4}>
-          <SelectInput
-            id="programCode"
-            label="Código de programa"
-            value={distribution.programCode.value}
-            items={[{ value: 'no', label: 'faltan opciones' }]}
-            handleSelect={onChangeHanlder}
-            loadError={loadError}
-            isValid={distribution.programCode.isValid}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={4}>
-          <TextInput
-            id="sequenceNumber"
-            label="N° de secuencia"
-            value={distribution.sequenceNumber.value}
-            onChange={onChangeHanlder}
-            isValid={distribution.sequenceNumber.isValid}
-            loadError={loadError}
-          />
-        </GridItem>
-      </GridContainer>
+      {distribution.repartition.value === 'cajaDePolicía' && (
+        <GridContainer>
+          <GridItem xs={12} sm={4}>
+            <SelectInput
+              id="programCode"
+              label="Código de programa"
+              value={distribution.programCode.value}
+              items={[{ value: 'no', label: 'faltan opciones' }]}
+              handleSelect={onChangeHanlder}
+              loadError={loadError}
+              isValid={true}
+            />
+          </GridItem>
+          <GridItem xs={12} sm={4}>
+            <TextInput
+              id="sequenceNumber"
+              label="N° de secuencia"
+              value={distribution.sequenceNumber.value}
+              onChange={onChangeHanlder}
+              isValid={true}
+              loadError={loadError}
+            />
+          </GridItem>
+        </GridContainer>
+      )}
+
       <div className={classes.footer}>
         <div className={classes.left}>
           <Button color="rose" onClick={handlePrevious}>

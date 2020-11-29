@@ -12,11 +12,10 @@ export const situacionCrediticiaList = [
 ];
 
 export const documentTypeList = [
-  { value: 'DNI', label: 'DNI' },
-  { value: 'CF', label: 'Cedula Federal' },
-  { value: 'DNI', label: 'Documento Nacional de Identidad' },
-  { value: 'LC', label: 'Libreta Civica' },
-  { value: 'LE', label: 'Libreta de Enrolamiento' },
+  { value: 'cf', label: 'Cedula Federal' },
+  { value: 'dni', label: 'Documento Nacional de Identidad' },
+  { value: 'lc', label: 'Libreta Civica' },
+  { value: 'le', label: 'Libreta de Enrolamiento' },
 ];
 
 export const civilStateList = [
@@ -45,30 +44,30 @@ export const recuperoCSList = [
 
 export const ministriesList = [
   { value: 'bica', label: 'BICA' },
-  { value: 'secretariaLegalTécnica', label: ' Secretaria Legal y Técnica' },
-  { value: 'autoridadDelAgua', label: ' de Autoridad del Agua' },
-  { value: 'CIC', label: ' CIC' },
-  { value: 'cajaDePolicía', label: ' Caja de Policía' },
-  { value: 'unidadGobernador', label: ' Unidad Gobernador' },
-  { value: 'educacion', label: ' Educacion' },
-  { value: 'fiscaliaDelEstado', label: ' Fiscalia del Estado' },
-  { value: 'hipodromo', label: ' Hipodromo' },
-  { value: 'IOMA', label: ' IOMA' },
-  { value: 'IPS', label: ' IPS' },
-  { value: 'loteria', label: ' Loteria' },
-  { value: 'secretariaLegalTécnica', label: ' Secretaria Legal y Técnica' },
-  { value: 'ministerioAgroindustria', label: ' Ministerio Agroindustria' },
-  { value: 'ministerioCultura', label: ' Ministerio Cultura' },
-  { value: 'ministerioDesarrollo Social', label: ' Ministerio Desarrollo Social' },
-  { value: 'ministerioEconomia', label: ' Ministerio Economia' },
-  { value: 'ministerioGobierno', label: ' Ministerio Gobierno' },
-  { value: 'ministerioInfraestructura', label: ' Ministerio Infraestructura' },
+  { value: 'secretariaLegalTécnica', label: 'Secretaria Legal y Técnica' },
+  { value: 'autoridadDelAgua', label: 'de Autoridad del Agua' },
+  { value: 'CIC', label: 'CIC' },
+  { value: 'cajaDePolicía', label: 'Caja de Policía' },
+  { value: 'unidadGobernador', label: 'Unidad Gobernador' },
+  { value: 'educacion', label: 'Educacion' },
+  { value: 'fiscaliaDelEstado', label: 'Fiscalia del Estado' },
+  { value: 'hipodromo', label: 'Hipodromo' },
+  { value: 'IOMA', label: 'IOMA' },
+  { value: 'IPS', label: 'IPS' },
+  { value: 'loteria', label: 'Loteria' },
+  { value: 'secretariaLegalTécnica', label: 'Secretaria Legal y Técnica' },
+  { value: 'ministerioAgroindustria', label: 'Ministerio Agroindustria' },
+  { value: 'ministerioCultura', label: 'Ministerio Cultura' },
+  { value: 'ministerioDesarrollo Social', label: 'Ministerio Desarrollo Social' },
+  { value: 'ministerioEconomia', label: 'Ministerio Economia' },
+  { value: 'ministerioGobierno', label: 'Ministerio Gobierno' },
+  { value: 'ministerioInfraestructura', label: 'Ministerio Infraestructura' },
   { value: 'ministerioDeTrabajo', label: ' Ministerio de Trabajo' },
-  { value: 'policía', label: ' Policía' },
-  { value: 'ministerioSalud', label: ' Ministerio Salud' },
-  { value: 'secretariaDeGobierno', label: ' Secretaria de Gobierno' },
-  { value: 'servicioPenitenciario', label: ' Servicio Penitenciario' },
-  { value: 'direcciónDeVialidad', label: ' Dirección de Vialidad' },
+  { value: 'policía', label: 'Policía' },
+  { value: 'ministerioSalud', label: 'Ministerio Salud' },
+  { value: 'secretariaDeGobierno', label: 'Secretaria de Gobierno' },
+  { value: 'servicioPenitenciario', label: 'Servicio Penitenciario' },
+  { value: 'direcciónDeVialidad', label: 'Dirección de Vialidad' },
   { value: 'RGM', label: 'RGM' },
 ];
 
@@ -88,4 +87,14 @@ export const benefitStatusList = [
 export const benefitTypeList = [
   { value: 'p', label: 'Prestación' },
   { value: 'cm', label: 'Cuota Membresia' },
+];
+
+export const statusList = [
+  { value: 'a', label: 'Alta' },
+  { value: 'b', label: 'Baja' },
+  { value: 'f', label: 'Fallecido' },
+  { value: 'q', label: 'Quiebra' },
+  { value: 'r', label: 'Renuncia' },
+  { value: 's', label: 'Suspendido' },
+  { value: 't', label: 'Transitorio' },
 ];

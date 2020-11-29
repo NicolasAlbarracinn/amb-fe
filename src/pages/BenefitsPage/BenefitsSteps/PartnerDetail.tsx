@@ -1,7 +1,5 @@
-import React, { useState, ReactNode, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { makeStyles, Theme } from '@material-ui/core';
 
 import Face from '@material-ui/icons/Face';
 import Email from '@material-ui/icons/Email';
@@ -15,102 +13,59 @@ import DateInput from 'components/Form/DateInput';
 import Button from 'components/CustomButtons/Button';
 
 import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
+import { documentTypeList, civilStateList, statusList } from 'utils/constants';
+import { defaultPartner } from './defaultStates';
 
-import { documentTypeList, civilStateList } from 'utils/constants';
+import { useStyles } from 'components/Wizard/stepsStyles';
 
-export const useStyles = makeStyles((theme: Theme) => ({
-  infoText: {
-    fontWeight: 300,
-    margin: '10px 0 30px',
-    textAlign: 'center',
-  },
-  inputAdornmentIcon: {
-    color: '#555',
-  },
-  inputAdornment: {
-    position: 'relative',
-  },
-  footer: {
-    padding: '0 15px',
-  },
-  left: {
-    float: 'left!important' as 'left',
-  },
-  right: {
-    float: 'right!important' as 'right',
-  },
-  clearfix: {
-    '&:after,&:before': {
-      display: 'table',
-      content: '" "',
-    },
-    clear: 'both',
-  },
-}));
+import { selectBenefitsData, selectIsDataFetched } from 'containers/Benefits/selectors';
+import { actions as benefitActions } from 'containers/Benefits/slice';
 
-const initialForm = {
-  partnerId: {
-    value: '',
-    isValid: true,
-  },
-  name: {
-    value: '',
-    isValid: false,
-  },
-  lastName: {
-    value: '',
-    isValid: false,
-  },
-  admissionDate: {
-    value: '',
-    isValid: false,
-  },
-  documentType: {
-    value: '',
-    isValid: false,
-  },
-  documentNumber: {
-    value: '',
-    isValid: false,
-  },
-  gender: {
-    value: '',
-    isValid: false,
-  },
-  cuil: {
-    value: '',
-    isValid: false,
-  },
-
-  civilState: {
-    value: '',
-    isValid: false,
-  },
-  status: {
-    value: '',
-    isValid: false,
-  },
-  email: {
-    value: '',
-    isValid: false,
-  },
-};
+import { parseResponseData } from './parseResponseData';
 
 const PartnerDetail = () => {
   const classes = useStyles();
-  const { inputs: partner, onChangeHanlder } = useInputChange(initialForm);
+  const { inputs: partner, onChangeHanlder, updateInputs } = useInputChange(defaultPartner);
   const { loadError, handleNext } = useWizardStep(partner, 'partnerDetail');
+
+  const { personalData, createdAt, status } = useSelector(selectBenefitsData);
+  const isDataFetched = useSelector(selectIsDataFetched);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const { isValid, value } = partner.partnerId;
+    //Maybe for the isDataFetched condition we could use something like isEmpty function from lodash an verify if benefitData is empty or not
+    if (isValid && !isDataFetched) {
+      dispatch(benefitActions.getUpdateBenefitRequest(value));
+    }
+  }, [dispatch, partner, isDataFetched]);
+
+  useEffect(() => {
+    if (isDataFetched) {
+      const updatedInput = parseResponseData(personalData);
+
+      updateInputs({
+        ...updatedInput,
+        admissionDate: { value: createdAt, isValid: true },
+        //TODO: add this parameter on db partner schema
+        status: {
+          value: status,
+          isValid: true,
+        },
+      });
+    }
+  }, [isDataFetched, personalData, createdAt]);
 
   return (
     <>
       <GridContainer>
         <GridItem xs={12} sm={4}>
           <TextInput
-            id="streetAdress"
+            id="partnerId"
             label="N° de afiliado"
             value={partner.partnerId.value}
             onChange={onChangeHanlder}
-            length={[2, 25]}
+            length={[1, 25]}
             isValid={partner.partnerId.isValid}
             loadError={loadError}
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
@@ -141,6 +96,7 @@ const PartnerDetail = () => {
           />
         </GridItem>
         <GridItem xs={12} sm={2}>
+          {/* TODO: modificar/termmina input basado en el templeta */}
           <DateInput
             id="admissionDate"
             label="Fecha de ingreso"
@@ -148,7 +104,7 @@ const PartnerDetail = () => {
             isValid={partner.admissionDate.isValid}
             onChange={onChangeHanlder}
             loadError={loadError}
-            disabled={false}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
@@ -222,31 +178,20 @@ const PartnerDetail = () => {
             handleSelect={onChangeHanlder}
             loadError={loadError}
             isValid={partner.civilState.isValid}
+            disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
-          <TextInput
+          <SelectInput
             id="status"
             label="Estado"
-            inputType="number"
-            value={partner.cuil.value}
-            onChange={onChangeHanlder}
-            length={[10, 11]}
-            isValid={partner.cuil.isValid}
+            mainSelectLabel="Selecione el estado"
+            value={partner.status.value}
+            handleSelect={onChangeHanlder}
+            items={statusList}
             loadError={loadError}
+            isValid={partner.status.isValid}
             disabled={true}
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={4}>
-          <DateInput
-            id="stau"
-            label="Fecha de Estado"
-            value=""
-            isValid={partner.admissionDate.isValid}
-            onChange={onChangeHanlder}
-            loadError={loadError}
-            disabled={false}
           />
         </GridItem>
       </GridContainer>
@@ -260,6 +205,7 @@ const PartnerDetail = () => {
             isValid={partner.email.isValid}
             loadError={loadError}
             endAdornmentIcon={<Email className={classes.inputAdornmentIcon} />}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
