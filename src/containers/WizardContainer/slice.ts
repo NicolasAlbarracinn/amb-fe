@@ -5,9 +5,11 @@ import { createSlice } from 'utils/@reduxjs/toolkit';
 // The initial state of the GithubRepoForm container
 export const initialState: any = {
   stepsData: {},
+  validatingStepId: '',
   currentStepId: '',
   buttonType: '',
   submitReady: false,
+  stepsIds: [],
 };
 
 const WizardContainerSlice = createSlice({
@@ -17,6 +19,7 @@ const WizardContainerSlice = createSlice({
     reset(state) {
       state.stepsValidation = initialState.stepsValidation;
       state.currentStepId = initialState.currentStepId;
+      state.previousStepId = initialState.previousStepId;
       state.buttonType = initialState.buttonType;
     },
     setStep(state, action: PayloadAction<any>) {
@@ -24,7 +27,7 @@ const WizardContainerSlice = createSlice({
         ...state.stepsData,
         [action.payload.stepId]: { ...action.payload.data, isValid: action.payload.isValid },
       };
-      state.currentStepId = action.payload.stepId;
+      state.validatingStepId = action.payload.stepId;
       if (action.payload.type === 'submit') {
         state.submitReady = true;
         state.buttonType = action.payload.type;
@@ -32,6 +35,12 @@ const WizardContainerSlice = createSlice({
         state.submitReady = false;
         state.buttonType = action.payload.type;
       }
+    },
+    setCurrentStepId(state, action: PayloadAction<any>) {
+      state.currentStepId = action.payload;
+    },
+    setStepsIds(state, action: PayloadAction<any>) {
+      state.stepsIds = action.payload;
     },
   },
 });

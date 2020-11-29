@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { call, put, takeLatest } from 'redux-saga/effects'; // select, delay
 import Cookies from 'universal-cookie';
 
-import { GET_RENAPER_DATA, GET_AFFILEATES_LIST, SAVE_PARTNER } from 'utils/endpoints';
+import { GET_RENAPER_DATA, GET_AFFILEATES_LIST, SAVE_PARTNER, UPADTE_PARTNER_STATUS } from 'utils/endpoints';
 import { request } from 'utils/request';
 import { QueryParameters } from 'types/types';
 import { queryBuilder } from 'utils/queryBuilder';
@@ -61,7 +61,7 @@ export function* getSavePartnerRequest(action: PayloadAction<any>) {
   const requestURL = `${SAVE_PARTNER}`;
   try {
     const requestOptions: RequestInit = {
-      method: 'Post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -106,9 +106,38 @@ export function* getUpdatePartnerRequest(action: PayloadAction<any>) {
   }
 }
 
+export function* getUpdatePartnerStatusRequest(action: PayloadAction<any>) {
+  const token = cookies.get('token');
+  const requestURL = `${UPADTE_PARTNER_STATUS}`;
+  try {
+    const requestOptions: RequestInit = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        status: action.payload.value,
+        partnerId: action.payload.partnerId,
+      }),
+    };
+    const response = yield call(request, requestURL, requestOptions);
+    yield put(actions.getUpdatePartnerStatusSuccess(response.data));
+    toast.success(`Estado de socio modificado`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (err) {
+    yield put(actions.getUpdatePartnerStatusFailed());
+    toast.error('Algo salio mal.', {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
 export function* partnersSaga() {
   yield takeLatest(actions.getRenaperDataRequest.type, getRenaperDataRequest);
   yield takeLatest(actions.getPartnersListRequest.type, getPartnersListRequest);
   yield takeLatest(actions.getSavePartnerRequest.type, getSavePartnerRequest);
   yield takeLatest(actions.getUpdatePartnerRequest.type, getUpdatePartnerRequest);
+  yield takeLatest(actions.getUpdatePartnerStatusRequest.type, getUpdatePartnerStatusRequest);
 }

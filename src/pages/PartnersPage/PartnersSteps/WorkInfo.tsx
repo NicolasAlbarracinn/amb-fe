@@ -13,6 +13,8 @@ import { actions as wizardActions } from 'containers/WizardContainer/slice';
 import SelectInput from 'components/Form/SelectInput';
 import { parseReceivedForm, parseSubmitForm } from 'utils/parseForm';
 import { selectWorkInfo, selectFetchedRenaperData } from 'containers/Partners/selectors';
+import { selectCurrentStepId } from 'containers/WizardContainer/selectors';
+import getCbuValues from 'utils/getCbuValues';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -69,19 +71,19 @@ const initialForm = {
     value: '',
     isValid: false,
   },
-  bank: {
+  bankName: {
+    value: 'Banco Provincia de Buenos Aires',
+    isValid: true,
+  },
+  bankBranchName: {
     value: '',
     isValid: false,
   },
-  branch: {
+  bankBranchCode: {
     value: '',
     isValid: false,
   },
-  banking: {
-    value: '',
-    isValid: false,
-  },
-  accountNumber: {
+  bankAccountNumber: {
     value: '',
     isValid: false,
   },
@@ -97,6 +99,7 @@ const WorkInfo = () => {
 
   const renaperData = useSelector(selectWorkInfo);
   const fetchedRenaperData = useSelector(selectFetchedRenaperData);
+  const currentStepId = useSelector(selectCurrentStepId);
 
   const dispatch = useDispatch();
 
@@ -107,6 +110,16 @@ const WorkInfo = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchedRenaperData, renaperData]);
+
+  useEffect(() => {
+    if (workInfo.cbu.isValid && currentStepId === 'workInfo') {
+      const bankData = getCbuValues(workInfo.cbu.value);
+      if (!!bankData) {
+        const parsedBankData = parseReceivedForm(bankData);
+        setWorkInfo(prevState => ({ ...prevState, ...parsedBankData }));
+      }
+    }
+  }, [currentStepId, workInfo.bankAccountNumber.isValid, workInfo.cbu.isValid, workInfo.cbu.value]);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);
@@ -214,55 +227,57 @@ const WorkInfo = () => {
             label="CBU"
             onChange={onChangeHanlder}
             value={workInfo.cbu.value}
-            length={[2, 25]}
+            length={[22, 22]}
             isValid={workInfo.cbu.isValid}
+            inputType="number"
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
       </GridContainer>
-      {workInfo.cbu.value !== '' && (
+      {workInfo.cbu.isValid && (
         <GridContainer style={{ marginBottom: '3%' }}>
           <GridItem xs={12} sm={4}>
             <TextInput
-              id="bank"
+              id="bankName"
               label="Banco"
               onChange={onChangeHanlder}
-              value={workInfo.bank.value}
+              value={workInfo.bankName.value}
               length={[2, 25]}
-              isValid={workInfo.bank.isValid}
+              isValid={workInfo.bankName.isValid}
+              disabled={true}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>
           <GridItem xs={12} sm={3}>
             <TextInput
-              id="branch"
-              label="Sucursal"
+              id="bankBranchName"
+              label="Nombre Sucursal"
               onChange={onChangeHanlder}
-              value={workInfo.branch.value}
+              value={workInfo.bankBranchName.value}
               length={[2, 25]}
-              isValid={workInfo.branch.isValid}
+              isValid={workInfo.bankBranchName.isValid}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>
           <GridItem xs={12} sm={3}>
             <TextInput
-              id="banking"
-              label="Bancaria"
+              id="bankBranchCode"
+              label="Codigo Sucursal"
               onChange={onChangeHanlder}
-              value={workInfo.banking.value}
+              value={workInfo.bankBranchCode.value}
               length={[2, 25]}
-              isValid={workInfo.banking.isValid}
+              isValid={workInfo.bankBranchCode.isValid}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>
           <GridItem xs={12} sm={2}>
             <TextInput
-              id="accountNumber"
+              id="bankAccountNumber"
               label="N de Cuenta"
               onChange={onChangeHanlder}
-              value={workInfo.accountNumber.value}
+              value={workInfo.bankAccountNumber.value}
               length={[2, 25]}
-              isValid={workInfo.accountNumber.isValid}
+              isValid={workInfo.bankAccountNumber.isValid}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>

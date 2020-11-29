@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectPartnersList, selectPartnersListCount } from 'containers/Partners/selectors';
-import { actions as PartnersActions } from 'containers/Partners/slice';
+import { actions as partnersActions } from 'containers/Partners/slice';
 import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import Assignment from '@material-ui/icons/Assignment';
 
 import EditIcon from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import ErrorIcon from '@material-ui/icons/Error';
+import AllOutIcon from '@material-ui/icons/AllOut';
 
 import Card from 'components/Card/Card';
 import CardBody from 'components/Card/CardBody';
@@ -50,11 +52,18 @@ const headers = () => [
     Header: 'Estado',
     accessor: 'status',
     Cell: props => {
-      const changeStatusHandler = ({ value }) => {};
+      const dispatch = useDispatch();
+      const [partnerState, setPartnerState] = useState(props.cell.row.original.status);
+      const changeStatusHandler = ({ value }) => {
+        dispatch(
+          partnersActions.getUpdatePartnerStatusRequest({ value, partnerId: props.cell.row.original.partnerId }),
+        );
+        setPartnerState(value);
+      };
       return (
         <SelectInput
           id="status"
-          value="a"
+          value={partnerState}
           handleSelect={changeStatusHandler}
           items={[
             { value: 'a', label: 'Alta' },
@@ -72,11 +81,54 @@ const headers = () => [
   {
     Header: 'Acciones',
     accessor: 'actions',
+    alignItems: 'center',
     Cell: props => {
       const history = useHistory();
       const dispatch = useDispatch();
       return (
         <div className="actions-right">
+          <Tooltip title="Cuotas Sociales" aria-label="socialCouta">
+            <Button
+              justIcon
+              round
+              simple
+              onClick={() => {
+                console.log('couta social');
+              }}
+              color="behance"
+              className="socialCouta"
+            >
+              <AttachMoneyIcon />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Rechazos" aria-label="rejections">
+            <Button
+              justIcon
+              round
+              simple
+              onClick={() => {
+                console.log('rechazos');
+              }}
+              color="danger"
+              className="rejections"
+            >
+              <ErrorIcon />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Prestaciones" aria-label="benefits">
+            <Button
+              justIcon
+              round
+              simple
+              onClick={() => {
+                console.log('prestaciones');
+              }}
+              color="dribbble"
+              className="benefits"
+            >
+              <AllOutIcon />
+            </Button>
+          </Tooltip>
           <Tooltip title="Editar" aria-label="edit">
             <Button
               justIcon
@@ -84,7 +136,7 @@ const headers = () => [
               simple
               onClick={() => {
                 dispatch(
-                  PartnersActions.setPartnerData({
+                  partnersActions.setPartnerData({
                     ...props.cell.row.original,
                     partnerId: props.cell.row.original.partnerId,
                   }),
@@ -109,14 +161,13 @@ const PartnersList = () => {
   const count = useSelector(selectPartnersListCount);
   const limit = useSelector(selectLimit);
   const offset = useSelector(selectOffset);
-
   const columns = React.useMemo(headers, []);
   const data = React.useMemo(() => partnersList.map(item => ({ ...item })), [partnersList]);
 
   const [sortBy, setSortBy] = useState<{ field: string; value: string }>();
 
   useEffect(() => {
-    dispatch(PartnersActions.getPartnersListRequest({ sortBy, limit, offset }));
+    dispatch(partnersActions.getPartnersListRequest({ sortBy, limit, offset }));
   }, [sortBy, limit, offset, dispatch]);
 
   const handlerSortBy = sortBy => {
