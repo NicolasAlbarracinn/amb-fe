@@ -72,7 +72,7 @@ export const defaultBenefit = {
 };
 
 export const defaultDistribution = {
-  distribution: {
+  repartition: {
     value: '',
     isValid: false,
   },
@@ -108,11 +108,11 @@ export const defaultDistribution = {
     value: '',
     isValid: false,
   },
-  bankBranch: {
+  branch: {
     value: '',
     isValid: false,
   },
-  acountNumber: {
+  accountNumber: {
     value: '',
     isValid: false,
   },
@@ -125,6 +125,16 @@ export const defaultDistribution = {
     isValid: false,
   },
 };
+
+// accountNumber: 1223313
+// bank: "Banco Provincia"
+// banking: 23132
+// branch: 404
+// cbu: 20372781727
+// fileItem: "32131"
+// fileNumber: 32131
+// observations: "Ningunaddd"
+// repartition: "slta"
 
 export const defaultPartner = {
   partnerId: {
@@ -172,7 +182,6 @@ export const defaultPartner = {
     isValid: false,
   },
 };
-
 
 // "personalData": {
 //   "documentType": "dni",

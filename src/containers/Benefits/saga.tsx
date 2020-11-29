@@ -5,7 +5,6 @@ import Cookies from 'universal-cookie';
 
 import { request } from 'utils/request';
 import { SAVE_PARTNER } from 'utils/endpoints';
-import { mockedBenefitsData } from './mockedBenefitsData';
 
 import { actions } from './slice';
 
@@ -24,7 +23,6 @@ export function* getUpdateBenefitRequest(action: PayloadAction<any>) {
     };
 
     const response = yield call(request, requestURL, requestOptions);
-    console.log(response.data);
     yield put(actions.getUpdateBenefitSuccess(response.data));
   } catch (err) {
     yield put(actions.getUpdateBenefitFailed());

@@ -21,12 +21,14 @@ import { useStyles } from 'components/Wizard/stepsStyles';
 import { selectBenefitsData, selectIsDataFetched } from 'containers/Benefits/selectors';
 import { actions as benefitActions } from 'containers/Benefits/slice';
 
+import { parseResponseData } from './parseResponseData';
+
 const PartnerDetail = () => {
   const classes = useStyles();
   const { inputs: partner, onChangeHanlder, updateInputs } = useInputChange(defaultPartner);
   const { loadError, handleNext } = useWizardStep(partner, 'partnerDetail');
 
-  const benefitData = useSelector(selectBenefitsData);
+  const { personalData, createdAt } = useSelector(selectBenefitsData);
   const isDataFetched = useSelector(selectIsDataFetched);
   const dispatch = useDispatch();
 
@@ -40,10 +42,19 @@ const PartnerDetail = () => {
 
   useEffect(() => {
     if (isDataFetched) {
-      console.log(benefitData.personalData);
-      updateInputs({ ...benefitData.personalData, admissionDate: benefitData.createdAt, status: 'deudor' });
+      const updatedInput = parseResponseData(personalData);
+
+      updateInputs({
+        ...updatedInput,
+        admissionDate: { value: createdAt, isValid: true },
+        //TODO: add this parameter on db partner schema
+        status: {
+          value: 'deudor',
+          isValid: true,
+        },
+      });
     }
-  }, [isDataFetched, benefitData]);
+  }, [isDataFetched, personalData, createdAt]);
 
   return (
     <>

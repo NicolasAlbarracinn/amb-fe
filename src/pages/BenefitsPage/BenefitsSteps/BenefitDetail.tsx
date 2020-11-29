@@ -17,8 +17,6 @@ const BenefitDetail = () => {
   const { inputs: benefit, onChangeHanlder } = useInputChange(defaultBenefit);
   const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
 
-  console.log(benefit.benefitType.value);
-
   //TODO: agregar logica del formulario
   return (
     <>

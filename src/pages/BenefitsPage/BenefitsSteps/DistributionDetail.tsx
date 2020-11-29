@@ -15,31 +15,44 @@ import { defaultDistribution } from './defaultStates';
 
 import { useStyles } from 'components/Wizard/stepsStyles';
 
-import { selectBenefitsData } from 'containers/Benefits/selectors';
+import { selectBenefitsData, selectIsDataFetched } from 'containers/Benefits/selectors';
+
+import { parseResponseData } from './parseResponseData';
 
 const DistributionDetail = () => {
   const classes = useStyles();
   const { inputs: distribution, onChangeHanlder, updateInputs } = useInputChange(defaultDistribution);
   const { loadError, handleNext, handlePrevious } = useWizardStep(distribution, 'distributionDetail');
 
-  const { distribution: distributionData } = useSelector(selectBenefitsData);
+  const { workInfo } = useSelector(selectBenefitsData);
+  const isDataFetched = useSelector(selectIsDataFetched);
 
   useEffect(() => {
-    updateInputs(distributionData);
-  }, [distributionData]);
+    if (isDataFetched) {
+      const updatedInput = parseResponseData(workInfo);
+      updateInputs({
+        ...updatedInput,
+        //This value is wrong on the db
+        repartition: { value: 'bica', isValid: true },
+        //Thit two filed are missing in the db
+        dependence: { value: '12222', isValid: true },
+        distributionCode: { value: 'bica', isValid: true },
+      });
+    }
+  }, [workInfo]);
 
   return (
     <>
       <GridContainer>
         <GridItem xs={12} sm={4}>
           <SelectInput
-            id="distribution"
+            id="repartition"
             label="Repartición"
-            value={distribution.distribution.value}
+            value={distribution.repartition.value}
             items={ministriesList}
             handleSelect={onChangeHanlder}
             loadError={loadError}
-            isValid={distribution.distribution.isValid}
+            isValid={distribution.repartition.isValid}
             disabled={true}
           />
         </GridItem>
@@ -74,9 +87,9 @@ const DistributionDetail = () => {
             id="fileNumber"
             label="N° Legajo"
             inputType="number"
-            value={distribution.dependence.value}
+            value={distribution.fileNumber.value}
             onChange={onChangeHanlder}
-            isValid={distribution.dependence.isValid}
+            isValid={distribution.fileNumber.isValid}
             loadError={loadError}
             disabled={true}
           />
@@ -86,9 +99,9 @@ const DistributionDetail = () => {
             id="fileItem"
             label="Item Legajo"
             inputType="number"
-            value={distribution.dependence.value}
+            value={distribution.fileItem.value}
             onChange={onChangeHanlder}
-            isValid={distribution.dependence.isValid}
+            isValid={distribution.fileItem.isValid}
             loadError={loadError}
             disabled={true}
           />
@@ -141,28 +154,28 @@ const DistributionDetail = () => {
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            id="bankBranch"
+            id="branch"
             label="Sucursal bancaria"
-            value={distribution.bankBranch.value}
+            value={distribution.branch.value}
             onChange={onChangeHanlder}
-            isValid={distribution.bankBranch.isValid}
+            isValid={distribution.branch.isValid}
             loadError={loadError}
             disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            id="acountNumber"
+            id="accountNumber"
             label="N° de cuenta"
-            value={distribution.acountNumber.value}
+            value={distribution.accountNumber.value}
             onChange={onChangeHanlder}
-            isValid={distribution.acountNumber.isValid}
+            isValid={distribution.accountNumber.isValid}
             loadError={loadError}
             disabled={true}
           />
         </GridItem>
       </GridContainer>
-      {distribution.distribution.value === 'cajaDePolicía' && (
+      {distribution.repartition.value === 'cajaDePolicía' && (
         <GridContainer>
           <GridItem xs={12} sm={4}>
             <SelectInput

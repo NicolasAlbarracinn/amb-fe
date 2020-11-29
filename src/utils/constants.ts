@@ -12,11 +12,10 @@ export const situacionCrediticiaList = [
 ];
 
 export const documentTypeList = [
-  { value: 'DNI', label: 'DNI' },
-  { value: 'CF', label: 'Cedula Federal' },
-  { value: 'DNI', label: 'Documento Nacional de Identidad' },
-  { value: 'LC', label: 'Libreta Civica' },
-  { value: 'LE', label: 'Libreta de Enrolamiento' },
+  { value: 'cf', label: 'Cedula Federal' },
+  { value: 'dni', label: 'Documento Nacional de Identidad' },
+  { value: 'lc', label: 'Libreta Civica' },
+  { value: 'le', label: 'Libreta de Enrolamiento' },
 ];
 
 export const civilStateList = [
