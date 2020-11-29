@@ -13,6 +13,8 @@ import { actions as wizardActions } from 'containers/WizardContainer/slice';
 import SelectInput from 'components/Form/SelectInput';
 import { parseReceivedForm, parseSubmitForm } from 'utils/parseForm';
 import { selectWorkInfo, selectFetchedRenaperData } from 'containers/Partners/selectors';
+import { selectCurrentStepId } from 'containers/WizardContainer/selectors';
+import getCbuValues from 'utils/getCbuValues';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   infoText: {
@@ -70,10 +72,10 @@ const initialForm = {
     isValid: false,
   },
   bank: {
-    value: '',
-    isValid: false,
+    value: 'Banco Provincia de Buenos Aires',
+    isValid: true,
   },
-  branch: {
+  officeName: {
     value: '',
     isValid: false,
   },
@@ -97,6 +99,7 @@ const WorkInfo = () => {
 
   const renaperData = useSelector(selectWorkInfo);
   const fetchedRenaperData = useSelector(selectFetchedRenaperData);
+  const currentStepId = useSelector(selectCurrentStepId);
 
   const dispatch = useDispatch();
 
@@ -107,6 +110,16 @@ const WorkInfo = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchedRenaperData, renaperData]);
+
+  useEffect(() => {
+    if (workInfo.cbu.isValid && currentStepId === 'workInfo') {
+      const bankData = getCbuValues(workInfo.cbu.value);
+      if (!!bankData) {
+        const parsedBankData = parseReceivedForm(bankData);
+        setWorkInfo(prevState => ({ ...prevState, ...parsedBankData }));
+      }
+    }
+  }, [currentStepId, workInfo.accountNumber.isValid, workInfo.cbu.isValid, workInfo.cbu.value]);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);
@@ -214,13 +227,14 @@ const WorkInfo = () => {
             label="CBU"
             onChange={onChangeHanlder}
             value={workInfo.cbu.value}
-            length={[2, 25]}
+            length={[22, 22]}
             isValid={workInfo.cbu.isValid}
+            inputType="number"
             endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
       </GridContainer>
-      {workInfo.cbu.value !== '' && (
+      {workInfo.cbu.isValid && (
         <GridContainer style={{ marginBottom: '3%' }}>
           <GridItem xs={12} sm={4}>
             <TextInput
@@ -230,17 +244,18 @@ const WorkInfo = () => {
               value={workInfo.bank.value}
               length={[2, 25]}
               isValid={workInfo.bank.isValid}
+              disabled={true}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>
           <GridItem xs={12} sm={3}>
             <TextInput
-              id="branch"
+              id="officeName"
               label="Sucursal"
               onChange={onChangeHanlder}
-              value={workInfo.branch.value}
+              value={workInfo.officeName.value}
               length={[2, 25]}
-              isValid={workInfo.branch.isValid}
+              isValid={workInfo.officeName.isValid}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>

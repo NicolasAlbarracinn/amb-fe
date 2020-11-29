@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useInjectReducer } from 'utils/redux-injectors';
-import { reducer, sliceKey } from './slice';
+import { actions, reducer, sliceKey } from './slice';
 
-import { selectButtonType, selectCurrentStepId, selectStepsData } from './selectors';
+import { selectButtonType, selectValidatingStepId, selectStepsData, selectStepsIds } from './selectors';
 
 import Wizard from 'components/Wizard/Wizard';
 
@@ -25,11 +25,14 @@ const WizardContainer = memo(
     const [currentStep, setCurrentStep] = useState(0);
 
     const stepsData = useSelector(selectStepsData);
-    const currentStepId = useSelector(selectCurrentStepId);
+    const validatingStepId = useSelector(selectValidatingStepId);
     const buttonType = useSelector(selectButtonType);
+    const stepsIds = useSelector(selectStepsIds);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
-      if (stepsData[currentStepId]?.isValid) {
+      if (stepsData[validatingStepId]?.isValid) {
         if (buttonType === 'next') {
           setCurrentStep(prevState => prevState + 1);
         }
@@ -37,10 +40,14 @@ const WizardContainer = memo(
           setCurrentStep(prevState => prevState - 1);
         }
       }
-    }, [buttonType, currentStepId, steps, stepsData]);
+    }, [buttonType, steps, stepsData, validatingStepId]);
+
+    useEffect(() => {
+      dispatch(actions.setCurrentStepId(stepsIds[currentStep]));
+    }, [currentStep, dispatch, stepsIds]);
 
     const navigationStepChange = key => {
-      if (stepsData[currentStepId]?.isValid) {
+      if (stepsData[validatingStepId]?.isValid) {
         setCurrentStep(key);
         return true;
       }

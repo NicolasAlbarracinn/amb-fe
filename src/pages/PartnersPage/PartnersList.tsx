@@ -56,7 +56,7 @@ const headers = () => [
       return (
         <SelectInput
           id="status"
-          value="a"
+          value={props.cell.row.original.status}
           handleSelect={changeStatusHandler}
           items={[
             { value: 'a', label: 'Alta' },

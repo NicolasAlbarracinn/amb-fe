@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 // core components
 import GridContainer from 'components/Grid/GridContainer';
@@ -9,8 +10,15 @@ import Adress from './PartnersSteps/Adress';
 import WorkInfo from './PartnersSteps/WorkInfo';
 
 import WizardContainer from 'containers/WizardContainer/WizardContainer';
+import { actions as wizardActions } from 'containers/WizardContainer/slice';
 
 const PartnersEditor = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(wizardActions.setStepsIds(['personalData', 'adress', 'workInfo']));
+  });
+
   return (
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>
