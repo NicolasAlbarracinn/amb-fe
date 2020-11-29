@@ -74,7 +74,6 @@ const PartnersSlice = createSlice({
       state.loading = true;
     },
     getUpdatePartnerStatusSuccess(state, action: PayloadAction<IPartner[]>) {
-      console.log(action.payload);
       state.loading = false;
     },
     getUpdatePartnerStatusFailed(state) {
