@@ -7,6 +7,7 @@ export const initialState: IBenefitsState = {
   loading: true,
   benefitData: {},
   isBenefitDataFetched: false,
+  benefitId: null,
 };
 
 const BenefitSlice = createSlice({
@@ -22,6 +23,16 @@ const BenefitSlice = createSlice({
       state.isBenefitDataFetched = true;
     },
     getUpdateBenefitFailed(state) {
+      state.loading = false;
+    },
+    setBenefitRequest(state, action: PayloadAction<any>) {
+      state.loading = true;
+    },
+    setBenefitData(state, action: PayloadAction<any>) {
+      state.loading = false;
+      state.benefitId = action.payload;
+    },
+    setBenefitFailed(state) {
       state.loading = false;
     },
   },

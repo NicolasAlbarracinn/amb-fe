@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { actions as benefitAction } from 'containers/Benefits/slice';
 
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
@@ -16,24 +19,10 @@ const BenefitDetail = () => {
   const classes = useStyles();
   const { inputs: benefit, onChangeHanlder } = useInputChange(defaultBenefit);
   const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
-
   //TODO: agregar logica del formulario
   return (
     <>
       <GridContainer>
-        <GridItem xs={12} sm={3}>
-          <TextInput
-            id="benefitNumber"
-            label="N° de prestación"
-            inputType="number"
-            value={benefit.benefitNumber.value}
-            onChange={onChangeHanlder}
-            length={[10, 11]}
-            isValid={benefit.benefitNumber.isValid}
-            loadError={loadError}
-            disabled={true}
-          />
-        </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
             id="lotNumber"

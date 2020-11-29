@@ -1,10 +1,6 @@
 import moment from 'moment';
 
 export const defaultBenefit = {
-  benefitNumber: {
-    value: '',
-    isValid: false,
-  },
   lotNumber: {
     value: '',
     isValid: false,
@@ -19,7 +15,7 @@ export const defaultBenefit = {
   },
   applicationDate: {
     value: moment(new Date()).format('MM/DD/YYYY'),
-    isValid: false,
+    isValid: true,
   },
   portfolio: {
     value: '',
@@ -100,7 +96,7 @@ export const defaultDistribution = {
     value: '',
     isValid: false,
   },
-  bank: {
+  bankName: {
     value: '',
     isValid: false,
   },
@@ -108,21 +104,21 @@ export const defaultDistribution = {
     value: '',
     isValid: false,
   },
-  branch: {
+  bankBranchName: {
     value: '',
     isValid: false,
   },
-  accountNumber: {
+  bankAccountNumber: {
     value: '',
     isValid: false,
   },
   programCode: {
     value: '',
-    isValid: false,
+    isValid: true,
   },
   sequenceNumber: {
     value: '',
-    isValid: false,
+    isValid: true,
   },
 };
 

@@ -50,9 +50,7 @@ const headers = () => [
     Header: 'Estado',
     accessor: 'status',
     Cell: props => {
-      const changeStatusHandler = ({ value }) => {
-        console.log(value);
-      };
+      const changeStatusHandler = ({ value }) => {};
       return (
         <SelectInput
           id="status"

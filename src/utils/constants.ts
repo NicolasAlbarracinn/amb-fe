@@ -88,3 +88,13 @@ export const benefitTypeList = [
   { value: 'p', label: 'Prestación' },
   { value: 'cm', label: 'Cuota Membresia' },
 ];
+
+export const statusList = [
+  { value: 'a', label: 'Alta' },
+  { value: 'b', label: 'Baja' },
+  { value: 'f', label: 'Fallecido' },
+  { value: 'q', label: 'Quiebra' },
+  { value: 'r', label: 'Renuncia' },
+  { value: 's', label: 'Suspendido' },
+  { value: 't', label: 'Transitorio' },
+];

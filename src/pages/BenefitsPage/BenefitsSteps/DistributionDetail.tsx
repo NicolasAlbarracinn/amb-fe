@@ -132,11 +132,11 @@ const DistributionDetail = () => {
       <GridContainer>
         <GridItem xs={12} sm={3}>
           <TextInput
-            id="bank"
+            id="bankName"
             label="Banco"
-            value={distribution.bank.value}
+            value={distribution.bankName.value}
             onChange={onChangeHanlder}
-            isValid={distribution.bank.isValid}
+            isValid={distribution.bankName.isValid}
             loadError={loadError}
             disabled={true}
           />
@@ -154,22 +154,22 @@ const DistributionDetail = () => {
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            id="branch"
+            id="bankBranchName"
             label="Sucursal bancaria"
-            value={distribution.branch.value}
+            value={distribution.bankBranchName.value}
             onChange={onChangeHanlder}
-            isValid={distribution.branch.isValid}
+            isValid={distribution.bankBranchName.isValid}
             loadError={loadError}
             disabled={true}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
-            id="accountNumber"
+            id="bankAccountNumber"
             label="N° de cuenta"
-            value={distribution.accountNumber.value}
+            value={distribution.bankAccountNumber.value}
             onChange={onChangeHanlder}
-            isValid={distribution.accountNumber.isValid}
+            isValid={true}
             loadError={loadError}
             disabled={true}
           />
@@ -185,7 +185,7 @@ const DistributionDetail = () => {
               items={[{ value: 'no', label: 'faltan opciones' }]}
               handleSelect={onChangeHanlder}
               loadError={loadError}
-              isValid={distribution.programCode.isValid}
+              isValid={true}
             />
           </GridItem>
           <GridItem xs={12} sm={4}>
@@ -194,7 +194,7 @@ const DistributionDetail = () => {
               label="N° de secuencia"
               value={distribution.sequenceNumber.value}
               onChange={onChangeHanlder}
-              isValid={distribution.sequenceNumber.isValid}
+              isValid={true}
               loadError={loadError}
             />
           </GridItem>

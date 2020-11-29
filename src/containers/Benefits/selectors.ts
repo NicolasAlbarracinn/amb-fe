@@ -10,3 +10,5 @@ export const selectIsDataFetched = createSelector(
   [selectBenefits],
   BenefitsState => BenefitsState.isBenefitDataFetched,
 );
+
+export const selectFetchedBenefitId = createSelector([selectBenefits], BenefitsState => BenefitsState.benefitId);

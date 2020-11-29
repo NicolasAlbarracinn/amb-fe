@@ -13,7 +13,7 @@ import DateInput from 'components/Form/DateInput';
 import Button from 'components/CustomButtons/Button';
 
 import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
-import { documentTypeList, civilStateList } from 'utils/constants';
+import { documentTypeList, civilStateList, statusList } from 'utils/constants';
 import { defaultPartner } from './defaultStates';
 
 import { useStyles } from 'components/Wizard/stepsStyles';
@@ -28,7 +28,7 @@ const PartnerDetail = () => {
   const { inputs: partner, onChangeHanlder, updateInputs } = useInputChange(defaultPartner);
   const { loadError, handleNext } = useWizardStep(partner, 'partnerDetail');
 
-  const { personalData, createdAt } = useSelector(selectBenefitsData);
+  const { personalData, createdAt, status } = useSelector(selectBenefitsData);
   const isDataFetched = useSelector(selectIsDataFetched);
   const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ const PartnerDetail = () => {
         admissionDate: { value: createdAt, isValid: true },
         //TODO: add this parameter on db partner schema
         status: {
-          value: 'deudor',
+          value: status,
           isValid: true,
         },
       });
@@ -182,16 +182,16 @@ const PartnerDetail = () => {
           />
         </GridItem>
         <GridItem xs={12} sm={4}>
-          <TextInput
+          <SelectInput
             id="status"
             label="Estado"
+            mainSelectLabel="Selecione el estado"
             value={partner.status.value}
-            onChange={onChangeHanlder}
-            length={[10, 11]}
-            isValid={partner.status.isValid}
+            handleSelect={onChangeHanlder}
+            items={statusList}
             loadError={loadError}
+            isValid={partner.status.isValid}
             disabled={true}
-            endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
           />
         </GridItem>
       </GridContainer>
