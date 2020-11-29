@@ -105,11 +105,6 @@ const headers = () => [
   },
 ];
 
-//TODO: Add redux slider for fetch data
-//Add funtionality for sort by function
-//Add pagination
-//Add search bar
-
 const PartnersList = () => {
   const dispatch = useDispatch();
   const partnersList = useSelector(selectPartnersList);
@@ -148,7 +143,6 @@ const PartnersList = () => {
             <h4 style={{ color: '#000' }}>Lista de Socios</h4>
           </CardHeader>
           <CardBody>
-            {/* TODO: Implement the paggination */}
             <Search />
             <Pagination totalItems={count} numberOfRowsData={[5, 10, 20, 25, 50]} />
             <Table columns={columns} data={data} handlerSortBy={handlerSortBy} />
