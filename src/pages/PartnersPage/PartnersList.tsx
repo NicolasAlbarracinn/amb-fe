@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectPartnersList, selectPartnersListCount } from 'containers/Partners/selectors';
-import { actions as PartnersActions } from 'containers/Partners/slice';
+import { actions as partnersActions } from 'containers/Partners/slice';
 import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import Assignment from '@material-ui/icons/Assignment';
@@ -50,8 +50,11 @@ const headers = () => [
     Header: 'Estado',
     accessor: 'status',
     Cell: props => {
+      const dispatch = useDispatch();
       const changeStatusHandler = ({ value }) => {
-        console.log(value);
+        dispatch(
+          partnersActions.getUpdatePartnerStatusRequest({ value, partnerId: props.cell.row.original.partnerId }),
+        );
       };
       return (
         <SelectInput
@@ -86,7 +89,7 @@ const headers = () => [
               simple
               onClick={() => {
                 dispatch(
-                  PartnersActions.setPartnerData({
+                  partnersActions.setPartnerData({
                     ...props.cell.row.original,
                     partnerId: props.cell.row.original.partnerId,
                   }),
@@ -111,14 +114,14 @@ const PartnersList = () => {
   const count = useSelector(selectPartnersListCount);
   const limit = useSelector(selectLimit);
   const offset = useSelector(selectOffset);
-
+  console.log(partnersList);
   const columns = React.useMemo(headers, []);
   const data = React.useMemo(() => partnersList.map(item => ({ ...item })), [partnersList]);
 
   const [sortBy, setSortBy] = useState<{ field: string; value: string }>();
 
   useEffect(() => {
-    dispatch(PartnersActions.getPartnersListRequest({ sortBy, limit, offset }));
+    dispatch(partnersActions.getPartnersListRequest({ sortBy, limit, offset }));
   }, [sortBy, limit, offset, dispatch]);
 
   const handlerSortBy = sortBy => {

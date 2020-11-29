@@ -3,13 +3,14 @@ import bankData from './jsonData/banksData.json';
 
 const getCbuValues = cbu => {
   const cbuArray = Array.from(String(cbu), Number);
-  const code = cbuArray.slice(10, 14);
+  const code = cbuArray.slice(10, 14).join('');
   const accountNumber = cbuArray.slice(14, 21).join('');
-  const bankInfo = bankData.find(bank => bank.code === code.join(''));
+  const bankInfo = bankData.find(bank => bank.code === code);
   if (!!bankInfo) {
     return {
-      accountNumber,
-      officeName: bankInfo.officeName,
+      bankAccountNumber: accountNumber,
+      bankBranchName: bankInfo.officeName,
+      bankBranchCode: code,
     };
   }
   toast.warning('No tenemos los datos de la sucursal indicada', {

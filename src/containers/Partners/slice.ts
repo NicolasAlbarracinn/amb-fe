@@ -70,6 +70,16 @@ const PartnersSlice = createSlice({
     getUpdatePartnerFailed(state) {
       state.loading = false;
     },
+    getUpdatePartnerStatusRequest(state, action: PayloadAction<any>) {
+      state.loading = true;
+    },
+    getUpdatePartnerStatusSuccess(state, action: PayloadAction<IPartner[]>) {
+      console.log(action.payload);
+      state.loading = false;
+    },
+    getUpdatePartnerStatusFailed(state) {
+      state.loading = false;
+    },
     setPartnerData(state, action: PayloadAction<IPartner[]>) {
       state.renaperData = action.payload;
       state.fetchedRenaperData = true;

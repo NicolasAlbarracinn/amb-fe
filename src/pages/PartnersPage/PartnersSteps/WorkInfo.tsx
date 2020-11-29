@@ -71,19 +71,19 @@ const initialForm = {
     value: '',
     isValid: false,
   },
-  bank: {
+  bankName: {
     value: 'Banco Provincia de Buenos Aires',
     isValid: true,
   },
-  officeName: {
+  bankBranchName: {
     value: '',
     isValid: false,
   },
-  banking: {
+  bankBranchCode: {
     value: '',
     isValid: false,
   },
-  accountNumber: {
+  bankAccountNumber: {
     value: '',
     isValid: false,
   },
@@ -119,7 +119,7 @@ const WorkInfo = () => {
         setWorkInfo(prevState => ({ ...prevState, ...parsedBankData }));
       }
     }
-  }, [currentStepId, workInfo.accountNumber.isValid, workInfo.cbu.isValid, workInfo.cbu.value]);
+  }, [currentStepId, workInfo.bankAccountNumber.isValid, workInfo.cbu.isValid, workInfo.cbu.value]);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(workInfo).some(key => key[1].isValid === false);
@@ -238,46 +238,46 @@ const WorkInfo = () => {
         <GridContainer style={{ marginBottom: '3%' }}>
           <GridItem xs={12} sm={4}>
             <TextInput
-              id="bank"
+              id="bankName"
               label="Banco"
               onChange={onChangeHanlder}
-              value={workInfo.bank.value}
+              value={workInfo.bankName.value}
               length={[2, 25]}
-              isValid={workInfo.bank.isValid}
+              isValid={workInfo.bankName.isValid}
               disabled={true}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>
           <GridItem xs={12} sm={3}>
             <TextInput
-              id="officeName"
-              label="Sucursal"
+              id="bankBranchName"
+              label="Nombre Sucursal"
               onChange={onChangeHanlder}
-              value={workInfo.officeName.value}
+              value={workInfo.bankBranchName.value}
               length={[2, 25]}
-              isValid={workInfo.officeName.isValid}
+              isValid={workInfo.bankBranchName.isValid}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>
           <GridItem xs={12} sm={3}>
             <TextInput
-              id="banking"
-              label="Bancaria"
+              id="bankBranchCode"
+              label="Codigo Sucursal"
               onChange={onChangeHanlder}
-              value={workInfo.banking.value}
+              value={workInfo.bankBranchCode.value}
               length={[2, 25]}
-              isValid={workInfo.banking.isValid}
+              isValid={workInfo.bankBranchCode.isValid}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>
           <GridItem xs={12} sm={2}>
             <TextInput
-              id="accountNumber"
+              id="bankAccountNumber"
               label="N de Cuenta"
               onChange={onChangeHanlder}
-              value={workInfo.accountNumber.value}
+              value={workInfo.bankAccountNumber.value}
               length={[2, 25]}
-              isValid={workInfo.accountNumber.isValid}
+              isValid={workInfo.bankAccountNumber.isValid}
               endAdornmentIcon={<Face className={classes.inputAdornmentIcon} />}
             />
           </GridItem>
