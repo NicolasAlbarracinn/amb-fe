@@ -27,7 +27,7 @@ const Table = ({ columns, data, handlerSortBy }: ITable) => {
 
   const sort = useCallback(() => {
     handlerSortBy(sortBy);
-  }, [sortBy]);
+  }, [handlerSortBy, sortBy]);
 
   useEffect(() => {
     sort();

@@ -8,7 +8,6 @@ export const parseSubmitForm = form => {
 
 export const parseReceivedForm = form => {
   let parsedForm = {};
-  console.log(form);
   Object.entries(form).forEach((key: any) => {
     const value = key[1];
     parsedForm[key[0]] = {
