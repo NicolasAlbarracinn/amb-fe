@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { actions as benefitAction } from 'containers/Benefits/slice';
@@ -17,9 +17,25 @@ import { useStyles } from 'components/Wizard/stepsStyles';
 
 const BenefitDetail = () => {
   const classes = useStyles();
-  const { inputs: benefit, onChangeHanlder } = useInputChange(defaultBenefit);
+  const { inputs: benefit, onChangeHanlder, updateInputs } = useInputChange(defaultBenefit);
   const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
   //TODO: agregar logica del formulario
+
+  useEffect(() => {
+    if (benefit.plan.isValid) {
+      updateInputs({
+        ...benefit,
+        duesAmount: { value: '24 cuotas de 5292', isValid: true },
+        duesQuantity: { value: 'cuota', isValid: true },
+        amountGranted: { value: '56700', isValid: true },
+        benefitStatus: { value: 's', isValid: true },
+        signatureAmount: { value: '56700', isValid: true },
+        statusDate: { value: '11/30/2020', isValid: true },
+      });
+    }
+  }, [benefit.plan]);
+
+  console.log(benefit);
   return (
     <>
       <GridContainer>
@@ -66,6 +82,7 @@ const BenefitDetail = () => {
             isValid={benefit.applicationDate.isValid}
             onChange={onChangeHanlder}
             loadError={loadError}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
@@ -82,14 +99,14 @@ const BenefitDetail = () => {
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
-          <TextInput
+          <SelectInput
             id="plan"
             label="Plan"
-            inputType="number"
+            mainSelectLabel="Selecione el plan"
             value={benefit.plan.value}
-            onChange={onChangeHanlder}
+            handleSelect={onChangeHanlder}
+            items={[{ value: 'NMANOV2020', label: 'NMA - NOV/2020' }]}
             isValid={benefit.plan.isValid}
-            loadError={loadError}
           />
         </GridItem>
 
@@ -98,10 +115,10 @@ const BenefitDetail = () => {
             id="signatureAmount"
             label="Monto Firma"
             inputType="signatureAmount"
-            value={benefit.signatureAmount.value}
+            value={benefit.plan.value === 'NMANOV2020' ? '56700' : benefit.signatureAmount.value}
             onChange={onChangeHanlder}
             length={[10, 11]}
-            isValid={benefit.signatureAmount.isValid}
+            isValid={benefit.plan.value === 'NMANOV2020' ? true : benefit.signatureAmount.isValid}
             loadError={loadError}
           />
         </GridItem>
@@ -111,10 +128,10 @@ const BenefitDetail = () => {
             id="duesQuantity"
             label="Cantidad de cuotas"
             mainSelectLabel="Selecione Cantidad de cuotas"
-            value={benefit.duesQuantity.value}
+            value={benefit.plan.value === 'NMANOV2020' ? 'cuota' : benefit.duesQuantity.value}
             handleSelect={onChangeHanlder}
-            items={[{ value: 'cuota', label: '3 cuotas' }]}
-            isValid={benefit.duesQuantity.isValid}
+            items={[{ value: 'cuota', label: '24 cuotas' }]}
+            isValid={benefit.plan.value === 'NMANOV2020' ? true : benefit.duesQuantity.isValid}
           />
         </GridItem>
       </GridContainer>
@@ -122,22 +139,21 @@ const BenefitDetail = () => {
         <GridItem xs={12} sm={3}>
           <TextInput
             id="duesAmount"
-            label="Monto Otorgado"
-            inputType="number"
-            value={benefit.duesAmount.value}
+            label="Monto de la cuota"
+            value={benefit.plan.value === 'NMANOV2020' ? '24 cuotas de 5292' : benefit.duesAmount.value}
             onChange={onChangeHanlder}
-            isValid={benefit.duesAmount.isValid}
+            isValid={benefit.plan.value === 'NMANOV2020' ? true : benefit.duesAmount.isValid}
             loadError={loadError}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <TextInput
             id="amountGranted"
-            label="Monto de la cuota"
+            label="Monto Otorgado"
             inputType="number"
-            value={benefit.amountGranted.value}
+            value={benefit.plan.value === 'NMANOV2020' ? '56700' : benefit.amountGranted.value}
             onChange={onChangeHanlder}
-            isValid={benefit.amountGranted.isValid}
+            isValid={benefit.plan.value === 'NMANOV2020' ? true : benefit.amountGranted.isValid}
             loadError={loadError}
           />
         </GridItem>
@@ -149,7 +165,7 @@ const BenefitDetail = () => {
             label="Observaciones"
             value={benefit.observations.value}
             onChange={onChangeHanlder}
-            isValid={benefit.observations.isValid}
+            isValid={true}
             loadError={loadError}
           />
         </GridItem>
@@ -160,10 +176,11 @@ const BenefitDetail = () => {
             id="benefitStatus"
             label="Estado de la prestación"
             mainSelectLabel="estado de prestacion"
-            value={benefit.benefitStatus.value}
+            value={'s' ?? benefit.benefitStatus.value}
             handleSelect={onChangeHanlder}
             items={benefitStatusList}
-            isValid={benefit.benefitStatus.isValid}
+            isValid={true}
+            disabled={true}
           />
         </GridItem>
       </GridContainer>
@@ -205,7 +222,7 @@ const BenefitDetail = () => {
             id="statusDate"
             label="Fecha Estado"
             value={benefit.statusDate.value}
-            isValid={benefit.statusDate.isValid}
+            isValid={true}
             onChange={onChangeHanlder}
             loadError={loadError}
           />

@@ -43,7 +43,7 @@ export const defaultBenefit = {
   },
   observations: {
     value: '',
-    isValid: false,
+    isValid: true,
   },
   benefitStatus: {
     value: '',
@@ -62,7 +62,7 @@ export const defaultBenefit = {
     isValid: false,
   },
   statusDate: {
-    value: '',
+    value: moment(new Date()).format('MM/DD/YYYY'),
     isValid: false,
   },
 };
@@ -73,11 +73,11 @@ export const defaultDistribution = {
     isValid: false,
   },
   distributionCode: {
-    value: '',
+    value: '0001',
     isValid: false,
   },
   dependence: {
-    value: '',
+    value: 'no específcica dependencia',
     isValid: false,
   },
   fileNumber: {
@@ -88,13 +88,13 @@ export const defaultDistribution = {
     value: '',
     isValid: false,
   },
-  paymentMethod: {
+  paymentType: {
     value: '',
-    isValid: false,
+    isValid: true,
   },
-  paymentMethodRecovery: {
+  recoveryPaymentType: {
     value: '',
-    isValid: false,
+    isValid: true,
   },
   bankName: {
     value: '',

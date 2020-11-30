@@ -20,8 +20,8 @@ const BenefitsForm = () => {
             { stepName: 'Datos de reparticion', stepComponent: DistributionDetail, stepId: 'distributionDetail' },
             { stepName: 'Datos de la prestación', stepComponent: BenefitDetail, stepId: 'benefitDetail' },
           ]}
-          title="Agregar Socio"
-          subtitle="Complete los campos requeridos para crear un nuevo socio"
+          title="Agregar prestacion"
+          subtitle="Complete los campos requeridos para crear un nuevo prestacion"
           color="rose"
           previousButtonText="Anterior"
           previousButtonClasses={{ color: 'rose' }}
