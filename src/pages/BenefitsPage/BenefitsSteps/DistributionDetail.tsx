@@ -24,7 +24,7 @@ const DistributionDetail = () => {
   const { inputs: distribution, onChangeHanlder, updateInputs } = useInputChange(defaultDistribution);
   const { loadError, handleNext, handlePrevious } = useWizardStep(distribution, 'distributionDetail');
 
-  const { workInfo } = useSelector(selectBenefitsData);
+  const { workInfo, personalData } = useSelector(selectBenefitsData);
   const isDataFetched = useSelector(selectIsDataFetched);
 
   useEffect(() => {
@@ -35,8 +35,8 @@ const DistributionDetail = () => {
         //This value is wrong on the db
         repartition: { value: 'bica', isValid: true },
         //Thit two filed are missing in the db
-        dependence: { value: '12222', isValid: true },
-        distributionCode: { value: 'bica', isValid: true },
+        dependence: { value: 'no específcica dependencia', isValid: true },
+        distributionCode: { value: '0001', isValid: true },
       });
     }
   }, [workInfo]);
@@ -72,7 +72,6 @@ const DistributionDetail = () => {
           <TextInput
             id="dependence"
             label="Dependencia"
-            inputType="number"
             value={distribution.dependence.value}
             onChange={onChangeHanlder}
             isValid={distribution.dependence.isValid}
@@ -110,22 +109,33 @@ const DistributionDetail = () => {
           <SelectInput
             id="paymentMethod"
             label="Forma de cobro"
-            value={distribution.paymentMethod.value}
-            items={recuperoCSList}
+            value={personalData?.paymentType || distribution.paymentType.value}
+            items={[
+              { value: 'db', label: 'Descuento bancario' },
+              { value: 'dbic', label: 'Descuento BICA' },
+              { value: 'dr', label: 'Descuento RGM' },
+              { value: 'pv', label: 'Pago Voluntario' },
+            ]}
             handleSelect={onChangeHanlder}
             loadError={loadError}
-            isValid={distribution.paymentMethod.isValid}
+            isValid={distribution.paymentType.isValid}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
             id="paymentMethodRecovery"
             label="Forma de Cobro Recupero"
-            value={distribution.paymentMethodRecovery.value}
-            items={recuperoCSList}
+            value={personalData?.recoveryPaymentType || distribution.recoveryPaymentType.value}
+            items={[
+              { value: 'db', label: 'Descuento bancario' },
+              { value: 'dbic', label: 'Descuento BICA' },
+              { value: 'dh', label: 'Descuento Haberes' },
+              { value: 'dr', label: 'Descuento RGM' },
+              { value: 'pv', label: 'Pago Voluntario' },
+            ]}
             handleSelect={onChangeHanlder}
             loadError={loadError}
-            isValid={distribution.paymentMethodRecovery.isValid}
+            isValid={distribution.recoveryPaymentType.isValid}
           />
         </GridItem>
       </GridContainer>
