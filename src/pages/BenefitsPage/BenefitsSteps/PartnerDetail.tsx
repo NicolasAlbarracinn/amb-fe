@@ -23,6 +23,8 @@ import { actions as benefitActions } from 'containers/Benefits/slice';
 
 import { parseResponseData } from './parseResponseData';
 
+import InputText from 'components/Form/InputText';
+
 const PartnerDetail = () => {
   const classes = useStyles();
   const { inputs: partner, onChangeHanlder, updateInputs } = useInputChange(defaultPartner);
@@ -58,6 +60,11 @@ const PartnerDetail = () => {
 
   return (
     <>
+      <GridContainer>
+        <GridItem sm={12}>
+          <InputText id="a" labelText="test" />
+        </GridItem>
+      </GridContainer>
       <GridContainer>
         <GridItem xs={12} sm={4}>
           <TextInput
@@ -212,7 +219,7 @@ const PartnerDetail = () => {
       <div className={classes.footer}>
         <div className={classes.right}>
           {true ? (
-            <Button color="rose" onClick={handleNext}>
+            <Button type="submit" color="rose" onClick={handleNext}>
               Proximo
             </Button>
           ) : null}
