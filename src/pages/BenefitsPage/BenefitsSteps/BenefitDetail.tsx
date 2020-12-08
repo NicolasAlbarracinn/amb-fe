@@ -35,7 +35,6 @@ const BenefitDetail = () => {
     }
   }, [benefit.plan]);
 
-  console.log(benefit);
   return (
     <>
       <GridContainer>

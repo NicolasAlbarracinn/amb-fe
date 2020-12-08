@@ -10,6 +10,8 @@ import { verifyLength } from './validators';
 
 import { useInputStyles } from './useInputStyles';
 
+import { DefaultState } from 'containers/WizardContainer/hooks';
+
 type InputEventFunction = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 
 interface IInputProps {
@@ -20,6 +22,9 @@ interface IInputProps {
   formControlProps?: FormControlProps;
   inputProps?: InputBaseComponentProps;
   labelProps?: InputLabelProps;
+  updateValueOnBlur: (inputValue: { [key: string]: DefaultState }) => void;
+  formHasBeenSubmited?: boolean;
+  isValidInput: boolean;
 }
 
 const InputText = ({
@@ -30,23 +35,29 @@ const InputText = ({
   formControlProps,
   inputProps,
   labelProps,
+  updateValueOnBlur,
+  formHasBeenSubmited,
+  isValidInput,
 }: IInputProps) => {
-  const [inputValue, setInputValue] = useState('');
   const [invalidInput, setInvalidInput] = useState(false);
   const [hasBeenValidAtLeastOnce, setHasBeenValidAtLeastOnce] = useState(false);
 
   const { marginTop, formControlClasses, helpTextClasses, inputClasses, classes } = useInputStyles(invalidInput);
 
+  useEffect(() => {
+    if (formHasBeenSubmited) {
+      setHasBeenValidAtLeastOnce(true);
+      setInvalidInput(!isValidInput);
+    }
+  }, [formHasBeenSubmited, isValidInput]);
+
   const handleOnChange: InputEventFunction = ({ currentTarget: { value } }) => {
-    setInputValue(value);
     const isValid = verifyLength(value, length);
+
+    setInvalidInput(!isValid);
 
     if (isValid) {
       setHasBeenValidAtLeastOnce(true);
-      setInvalidInput(false);
-    }
-    if (!isValid) {
-      setInvalidInput(true);
     }
   };
 
@@ -54,8 +65,12 @@ const InputText = ({
     setHasBeenValidAtLeastOnce(false);
   };
 
-  const handleOnBlur: InputEventFunction = ({ currentTarget: { value } }) => {
-    setInvalidInput(!verifyLength(value, length));
+  const handleOnBlur: InputEventFunction = ({ currentTarget: { value, id } }) => {
+    const isValid = verifyLength(value, length);
+
+    setInvalidInput(!isValid);
+    setHasBeenValidAtLeastOnce(true);
+    updateValueOnBlur({ [id]: { value, isValid } });
   };
 
   //TODO: move this to useInputStyles hook

@@ -33,7 +33,7 @@ const PartnerDetail = () => {
   const { personalData, createdAt, status } = useSelector(selectBenefitsData);
   const isDataFetched = useSelector(selectIsDataFetched);
   const dispatch = useDispatch();
-  console.log(personalData);
+
   useEffect(() => {
     const { isValid, value } = partner.partnerId;
     //Maybe for the isDataFetched condition we could use something like isEmpty function from lodash an verify if benefitData is empty or not
@@ -60,11 +60,6 @@ const PartnerDetail = () => {
 
   return (
     <>
-      <GridContainer>
-        <GridItem sm={12}>
-          <InputText id="a" labelText="test" />
-        </GridItem>
-      </GridContainer>
       <GridContainer>
         <GridItem xs={12} sm={4}>
           <TextInput

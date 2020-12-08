@@ -32,7 +32,7 @@ export const useWizardStep = (inputs: object, stepId: string) => {
   return { loadError, handleNext, handlePrevious, handleSubmit };
 };
 
-interface DefaultState {
+export interface DefaultState {
   value: string;
   isValid: boolean;
 }
