@@ -23,8 +23,6 @@ import { actions as benefitActions } from 'containers/Benefits/slice';
 
 import { parseResponseData } from './parseResponseData';
 
-import InputText from 'components/Form/InputText';
-
 const PartnerDetail = () => {
   const classes = useStyles();
   const { inputs: partner, onChangeHanlder, updateInputs } = useInputChange(defaultPartner);

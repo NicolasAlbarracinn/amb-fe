@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Face from '@material-ui/icons/Face';
-import Email from '@material-ui/icons/Email';
-
 import GridContainer from 'components/Grid/GridContainer';
-import GridItem from 'components/Grid/GridItem';
-import TextInput from 'components/Form/TextInput';
-import SelectInput from 'components/Form/SelectInput';
-import EmailInput from 'components/Form/EmailInput';
-import DateInput from 'components/Form/DateInput';
 import Button from 'components/CustomButtons/Button';
 
-import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
+import { DefaultState, useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
 import { documentTypeList, civilStateList, statusList } from 'utils/constants';
 import { defaultPartner } from './defaultStates';
 
@@ -23,15 +15,115 @@ import { actions as benefitActions } from 'containers/Benefits/slice';
 
 import { parseResponseData } from './parseResponseData';
 
-import InputText from 'components/Form/InputText';
-
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 
 import { parseSubmitForm } from 'utils/parseForm';
 
+import { UpdateInput } from 'components/Form/types';
+
+import FormInputs, { InputOptions } from 'components/Form/Inputs';
+
+const inputsConfig = (
+  inputValue: {
+    [key: string]: DefaultState;
+  },
+  updateValueOnBlur: UpdateInput,
+  formHasBeenSubmited,
+) => {
+  return [
+    {
+      type: InputOptions.TEXT,
+      gridSizeProps: {
+        xs: 12,
+        sm: 3,
+      },
+      props: {
+        id: 'testValue',
+        label: 'test input',
+        updateValueOnBlur,
+        formHasBeenSubmited,
+        isValidInput: inputValue['testValue'].isValid,
+      },
+    },
+    {
+      type: InputOptions.TEXT,
+      gridSizeProps: {
+        xs: 12,
+        sm: 3,
+      },
+      props: {
+        id: 'testValue3',
+        label: 'test input',
+        updateValueOnBlur,
+        formHasBeenSubmited,
+        isValidInput: inputValue['testValue'].isValid,
+      },
+    },
+    {
+      type: InputOptions.TEXT,
+      gridSizeProps: {
+        xs: 12,
+        sm: 3,
+      },
+      props: {
+        id: 'testValue2',
+        label: 'test input',
+        updateValueOnBlur,
+        formHasBeenSubmited,
+        isValidInput: inputValue['testValue'].isValid,
+      },
+    },
+    {
+      type: InputOptions.TEXT,
+      gridSizeProps: {
+        xs: 12,
+        sm: 3,
+      },
+      props: {
+        id: 'testValue4',
+        label: 'test input',
+        updateValueOnBlur,
+        formHasBeenSubmited,
+        isValidInput: inputValue['testValue'].isValid,
+      },
+    },
+    {
+      type: InputOptions.TEXT,
+      gridSizeProps: {
+        xs: 12,
+        sm: 3,
+      },
+      props: {
+        id: 'testValue5',
+        label: 'test input',
+        updateValueOnBlur,
+        formHasBeenSubmited,
+        isValidInput: inputValue['testValue'].isValid,
+      },
+    },
+    {
+      type: InputOptions.EMAIL,
+      gridSizeProps: {
+        xs: 12,
+        sm: 3,
+      },
+      props: {
+        id: 'email',
+        label: 'test email',
+        updateValueOnBlur,
+        formHasBeenSubmited,
+        isValidInput: inputValue['email'].isValid,
+      },
+    },
+  ];
+};
+
 const PartnerDetail = () => {
   const classes = useStyles();
-  const { inputs, onChangeHanlder, updateInputs } = useInputChange({ testValue: { isValid: false, value: '' } });
+  const { inputs, onChangeHanlder, updateInputs } = useInputChange({
+    testValue: { isValid: false, value: '' },
+    email: { isValid: false, value: '' },
+  });
 
   //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();
@@ -47,19 +139,11 @@ const PartnerDetail = () => {
     }
   };
 
+  const config = inputsConfig(inputs, updateInputs, formHasBeenSubmited);
+
   return (
     <>
-      <GridContainer>
-        <GridItem sm={12}>
-          <InputText
-            id="testValue"
-            labelText="test"
-            updateValueOnBlur={updateInputs}
-            formHasBeenSubmited={formHasBeenSubmited}
-            isValidInput={inputs.testValue.isValid}
-          />
-        </GridItem>
-      </GridContainer>
+      <GridContainer>{FormInputs(config)}</GridContainer>
       <div className={classes.footer}>
         <div className={classes.right}>
           <Button type="submit" color="rose" onClick={handleNext}>
