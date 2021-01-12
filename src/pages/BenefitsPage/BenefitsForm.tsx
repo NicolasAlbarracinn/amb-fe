@@ -7,7 +7,6 @@ import GridItem from 'components/Grid/GridItem';
 import PartnerDetail from './BenefitsSteps/PartnerDetail';
 import DistributionDetail from './BenefitsSteps/DistributionDetail';
 import BenefitDetail from './BenefitsSteps/BenefitDetail';
-import TestStep from './BenefitsSteps/TestStep';
 
 import WizardContainer from 'containers/WizardContainer/WizardContainer';
 
@@ -17,7 +16,6 @@ const BenefitsForm = () => {
       <GridItem xs={12} sm={8}>
         <WizardContainer
           steps={[
-            { stepName: 'Test', stepComponent: TestStep, stepId: 'test' },
             { stepName: 'Datos del socio', stepComponent: PartnerDetail, stepId: 'partnerDetail' },
             { stepName: 'Datos de reparticion', stepComponent: DistributionDetail, stepId: 'distributionDetail' },
             { stepName: 'Datos de la prestación', stepComponent: BenefitDetail, stepId: 'benefitDetail' },
