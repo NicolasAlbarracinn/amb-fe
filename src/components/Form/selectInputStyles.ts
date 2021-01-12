@@ -1,5 +1,13 @@
 import { makeStyles, Theme } from '@material-ui/core';
-import { grayColor, primaryBoxShadow, primaryColor, whiteColor } from 'utils/styles';
+import {
+  dangerColor,
+  defaultFont,
+  grayColor,
+  primaryColor,
+  successColor,
+  whiteColor,
+  primaryBoxShadow,
+} from 'utils/styles';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   select: {
@@ -22,22 +30,37 @@ export const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   selectFormControl: {
-    margin: '7px 0 17px 0 !important',
+    margin: '7px 0 17px 0',
     '& > div': {
+      '&:hover:not($disabled):before,&:before': {
+        borderColor: grayColor[4] + '!important',
+        borderWidth: '1px !important',
+      },
       '&:before': {
-        borderBottomWidth: '1px !important',
-        borderBottomColor: grayColor[4] + '!important',
+        borderBottomWidth: '1px',
+        borderBottomColor: grayColor[4],
       },
       '&:after': {
-        borderBottomColor: primaryColor[0] + '!important',
+        borderBottomColor: primaryColor[0],
       },
     },
   },
   selectLabel: {
-    fontSize: '12px',
-    textTransform: 'uppercase',
-    color: grayColor[2] + ' !important',
-    top: '8px',
+    ...defaultFont,
+    color: grayColor[3] + ' !important',
+    fontWeight: 400,
+    fontSize: '14px',
+    lineHeight: '1.42857',
+    letterSpacing: 'unset',
+    '& + $underline': {
+      marginTop: '0px',
+    },
+  },
+  selectLabelError: {
+    color: dangerColor[0] + ' !important',
+  },
+  selectLabelSuccess: {
+    color: successColor[0] + ' !important',
   },
   selectMenu: {
     '& > div > ul': {
@@ -84,5 +107,19 @@ export const useStyles = makeStyles((theme: Theme) => ({
   selectMenuItemSelected: {
     backgroundColor: primaryColor[0] + '!important',
     color: whiteColor,
+  },
+  underlineError: {
+    '& > div': {
+      '&:after': {
+        borderBottomColor: dangerColor[0],
+      },
+    },
+  },
+  underlineSuccess: {
+    '& > div': {
+      '&:after': {
+        borderBottomColor: successColor[0],
+      },
+    },
   },
 }));

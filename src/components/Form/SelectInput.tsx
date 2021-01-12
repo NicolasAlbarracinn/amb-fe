@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 
 import { useStyles } from './selectInputStyles';
@@ -30,10 +31,22 @@ const SelectInput = ({
     handleSelect({ id, value: e.target.value, isValid: true });
   };
 
+  const error = !isValid && loadError;
+
+  const labelClasses = classNames({
+    [' ' + classes.selectLabelError]: error,
+    [' ' + classes.selectLabelSuccess]: isValid && !error,
+  });
+
+  const underlineClasses = classNames({
+    [classes.underlineError]: error,
+    [classes.underlineSuccess]: isValid && !error,
+  });
+
   return (
-    <FormControl error={!isValid && loadError} fullWidth className={classes.selectFormControl}>
+    <FormControl fullWidth className={classes.selectFormControl + ' ' + underlineClasses}>
       {label && (
-        <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
+        <InputLabel htmlFor="simple-select" className={classes.selectLabel + ' ' + labelClasses}>
           {label}
         </InputLabel>
       )}
@@ -42,14 +55,14 @@ const SelectInput = ({
         MenuProps={{
           className: classes.selectMenu,
         }}
-        classes={{
-          select: classes.select,
-        }}
         value={value}
         onChange={handleOnChange}
         inputProps={{
           name: 'simpleSelect',
           id: 'simple-select',
+          classes: {
+            select: classes.select,
+          },
         }}
       >
         {mainSelectLabel && (
