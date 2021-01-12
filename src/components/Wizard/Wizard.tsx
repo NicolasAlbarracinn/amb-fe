@@ -116,7 +116,7 @@ const Wizard = memo(({ steps, color, title, subtitle, navigationStepChange, curr
 
   return (
     <div className={classes.wizardContainer} ref={wizard}>
-      <Card className={classes.card}>
+      <div className={classes.card}>
         <div className={classes.wizardHeader}>
           <h3 className={classes.title}>{title}</h3>
           <h5 className={classes.subtitle}>{subtitle}</h5>
@@ -158,7 +158,7 @@ const Wizard = memo(({ steps, color, title, subtitle, navigationStepChange, curr
             );
           })}
         </div>
-      </Card>
+      </div>
     </div>
   );
 });
