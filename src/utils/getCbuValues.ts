@@ -4,7 +4,6 @@ import bankData from './jsonData/banksData.json';
 const getCbuValues = cbu => {
   const cbuArray = Array.from(String(cbu), Number);
   const code = cbuArray.slice(10, 14).join('');
-  console.log(code);
   const accountNumber = cbuArray.slice(14, 21).join('');
   const bankInfo = bankData.find(bank => bank.code === code);
   if (!!bankInfo) {
