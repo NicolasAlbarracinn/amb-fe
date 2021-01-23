@@ -4,7 +4,9 @@ import React from 'react';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 
-import LenderDetail from './LenderSteps/index';
+import LenderDetails from './LenderSteps/LenderDetails';
+import EconomicActivity from './LenderSteps/EconomicActivity';
+import Address from './LenderSteps/Address';
 
 import WizardContainer from 'containers/WizardContainer/WizardContainer';
 
@@ -13,7 +15,11 @@ const LenderForm = () => {
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>
         <WizardContainer
-          steps={[{ stepName: 'Alta de cartera', stepComponent: LenderDetail, stepId: 'lenderDetail' }]}
+          steps={[
+            { stepName: 'Alta de cartera', stepComponent: LenderDetails, stepId: 'lenderDetails' },
+            { stepName: 'Lidacion de haberes', stepComponent: EconomicActivity, stepId: 'economicActivity' },
+            { stepName: 'Lidacion bancaria', stepComponent: Address, stepId: 'address' },
+          ]}
           title="Agregar nueva cartera"
           subtitle="Complete los campos requeridos para crear una nueva cartera"
           color="rose"

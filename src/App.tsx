@@ -18,6 +18,7 @@ import Partners from 'containers/Partners/Partners';
 import Benefits from 'containers/Benefits/Benefits';
 
 import PortfolioForm from 'pages/PortfolioPage';
+import LenderForm from 'pages/LenderPage';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
               <Switch>
                 <Route path="/app" exact render={() => <Redirect to="/app/dashboard" />} />
                 <Route path="/app/porfolio" component={PortfolioForm} />
+                <Route path="/app/lender" component={LenderForm} />
                 <Route path="/app/profile" component={Profile} />
                 <Route path="/app/partners" component={Partners} />
                 <Route path="/app/benefits" component={Benefits} />

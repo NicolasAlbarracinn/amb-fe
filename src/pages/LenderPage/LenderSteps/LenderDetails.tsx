@@ -13,14 +13,12 @@ import { actions as wizardActions } from 'containers/WizardContainer/slice';
 import { parseSubmitForm } from 'utils/parseForm';
 
 import FormInputs from 'components/Form/Inputs';
-import { LenderFormInputsConfig } from '../lenderFormConfig';
+import { lenderConfig } from './lenderConfig';
+import { lenderDefaultState } from './lenderDefaultValues';
 
-const LenderDetail = () => {
+const LenderDetails = () => {
   const classes = useStyles();
-  const { inputs, onChangeHanlder, updateInputs } = useInputChange({
-    testValue: { isValid: false, value: '' },
-    email: { isValid: false, value: '' },
-  });
+  const { inputs, onChangeHanlder, updateInputs } = useInputChange(lenderDefaultState);
 
   //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();
@@ -29,16 +27,21 @@ const LenderDetail = () => {
   const handleNext = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
     if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId: 'lenderDetail', data: parseSubmitForm(inputs), isValid: false }));
+      dispatch(wizardActions.setStep({ stepId: 'lenderDetails', data: parseSubmitForm(inputs), isValid: false }));
       setFormHasBeenSubmited(true);
     } else {
       dispatch(
-        wizardActions.setStep({ stepId: 'lenderDetail', data: parseSubmitForm(inputs), isValid: true, type: 'next' }),
+        wizardActions.setStep({
+          stepId: 'assetsLiquidation',
+          data: parseSubmitForm(inputs),
+          isValid: true,
+          type: 'next',
+        }),
       );
     }
   };
 
-  const config = LenderFormInputsConfig(inputs, updateInputs, formHasBeenSubmited);
+  const config = lenderConfig(inputs, updateInputs, formHasBeenSubmited);
 
   return (
     <>
@@ -55,4 +58,4 @@ const LenderDetail = () => {
   );
 };
 
-export default LenderDetail;
+export default LenderDetails;
