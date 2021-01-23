@@ -2,7 +2,7 @@ import { InputOptions } from 'components/Form/Inputs';
 import { UpdateInput } from 'components/Form/types';
 import { DefaultState } from 'containers/WizardContainer/hooks';
 
-export const assetsLiquidationConfigForm = (
+export const liquidationsConfig = (
   inputValue: {
     [key: string]: DefaultState;
   },
@@ -17,11 +17,11 @@ export const assetsLiquidationConfigForm = (
         sm: 3,
       },
       props: {
-        id: 'diaDeCorteHaberes',
-        label: 'diaDeCorteHaberes',
+        id: 'cutDay',
+        label: 'dia De Corte Haberes',
         updateValueOnBlur,
         formHasBeenSubmited,
-        isValidInput: inputValue['diaDeCorteHaberes'].isValid || true,
+        isValidInput: inputValue['cutDay'].isValid || true,
       },
     },
     {
@@ -31,11 +31,11 @@ export const assetsLiquidationConfigForm = (
         sm: 3,
       },
       props: {
-        id: 'ComisionporDebitoCargoFijo',
+        id: 'fixedChargeDebtCommission',
         label: 'Comision Por Debito Cargo Fijo',
         updateValueOnBlur,
         formHasBeenSubmited,
-        isValidInput: inputValue['ComisionporDebitoCargoFijo'].isValid || true,
+        isValidInput: inputValue['fixedChargeDebtCommission'].isValid || true,
       },
     },
     {
@@ -45,11 +45,11 @@ export const assetsLiquidationConfigForm = (
         sm: 3,
       },
       props: {
-        id: 'ComisionporDebitoCargoPorcentaje',
+        id: 'fixedChargeDebtCommissionPercent',
         label: 'comision por debito cargo porcentaje',
         updateValueOnBlur,
         formHasBeenSubmited,
-        isValidInput: inputValue['ComisionporDebitoCargoPorcentaje'].isValid,
+        isValidInput: inputValue['fixedChargeDebtCommissionPercent'].isValid,
       },
     },
     {
@@ -59,11 +59,11 @@ export const assetsLiquidationConfigForm = (
         sm: 3,
       },
       props: {
-        id: 'impuestosDébitosCréditosPorcentajeHaberes',
+        id: 'percentCreditTax',
         label: 'impuestos Débitos Créditos Porcentaje',
         updateValueOnBlur,
         formHasBeenSubmited,
-        isValidInput: inputValue['impuestosDébitosCréditosPorcentajeHaberes'].isValid,
+        isValidInput: inputValue['percentCreditTax'].isValid,
       },
     },
     {
@@ -73,11 +73,11 @@ export const assetsLiquidationConfigForm = (
         sm: 3,
       },
       props: {
-        id: 'gastosBancariosPorcentajeHaberes',
+        id: 'percentBankingExpenses',
         label: 'gastos Bancarios Porcentaje',
         updateValueOnBlur,
         formHasBeenSubmited,
-        isValidInput: inputValue['gastosBancariosPorcentajeHaberes'].isValid,
+        isValidInput: inputValue['percentBankingExpenses'].isValid,
       },
     },
     {
@@ -87,11 +87,11 @@ export const assetsLiquidationConfigForm = (
         sm: 3,
       },
       props: {
-        id: 'tipodeCalculoHaberes',
+        id: 'typeOfCalculation',
         label: 'tipode Calculo',
         updateValueOnBlur,
         formHasBeenSubmited,
-        isValidInput: inputValue['tipodeCalculoHaberes'].isValid,
+        isValidInput: inputValue['typeOfCalculation'].isValid,
       },
     },
   ];
