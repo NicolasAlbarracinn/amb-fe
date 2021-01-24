@@ -4,6 +4,7 @@ import { LoginState } from 'containers/Login/pageState';
 import { AuthState } from 'containers/PrivateRoutes/pageState';
 import { IPartnersState } from 'containers/Partners/pageState';
 import { IBenefitsState } from 'containers/Benefits/pageState';
+import { IPortfolioState } from 'containers/Portfolio/pageState';
 
 import { PaginationState } from 'components/Pagination/pageState';
 import { SearchBarState } from 'components/SearchBar/pageState';
@@ -23,6 +24,7 @@ export interface RootState {
   wizardContainer?: any;
   searchBar?: SearchBarState;
   benefits?: IBenefitsState;
+  portfolios?: IPortfolioState;
 }
 
 export interface QueryParameters {
