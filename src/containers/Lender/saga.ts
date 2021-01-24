@@ -7,10 +7,10 @@ import { actions } from './slice';
 
 const cookies = new Cookies();
 
-export function* getPorfolioDataRequest(action: PayloadAction<any>) {
+export function* getLenderDataRequest(action: PayloadAction<any>) {
   //TODO: add request
 }
 
-export function* portfolioSaga() {
-  yield takeLatest(actions.getPortfolioRequest.type, getPorfolioDataRequest);
+export function* lenderSaga() {
+  yield takeLatest(actions.getLenderRequest.type, getLenderDataRequest);
 }
