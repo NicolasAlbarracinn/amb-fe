@@ -12,7 +12,7 @@ import Button from 'components/CustomButtons/Button';
 
 import { useStyles } from './styles';
 
-const SearchBar = (props: { rtlActive?: string }) => {
+const SearchBar = (props: { rtlActive?: string; placeholder?: string }) => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
 
   const classes = useStyles();
@@ -37,7 +37,7 @@ const SearchBar = (props: { rtlActive?: string }) => {
           className: classes.top + ' ' + classes.search,
         }}
         inputProps={{
-          placeholder: 'Buscar',
+          placeholder: props.placeholder || 'Buscar',
           inputProps: {
             'aria-label': 'Buscar',
             className: classes.searchInput,

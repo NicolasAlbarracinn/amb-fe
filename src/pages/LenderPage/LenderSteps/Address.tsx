@@ -10,19 +10,25 @@ import { useStyles } from 'components/Wizard/stepsStyles';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 
-import { parseSubmitForm } from 'utils/parseForm';
+import { parseReceivedForm, parseSubmitForm } from 'utils/parseForm';
 
 import FormInputs from 'components/Form/Inputs';
 import { addressConfig } from './lenderConfig';
 import { addressDefaultState } from './lenderDefaultValues';
 
+import { selectLenderData, selectIsDataBeenFetched } from 'containers/Lender/selectors';
+
 const Address = () => {
   const classes = useStyles();
-  const { inputs, onChangeHanlder, updateInputs } = useInputChange(addressDefaultState);
+  const [formHasBeenSubmited, setFormHasBeenSubmited] = useState(false);
+  const { inputs, updateInputs } = useInputChange(addressDefaultState);
+  const config = addressConfig(addressDefaultState, updateInputs, formHasBeenSubmited);
+  const [inputsConfig, setInputConfig] = useState(config);
 
   //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();
-  const [formHasBeenSubmited, setFormHasBeenSubmited] = useState(false);
+  const { address: addressData } = useSelector(selectLenderData);
+  const fetched = useSelector(selectIsDataBeenFetched);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
@@ -41,11 +47,17 @@ const Address = () => {
     }
   };
 
-  const config = addressConfig(inputs, updateInputs, formHasBeenSubmited);
+  useEffect(() => {
+    if (addressData) {
+      const updatedItems = parseReceivedForm(addressData);
+      const activityConfig = addressConfig(updatedItems, updateInputs, formHasBeenSubmited);
+      setInputConfig(activityConfig);
+    }
+  }, [addressData, fetched]);
 
   return (
     <>
-      <GridContainer>{FormInputs(config)}</GridContainer>
+      <GridContainer>{FormInputs(inputsConfig)}</GridContainer>
       <div className={classes.footer}>
         <div className={classes.right}>
           <Button type="submit" color="rose" onClick={handleNext}>

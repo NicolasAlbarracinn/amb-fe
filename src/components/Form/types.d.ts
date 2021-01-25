@@ -11,4 +11,5 @@ export interface IInputProps {
   formHasBeenSubmited?: boolean;
   isValidInput?: boolean;
   disabled?: boolean;
+  value?: string;
 }

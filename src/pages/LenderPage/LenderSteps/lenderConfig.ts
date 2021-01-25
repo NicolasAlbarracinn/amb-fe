@@ -17,25 +17,12 @@ export const lenderConfig = (
         sm: 3,
       },
       props: {
-        id: 'cuit',
-        label: 'cuit',
-        updateValueOnBlur,
-        formHasBeenSubmited,
-        isValidInput: inputValue['cuit'].isValid,
-      },
-    },
-    {
-      type: InputOptions.TEXT,
-      gridSizeProps: {
-        xs: 12,
-        sm: 3,
-      },
-      props: {
         id: 'lenderName',
         label: 'Nombre del fondista en el sistema',
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['lenderName'].isValid,
+        value: inputValue['lenderName'].value,
       },
     },
     {
@@ -50,6 +37,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['personType'].isValid,
+        value: inputValue['personType'].value,
       },
     },
     {
@@ -64,6 +52,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['name'].isValid,
+        value: inputValue['name'].value,
       },
     },
     {
@@ -78,6 +67,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['lastName'].isValid,
+        value: inputValue['lastName'].value,
       },
     },
     {
@@ -92,6 +82,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['businessName'].isValid,
+        value: inputValue['businessName'].value,
       },
     },
     {
@@ -106,6 +97,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['documentType'].isValid,
+        value: inputValue['documentType'].value,
       },
     },
     {
@@ -120,7 +112,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['documentNumber'].isValid,
-        type: 'number',
+        value: inputValue['documentNumber'].value,
       },
     },
     {
@@ -135,6 +127,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['email'].isValid,
+        value: inputValue['email'].value,
       },
     },
     {
@@ -149,6 +142,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['cellphone'].isValid,
+        value: inputValue['cellphone'].value,
       },
     },
     {
@@ -163,6 +157,7 @@ export const lenderConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['phone'].isValid,
+        value: inputValue['phone'].value,
       },
     },
   ];
@@ -188,6 +183,7 @@ export const economicActivityConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['type'].isValid,
+        value: inputValue['type'].value,
       },
     },
     {
@@ -202,6 +198,7 @@ export const economicActivityConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['order'].isValid,
+        value: inputValue['order'].value,
       },
     },
     {
@@ -216,6 +213,7 @@ export const economicActivityConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['registrationPeriod'].isValid,
+        value: inputValue['registrationPeriod'].value,
       },
     },
   ];
@@ -241,6 +239,7 @@ export const addressConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['streetAdress'].isValid,
+        value: inputValue['streetAdress'].value,
       },
     },
     {
@@ -255,6 +254,7 @@ export const addressConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['floor'].isValid,
+        value: inputValue['floor'].value,
       },
     },
     {
@@ -269,6 +269,7 @@ export const addressConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['aptNumber'].isValid,
+        value: inputValue['aptNumber'].value,
       },
     },
     {
@@ -283,6 +284,7 @@ export const addressConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['department'].isValid,
+        value: inputValue['department'].value,
       },
     },
     {
@@ -297,6 +299,7 @@ export const addressConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['location'].isValid,
+        value: inputValue['location'].value,
       },
     },
     {
@@ -311,6 +314,7 @@ export const addressConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['province'].isValid,
+        value: inputValue['province'].value,
       },
     },
     {
@@ -325,6 +329,7 @@ export const addressConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['postalCode'].isValid,
+        value: inputValue['postalCode'].value,
       },
     },
     {
@@ -339,6 +344,7 @@ export const addressConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['observations'].isValid,
+        value: inputValue['observations'].value,
       },
     },
   ];
