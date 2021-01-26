@@ -22,11 +22,7 @@ const Address = () => {
   const dispatch = useDispatch();
   const { address: addressData } = useSelector(selectLenderData);
 
-  const { setFormHasBeenSubmited, inputs, inputsConfig } = useLenderState(
-    addressData,
-    addressDefaultState,
-    addressConfig,
-  );
+  const { inputs, inputsConfig } = useLenderState(addressData, addressDefaultState, addressConfig);
 
   const handleSubmit = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);

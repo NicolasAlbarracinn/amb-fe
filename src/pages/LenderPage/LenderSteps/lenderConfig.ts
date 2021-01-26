@@ -1,28 +1,7 @@
 import { InputOptions } from 'components/Form/Inputs';
-import { UpdateInput } from 'components/Form/types';
-import { DefaultState } from 'containers/WizardContainer/hooks';
+import { IConfigFunction } from 'types/types';
 
-export interface IConfig {
-  type: InputOptions;
-  gridSizeProps: { xs: number; sm: number };
-  props: object;
-}
-
-export type IConfigFunction = (
-  inputValue: {
-    [key: string]: DefaultState;
-  },
-  updateValueOnBlur: UpdateInput,
-  formHasBeenSubmited: boolean,
-) => Array<IConfig>;
-
-export const lenderConfig = (
-  inputValue: {
-    [key: string]: DefaultState;
-  },
-  updateValueOnBlur: UpdateInput,
-  formHasBeenSubmited,
-) => {
+export const lenderConfig: IConfigFunction = (inputValue, updateValueOnBlur, formHasBeenSubmited) => {
   return [
     {
       type: InputOptions.TEXT,
@@ -177,13 +156,7 @@ export const lenderConfig = (
   ];
 };
 
-export const economicActivityConfig = (
-  inputValue: {
-    [key: string]: DefaultState;
-  },
-  updateValueOnBlur: UpdateInput,
-  formHasBeenSubmited,
-) => {
+export const economicActivityConfig: IConfigFunction = (inputValue, updateValueOnBlur, formHasBeenSubmited) => {
   return [
     {
       type: InputOptions.TEXT,
@@ -233,13 +206,7 @@ export const economicActivityConfig = (
   ];
 };
 
-export const addressConfig = (
-  inputValue: {
-    [key: string]: DefaultState;
-  },
-  updateValueOnBlur: UpdateInput,
-  formHasBeenSubmited,
-) => {
+export const addressConfig: IConfigFunction = (inputValue, updateValueOnBlur, formHasBeenSubmited) => {
   return [
     {
       type: InputOptions.TEXT,

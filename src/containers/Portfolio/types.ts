@@ -26,3 +26,8 @@ export interface ILiquidation {
   percentBankingExpenses: number; //Debe aparecer el número 0 pero con posibilidad de edición
   typeOfCalculation: 'Por lo enviado' | 'Por lo debitado'; //Debe aparecer Por lo Enviado con posibilidad de edición
 }
+
+export interface ILendersNamesList {
+  id: string;
+  lenderName: string;
+}

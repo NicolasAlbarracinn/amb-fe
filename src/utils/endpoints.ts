@@ -9,6 +9,7 @@ export const SAVE_PARTNER = `${BASE_URL}/partners`;
 export const BENEFITS_URL = `${BASE_URL}/benefits`;
 export const UPADTE_PARTNER_STATUS = `${BASE_URL}/partners/updateStatus`;
 export const LENDERS_URL = `${BASE_URL}/lenders`;
+export const PORTFOLIOS_URL = `${BASE_URL}/portfolios`;
 
 export function getCurrentEnvironment() {
   const host = window.location.hostname;

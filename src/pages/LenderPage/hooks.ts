@@ -7,7 +7,7 @@ import { selectIsDataBeenFetched } from 'containers/Lender/selectors';
 
 import { parseReceivedForm } from 'utils/parseForm';
 
-import { IConfigFunction } from './LenderSteps/lenderConfig';
+import { IConfigFunction } from 'types/types';
 
 interface IGenericObject {
   [key: string]: DefaultState;

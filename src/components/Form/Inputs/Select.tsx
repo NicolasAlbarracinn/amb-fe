@@ -6,7 +6,7 @@ interface IInputProps {
   id: string;
   label?: string;
   mainSelectLabel?: string;
-  value: string;
+  value?: string;
   items: { value: string; label: string }[];
   handleSelect: Function;
   isValid?: boolean;

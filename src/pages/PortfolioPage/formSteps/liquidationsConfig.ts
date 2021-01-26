@@ -21,7 +21,8 @@ export const liquidationsConfig = (
         label: 'dia De Corte Haberes',
         updateValueOnBlur,
         formHasBeenSubmited,
-        isValidInput: inputValue['cutDay'].isValid || true,
+        isValidInput: inputValue['cutDay'].isValid,
+        value: inputValue['cutDay'].value,
       },
     },
     {
@@ -35,7 +36,8 @@ export const liquidationsConfig = (
         label: 'Comision Por Debito Cargo Fijo',
         updateValueOnBlur,
         formHasBeenSubmited,
-        isValidInput: inputValue['fixedChargeDebtCommission'].isValid || true,
+        isValidInput: inputValue['fixedChargeDebtCommission'].isValid,
+        value: inputValue['fixedChargeDebtCommission'].value,
       },
     },
     {
@@ -50,6 +52,7 @@ export const liquidationsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['fixedChargeDebtCommissionPercent'].isValid,
+        value: inputValue['fixedChargeDebtCommission'].value,
       },
     },
     {
@@ -64,6 +67,7 @@ export const liquidationsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['percentCreditTax'].isValid,
+        value: inputValue['percentCreditTax'].value,
       },
     },
     {
@@ -78,6 +82,7 @@ export const liquidationsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['percentBankingExpenses'].isValid,
+        value: inputValue['percentBankingExpenses'].value,
       },
     },
     {
@@ -92,6 +97,7 @@ export const liquidationsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['typeOfCalculation'].isValid,
+        value: inputValue['typeOfCalculation'].value,
       },
     },
   ];

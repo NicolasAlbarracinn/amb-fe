@@ -18,13 +18,14 @@ export const portfolioDetailsConfig = (
       },
       props: {
         id: 'portfolioTypes',
-        label: 'portfolioTypes',
+        label: 'tipo de cartera',
         handleSelect: updateValueOnBlur,
-        formHasBeenSubmited,
         isValid: inputValue['portfolioTypes'].isValid,
-        value: inputValue['portfolioTypes'].value,
-        items: ['Sin fines determinados', 'Ayudas economicas', 'Vacaciones'],
-        mainSelectLabel: 'Selecione el tipo de Cartera',
+        items: [
+          { value: 'Sin fines determinados', label: 'Sin fines determinados' },
+          { value: 'Ayudas economicas', label: 'Ayudas economicas' },
+          { value: 'Vacaciones', label: 'Vacaciones' },
+        ],
       },
     },
     {
@@ -39,6 +40,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['minCapital'].isValid,
+        value: inputValue['minCapital'].value,
       },
     },
     {
@@ -53,6 +55,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['minDues'].isValid,
+        value: inputValue['minDues'].value,
       },
     },
     {
@@ -67,6 +70,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['administrativeExpense'].isValid,
+        value: inputValue['administrativeExpense'].value,
       },
     },
     {
@@ -81,6 +85,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['monthlyCashRate'].isValid,
+        value: inputValue['monthlyCashRate'].value,
       },
     },
     {
@@ -95,6 +100,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['financialTotal'].isValid,
+        value: inputValue['financialTotal'].value,
       },
     },
     {
@@ -109,6 +115,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['validSince'].isValid,
+        value: inputValue['validSince'].value,
       },
     },
     {
@@ -123,6 +130,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['validTo'].isValid,
+        value: inputValue['validTo'].value,
       },
     },
     {
@@ -137,7 +145,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['showsAmountAwarded'].isValid,
-        type: 'number',
+        value: inputValue['showsAmountAwarded'].value,
       },
     },
     {
@@ -152,6 +160,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['description'].isValid,
+        value: inputValue['description'].value,
       },
     },
     {
@@ -166,6 +175,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['maxCapital'].isValid,
+        value: inputValue['maxCapital'].value,
       },
     },
     {
@@ -180,6 +190,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['maxDues'].isValid,
+        value: inputValue['maxDues'].value,
       },
     },
     {
@@ -194,20 +205,7 @@ export const portfolioDetailsConfig = (
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['cancellationExpense'].isValid,
-      },
-    },
-    {
-      type: InputOptions.TEXT,
-      gridSizeProps: {
-        xs: 12,
-        sm: 3,
-      },
-      props: {
-        id: 'fondista',
-        label: 'fondista',
-        updateValueOnBlur,
-        formHasBeenSubmited,
-        isValidInput: inputValue['lender'].isValid,
+        value: inputValue['cancellationExpense'].value,
       },
     },
   ];

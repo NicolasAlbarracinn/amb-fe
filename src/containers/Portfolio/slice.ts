@@ -7,6 +7,7 @@ import { IPortfolio } from './types';
 export const initialState: IPortfolioState = {
   loading: true,
   portfolioData: {} as IPortfolio,
+  lendersNameList: [],
 };
 
 const PortfolioSlice = createSlice({
@@ -21,6 +22,16 @@ const PortfolioSlice = createSlice({
       state.portfolioData = action.payload;
     },
     getPortfolioFailed(state) {
+      state.loading = false;
+    },
+    getLendersNameListRequest(state) {
+      state.loading = true;
+    },
+    getLendersNameListSuccess(state, action: PayloadAction<any>) {
+      state.loading = false;
+      state.lendersNameList = action.payload;
+    },
+    getLendersNameListFailed(state) {
       state.loading = false;
     },
   },
