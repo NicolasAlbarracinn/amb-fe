@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useStyles } from 'components/Wizard/stepsStyles';
@@ -7,32 +7,29 @@ import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
 import FormInputs from 'components/Form/Inputs';
 import SearchBar from 'components/SearchBar/SearchBar';
+import { selectParameterWasSubmited, selectSearchParameter } from 'components/SearchBar/selectors';
 
-import { useInputChange } from 'containers/WizardContainer/hooks';
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
+import { selectLenderData } from 'containers/Lender/selectors';
+import { actions as lenderActions } from 'containers/Lender/slice';
 
-import { parseSubmitForm, parseReceivedForm } from 'utils/parseForm';
+import { parseSubmitForm } from 'utils/parseForm';
 
 import { lenderConfig } from './lenderConfig';
 import { lenderDefaultState } from './lenderDefaultValues';
 
-import { selectLenderData, selectIsDataBeenFetched } from 'containers/Lender/selectors';
-import { actions as lenderActions } from 'containers/Lender/slice';
-import { selectParameterWasSubmited, selectSearchParameter } from 'components/SearchBar/selectors';
+import { useLenderState } from '../hooks';
 
 const LenderDetails = () => {
   const classes = useStyles();
-  const { inputs, updateInputs } = useInputChange(lenderDefaultState);
-  const [formHasBeenSubmited, setFormHasBeenSubmited] = useState(false);
-  const config = lenderConfig(lenderDefaultState, updateInputs, formHasBeenSubmited);
-  const [inputsConfig, setInputConfig] = useState(config);
   //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();
 
   const lenderData = useSelector(selectLenderData);
   const wasSubmited = useSelector(selectParameterWasSubmited);
   const searchParam = useSelector(selectSearchParameter);
-  const fetched = useSelector(selectIsDataBeenFetched);
+
+  const { setFormHasBeenSubmited, inputs, inputsConfig } = useLenderState(lenderData, lenderDefaultState, lenderConfig);
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
@@ -54,13 +51,6 @@ const LenderDetails = () => {
   useEffect(() => {
     if (wasSubmited) dispatch(lenderActions.getLenderRequest(searchParam));
   }, [wasSubmited]);
-
-  useEffect(() => {
-    if (fetched && lenderData) {
-      const updatedItems = parseReceivedForm(lenderData);
-      setInputConfig(lenderConfig(updatedItems, updateInputs, formHasBeenSubmited));
-    }
-  }, [fetched]);
 
   return (
     <>

@@ -1,34 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import GridContainer from 'components/Grid/GridContainer';
 import Button from 'components/CustomButtons/Button';
-
-import { useInputChange } from 'containers/WizardContainer/hooks';
-
+import FormInputs from 'components/Form/Inputs';
 import { useStyles } from 'components/Wizard/stepsStyles';
 
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
+import { selectLenderData } from 'containers/Lender/selectors';
 
-import { parseReceivedForm, parseSubmitForm } from 'utils/parseForm';
+import { parseSubmitForm } from 'utils/parseForm';
 
-import FormInputs from 'components/Form/Inputs';
 import { economicActivityConfig } from './lenderConfig';
 import { economicActivityState } from './lenderDefaultValues';
-
-import { selectLenderData, selectIsDataBeenFetched } from 'containers/Lender/selectors';
+import { useLenderState } from '../hooks';
 
 const EconomicActivity = () => {
   const classes = useStyles();
-  const [formHasBeenSubmited, setFormHasBeenSubmited] = useState(false);
-  const { inputs, updateInputs } = useInputChange(economicActivityState);
-  const config = economicActivityConfig(economicActivityState, updateInputs, formHasBeenSubmited);
-  const [inputsConfig, setInputConfig] = useState(config);
 
-  //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();
   const { economicActivity } = useSelector(selectLenderData);
-  const fetched = useSelector(selectIsDataBeenFetched);
+
+  const { setFormHasBeenSubmited, inputs, inputsConfig } = useLenderState(
+    economicActivity,
+    economicActivityState,
+    economicActivityConfig,
+  );
+  //TODO: move this to the wizard custom hook
 
   const handleNext = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
@@ -46,14 +44,6 @@ const EconomicActivity = () => {
       );
     }
   };
-
-  useEffect(() => {
-    if (economicActivity) {
-      const updatedItems = parseReceivedForm(economicActivity);
-      const activityConfig = economicActivityConfig(updatedItems, updateInputs, formHasBeenSubmited);
-      setInputConfig(activityConfig);
-    }
-  }, [economicActivity, fetched]);
 
   return (
     <>
