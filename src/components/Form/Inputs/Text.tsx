@@ -31,7 +31,7 @@ const TextInput = ({
   const { onChangeValidation, onInputFocused, OnBlurValidation } = eventsHandlers;
 
   const handleOnChange: InputEventFunction = ({ currentTarget: { value } }) => {
-    const isValid = verifyLength(value, [3, 5]);
+    const isValid = verifyLength(value, [0, 80]);
     onChangeValidation(isValid);
     setInputValue(value);
   };
@@ -41,7 +41,7 @@ const TextInput = ({
   };
 
   const handleOnBlur: InputEventFunction = ({ currentTarget: { value, id } }) => {
-    const isValid = verifyLength(value, [3, 5]);
+    const isValid = verifyLength(value, [3, 80]);
     OnBlurValidation({ value, id, isValid });
   };
 

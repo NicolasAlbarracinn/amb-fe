@@ -22,8 +22,8 @@ export function* createLenderRequest(action: PayloadAction<any>) {
       body: JSON.stringify(action.payload),
     };
 
-    const response = yield call(request, LENDERS_URL, requestOptions);
-    yield put(actions.setLenderSuccess(response.data));
+    yield call(request, LENDERS_URL, requestOptions);
+    yield put(actions.setLenderSuccess());
   } catch (err) {
     yield put(actions.setLenderFalied());
     toast.error('Algo salio mal.', {

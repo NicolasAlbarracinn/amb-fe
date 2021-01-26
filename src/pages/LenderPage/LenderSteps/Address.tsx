@@ -28,30 +28,39 @@ const Address = () => {
     addressConfig,
   );
 
-  const handleNext = () => {
+  const handleSubmit = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
-    if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId: 'address', data: parseSubmitForm(inputs), isValid: false }));
-      setFormHasBeenSubmited(true);
-    } else {
+
+    if (!isFormInvalid) {
       dispatch(
-        wizardActions.setStep({
-          stepId: 'address',
-          data: parseSubmitForm(inputs),
-          isValid: true,
-          type: 'next',
-        }),
+        wizardActions.setStep({ stepId: 'address', data: parseSubmitForm(inputs), isValid: true, type: 'submit' }),
       );
     }
+  };
+
+  const handlePrevious = () => {
+    dispatch(
+      wizardActions.setStep({
+        stepId: 'economicActivity',
+        data: parseSubmitForm(inputs),
+        isValid: true,
+        type: 'previous',
+      }),
+    );
   };
 
   return (
     <>
       <GridContainer>{FormInputs(inputsConfig)}</GridContainer>
       <div className={classes.footer}>
+        <div className={classes.left}>
+          <Button color="rose" onClick={handlePrevious}>
+            Anterior
+          </Button>
+        </div>
         <div className={classes.right}>
-          <Button type="submit" color="rose" onClick={handleNext}>
-            Proximo
+          <Button color="rose" onClick={handleSubmit}>
+            Finalizar
           </Button>
         </div>
         <div className={classes.clearfix} />

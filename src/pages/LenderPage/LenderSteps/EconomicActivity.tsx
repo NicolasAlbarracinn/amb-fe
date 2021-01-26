@@ -45,10 +45,26 @@ const EconomicActivity = () => {
     }
   };
 
+  const handlePrevious = () => {
+    dispatch(
+      wizardActions.setStep({
+        stepId: 'economicActivity',
+        data: parseSubmitForm(inputs),
+        isValid: true,
+        type: 'previous',
+      }),
+    );
+  };
+
   return (
     <>
       <GridContainer>{FormInputs(inputsConfig)}</GridContainer>
       <div className={classes.footer}>
+        <div className={classes.left}>
+          <Button color="rose" onClick={handlePrevious}>
+            Anterior
+          </Button>
+        </div>
         <div className={classes.right}>
           <Button type="submit" color="rose" onClick={handleNext}>
             Proximo

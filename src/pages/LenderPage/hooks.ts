@@ -27,10 +27,10 @@ export const useLenderState = <T extends object>(
 
   useEffect(() => {
     if (!isEmpty(fetchedData)) {
-      console.log(fetchedData);
       const updatedItems = parseReceivedForm(fetchedData);
       const inputyConfig = configFunction(updatedItems, updateInputs, formHasBeenSubmited);
       setInputConfig(inputyConfig);
+      updateInputs(updatedItems);
     }
   }, [fetchedData, fetched]);
 

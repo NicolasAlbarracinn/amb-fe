@@ -26,12 +26,11 @@ const LenderSlice = createSlice({
     getLenderFailed(state) {
       state.loading = false;
     },
-    setLenderRequest(state) {
+    setLenderRequest(state, action: PayloadAction<any>) {
       state.loading = true;
     },
-    setLenderSuccess(state, action: PayloadAction<any>) {
+    setLenderSuccess(state) {
       state.loading = false;
-      state.lenderData = action.payload;
     },
     setLenderFalied(state) {
       state.loading = true;

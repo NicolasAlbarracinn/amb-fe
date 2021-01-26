@@ -34,7 +34,7 @@ const LenderDetails = () => {
   const handleNext = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
     if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId: 'lenderDetails', data: parseSubmitForm(inputs), isValid: false }));
+      dispatch(wizardActions.setStep({ stepId: 'lenderDetails', data: parseSubmitForm(inputs), isValid: true }));
       setFormHasBeenSubmited(true);
     } else {
       dispatch(
@@ -54,7 +54,6 @@ const LenderDetails = () => {
 
   return (
     <>
-      {' '}
       <GridContainer>
         <GridItem xs={12} sm={6}>
           <SearchBar placeholder="Cuil" />
