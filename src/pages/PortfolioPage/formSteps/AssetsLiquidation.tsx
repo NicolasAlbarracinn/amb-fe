@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import GridContainer from 'components/Grid/GridContainer';
 import Button from 'components/CustomButtons/Button';
 
-import { DefaultState, useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
+import { useInputChange } from 'containers/WizardContainer/hooks';
 
 import { useStyles } from 'components/Wizard/stepsStyles';
 
@@ -18,7 +18,7 @@ import { liquidationState } from './PortfoliosDeafultValues';
 
 const AssetsLiquidation = () => {
   const classes = useStyles();
-  const { inputs, onChangeHanlder, updateInputs } = useInputChange(liquidationState);
+  const { inputs, updateInputs } = useInputChange(liquidationState);
 
   //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();

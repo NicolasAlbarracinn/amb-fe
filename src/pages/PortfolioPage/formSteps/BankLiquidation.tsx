@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import GridContainer from 'components/Grid/GridContainer';
 import Button from 'components/CustomButtons/Button';
 
-import { DefaultState, useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
+import { useInputChange } from 'containers/WizardContainer/hooks';
 
 import { useStyles } from 'components/Wizard/stepsStyles';
 
@@ -18,24 +18,22 @@ import { liquidationState } from './PortfoliosDeafultValues';
 
 const BankLiquidation = () => {
   const classes = useStyles();
-  const { inputs, onChangeHanlder, updateInputs } = useInputChange(liquidationState);
+  const { inputs, updateInputs } = useInputChange(liquidationState);
 
   //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();
   const [formHasBeenSubmited, setFormHasBeenSubmited] = useState(false);
 
-  const handleNext = () => {
+  const handleSubmit = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
-    if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId: 'bankLiquidation', data: parseSubmitForm(inputs), isValid: false }));
-      setFormHasBeenSubmited(true);
-    } else {
+
+    if (!isFormInvalid) {
       dispatch(
         wizardActions.setStep({
           stepId: 'bankLiquidation',
           data: parseSubmitForm(inputs),
           isValid: true,
-          type: 'next',
+          type: 'submit',
         }),
       );
     }
@@ -48,8 +46,8 @@ const BankLiquidation = () => {
       <GridContainer>{FormInputs(config)}</GridContainer>
       <div className={classes.footer}>
         <div className={classes.right}>
-          <Button type="submit" color="rose" onClick={handleNext}>
-            Proximo
+          <Button color="rose" onClick={handleSubmit}>
+            Finalizar
           </Button>
         </div>
         <div className={classes.clearfix} />

@@ -34,6 +34,15 @@ const PortfolioSlice = createSlice({
     getLendersNameListFailed(state) {
       state.loading = false;
     },
+    setPortfolioRequest(state, action: PayloadAction<any>) {
+      state.loading = true;
+    },
+    setPortfolioSuccess(state) {
+      state.loading = false;
+    },
+    setPortfolioFailed(state) {
+      state.loading = false;
+    },
   },
 });
 

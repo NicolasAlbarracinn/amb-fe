@@ -34,7 +34,30 @@ export function* getLendersNameListRequest(action: PayloadAction<any>) {
   }
 }
 
+export function* setPortfolioRequest(action: PayloadAction<any>) {
+  const token = cookies.get('token');
+  try {
+    const requestOptions: RequestInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(action.payload),
+    };
+
+    yield call(request, PORTFOLIOS_URL, requestOptions);
+    yield put(actions.setPortfolioSuccess());
+  } catch (err) {
+    yield put(actions.setPortfolioFailed());
+    toast.error('Algo salio mal.', {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
 export function* portfolioSaga() {
   yield takeLatest(actions.getPortfolioRequest.type, getPorfolioDataRequest);
   yield takeLatest(actions.getLendersNameListRequest.type, getLendersNameListRequest);
+  yield takeLatest(actions.setPortfolioRequest.type, setPortfolioRequest);
 }

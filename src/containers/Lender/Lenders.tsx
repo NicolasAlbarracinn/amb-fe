@@ -19,7 +19,6 @@ const Portfolios = () => {
   const data = useSelector(selectStepsData);
 
   useEffect(() => {
-    console.log(data);
     if (!isEmpty(data)) {
       dispatch(
         actions.setLenderRequest({
