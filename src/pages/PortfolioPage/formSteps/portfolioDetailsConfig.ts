@@ -29,7 +29,7 @@ export const portfolioDetailsConfig = (
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -41,10 +41,11 @@ export const portfolioDetailsConfig = (
         formHasBeenSubmited,
         isValidInput: inputValue['minCapital'].isValid,
         value: inputValue['minCapital'].value,
+        isDecimal: true,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -59,7 +60,7 @@ export const portfolioDetailsConfig = (
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -71,39 +72,75 @@ export const portfolioDetailsConfig = (
         formHasBeenSubmited,
         isValidInput: inputValue['administrativeExpense'].isValid,
         value: inputValue['administrativeExpense'].value,
+        isDecimal: true,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
       },
       props: {
         id: 'monthlyCashRate',
-        label: 'Tasa de Effectivo mensual',
+        label: 'Tasa Efectiva Mensual - T.E.M %',
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['monthlyCashRate'].isValid,
         value: inputValue['monthlyCashRate'].value,
+        max: 100,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
+      gridSizeProps: {
+        xs: 12,
+        sm: 3,
+      },
+      props: {
+        id: 'nominalAnulRate',
+        label: 'Tasa Nominal Anual - T.N.A%',
+        updateValueOnBlur,
+        formHasBeenSubmited,
+        isValidInput: inputValue['nominalAnulRate'].isValid,
+        value: inputValue['nominalAnulRate'].value,
+        max: 100,
+      },
+    },
+    {
+      type: InputOptions.NUMERIC,
+      gridSizeProps: {
+        xs: 12,
+        sm: 3,
+      },
+      props: {
+        id: 'anualCashRate',
+        label: 'Tasa Efectiva Anual - T.E.A%',
+        updateValueOnBlur,
+        formHasBeenSubmited,
+        isValidInput: inputValue['anualCashRate'].isValid,
+        value: inputValue['anualCashRate'].value,
+        max: 100,
+      },
+    },
+    {
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
       },
       props: {
         id: 'financialTotal',
-        label: 'Costo finaciero total',
+        label: 'Costo Financiero Total - C.F.T %',
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['financialTotal'].isValid,
         value: inputValue['financialTotal'].value,
+        max: 100,
       },
     },
     {
+      //TODO: modify input date
       type: InputOptions.TEXT,
       gridSizeProps: {
         xs: 12,
@@ -119,6 +156,7 @@ export const portfolioDetailsConfig = (
       },
     },
     {
+      //TODO: modify input date
       type: InputOptions.TEXT,
       gridSizeProps: {
         xs: 12,
@@ -134,7 +172,7 @@ export const portfolioDetailsConfig = (
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.SELECT,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -142,10 +180,12 @@ export const portfolioDetailsConfig = (
       props: {
         id: 'showsAmountAwarded',
         label: 'Muestra monto ortogado',
-        updateValueOnBlur,
-        formHasBeenSubmited,
-        isValidInput: inputValue['showsAmountAwarded'].isValid,
-        value: inputValue['showsAmountAwarded'].value,
+        handleSelect: updateValueOnBlur,
+        isValid: inputValue['showsAmountAwarded'].isValid,
+        items: [
+          { value: 'si', label: 'Si' },
+          { value: 'no', label: 'No' },
+        ],
       },
     },
     {
@@ -164,7 +204,7 @@ export const portfolioDetailsConfig = (
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -176,10 +216,11 @@ export const portfolioDetailsConfig = (
         formHasBeenSubmited,
         isValidInput: inputValue['maxCapital'].isValid,
         value: inputValue['maxCapital'].value,
+        isDecimal: true,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -191,10 +232,11 @@ export const portfolioDetailsConfig = (
         formHasBeenSubmited,
         isValidInput: inputValue['maxDues'].isValid,
         value: inputValue['maxDues'].value,
+        max: 120,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -206,6 +248,7 @@ export const portfolioDetailsConfig = (
         formHasBeenSubmited,
         isValidInput: inputValue['cancellationExpense'].isValid,
         value: inputValue['cancellationExpense'].value,
+        isDecimal: true,
       },
     },
   ];

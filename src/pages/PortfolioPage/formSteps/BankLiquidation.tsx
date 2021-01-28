@@ -14,11 +14,11 @@ import { parseSubmitForm } from 'utils/parseForm';
 
 import FormInputs from 'components/Form/Inputs';
 import { liquidationsConfig } from './liquidationsConfig';
-import { liquidationState } from './PortfoliosDeafultValues';
+import { bankLiquidationState } from './PortfoliosDeafultValues';
 
 const BankLiquidation = () => {
   const classes = useStyles();
-  const { inputs, updateInputs } = useInputChange(liquidationState);
+  const { inputs, updateInputs } = useInputChange(bankLiquidationState);
 
   //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();
