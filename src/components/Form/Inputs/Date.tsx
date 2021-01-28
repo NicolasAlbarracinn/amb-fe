@@ -36,7 +36,7 @@ const DateInput = ({
 
   const handleDateChange = date => {
     const parsedDate = moment(date).format('MM/DD/YYYY');
-    onChange({ id, value: parsedDate, isValid: true });
+    onChange({ [id]: { value: parsedDate, isValid: true } });
   };
 
   const error = !isValid && loadError;

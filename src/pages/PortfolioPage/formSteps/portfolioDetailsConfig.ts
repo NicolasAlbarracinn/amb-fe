@@ -141,7 +141,7 @@ export const portfolioDetailsConfig = (
     },
     {
       //TODO: modify input date
-      type: InputOptions.TEXT,
+      type: InputOptions.DATE,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -149,26 +149,26 @@ export const portfolioDetailsConfig = (
       props: {
         id: 'validSince',
         label: 'Vigencia Desde',
-        updateValueOnBlur,
-        formHasBeenSubmited,
-        isValidInput: inputValue['validSince'].isValid,
+        onChange: updateValueOnBlur,
+        isValid: inputValue['validSince'].isValid,
         value: inputValue['validSince'].value,
+        loadError: false,
       },
     },
     {
       //TODO: modify input date
-      type: InputOptions.TEXT,
+      type: InputOptions.DATE,
       gridSizeProps: {
         xs: 12,
         sm: 3,
       },
       props: {
         id: 'validTo',
-        label: 'vigencia Hasta',
-        updateValueOnBlur,
-        formHasBeenSubmited,
-        isValidInput: inputValue['validTo'].isValid,
+        label: 'Vigencia Hasta',
+        onChange: updateValueOnBlur,
+        isValid: inputValue['validTo'].isValid,
         value: inputValue['validTo'].value,
+        loadError: false,
       },
     },
     {

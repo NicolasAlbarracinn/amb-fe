@@ -26,8 +26,9 @@ const SelectInput = ({
   disabled = false,
 }: IInputProps) => {
   const classes = useStyles();
+
   const handleOnChange = e => {
-    handleSelect({ id, value: e.target.value, isValid: true });
+    handleSelect({ [id]: { value: e.target.value, isValid: true } });
   };
 
   return (
