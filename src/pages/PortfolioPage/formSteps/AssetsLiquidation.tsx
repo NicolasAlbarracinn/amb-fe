@@ -41,12 +41,28 @@ const AssetsLiquidation = () => {
     }
   };
 
+  const handlePrevious = () => {
+    dispatch(
+      wizardActions.setStep({
+        stepId: 'assetsLiquidation',
+        data: parseSubmitForm(inputs),
+        isValid: true,
+        type: 'previous',
+      }),
+    );
+  };
+
   const config = liquidationsConfig(inputs, updateInputs, formHasBeenSubmited);
 
   return (
     <>
       <GridContainer>{FormInputs(config)}</GridContainer>
       <div className={classes.footer}>
+        <div className={classes.left}>
+          <Button color="rose" onClick={handlePrevious}>
+            Anterior
+          </Button>
+        </div>
         <div className={classes.right}>
           <Button type="submit" color="rose" onClick={handleNext}>
             Proximo

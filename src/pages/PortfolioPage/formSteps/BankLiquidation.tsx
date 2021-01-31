@@ -38,6 +38,16 @@ const BankLiquidation = () => {
       );
     }
   };
+  const handlePrevious = () => {
+    dispatch(
+      wizardActions.setStep({
+        stepId: 'bankLiquidation',
+        data: parseSubmitForm(inputs),
+        isValid: true,
+        type: 'previous',
+      }),
+    );
+  };
 
   const config = liquidationsConfig(inputs, updateInputs, formHasBeenSubmited);
 
@@ -45,6 +55,11 @@ const BankLiquidation = () => {
     <>
       <GridContainer>{FormInputs(config)}</GridContainer>
       <div className={classes.footer}>
+        <div className={classes.left}>
+          <Button color="rose" onClick={handlePrevious}>
+            Anterior
+          </Button>
+        </div>
         <div className={classes.right}>
           <Button color="rose" onClick={handleSubmit}>
             Finalizar
