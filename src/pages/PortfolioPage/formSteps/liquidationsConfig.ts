@@ -11,14 +11,14 @@ export const liquidationsConfig = (
 ) => {
   return [
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
       },
       props: {
         id: 'cutDay',
-        label: 'dia De Corte Haberes',
+        label: 'Día de Corte Haberes',
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['cutDay'].isValid,
@@ -26,7 +26,7 @@ export const liquidationsConfig = (
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -38,66 +38,75 @@ export const liquidationsConfig = (
         formHasBeenSubmited,
         isValidInput: inputValue['fixedChargeDebtCommission'].isValid,
         value: inputValue['fixedChargeDebtCommission'].value,
+        isDecimal: true,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
       },
       props: {
         id: 'fixedChargeDebtCommissionPercent',
-        label: 'comision por debito cargo porcentaje',
+        label: 'Comisión por Debito Cargo %',
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['fixedChargeDebtCommissionPercent'].isValid,
         value: inputValue['fixedChargeDebtCommission'].value,
+        isDecimal: true,
+        max: 100,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
       },
       props: {
         id: 'percentCreditTax',
-        label: 'impuestos Débitos Créditos Porcentaje',
+        label: 'Impuestos Débitos/Créditos %',
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['percentCreditTax'].isValid,
         value: inputValue['percentCreditTax'].value,
+        isDecimal: true,
+        max: 100,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.NUMERIC,
       gridSizeProps: {
         xs: 12,
         sm: 3,
       },
       props: {
         id: 'percentBankingExpenses',
-        label: 'gastos Bancarios Porcentaje',
+        label: 'Gastos Bancarios %',
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['percentBankingExpenses'].isValid,
         value: inputValue['percentBankingExpenses'].value,
+        isDecimal: true,
+        max: 100,
       },
     },
     {
-      type: InputOptions.TEXT,
+      type: InputOptions.SELECT,
       gridSizeProps: {
         xs: 12,
         sm: 3,
       },
       props: {
         id: 'typeOfCalculation',
-        label: 'tipode Calculo',
-        updateValueOnBlur,
-        formHasBeenSubmited,
-        isValidInput: inputValue['typeOfCalculation'].isValid,
-        value: inputValue['typeOfCalculation'].value,
+        label: 'Tipo de Cálculo',
+        handleSelect: updateValueOnBlur,
+        isValid: inputValue['typeOfCalculation'].isValid,
+        items: [
+          { value: 'Por lo enviado', label: 'Por lo enviado' },
+          { value: 'Por lo debitado', label: 'Por lo debitado' },
+        ],
       },
     },
   ];

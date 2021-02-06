@@ -14,11 +14,11 @@ import { parseSubmitForm } from 'utils/parseForm';
 
 import FormInputs from 'components/Form/Inputs';
 import { liquidationsConfig } from './liquidationsConfig';
-import { liquidationState } from './PortfoliosDeafultValues';
+import { bankLiquidationState } from './PortfoliosDeafultValues';
 
 const BankLiquidation = () => {
   const classes = useStyles();
-  const { inputs, updateInputs } = useInputChange(liquidationState);
+  const { inputs, updateInputs } = useInputChange(bankLiquidationState);
 
   //TODO: move this to the wizard custom hook
   const dispatch = useDispatch();
@@ -38,6 +38,16 @@ const BankLiquidation = () => {
       );
     }
   };
+  const handlePrevious = () => {
+    dispatch(
+      wizardActions.setStep({
+        stepId: 'bankLiquidation',
+        data: parseSubmitForm(inputs),
+        isValid: true,
+        type: 'previous',
+      }),
+    );
+  };
 
   const config = liquidationsConfig(inputs, updateInputs, formHasBeenSubmited);
 
@@ -45,6 +55,11 @@ const BankLiquidation = () => {
     <>
       <GridContainer>{FormInputs(config)}</GridContainer>
       <div className={classes.footer}>
+        <div className={classes.left}>
+          <Button color="rose" onClick={handlePrevious}>
+            Anterior
+          </Button>
+        </div>
         <div className={classes.right}>
           <Button color="rose" onClick={handleSubmit}>
             Finalizar

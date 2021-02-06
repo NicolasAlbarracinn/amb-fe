@@ -17,13 +17,13 @@ const LenderForm = () => {
       <GridItem xs={12} sm={8}>
         <WizardContainer
           steps={[
-            { stepName: 'Alta de cartera', stepComponent: LenderDetails, stepId: 'lenderDetails' },
-            { stepName: 'Lidacion de haberes', stepComponent: EconomicActivity, stepId: 'economicActivity' },
-            { stepName: 'Lidacion bancaria', stepComponent: Address, stepId: 'address' },
+            { stepName: 'Datos personales', stepComponent: LenderDetails, stepId: 'lenderDetails' },
+            { stepName: 'Actividad econimica', stepComponent: EconomicActivity, stepId: 'economicActivity' },
+            { stepName: 'Domicilio', stepComponent: Address, stepId: 'address' },
             { stepName: 'Carga de documentacion', stepComponent: FilesUpload, stepId: 'ledersFileUpdates' },
           ]}
-          title="Agregar nueva cartera"
-          subtitle="Complete los campos requeridos para crear una nueva cartera"
+          title="Agregar fondista"
+          subtitle="Complete los campos requeridos para agregar un nuevo fondista"
           color="rose"
           previousButtonText="Anterior"
           previousButtonClasses={{ color: 'rose' }}

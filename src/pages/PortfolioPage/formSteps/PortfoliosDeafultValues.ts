@@ -1,5 +1,32 @@
 export const liquidationState = {
   cutDay: {
+    value: '17',
+    isValid: true,
+  }, //Debe aparecer el número 10 pero con posibilidad de edición
+  fixedChargeDebtCommission: {
+    value: '2.3',
+    isValid: true,
+  }, //Debe aparecer el número 0 pero con posibilidad de edición
+  fixedChargeDebtCommissionPercent: {
+    value: '1',
+    isValid: true,
+  }, //Debe aparecer el número 10 pero con posibilidad de edición
+  percentCreditTax: {
+    value: '0.75',
+    isValid: true,
+  }, //Debe aparecer el número 10 pero con posibilidad de edición
+  percentBankingExpenses: {
+    value: '0',
+    isValid: true,
+  }, //Debe aparecer el número 0 pero con posibilidad de edición
+  typeOfCalculation: {
+    value: '',
+    isValid: true,
+  }, //Debe aparecer Por lo Enviado con posibilidad de edición
+};
+
+export const bankLiquidationState = {
+  cutDay: {
     value: '10',
     isValid: true,
   }, //Debe aparecer el número 10 pero con posibilidad de edición
@@ -54,6 +81,14 @@ export const portfolioState = {
     value: '',
     isValid: true,
   }, // poner una descripcion T.E.M% | Minimo 0 y se expresa en %
+  nominalAnulRate: {
+    value: '',
+    isValid: true,
+  },
+  anualCashRate: {
+    value: '',
+    isValid: true,
+  },
   financialTotal: {
     value: '',
     isValid: true,

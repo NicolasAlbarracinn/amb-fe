@@ -56,7 +56,7 @@ const LenderDetails = () => {
     <>
       <GridContainer>
         <GridItem xs={12} sm={6}>
-          <SearchBar placeholder="Cuil" />
+          <SearchBar placeholder="Cuit" />
         </GridItem>
       </GridContainer>
       <GridContainer>{FormInputs(inputsConfig)}</GridContainer>
