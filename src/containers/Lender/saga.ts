@@ -22,8 +22,11 @@ export function* createLenderRequest(action: PayloadAction<any>) {
       body: JSON.stringify(action.payload),
     };
 
-    yield call(request, LENDERS_URL, requestOptions);
+    const response = yield call(request, LENDERS_URL, requestOptions);
     yield put(actions.setLenderSuccess());
+    toast.success(`Se agrego el nuevo fondista ${response.data.name}`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
   } catch (err) {
     yield put(actions.setLenderFalied());
     toast.error('Algo salio mal.', {

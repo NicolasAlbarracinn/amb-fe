@@ -8,6 +8,7 @@ export const initialState: ILenderState = {
   loading: false,
   lenderData: {} as ILender,
   isLenderDataFetched: false,
+  isSuccessfullyCreated: false,
 };
 
 const LenderSlice = createSlice({
@@ -34,6 +35,9 @@ const LenderSlice = createSlice({
     },
     setLenderFalied(state) {
       state.loading = true;
+    },
+    setLenderSuccessfullyCreated(state) {
+      state.isSuccessfullyCreated = true;
     },
   },
 });

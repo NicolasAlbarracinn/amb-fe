@@ -7,6 +7,7 @@ import GridItem from 'components/Grid/GridItem';
 import LenderDetails from './LenderSteps/LenderDetails';
 import EconomicActivity from './LenderSteps/EconomicActivity';
 import Address from './LenderSteps/Address';
+import FilesUpload from './LenderSteps/FilesUpload';
 
 import WizardContainer from 'containers/WizardContainer/WizardContainer';
 
@@ -19,6 +20,7 @@ const LenderForm = () => {
             { stepName: 'Alta de cartera', stepComponent: LenderDetails, stepId: 'lenderDetails' },
             { stepName: 'Lidacion de haberes', stepComponent: EconomicActivity, stepId: 'economicActivity' },
             { stepName: 'Lidacion bancaria', stepComponent: Address, stepId: 'address' },
+            { stepName: 'Carga de documentacion', stepComponent: FilesUpload, stepId: 'ledersFileUpdates' },
           ]}
           title="Agregar nueva cartera"
           subtitle="Complete los campos requeridos para crear una nueva cartera"

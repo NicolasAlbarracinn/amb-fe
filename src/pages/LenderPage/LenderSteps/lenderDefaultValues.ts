@@ -1,3 +1,5 @@
+import { DefaultState } from 'containers/WizardContainer/hooks';
+
 export const lenderDefaultState = {
   cuit: {
     value: '',
@@ -94,3 +96,147 @@ export const economicActivityState = {
     isValid: false,
   },
 };
+
+export const humanPersonState = {
+  cuitCertificate: {
+    value: '',
+    isValid: false,
+  },
+  proofGrossIncome: {
+    value: '',
+    isValid: false,
+  },
+  incomesCertificates: {
+    value: '',
+    isValid: false,
+  },
+  dniCertificate: {
+    value: '',
+    isValid: false,
+  },
+  proofOfInscriptionUIF: {
+    value: '',
+    isValid: false,
+  },
+  originLegalityFundsCertificate: {
+    value: '',
+    isValid: false,
+  },
+  pepAuthoritiesCertificate: {
+    value: '',
+    isValid: false,
+  },
+  uidInscriptionCertificateAsLender: {
+    value: '',
+    isValid: false,
+  },
+  manualCopyPLAFT: {
+    value: '',
+    isValid: false,
+  },
+};
+
+export const legalPersonState = {
+  statuteStatutoryReform: {
+    value: '',
+    isValid: false,
+  },
+  cuitCertificate: {
+    value: '',
+    isValid: false,
+  },
+  proofGrossIncome: {
+    value: '',
+    isValid: false,
+  },
+  lastBalanceCertificate: {
+    value: '',
+    isValid: false,
+  },
+  proofLegalPerson: {
+    value: '',
+    isValid: false,
+  },
+  proofOfInscriptionUIF: {
+    value: '',
+    isValid: false,
+  },
+  originLegalityFundsCertificate: {
+    value: '',
+    isValid: false,
+  },
+  currentAuthoritiesCertificate: {
+    value: '',
+    isValid: false,
+  },
+  ActOfAssemblyCurrentauthorities: {
+    value: '',
+    isValid: false,
+  },
+  ActOfGoverningBody: {
+    value: '',
+    isValid: false,
+  },
+  currentAuthoritiesDNICertificates: {
+    value: '',
+    isValid: false,
+  },
+  pepAuthoritiesCertificate: {
+    value: '',
+    isValid: false,
+  },
+  regulatoryComplianceUIFCertificate: {
+    value: '',
+    isValid: false,
+  },
+  uifInscriptionCertificate: {
+    value: '',
+    isValid: false,
+  },
+  meetingMinutesOfficialDesignation: {
+    value: '',
+    isValid: false,
+  },
+  actPLAFT: {
+    value: '',
+    isValid: false,
+  },
+  manualCopyPLAFT: {
+    value: '',
+    isValid: false,
+  },
+};
+
+type genericObject = { [key: string]: DefaultState };
+
+export interface ILegalPersonType extends genericObject {
+  statuteStatutoryReform: DefaultState;
+  cuitCertificate: DefaultState;
+  proofGrossIncome: DefaultState;
+  lastBalanceCertificate: DefaultState;
+  proofLegalPerson: DefaultState;
+  proofOfInscriptionUIF: DefaultState;
+  originLegalityFundsCertificate: DefaultState;
+  currentAuthoritiesCertificate: DefaultState;
+  ActOfAssemblyCurrentauthorities: DefaultState;
+  ActOfGoverningBody: DefaultState;
+  currentAuthoritiesDNICertificates: DefaultState;
+  pepAuthoritiesCertificate: DefaultState;
+  regulatoryComplianceUIFCertificate: DefaultState;
+  uifInscriptionCertificate: DefaultState;
+  meetingMinutesOfficialDesignation: DefaultState;
+  actPLAFT: DefaultState;
+  manualCopyPLAFT: DefaultState;
+}
+
+export interface IHumanPersonType extends genericObject {
+  cuitCertificate: DefaultState;
+  proofGrossIncome: DefaultState;
+  incomesCertificates: DefaultState;
+  dniCertificate: DefaultState;
+  proofOfInscriptionUIF: DefaultState;
+  originLegalityFundsCertificate: DefaultState;
+  pepAuthoritiesCertificate: DefaultState;
+  uidInscriptionCertificateAsLender: DefaultState;
+  manualCopyPLAFT: DefaultState;
+}

@@ -48,7 +48,7 @@ const EconomicActivity = () => {
   const handlePrevious = () => {
     dispatch(
       wizardActions.setStep({
-        stepId: 'economicActivity',
+        stepId: 'address',
         data: parseSubmitForm(inputs),
         isValid: true,
         type: 'previous',

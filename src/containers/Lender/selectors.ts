@@ -11,3 +11,7 @@ export const selectIsDataBeenFetched = createSelector(
   [selectLenders],
   ({ isLenderDataFetched }) => isLenderDataFetched,
 );
+export const selectIsSuccessfullyCreated = createSelector(
+  [selectLenders],
+  ({ isSuccessfullyCreated }) => isSuccessfullyCreated,
+);

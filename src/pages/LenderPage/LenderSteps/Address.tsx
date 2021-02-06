@@ -22,14 +22,25 @@ const Address = () => {
   const dispatch = useDispatch();
   const { address: addressData } = useSelector(selectLenderData);
 
-  const { inputs, inputsConfig } = useLenderState(addressData, addressDefaultState, addressConfig);
+  const { inputs, inputsConfig, setFormHasBeenSubmited } = useLenderState(
+    addressData,
+    addressDefaultState,
+    addressConfig,
+  );
 
-  const handleSubmit = () => {
+  const handleNext = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
-
-    if (!isFormInvalid) {
+    if (isFormInvalid) {
+      dispatch(wizardActions.setStep({ stepId: 'address', data: parseSubmitForm(inputs), isValid: true }));
+      setFormHasBeenSubmited(true);
+    } else {
       dispatch(
-        wizardActions.setStep({ stepId: 'address', data: parseSubmitForm(inputs), isValid: true, type: 'submit' }),
+        wizardActions.setStep({
+          stepId: 'address',
+          data: parseSubmitForm(inputs),
+          isValid: true,
+          type: 'next',
+        }),
       );
     }
   };
@@ -55,8 +66,8 @@ const Address = () => {
           </Button>
         </div>
         <div className={classes.right}>
-          <Button color="rose" onClick={handleSubmit}>
-            Finalizar
+          <Button color="rose" onClick={handleNext}>
+            Proximo
           </Button>
         </div>
         <div className={classes.clearfix} />

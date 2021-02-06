@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
 
@@ -40,7 +40,7 @@ export interface DefaultState {
 export const useInputChange = (defaultState: { [key: string]: DefaultState }) => {
   const [inputs, setInputs] = useState(defaultState);
 
-  const onChangeHanlder = ({ id, value, isValid }) => {
+  const onChangeHanlder = useCallback(({ id, value, isValid }) => {
     setInputs(prevState => ({
       ...prevState,
       [id]: {
@@ -48,7 +48,7 @@ export const useInputChange = (defaultState: { [key: string]: DefaultState }) =>
         isValid,
       },
     }));
-  };
+  }, []);
 
   const updateInputs = (updatedValues: { [key: string]: DefaultState }) => {
     setInputs(prevState => ({ ...prevState, ...updatedValues }));
