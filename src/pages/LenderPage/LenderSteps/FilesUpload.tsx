@@ -46,7 +46,7 @@ const FilesUpload = () => {
     );
   };
 
-  return personType === '' ? (
+  return personType === 'fisica' ? (
     <HumanPersonFiles submitHandler={handleSubmit} backHandler={handlePrevious} />
   ) : (
     <LegalPersonFiles submitHandler={handleSubmit} backHandler={handlePrevious} />
@@ -81,7 +81,6 @@ const HumanPersonFiles = ({ submitHandler, backHandler }: IPersonFilesProps) => 
           </GridItem>
         ))}
       </GridContainer>
-      )
       <div className={classes.footer}>
         <div className={classes.left}>
           <Button color="rose" onClick={() => backHandler(inputs)}>
@@ -122,7 +121,6 @@ const LegalPersonFiles = ({ submitHandler, backHandler }: IPersonFilesProps) => 
           </GridItem>
         ))}
       </GridContainer>
-      )
       <div className={classes.footer}>
         <div className={classes.left}>
           <Button color="rose" onClick={() => backHandler(inputs)}>

@@ -66,7 +66,7 @@ const DateInput = ({
         id={id}
         label={label}
         InputLabelProps={{ className: classes.labelRoot + ' ' + labelClasses }}
-        value={value.length <= 0 ? null : value}
+        value={value.length <= 0 ? null : moment(value).format('MM/DD/YYYY')}
         onChange={handleDateChange}
         maxDate={moment(new Date())}
         KeyboardButtonProps={{

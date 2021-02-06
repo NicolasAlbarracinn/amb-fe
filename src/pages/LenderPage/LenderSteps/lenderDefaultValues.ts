@@ -3,47 +3,47 @@ import { DefaultState } from 'containers/WizardContainer/hooks';
 export const lenderDefaultState = {
   cuit: {
     value: '',
-    isValid: true,
+    isValid: false,
   }, // puede repertise?
   lenderName: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   personType: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   name: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   lastName: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   businessName: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   documentType: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   documentNumber: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   email: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   cellphone: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
   phone: {
     value: '',
-    isValid: true,
+    isValid: false,
   },
 };
 

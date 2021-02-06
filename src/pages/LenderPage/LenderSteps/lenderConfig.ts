@@ -189,7 +189,8 @@ export const economicActivityConfig: IConfigFunction = (inputValue, updateValueO
       },
     },
     {
-      type: InputOptions.TEXT,
+      //TODO: modify input date
+      type: InputOptions.DATE,
       gridSizeProps: {
         xs: 12,
         sm: 3,
@@ -197,10 +198,10 @@ export const economicActivityConfig: IConfigFunction = (inputValue, updateValueO
       props: {
         id: 'registrationPeriod',
         label: 'Periodo de alta de la actividad',
-        updateValueOnBlur,
-        formHasBeenSubmited,
-        isValidInput: inputValue['registrationPeriod'].isValid,
+        onChange: updateValueOnBlur,
+        isValid: inputValue['registrationPeriod'].isValid,
         value: inputValue['registrationPeriod'].value,
+        loadError: false,
       },
     },
   ];

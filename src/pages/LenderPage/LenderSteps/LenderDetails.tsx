@@ -19,6 +19,7 @@ import { lenderConfig } from './lenderConfig';
 import { lenderDefaultState } from './lenderDefaultValues';
 
 import { useLenderState } from '../hooks';
+import { verifyLength } from 'components/Form/validators';
 
 const LenderDetails = () => {
   const classes = useStyles();
@@ -34,7 +35,7 @@ const LenderDetails = () => {
   const handleNext = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
     if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId: 'lenderDetails', data: parseSubmitForm(inputs), isValid: true }));
+      dispatch(wizardActions.setStep({ stepId: 'lenderDetails', data: parseSubmitForm(inputs), isValid: false }));
       setFormHasBeenSubmited(true);
     } else {
       dispatch(
@@ -56,7 +57,7 @@ const LenderDetails = () => {
     <>
       <GridContainer>
         <GridItem xs={12} sm={6}>
-          <SearchBar placeholder="Cuit" />
+          <SearchBar placeholder="Cuit" validateInput={(value: string) => verifyLength(value, [11, 11])} />
         </GridItem>
       </GridContainer>
       <GridContainer>{FormInputs(inputsConfig)}</GridContainer>
