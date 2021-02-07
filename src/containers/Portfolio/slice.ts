@@ -2,12 +2,13 @@ import { PayloadAction } from '@reduxjs/toolkit';
 
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { IPortfolioState } from './pageState';
-import { IPortfolio } from './types';
+import { IPortfolio, IplanList } from './types';
 
 export const initialState: IPortfolioState = {
   loading: true,
   portfolioData: {} as IPortfolio,
   lendersNameList: [],
+  planList: [],
 };
 
 const PortfolioSlice = createSlice({
@@ -42,6 +43,12 @@ const PortfolioSlice = createSlice({
     },
     setPortfolioFailed(state) {
       state.loading = false;
+    },
+    setPlanToList(state, action: PayloadAction<IplanList>) {
+      state.planList.push(action.payload);
+    },
+    removePlanFromList(state, action: PayloadAction<string>) {
+      state.planList = state.planList.filter(i => i.plan !== action.payload);
     },
   },
 });

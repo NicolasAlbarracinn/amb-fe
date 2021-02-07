@@ -122,3 +122,29 @@ export const portfolioState = {
     isValid: true,
   }, //va a depender de la lista de fondista-- en db agregar una realcion a lista de fondista
 };
+
+export const planDefaultState = {
+  plan: {
+    value: '',
+    isValid: true,
+  },
+  amountGranted: {
+    value: '',
+    isValid: true,
+  },
+  signatureAmount: {
+    value: '',
+    isValid: true,
+  },
+};
+
+export const duesDefaultState = {
+  duesQuantity: {
+    value: '0',
+    isValid: true,
+  },
+  duesAmount: {
+    value: '',
+    isValid: true,
+  },
+};

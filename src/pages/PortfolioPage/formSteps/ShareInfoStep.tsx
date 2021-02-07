@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useTable, useSortBy } from 'react-table';
-import classnames from 'classnames';
-import { isEmpty } from 'lodash';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import GridContainer from 'components/Grid/GridContainer';
-import Button from 'components/CustomButtons/Button';
-
-import { DefaultState, useInputChange } from 'containers/WizardContainer/hooks';
-
-import { useStyles } from 'components/Wizard/stepsStyles';
-
-import { actions as wizardActions } from 'containers/WizardContainer/slice';
+import Add from '@material-ui/icons/Add';
+import Clear from '@material-ui/icons/Clear';
 
 import { parseSubmitForm } from 'utils/parseForm';
 
@@ -20,17 +11,21 @@ import InputSelect from 'components/Form/Inputs/Select';
 import InputText from 'components/Form/Inputs/Text';
 import InputNumber from 'components/Form/Inputs/Numeric';
 import RegularButton from 'components/CustomButtons/Button';
-import Table from 'components/Table/Table';
-
-import { portfolioState } from './PortfoliosDeafultValues';
-import { selectLenderNameList } from 'containers/Portfolio/selectors';
 import GridItem from 'components/Grid/GridItem';
-import { UpdateInput } from 'components/Form/types';
-import Add from '@material-ui/icons/Add';
-import Clear from '@material-ui/icons/Clear';
-
+import GridContainer from 'components/Grid/GridContainer';
 import Card from 'components/Card/Card';
-import { Close, Dvr } from '@material-ui/icons';
+
+import { DefaultState } from 'containers/WizardContainer/hooks';
+import { useStyles } from 'components/Wizard/stepsStyles';
+import { actions as wizardActions } from 'containers/WizardContainer/slice';
+import { actions } from 'containers/PrivateRoutes/slice';
+
+import { actions as portfolioActions } from 'containers/Portfolio/slice';
+import { IPlan, IDues, IplanList } from 'containers/Portfolio/types';
+
+import { planDefaultState, duesDefaultState } from './PortfoliosDeafultValues';
+
+import PlanList from './ShareInfoTable';
 
 interface IPlanState {
   plan: DefaultState;
@@ -43,50 +38,12 @@ interface IDuesState {
   duesAmount: DefaultState;
 }
 
-const planDefaultState = {
-  plan: {
-    value: '',
-    isValid: true,
-  },
-  amountGranted: {
-    value: '',
-    isValid: true,
-  },
-  signatureAmount: {
-    value: '',
-    isValid: true,
-  },
-};
-
-const duesDefaultState = {
-  duesQuantity: {
-    value: '0',
-    isValid: true,
-  },
-  duesAmount: {
-    value: '',
-    isValid: true,
-  },
-};
-
-interface IPlan {
-  plan: string;
-  amountGranted: string;
-  signatureAmount: string;
-}
-
-type IDues = Array<{ duesQuantity: string; duesAmount: string }>;
-
-interface IplanList extends IPlan {
-  dues: IDues;
-}
-
 const ShareInfoStep = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [planInput, setPlanInputs] = useState(planDefaultState);
   const [duesInput, setDuesInput] = useState(duesDefaultState);
   const [duesList, setDuesList] = useState<Array<IDuesState>>([]);
-  const [planList, setPlanList] = useState<Array<IplanList>>([]);
 
   const handlePlanInputChange = (updatedValues: { [key: string]: DefaultState }) => {
     setPlanInputs(prevState => ({ ...prevState, ...updatedValues }));
@@ -122,15 +79,10 @@ const ShareInfoStep = () => {
       dues: parsedDues,
     };
 
-    setPlanList(prevState => [...prevState, { ...newPlan }]);
+    dispatch(portfolioActions.setPlanToList(newPlan));
     setDuesInput(duesDefaultState);
     setPlanInputs(planDefaultState);
     setDuesList([]);
-  };
-
-  const handleDeletePlan = (name: string) => {
-    console.log(name);
-    setPlanList(ps => ps.filter(i => i.plan !== name));
   };
 
   return (
@@ -233,7 +185,7 @@ const ShareInfoStep = () => {
           <div className={classes.clearfix} />
         </div>
       </Card>
-      <PlanList plan={planList} deleteRow={handleDeletePlan} />
+      <PlanList />
     </div>
   );
 };
@@ -246,108 +198,4 @@ const getDuesOptions = (maxAmount: number) => {
     options.push({ value: i.toString(), label: i.toString() });
   }
   return options;
-};
-
-const headers = (deleteRow: (arg: string) => void, showDues: () => void) => [
-  {
-    Header: 'Plan',
-    accessor: 'plan',
-  },
-  {
-    Header: 'Monto Otorgado',
-    accessor: 'amountGranted',
-  },
-  {
-    Header: 'Monto Firma',
-    accessor: 'signatureAmount',
-  },
-  {
-    Header: 'Acciones',
-    accessor: 'actions',
-    alignItems: 'center',
-    Cell: props => {
-      console.log(props.row.values.plan);
-      return (
-        <div className="actions-right">
-          <Button justIcon round simple onClick={() => showDues()} color="warning" className="edit">
-            <Dvr />
-          </Button>
-          {/* use this button to remove the data row */}
-          <Button
-            justIcon
-            round
-            simple
-            onClick={() => deleteRow(props.row.values.plan)}
-            color="danger"
-            className="remove"
-          >
-            <Close />
-          </Button>
-        </div>
-      );
-    },
-  },
-];
-
-interface IPlanListProps {
-  plan: IplanList[];
-  deleteRow: (arg: string) => void;
-}
-
-const PlanList = ({ plan, deleteRow }: IPlanListProps) => {
-  const columns = React.useMemo(
-    () =>
-      headers(deleteRow, () => {
-        console.log('showInfo');
-      }),
-    [],
-  );
-
-  const tableInstance = useTable({ columns, data: plan });
-
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
-
-  // const data = React.useMemo(() => partnersList.map(item => ({ ...item })), [partnersList]);
-
-  return (
-    <div className="ReactTable -striped -highlight">
-      <table {...getTableProps()} className="ReactTable -striped -highlight">
-        <thead className="rt-thead -header">
-          {headerGroups.map((headerGroup, i) => (
-            <tr key={`${new Date()}-${Math.random() * i}`} {...headerGroup.getHeaderGroupProps()} className="rt-tr">
-              {headerGroup.headers.map((column, key) => (
-                <th key={`${new Date()}-${Math.random() * key}`} className={classnames('rt-th rt-resizable-header')}>
-                  <div className="rt-resizable-header-content">{column.render('Header')}</div>
-                  {/* Render the columns filter UI */}
-                  <div>
-                    {headerGroup.headers.length - 1 === key ? null : column.canFilter ? column.render('Filter') : null}
-                  </div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()} className="rt-tbody">
-          {rows.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr
-                key={`${new Date()}-${Math.random() * i}`}
-                {...row.getRowProps()}
-                className={classnames('rt-tr', { ' -odd': i % 2 === 0 }, { ' -even': i % 2 === 1 })}
-              >
-                {row.cells.map((cell, key) => {
-                  return (
-                    <td key={`${new Date()}-${Math.random() * key}`} {...cell.getCellProps()} className="rt-td">
-                      {cell.render('Cell')}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
 };

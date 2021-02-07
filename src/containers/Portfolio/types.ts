@@ -31,3 +31,15 @@ export interface ILendersNamesList {
   id: string;
   lenderName: string;
 }
+
+export interface IPlan {
+  plan: string;
+  amountGranted: string;
+  signatureAmount: string;
+}
+
+export type IDues = Array<{ duesQuantity: string; duesAmount: string }>;
+
+export interface IplanList extends IPlan {
+  dues: IDues;
+}
