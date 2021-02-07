@@ -24,7 +24,6 @@ const Portfolios = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(data);
     if (!isEmpty(data)) {
       dispatch(
         actions.setPortfolioRequest({

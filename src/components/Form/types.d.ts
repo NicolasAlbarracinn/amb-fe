@@ -12,4 +12,5 @@ export interface IInputProps {
   isValidInput?: boolean;
   disabled?: boolean;
   value?: string;
+  lenghtRange?: Array<number>;
 }

@@ -107,7 +107,6 @@ const LegalPersonFiles = ({ submitHandler, backHandler }: IPersonFilesProps) => 
   // const isValid = useMemo(() => Object.entries(inputs).some(key => key[1].isValid === false), [inputs]);
 
   useEffect(() => {
-    console.log(inputs);
     const isValid = Object.entries(inputs).some(key => key[1].isValid === false);
     setInvalidForm(isValid);
   }, [inputs]);

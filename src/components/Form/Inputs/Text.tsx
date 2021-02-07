@@ -16,6 +16,7 @@ const TextInput = ({
   isValidInput = true,
   disabled = false,
   value,
+  lenghtRange = [1, 80],
 }: ITextInput) => {
   const [inputValue, setInputValue] = useState(value);
   const { invalidInput, hasBeenValidAtLeastOnce, eventsHandlers } = useInputValidation(
@@ -31,7 +32,7 @@ const TextInput = ({
   const { onChangeValidation, onInputFocused, OnBlurValidation } = eventsHandlers;
 
   const handleOnChange: InputEventFunction = ({ currentTarget: { value } }) => {
-    const isValid = verifyLength(value, [1, 80]);
+    const isValid = verifyLength(value, lenghtRange);
     onChangeValidation(isValid);
     setInputValue(value);
   };
@@ -41,7 +42,7 @@ const TextInput = ({
   };
 
   const handleOnBlur: InputEventFunction = ({ currentTarget: { value, id } }) => {
-    const isValid = verifyLength(value, [1, 80]);
+    const isValid = verifyLength(value, lenghtRange);
     OnBlurValidation({ value, id, isValid });
   };
 
