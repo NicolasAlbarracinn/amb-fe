@@ -17,10 +17,10 @@ const PortfolioForm = () => {
       <GridItem xs={12} sm={8}>
         <WizardContainer
           steps={[
-            { stepName: 'Carga de cuotas', stepComponent: ShareInfoStep, stepId: 'ShareInfoStep' },
             { stepName: 'Alta de cartera', stepComponent: PortfolioDetails, stepId: 'portfolioDetails' },
             { stepName: 'Liquidacion de haberes', stepComponent: AssetsLiquidation, stepId: 'assetsLiquidation' },
             { stepName: 'Liquidacion Bancaria', stepComponent: BankLiquidation, stepId: 'bankLiquidation' },
+            { stepName: 'Carga de cuotas', stepComponent: ShareInfoStep, stepId: 'ShareInfoStep' },
           ]}
           title="Agregar nueva cartera"
           subtitle="Complete los campos requeridos para crear una nueva cartera"

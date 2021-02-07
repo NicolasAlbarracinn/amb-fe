@@ -5,6 +5,7 @@ export interface IPortfolioState {
   portfolioData: IPortfolio;
   lendersNameList: Array<ILendersNamesList>;
   planList: Array<IplanList>;
+  isSuccessfullyCreated: boolean;
 }
 
 export type ContainerState = IPortfolioState;

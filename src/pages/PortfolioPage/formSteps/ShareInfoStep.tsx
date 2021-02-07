@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { isEmpty } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Add from '@material-ui/icons/Add';
 import Clear from '@material-ui/icons/Clear';
@@ -18,14 +19,15 @@ import Card from 'components/Card/Card';
 import { DefaultState } from 'containers/WizardContainer/hooks';
 import { useStyles } from 'components/Wizard/stepsStyles';
 import { actions as wizardActions } from 'containers/WizardContainer/slice';
-import { actions } from 'containers/PrivateRoutes/slice';
 
 import { actions as portfolioActions } from 'containers/Portfolio/slice';
 import { IPlan, IDues, IplanList } from 'containers/Portfolio/types';
+import { selectPlanList } from 'containers/Portfolio/selectors';
 
 import { planDefaultState, duesDefaultState } from './PortfoliosDeafultValues';
 
 import PlanList from './ShareInfoTable';
+import Button from 'components/CustomButtons/Button';
 
 interface IPlanState {
   plan: DefaultState;
@@ -41,6 +43,7 @@ interface IDuesState {
 const ShareInfoStep = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const planList: IplanList[] = useSelector(selectPlanList);
   const [planInput, setPlanInputs] = useState(planDefaultState);
   const [duesInput, setDuesInput] = useState(duesDefaultState);
   const [duesList, setDuesList] = useState<Array<IDuesState>>([]);
@@ -83,6 +86,27 @@ const ShareInfoStep = () => {
     setDuesInput(duesDefaultState);
     setPlanInputs(planDefaultState);
     setDuesList([]);
+  };
+
+  const handleSubmit = () => {
+    dispatch(
+      wizardActions.setStep({
+        stepId: 'ShareInfoStep',
+        data: planList,
+        isValid: true,
+        type: 'submit',
+      }),
+    );
+  };
+  const handlePrevious = () => {
+    dispatch(
+      wizardActions.setStep({
+        stepId: 'ShareInfoStep',
+        data: planList,
+        isValid: true,
+        type: 'previous',
+      }),
+    );
   };
 
   return (
@@ -185,7 +209,22 @@ const ShareInfoStep = () => {
           <div className={classes.clearfix} />
         </div>
       </Card>
-      <PlanList />
+      <Card className={classes.cardPadding}>
+        <PlanList />
+      </Card>
+      <div className={classes.footer}>
+        <div className={classes.left}>
+          <Button color="rose" onClick={handlePrevious}>
+            Anterior
+          </Button>
+        </div>
+        <div className={classes.right}>
+          <Button disabled={isEmpty(planList)} color="rose" onClick={handleSubmit}>
+            Agregar cartera
+          </Button>
+        </div>
+        <div className={classes.clearfix} />
+      </div>
     </div>
   );
 };

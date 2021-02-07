@@ -24,20 +24,23 @@ const BankLiquidation = () => {
   const dispatch = useDispatch();
   const [formHasBeenSubmited, setFormHasBeenSubmited] = useState(false);
 
-  const handleSubmit = () => {
+  const handleNext = () => {
     const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
-
-    if (!isFormInvalid) {
+    if (isFormInvalid) {
+      dispatch(wizardActions.setStep({ stepId: 'bankLiquidation', data: parseSubmitForm(inputs), isValid: false }));
+      setFormHasBeenSubmited(true);
+    } else {
       dispatch(
         wizardActions.setStep({
           stepId: 'bankLiquidation',
           data: parseSubmitForm(inputs),
           isValid: true,
-          type: 'submit',
+          type: 'next',
         }),
       );
     }
   };
+
   const handlePrevious = () => {
     dispatch(
       wizardActions.setStep({
@@ -61,8 +64,8 @@ const BankLiquidation = () => {
           </Button>
         </div>
         <div className={classes.right}>
-          <Button color="rose" onClick={handleSubmit}>
-            Finalizar
+          <Button color="rose" onClick={handleNext}>
+            Proximo
           </Button>
         </div>
         <div className={classes.clearfix} />

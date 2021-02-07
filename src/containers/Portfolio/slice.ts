@@ -9,6 +9,7 @@ export const initialState: IPortfolioState = {
   portfolioData: {} as IPortfolio,
   lendersNameList: [],
   planList: [],
+  isSuccessfullyCreated: false,
 };
 
 const PortfolioSlice = createSlice({
@@ -35,11 +36,12 @@ const PortfolioSlice = createSlice({
     getLendersNameListFailed(state) {
       state.loading = false;
     },
-    setPortfolioRequest(state, action: PayloadAction<any>) {
+    setPortfolioRequest(state, action: PayloadAction<string>) {
       state.loading = true;
     },
     setPortfolioSuccess(state) {
       state.loading = false;
+      state.isSuccessfullyCreated = true;
     },
     setPortfolioFailed(state) {
       state.loading = false;

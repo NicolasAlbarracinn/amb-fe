@@ -46,8 +46,11 @@ export function* setPortfolioRequest(action: PayloadAction<any>) {
       body: JSON.stringify(action.payload),
     };
 
-    yield call(request, PORTFOLIOS_URL, requestOptions);
+    const response = yield call(request, PORTFOLIOS_URL, requestOptions);
     yield put(actions.setPortfolioSuccess());
+    toast.success(`Se agrego la cartera nro: ${response.data.planId}`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
   } catch (err) {
     yield put(actions.setPortfolioFailed());
     toast.error('Algo salio mal.', {

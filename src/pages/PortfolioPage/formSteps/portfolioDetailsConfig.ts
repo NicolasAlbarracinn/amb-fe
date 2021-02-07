@@ -227,7 +227,7 @@ export const portfolioDetailsConfig = (
       },
       props: {
         id: 'maxDues',
-        label: 'descripcion Breve',
+        label: 'maximo de cuotas',
         updateValueOnBlur,
         formHasBeenSubmited,
         isValidInput: inputValue['maxDues'].isValid,
