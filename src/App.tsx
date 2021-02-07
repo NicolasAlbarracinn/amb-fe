@@ -16,6 +16,10 @@ import Dashboard from 'pages/Dashboard/Dashboard';
 import Profile from 'containers/Profile/Profile';
 import Partners from 'containers/Partners/Partners';
 import Benefits from 'containers/Benefits/Benefits';
+import Portfolios from 'containers/Portfolio/Portfolios';
+import Lenders from 'containers/Lender/Lenders';
+
+import LenderForm from 'pages/LenderPage';
 
 const App = () => {
   return (
@@ -38,6 +42,8 @@ const App = () => {
                 <Route path="/app/profile" component={Profile} />
                 <Route path="/app/partners" component={Partners} />
                 <Route path="/app/benefits" component={Benefits} />
+                <Route path="/app/portfolio" component={Portfolios} />
+                <Route path="/app/lender" component={Lenders} />
                 <Route path="/app/dashboard" component={Dashboard} />
               </Switch>
             </AdminLayout>

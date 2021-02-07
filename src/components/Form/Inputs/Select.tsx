@@ -6,7 +6,7 @@ interface IInputProps {
   id: string;
   label?: string;
   mainSelectLabel?: string;
-  value: string;
+  value?: string;
   items: { value: string; label: string }[];
   handleSelect: Function;
   isValid?: boolean;
@@ -26,14 +26,16 @@ const SelectInput = ({
   disabled = false,
 }: IInputProps) => {
   const classes = useStyles();
+
   const handleOnChange = e => {
-    handleSelect({ id, value: e.target.value, isValid: true });
+    handleSelect({ [id]: { value: e.target.value, isValid: true } });
   };
 
+  const elementId = `simple-select-${new Date().getUTCMilliseconds() * Math.random()}`;
   return (
     <FormControl error={!isValid && loadError} fullWidth className={classes.selectFormControl}>
       {label && (
-        <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
+        <InputLabel htmlFor={elementId} className={classes.selectLabel}>
           {label}
         </InputLabel>
       )}
@@ -48,8 +50,8 @@ const SelectInput = ({
         value={value}
         onChange={handleOnChange}
         inputProps={{
-          name: 'simpleSelect',
-          id: 'simple-select',
+          name: elementId,
+          id: elementId,
         }}
       >
         {mainSelectLabel && (

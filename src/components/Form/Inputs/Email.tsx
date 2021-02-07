@@ -40,6 +40,7 @@ const EmailInput = ({
 
   return (
     <CustomInput
+      key={id}
       id={id}
       labelText={label}
       invalidInput={invalidInput}

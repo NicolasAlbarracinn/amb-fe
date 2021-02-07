@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 
@@ -12,7 +12,8 @@ import Button from 'components/CustomButtons/Button';
 
 import { useStyles } from './styles';
 
-const SearchBar = (props: { rtlActive?: string }) => {
+const SearchBar = (props: { rtlActive?: string; placeholder?: string; validateInput?: (arg: string) => boolean }) => {
+  const [isDisabled, setIsDisabled] = useState(props.validateInput ? true : false);
   useInjectReducer({ key: sliceKey, reducer: reducer });
 
   const classes = useStyles();
@@ -23,6 +24,11 @@ const SearchBar = (props: { rtlActive?: string }) => {
   });
 
   const handleOnChange = ({ currentTarget: { value } }: FormEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    if (props.validateInput) {
+      const isValid = props.validateInput(value);
+      setIsDisabled(!isValid);
+    }
+
     dispatch(actions.updateSearchParameter({ searchParameter: value }));
   };
 
@@ -37,7 +43,7 @@ const SearchBar = (props: { rtlActive?: string }) => {
           className: classes.top + ' ' + classes.search,
         }}
         inputProps={{
-          placeholder: 'Buscar',
+          placeholder: props.placeholder || 'Buscar',
           inputProps: {
             'aria-label': 'Buscar',
             className: classes.searchInput,
@@ -45,7 +51,15 @@ const SearchBar = (props: { rtlActive?: string }) => {
           onChange: handleOnChange,
         }}
       />
-      <Button onClick={handleSubmit} color="white" aria-label="edit" justIcon round className={searchButton}>
+      <Button
+        disabled={isDisabled}
+        onClick={handleSubmit}
+        color="white"
+        aria-label="edit"
+        justIcon
+        round
+        className={searchButton}
+      >
         <Search className={classes.headerLinksSvg + ' ' + classes.searchIcon} />
       </Button>
     </div>

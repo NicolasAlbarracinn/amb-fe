@@ -18,6 +18,7 @@ interface ICustomInputProps {
   formControlProps?: FormControlProps;
   inputProps?: InputBaseComponentProps;
   labelProps?: InputLabelProps;
+  value?: string;
 }
 
 const CustomInput = ({
@@ -29,6 +30,7 @@ const CustomInput = ({
   labelProps,
   invalidInput,
   hasBeenValidAtLeastOnce,
+  value,
 }: ICustomInputProps) => {
   const { marginTop, formControlClasses, helpTextClasses, inputClasses, classes } = useInputStyles(invalidInput);
 
@@ -53,6 +55,7 @@ const CustomInput = ({
         </InputLabel>
       )}
       <Input
+        value={value}
         classes={{
           input: inputClasses,
           root: marginTop,

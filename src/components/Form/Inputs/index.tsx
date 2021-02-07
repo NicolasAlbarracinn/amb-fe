@@ -5,6 +5,7 @@ import InputText from './Text';
 import InputDate from './Date';
 import InputSelect from './Select';
 import InputEmail from './Email';
+import InputNumber from './Numeric';
 
 export enum InputOptions {
   TEXT = 'text',
@@ -19,6 +20,7 @@ export const inputCases = {
   [InputOptions.EMAIL]: InputEmail,
   [InputOptions.DATE]: InputDate,
   [InputOptions.SELECT]: InputSelect,
+  [InputOptions.NUMERIC]: InputNumber,
 };
 
 const FormInputs = (inputs: Array<any>) => {

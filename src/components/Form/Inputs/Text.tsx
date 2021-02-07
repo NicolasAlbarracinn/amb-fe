@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CustomInput from './CustomInput';
 import { verifyLength } from '../validators';
@@ -15,18 +15,26 @@ const TextInput = ({
   formHasBeenSubmited = true,
   isValidInput = true,
   disabled = false,
+  value,
+  lenghtRange = [1, 80],
 }: ITextInput) => {
+  const [inputValue, setInputValue] = useState(value);
   const { invalidInput, hasBeenValidAtLeastOnce, eventsHandlers } = useInputValidation(
     formHasBeenSubmited,
     isValidInput,
     updateValueOnBlur,
   );
 
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
   const { onChangeValidation, onInputFocused, OnBlurValidation } = eventsHandlers;
 
   const handleOnChange: InputEventFunction = ({ currentTarget: { value } }) => {
-    const isValid = verifyLength(value, [3, 5]);
+    const isValid = verifyLength(value, lenghtRange);
     onChangeValidation(isValid);
+    setInputValue(value);
   };
 
   const handleOnFocus: InputEventFunction = () => {
@@ -34,13 +42,15 @@ const TextInput = ({
   };
 
   const handleOnBlur: InputEventFunction = ({ currentTarget: { value, id } }) => {
-    const isValid = verifyLength(value, [3, 5]);
+    const isValid = verifyLength(value, lenghtRange);
     OnBlurValidation({ value, id, isValid });
   };
 
   return (
     <CustomInput
+      key={id}
       id={id}
+      value={inputValue}
       labelText={label}
       invalidInput={invalidInput}
       hasBeenValidAtLeastOnce={hasBeenValidAtLeastOnce}

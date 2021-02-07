@@ -36,7 +36,7 @@ const DateInput = ({
 
   const handleDateChange = date => {
     const parsedDate = moment(date).format('MM/DD/YYYY');
-    onChange({ id, value: parsedDate, isValid: true });
+    onChange({ [id]: { value: parsedDate, isValid: true } });
   };
 
   const error = !isValid && loadError;
@@ -66,7 +66,7 @@ const DateInput = ({
         id={id}
         label={label}
         InputLabelProps={{ className: classes.labelRoot + ' ' + labelClasses }}
-        value={value.length <= 0 ? null : value}
+        value={value.length <= 0 ? null : moment(value).format('MM/DD/YYYY')}
         onChange={handleDateChange}
         maxDate={moment(new Date())}
         KeyboardButtonProps={{
