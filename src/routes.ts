@@ -50,5 +50,35 @@ const dashRoutes = [
       },
     ],
   },
+  {
+    collapse: true,
+    name: 'Carteras',
+    icon: AllOut,
+    state: 'porfolioCollapse',
+    views: [
+      {
+        path: '/new',
+        name: 'Crear Cartera',
+        mini: 'CC',
+        component: AllOut,
+        layout: '/app/portfolio',
+      },
+    ],
+  },
+  {
+    collapse: true,
+    name: 'Fondeadores',
+    icon: AllOut,
+    state: 'porfolioCollapse',
+    views: [
+      {
+        path: '/new',
+        name: 'Crear fondeador',
+        mini: 'FC',
+        component: AllOut,
+        layout: '/app/lender',
+      },
+    ],
+  },
 ];
 export default dashRoutes;

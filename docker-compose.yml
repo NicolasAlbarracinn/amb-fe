@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  sample:
+    container_name: amebo-develop
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3001:80
+    environment:
+      - REACT_APP_API_URL=https://amebo-be-tsc.herokuapp.com

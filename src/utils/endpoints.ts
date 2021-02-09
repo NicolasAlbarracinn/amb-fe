@@ -1,4 +1,6 @@
-export const BASE_URL = `http://${getCurrentEnvironment()}:4000/api`;
+import { environment } from 'enviroment';
+
+export const BASE_URL = `${environment.API.HTTP_URL}`;
 export const GET_USER_LOGIN = `${BASE_URL}/user/login`;
 export const GET_ACCOUNT_DATA = `${BASE_URL}/user/profile`;
 export const UPDATE_ACCOUNT_DATA = `${BASE_URL}/user/profile/edit`;
@@ -12,6 +14,7 @@ export const LENDERS_URL = `${BASE_URL}/lenders`;
 export const PORTFOLIOS_URL = `${BASE_URL}/portfolios`;
 
 export function getCurrentEnvironment() {
+  console.log(process.env);
   const host = window.location.hostname;
   return host;
 }
