@@ -7,6 +7,7 @@ export const GET_AFFILEATES_LIST = `${BASE_URL}/partners`;
 //TODO: We should change this to a generic name like partners_url and what defines the type of request is the method
 export const SAVE_PARTNER = `${BASE_URL}/partners`;
 export const BENEFITS_URL = `${BASE_URL}/benefits`;
+export const BENEFIT_PLAN_LIST = `${BASE_URL}/benefits/planList`;
 export const UPADTE_PARTNER_STATUS = `${BASE_URL}/partners/updateStatus`;
 export const LENDERS_URL = `${BASE_URL}/lenders`;
 export const PORTFOLIOS_URL = `${BASE_URL}/portfolios`;
