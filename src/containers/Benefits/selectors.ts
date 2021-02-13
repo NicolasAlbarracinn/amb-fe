@@ -6,6 +6,7 @@ import { initialState } from './slice';
 const selectBenefits = (state: RootState) => state.benefits || initialState;
 
 export const selectBenefitsData = createSelector([selectBenefits], BenefitsState => BenefitsState.benefitData);
+export const selectPartnerData = createSelector([selectBenefits], ({ partnerInfo }) => partnerInfo);
 export const selectIsDataFetched = createSelector(
   [selectBenefits],
   BenefitsState => BenefitsState.isBenefitDataFetched,

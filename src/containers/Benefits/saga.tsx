@@ -10,7 +10,7 @@ import { actions } from './slice';
 
 const cookies = new Cookies();
 
-export function* getUpdateBenefitRequest(action: PayloadAction<any>) {
+export function* getPartnerInformation(action: PayloadAction<any>) {
   const token = cookies.get('token');
   const requestURL = `${BENEFITS_URL}/${action.payload}`;
   try {
@@ -23,10 +23,10 @@ export function* getUpdateBenefitRequest(action: PayloadAction<any>) {
     };
 
     const response = yield call(request, requestURL, requestOptions);
-    yield put(actions.getUpdateBenefitSuccess(response.data));
+    yield put(actions.getPartnerInformationSuccess(response.data));
   } catch (err) {
-    yield put(actions.getUpdateBenefitFailed());
-    toast.error('Algo salio mal.', {
+    yield put(actions.getPartnerInformationFailed());
+    toast.error(err.message, {
       position: toast.POSITION.TOP_CENTER,
     });
   }
@@ -103,7 +103,7 @@ export function* getPlanById(action: PayloadAction<string>) {
 }
 
 export function* benefitsSaga() {
-  yield takeLatest(actions.getUpdateBenefitRequest.type, getUpdateBenefitRequest);
+  yield takeLatest(actions.getPartnerInformationRequest.type, getPartnerInformation);
   yield takeLatest(actions.setBenefitRequest.type, setBenefitRequest);
   yield takeLatest(actions.getPlanListRequest.type, getPlanList);
   yield takeLatest(actions.getPlanRequest.type, getPlanById);

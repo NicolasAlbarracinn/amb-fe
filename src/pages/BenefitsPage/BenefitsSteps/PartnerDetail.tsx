@@ -11,24 +11,24 @@ import SelectInput from 'components/Form/SelectInput';
 import EmailInput from 'components/Form/EmailInput';
 import DateInput from 'components/Form/DateInput';
 import Button from 'components/CustomButtons/Button';
-
-import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
-import { documentTypeList, civilStateList, statusList } from 'utils/constants';
-import { defaultPartner } from './defaultStates';
-
 import { useStyles } from 'components/Wizard/stepsStyles';
 
-import { selectBenefitsData, selectIsDataFetched } from 'containers/Benefits/selectors';
+import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
+
+import { documentTypeList, civilStateList, statusList } from 'utils/constants';
+import { selectPartnerData, selectIsDataFetched } from 'containers/Benefits/selectors';
 import { actions as benefitActions } from 'containers/Benefits/slice';
+import { IPartnerDetail } from 'containers/Partners/types';
 
 import { parseResponseData } from './parseResponseData';
+import { defaultPartner } from './defaultStates';
 
 const PartnerDetail = () => {
   const classes = useStyles();
   const { inputs: partner, onChangeHanlder, updateInputs } = useInputChange(defaultPartner);
   const { loadError, handleNext } = useWizardStep(partner, 'partnerDetail');
 
-  const { personalData, createdAt, status } = useSelector(selectBenefitsData);
+  const partnertData: IPartnerDetail | null = useSelector(selectPartnerData);
   const isDataFetched = useSelector(selectIsDataFetched);
   const dispatch = useDispatch();
 
@@ -36,12 +36,13 @@ const PartnerDetail = () => {
     const { isValid, value } = partner.partnerId;
     //Maybe for the isDataFetched condition we could use something like isEmpty function from lodash an verify if benefitData is empty or not
     if (isValid && !isDataFetched) {
-      dispatch(benefitActions.getUpdateBenefitRequest(value));
+      dispatch(benefitActions.getPartnerInformationRequest(value));
     }
   }, [dispatch, partner, isDataFetched]);
 
   useEffect(() => {
-    if (isDataFetched) {
+    if (isDataFetched && partnertData) {
+      const { personalData, createdAt, status } = partnertData;
       const updatedInput = parseResponseData(personalData);
 
       updateInputs({
@@ -54,7 +55,7 @@ const PartnerDetail = () => {
         },
       });
     }
-  }, [isDataFetched, personalData, createdAt]);
+  }, [isDataFetched, partnertData, updateInputs]);
 
   return (
     <>

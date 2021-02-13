@@ -3,8 +3,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { QueryParameters } from 'types/types';
 
-import { IPartnersState } from './pageState';
-import { IPartner } from './types';
+import { IPartnerList } from './types';
 
 // The initial state of the GithubRepoForm container
 export const initialState: any = {
@@ -42,7 +41,7 @@ const PartnersSlice = createSlice({
     getPartnersListRequest(state, action: PayloadAction<QueryParameters>) {
       state.loading = true;
     },
-    getPartnersListSuccess(state, action: PayloadAction<{ list: IPartner[]; count: number }>) {
+    getPartnersListSuccess(state, action: PayloadAction<{ list: IPartnerList[]; count: number }>) {
       state.loading = false;
       state.partnersList = action.payload.list;
       state.totalPartnerAmount = action.payload.count;
@@ -54,7 +53,7 @@ const PartnersSlice = createSlice({
     getSavePartnerRequest(state, action: PayloadAction<any>) {
       state.loading = true;
     },
-    getSavePartnerSuccess(state, action: PayloadAction<IPartner[]>) {
+    getSavePartnerSuccess(state, action: PayloadAction<IPartnerList[]>) {
       state.loading = false;
       state.newPartnerId = action.payload;
     },
@@ -64,7 +63,7 @@ const PartnersSlice = createSlice({
     getUpdatePartnerRequest(state, action: PayloadAction<any>) {
       state.loading = true;
     },
-    getUpdatePartnerSuccess(state, action: PayloadAction<IPartner[]>) {
+    getUpdatePartnerSuccess(state, action: PayloadAction<IPartnerList[]>) {
       state.loading = false;
     },
     getUpdatePartnerFailed(state) {
@@ -73,13 +72,13 @@ const PartnersSlice = createSlice({
     getUpdatePartnerStatusRequest(state, action: PayloadAction<any>) {
       state.loading = true;
     },
-    getUpdatePartnerStatusSuccess(state, action: PayloadAction<IPartner[]>) {
+    getUpdatePartnerStatusSuccess(state, action: PayloadAction<IPartnerList[]>) {
       state.loading = false;
     },
     getUpdatePartnerStatusFailed(state) {
       state.loading = false;
     },
-    setPartnerData(state, action: PayloadAction<IPartner[]>) {
+    setPartnerData(state, action: PayloadAction<IPartnerList[]>) {
       state.renaperData = action.payload;
       state.fetchedRenaperData = true;
     },

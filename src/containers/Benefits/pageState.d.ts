@@ -1,12 +1,10 @@
-import { IplanList } from '../Portfolio/types';
-
-export interface IPlan extends IplanList {
-  _id: string;
-}
+import { IPlan, IBenefit } from './types';
+import { IPartnerDetail } from '../Partners/types';
 
 export interface IBenefitsState {
   loading: boolean;
-  benefitData: object;
+  partnerInfo: IPartnerDetail | null;
+  benefitData: IBenefit | null;
   isBenefitDataFetched: boolean;
   benefitId: number | null;
   plans: IPlan[];
@@ -14,3 +12,5 @@ export interface IBenefitsState {
 }
 
 export type ContainerState = IBenefitsState;
+
+//Get partner info

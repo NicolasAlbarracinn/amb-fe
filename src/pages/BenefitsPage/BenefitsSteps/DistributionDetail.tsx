@@ -5,18 +5,15 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import TextInput from 'components/Form/TextInput';
 import SelectInput from 'components/Form/SelectInput';
-
 import Button from 'components/CustomButtons/Button';
-
-import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
-import { ministriesList, recuperoCSList } from 'utils/constants';
-
-import { defaultDistribution } from './defaultStates';
-
 import { useStyles } from 'components/Wizard/stepsStyles';
 
-import { selectBenefitsData, selectIsDataFetched } from 'containers/Benefits/selectors';
+import { selectPartnerData, selectIsDataFetched } from 'containers/Benefits/selectors';
+import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
+import { IPartnerDetail } from 'containers/Partners/types';
 
+import { ministriesList } from 'utils/constants';
+import { defaultDistribution } from './defaultStates';
 import { parseResponseData } from './parseResponseData';
 
 const DistributionDetail = () => {
@@ -24,12 +21,13 @@ const DistributionDetail = () => {
   const { inputs: distribution, onChangeHanlder, updateInputs } = useInputChange(defaultDistribution);
   const { loadError, handleNext, handlePrevious } = useWizardStep(distribution, 'distributionDetail');
 
-  const { workInfo, personalData } = useSelector(selectBenefitsData);
+  const partnerData: IPartnerDetail | null = useSelector(selectPartnerData);
   const isDataFetched = useSelector(selectIsDataFetched);
 
   useEffect(() => {
-    if (isDataFetched) {
-      const updatedInput = parseResponseData(workInfo);
+    if (isDataFetched && partnerData) {
+      const { workInfo, personalData } = partnerData;
+      const updatedInput = parseResponseData({ ...workInfo, ...personalData });
       updateInputs({
         ...updatedInput,
         //This value is wrong on the db
@@ -39,7 +37,7 @@ const DistributionDetail = () => {
         distributionCode: { value: '0001', isValid: true },
       });
     }
-  }, [workInfo]);
+  }, [isDataFetched, partnerData, updateInputs]);
 
   return (
     <>
@@ -109,7 +107,7 @@ const DistributionDetail = () => {
           <SelectInput
             id="paymentMethod"
             label="Forma de cobro"
-            value={personalData?.paymentType || distribution.paymentType.value}
+            value={distribution.paymentType.value}
             items={[
               { value: 'db', label: 'Descuento bancario' },
               { value: 'dbic', label: 'Descuento BICA' },
@@ -125,7 +123,7 @@ const DistributionDetail = () => {
           <SelectInput
             id="paymentMethodRecovery"
             label="Forma de Cobro Recupero"
-            value={personalData?.recoveryPaymentType || distribution.recoveryPaymentType.value}
+            value={distribution.recoveryPaymentType.value}
             items={[
               { value: 'db', label: 'Descuento bancario' },
               { value: 'dbic', label: 'Descuento BICA' },

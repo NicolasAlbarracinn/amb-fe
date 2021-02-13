@@ -1,8 +1,8 @@
-import { IPartner } from './types';
+import { IPartnerList } from './types';
 
 export interface IPartnersState {
   loading: boolean;
-  partnersList: IPartner[];
+  partnersList: IPartnerList[];
 }
 
 export type ContainerState = PartnersState;

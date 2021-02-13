@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { IPlan } from 'containers/Benefits/pageState';
+import { IPlan } from 'containers/Benefits/types';
 import { selectPlan, selectPlanList } from 'containers/Benefits/selectors';
 import { actions as benefitAction } from 'containers/Benefits/slice';
 

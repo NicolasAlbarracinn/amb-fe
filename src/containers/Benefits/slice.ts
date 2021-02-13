@@ -1,12 +1,14 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import { IPlan } from './pageState';
+import { IPlan } from './types';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { IBenefitsState } from './pageState';
+import { IPartnerDetail } from '../Partners/types';
 
 export const initialState: IBenefitsState = {
   loading: true,
-  benefitData: {},
+  partnerInfo: null,
+  benefitData: null,
   isBenefitDataFetched: false,
   benefitId: null,
   plans: [],
@@ -17,15 +19,15 @@ const BenefitSlice = createSlice({
   name: 'benefits',
   initialState,
   reducers: {
-    getUpdateBenefitRequest(state, action: PayloadAction<any>) {
+    getPartnerInformationRequest(state, action: PayloadAction<string>) {
       state.loading = true;
     },
-    getUpdateBenefitSuccess(state, action: PayloadAction<any>) {
+    getPartnerInformationSuccess(state, action: PayloadAction<IPartnerDetail>) {
       state.loading = false;
-      state.benefitData = action.payload;
+      state.partnerInfo = action.payload;
       state.isBenefitDataFetched = true;
     },
-    getUpdateBenefitFailed(state) {
+    getPartnerInformationFailed(state) {
       state.loading = false;
     },
     setBenefitRequest(state, action: PayloadAction<any>) {

@@ -30,7 +30,13 @@ const Benefits = () => {
     }
 
     if (submitReady) {
-      dispatch(actions.setBenefitRequest(data.benefitDetail));
+      dispatch(
+        actions.setBenefitRequest({
+          ...data.benefitDetail,
+          distributionDetail: data.distributionDetail,
+          partnerDetail: data.partnerDetail,
+        }),
+      );
     }
   }, [data, dispatch, history, submitReady, benefitId]);
 
