@@ -12,3 +12,5 @@ export const selectIsDataFetched = createSelector(
 );
 
 export const selectFetchedBenefitId = createSelector([selectBenefits], BenefitsState => BenefitsState.benefitId);
+export const selectPlanList = createSelector([selectBenefits], ({ plans }) => plans);
+export const selectPlan = createSelector([selectBenefits], ({ plan }) => plan);

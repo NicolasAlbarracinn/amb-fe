@@ -1,10 +1,6 @@
 import moment from 'moment';
 
 export const defaultBenefit = {
-  lotNumber: {
-    value: '',
-    isValid: false,
-  },
   benefitType: {
     value: '',
     isValid: false,
@@ -46,8 +42,8 @@ export const defaultBenefit = {
     isValid: true,
   },
   benefitStatus: {
-    value: '',
-    isValid: false,
+    value: 's',
+    isValid: true,
   },
   commercializer: {
     value: '',
@@ -63,7 +59,7 @@ export const defaultBenefit = {
   },
   statusDate: {
     value: moment(new Date()).format('MM/DD/YYYY'),
-    isValid: false,
+    isValid: true,
   },
 };
 

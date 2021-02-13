@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { IPlan } from 'containers/Benefits/pageState';
+import { selectPlan, selectPlanList } from 'containers/Benefits/selectors';
 import { actions as benefitAction } from 'containers/Benefits/slice';
 
 import GridContainer from 'components/Grid/GridContainer';
@@ -15,39 +17,80 @@ import { benefitTypeList, portfoliosList, benefitStatusList } from 'utils/consta
 import { defaultBenefit } from './defaultStates';
 import { useStyles } from 'components/Wizard/stepsStyles';
 
+const defaultPlanState = {
+  plan: {
+    value: '',
+    isValid: false,
+  },
+  duesQuantity: {
+    value: '',
+    isValid: false,
+  },
+  duesAmount: {
+    value: '',
+    isValid: false,
+  },
+};
+
 const BenefitDetail = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const planList: IPlan[] = useSelector(selectPlanList);
+  const plan: IPlan | null = useSelector(selectPlan);
   const { inputs: benefit, onChangeHanlder, updateInputs } = useInputChange(defaultBenefit);
   const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
-  //TODO: agregar logica del formulario
+
+  const setPlanDefaultValues = useCallback(() => {
+    updateInputs(defaultPlanState);
+  }, [updateInputs]);
 
   useEffect(() => {
+    updateInputs({
+      duesQuantity: {
+        value: '',
+        isValid: false,
+      },
+      duesAmount: {
+        value: '',
+        isValid: false,
+      },
+    });
     if (benefit.plan.isValid) {
+      dispatch(benefitAction.getPlanRequest(benefit.plan.value));
+    }
+  }, [benefit.plan, dispatch, updateInputs]);
+
+  useEffect(() => {
+    setPlanDefaultValues();
+    if (benefit.portfolio.value) {
+      dispatch(benefitAction.getPlanListRequest(benefit.portfolio.value));
+    }
+  }, [benefit.portfolio.value, dispatch, setPlanDefaultValues]);
+
+  useEffect(() => {
+    if (benefit.duesQuantity.isValid) {
+      onChangeHanlder({ id: 'duesAmount', value: benefit.duesQuantity.value, isVAlid: true });
+    }
+  }, [benefit.duesQuantity, onChangeHanlder]);
+
+  useEffect(() => {
+    if (plan) {
       updateInputs({
-        ...benefit,
-        duesAmount: { value: '24 cuotas de 5292', isValid: true },
-        duesQuantity: { value: 'cuota', isValid: true },
-        amountGranted: { value: '56700', isValid: true },
-        benefitStatus: { value: 's', isValid: true },
-        signatureAmount: { value: '56700', isValid: true },
-        statusDate: { value: '11/30/2020', isValid: true },
+        amountGranted: {
+          value: plan.amountGranted,
+          isValid: true,
+        },
+        signatureAmount: {
+          value: plan.signatureAmount,
+          isValid: true,
+        },
       });
     }
-  }, [benefit.plan]);
+  }, [plan, updateInputs]);
 
   return (
     <>
       <GridContainer>
-        <GridItem xs={12} sm={3}>
-          <TextInput
-            id="lotNumber"
-            label="N° de lote"
-            value={benefit.lotNumber.value}
-            onChange={onChangeHanlder}
-            isValid={benefit.lotNumber.isValid}
-            loadError={loadError}
-          />
-        </GridItem>
         <GridItem xs={12} sm={2}>
           <SelectInput
             id="benefitType"
@@ -104,7 +147,7 @@ const BenefitDetail = () => {
             mainSelectLabel="Selecione el plan"
             value={benefit.plan.value}
             handleSelect={onChangeHanlder}
-            items={[{ value: 'NMANOV2020', label: 'NMA - NOV/2020' }]}
+            items={planList.map(pl => ({ value: pl._id, label: pl.plan }))}
             isValid={benefit.plan.isValid}
           />
         </GridItem>
@@ -114,10 +157,10 @@ const BenefitDetail = () => {
             id="signatureAmount"
             label="Monto Firma"
             inputType="signatureAmount"
-            value={benefit.plan.value === 'NMANOV2020' ? '56700' : benefit.signatureAmount.value}
+            value={plan?.signatureAmount || ''}
             onChange={onChangeHanlder}
-            length={[10, 11]}
-            isValid={benefit.plan.value === 'NMANOV2020' ? true : benefit.signatureAmount.isValid}
+            length={[0, 100]}
+            isValid={benefit.signatureAmount.isValid}
             loadError={loadError}
           />
         </GridItem>
@@ -129,8 +172,13 @@ const BenefitDetail = () => {
             mainSelectLabel="Selecione Cantidad de cuotas"
             value={benefit.plan.value === 'NMANOV2020' ? 'cuota' : benefit.duesQuantity.value}
             handleSelect={onChangeHanlder}
-            items={[{ value: 'cuota', label: '24 cuotas' }]}
-            isValid={benefit.plan.value === 'NMANOV2020' ? true : benefit.duesQuantity.isValid}
+            items={
+              plan?.dues?.map(d => ({
+                value: `${d.duesQuantity} cuotas de ${d.duesAmount}`,
+                label: `${d.duesQuantity} cuotas`,
+              })) || []
+            }
+            isValid={benefit.duesQuantity.isValid}
           />
         </GridItem>
       </GridContainer>
@@ -139,9 +187,9 @@ const BenefitDetail = () => {
           <TextInput
             id="duesAmount"
             label="Monto de la cuota"
-            value={benefit.plan.value === 'NMANOV2020' ? '24 cuotas de 5292' : benefit.duesAmount.value}
+            value={benefit.duesAmount.value}
             onChange={onChangeHanlder}
-            isValid={benefit.plan.value === 'NMANOV2020' ? true : benefit.duesAmount.isValid}
+            isValid={benefit.duesAmount.isValid}
             loadError={loadError}
           />
         </GridItem>
@@ -150,9 +198,9 @@ const BenefitDetail = () => {
             id="amountGranted"
             label="Monto Otorgado"
             inputType="number"
-            value={benefit.plan.value === 'NMANOV2020' ? '56700' : benefit.amountGranted.value}
+            value={plan?.amountGranted || ''}
             onChange={onChangeHanlder}
-            isValid={benefit.plan.value === 'NMANOV2020' ? true : benefit.amountGranted.isValid}
+            isValid={benefit.amountGranted.isValid}
             loadError={loadError}
           />
         </GridItem>

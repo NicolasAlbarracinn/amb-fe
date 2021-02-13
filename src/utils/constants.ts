@@ -72,9 +72,9 @@ export const ministriesList = [
 ];
 
 export const portfoliosList = [
-  { value: 'sfd', label: 'Sin fines determinados' },
-  { value: 'ae', label: 'Ayudas economicas' },
-  { value: 'v', label: 'Vacaciones' },
+  { value: 'Sin fines determinados', label: 'Sin fines determinados' },
+  { value: 'Ayudas economicas', label: 'Ayudas economicas' },
+  { value: 'Vacaciones', label: 'Vacaciones' },
 ];
 
 export const benefitStatusList = [

@@ -1,5 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
+import { IPlan } from './pageState';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { IBenefitsState } from './pageState';
 
@@ -8,6 +9,8 @@ export const initialState: IBenefitsState = {
   benefitData: {},
   isBenefitDataFetched: false,
   benefitId: null,
+  plans: [],
+  plan: null,
 };
 
 const BenefitSlice = createSlice({
@@ -33,6 +36,27 @@ const BenefitSlice = createSlice({
       state.benefitId = action.payload;
     },
     setBenefitFailed(state) {
+      state.loading = false;
+    },
+    getPlanListRequest(state, action: PayloadAction<string>) {
+      state.loading = true;
+    },
+    getPlanListSuccess(state, action: PayloadAction<IPlan[]>) {
+      state.loading = false;
+      state.plans = action.payload;
+      state.plan = null;
+    },
+    getPlanListFailed(state) {
+      state.loading = false;
+    },
+    getPlanRequest(state, action: PayloadAction<string>) {
+      state.loading = true;
+    },
+    getPlanSuccess(state, action: PayloadAction<IPlan>) {
+      state.loading = false;
+      state.plan = action.payload;
+    },
+    getPlanFailed(state) {
       state.loading = false;
     },
   },
