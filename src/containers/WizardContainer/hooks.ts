@@ -50,9 +50,9 @@ export const useInputChange = (defaultState: { [key: string]: DefaultState }) =>
     }));
   }, []);
 
-  const updateInputs = (updatedValues: { [key: string]: DefaultState }) => {
+  const updateInputs = useCallback((updatedValues: { [key: string]: DefaultState }) => {
     setInputs(prevState => ({ ...prevState, ...updatedValues }));
-  };
+  }, []);
 
   return {
     inputs,

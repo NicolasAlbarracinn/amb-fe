@@ -1,10 +1,6 @@
 import moment from 'moment';
 
 export const defaultBenefit = {
-  lotNumber: {
-    value: '',
-    isValid: false,
-  },
   benefitType: {
     value: '',
     isValid: false,

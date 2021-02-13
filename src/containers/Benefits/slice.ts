@@ -44,6 +44,7 @@ const BenefitSlice = createSlice({
     getPlanListSuccess(state, action: PayloadAction<IPlan[]>) {
       state.loading = false;
       state.plans = action.payload;
+      state.plan = null;
     },
     getPlanListFailed(state) {
       state.loading = false;

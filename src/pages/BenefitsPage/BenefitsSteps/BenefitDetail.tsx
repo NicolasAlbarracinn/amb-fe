@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { IPlan } from 'containers/Benefits/pageState';
@@ -17,25 +17,55 @@ import { benefitTypeList, portfoliosList, benefitStatusList } from 'utils/consta
 import { defaultBenefit } from './defaultStates';
 import { useStyles } from 'components/Wizard/stepsStyles';
 
+const defaultPlanState = {
+  plan: {
+    value: '',
+    isValid: false,
+  },
+  duesQuantity: {
+    value: '',
+    isValid: false,
+  },
+  duesAmount: {
+    value: '',
+    isValid: false,
+  },
+};
+
 const BenefitDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const planList: IPlan[] = useSelector(selectPlanList);
   const plan: IPlan | null = useSelector(selectPlan);
-  const { inputs: benefit, onChangeHanlder } = useInputChange(defaultBenefit);
+  const { inputs: benefit, onChangeHanlder, updateInputs } = useInputChange(defaultBenefit);
   const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
 
+  const setPlanDefaultValues = useCallback(() => {
+    updateInputs(defaultPlanState);
+  }, [updateInputs]);
+
   useEffect(() => {
+    updateInputs({
+      duesQuantity: {
+        value: '',
+        isValid: false,
+      },
+      duesAmount: {
+        value: '',
+        isValid: false,
+      },
+    });
     if (benefit.plan.isValid) {
       dispatch(benefitAction.getPlanRequest(benefit.plan.value));
     }
-  }, [benefit.plan, dispatch]);
+  }, [benefit.plan, dispatch, updateInputs]);
 
   useEffect(() => {
+    setPlanDefaultValues();
     if (benefit.portfolio.value) {
       dispatch(benefitAction.getPlanListRequest(benefit.portfolio.value));
     }
-  }, [benefit.portfolio.value, dispatch]);
+  }, [benefit.portfolio.value, dispatch, setPlanDefaultValues]);
 
   useEffect(() => {
     if (benefit.duesQuantity.isValid) {
@@ -46,16 +76,6 @@ const BenefitDetail = () => {
   return (
     <>
       <GridContainer>
-        <GridItem xs={12} sm={3}>
-          <TextInput
-            id="lotNumber"
-            label="N° de lote"
-            value={benefit.lotNumber.value}
-            onChange={onChangeHanlder}
-            isValid={benefit.lotNumber.isValid}
-            loadError={loadError}
-          />
-        </GridItem>
         <GridItem xs={12} sm={2}>
           <SelectInput
             id="benefitType"
