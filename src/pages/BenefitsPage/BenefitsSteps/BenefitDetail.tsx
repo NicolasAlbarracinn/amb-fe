@@ -73,6 +73,21 @@ const BenefitDetail = () => {
     }
   }, [benefit.duesQuantity, onChangeHanlder]);
 
+  useEffect(() => {
+    if (plan) {
+      updateInputs({
+        amountGranted: {
+          value: plan.amountGranted,
+          isValid: true,
+        },
+        signatureAmount: {
+          value: plan.signatureAmount,
+          isValid: true,
+        },
+      });
+    }
+  }, [plan, updateInputs]);
+
   return (
     <>
       <GridContainer>
