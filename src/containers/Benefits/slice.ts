@@ -1,7 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import { IPlan } from './types';
 import { createSlice } from 'utils/@reduxjs/toolkit';
+import { QueryParameters } from 'types/types';
+
+import { IPlan, IBenefitList, IBenefit } from './types';
 import { IBenefitsState } from './pageState';
 import { IPartnerDetail } from '../Partners/types';
 
@@ -9,6 +11,8 @@ export const initialState: IBenefitsState = {
   loading: true,
   partnerInfo: null,
   benefitData: null,
+  benefitList: [],
+  benefitRecordCount: 0,
   isBenefitDataFetched: false,
   benefitId: null,
   plans: [],
@@ -59,6 +63,27 @@ const BenefitSlice = createSlice({
       state.plan = action.payload;
     },
     getPlanFailed(state) {
+      state.loading = false;
+    },
+    getBenefitDetailRequest(state, action: PayloadAction<string>) {
+      state.loading = true;
+    },
+    getBenefitDetailSuccess(state, action: PayloadAction<IBenefit>) {
+      state.loading = false;
+      state.benefitData = action.payload;
+    },
+    getBenefitDetailFailed(state) {
+      state.loading = false;
+    },
+    getBenefitListRequest(state, action: PayloadAction<QueryParameters>) {
+      state.loading = true;
+    },
+    getBenefitListSuccess(state, action: PayloadAction<{ list: IBenefitList[]; count: number }>) {
+      state.loading = false;
+      state.benefitList = action.payload.list;
+      state.benefitRecordCount = action.payload.count;
+    },
+    getBenefitListFailed(state) {
       state.loading = false;
     },
   },

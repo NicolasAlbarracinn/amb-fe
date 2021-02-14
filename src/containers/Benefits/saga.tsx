@@ -4,7 +4,9 @@ import { call, put, takeLatest } from 'redux-saga/effects'; // select, delay
 import Cookies from 'universal-cookie';
 
 import { request } from 'utils/request';
+import { queryBuilder } from 'utils/queryBuilder';
 import { BENEFITS_URL, PLANS_URL } from 'utils/endpoints';
+import { QueryParameters } from 'types/types';
 
 import { actions } from './slice';
 
@@ -102,9 +104,58 @@ export function* getPlanById(action: PayloadAction<string>) {
   }
 }
 
+export function* getBenefitList(action: PayloadAction<QueryParameters>) {
+  const token = cookies.get('token');
+  const { sortBy, limit, offset, filter } = action.payload;
+  const query = queryBuilder({ sortBy, limit, offset, filter });
+  const requestURL = `${BENEFITS_URL}/list?${query}`;
+  try {
+    const requestOptions: RequestInit = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = yield call(request, requestURL, requestOptions);
+    yield put(actions.getBenefitListSuccess({ list: response.data, count: response.count }));
+  } catch (err) {
+    yield put(actions.getBenefitListFailed());
+    toast.error(err.message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
+export function* getBenefitDetail(action: PayloadAction<string>) {
+  const token = cookies.get('token');
+
+  const requestURL = `${BENEFITS_URL}/detail/${action.payload}`;
+  try {
+    const requestOptions: RequestInit = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = yield call(request, requestURL, requestOptions);
+    yield put(actions.getBenefitDetailSuccess(response.data));
+  } catch (err) {
+    yield put(actions.getBenefitDetailFailed());
+    toast.error(err.message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
 export function* benefitsSaga() {
   yield takeLatest(actions.getPartnerInformationRequest.type, getPartnerInformation);
   yield takeLatest(actions.setBenefitRequest.type, setBenefitRequest);
   yield takeLatest(actions.getPlanListRequest.type, getPlanList);
   yield takeLatest(actions.getPlanRequest.type, getPlanById);
+  yield takeLatest(actions.getBenefitListRequest.type, getBenefitList);
+  yield takeLatest(actions.getBenefitDetailRequest.type, getBenefitDetail);
 }

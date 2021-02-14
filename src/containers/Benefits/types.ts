@@ -57,3 +57,9 @@ export interface IBenefit extends IBenefitInfo {
   partnerDetail: IPartnerInfo;
   distributionDetail: IDistributionInfo;
 }
+
+export interface IBenefitList {
+  benefitId: number;
+  portfolio: string;
+  benefitStatus: string;
+}
