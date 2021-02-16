@@ -19,7 +19,8 @@ import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import { benefitStatusList } from 'utils/constants';
 import DetailsModal from './Widgets/DetailModal';
-import { DeleteBtn, DetailBtn } from './Widgets/ActionBtn';
+import UploadModal from './Widgets/UploadModal';
+import { DeleteBtn, DetailBtn, AttachmentBtn } from './Widgets/ActionBtn';
 
 const headers = () => [
   {
@@ -46,8 +47,9 @@ const headers = () => [
     Cell: props => {
       return (
         <div className="actions-right">
-          <DetailBtn benefitId={props.row.values.benefitId} />
-          <DeleteBtn benefitId={props.row.original._id} />
+          {props.row.values.benefitStatus === 's' && <DetailBtn benefitId={props.row.values.benefitId} />}
+          {props.row.values.benefitStatus === 'a' && <AttachmentBtn benefitId={props.row.original.benefitId} />}
+          {props.row.values.benefitStatus !== 'o' && <DeleteBtn benefitId={props.row.original._id} />}
         </div>
       );
     },
@@ -88,6 +90,7 @@ const BenefitList = () => {
         </GridItem>
       </GridContainer>
       <DetailsModal />
+      <UploadModal />
     </>
   );
 };

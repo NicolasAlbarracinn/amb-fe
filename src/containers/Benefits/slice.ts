@@ -105,8 +105,23 @@ const BenefitSlice = createSlice({
     updateBenefitStatusFailed(state) {
       state.loading = false;
     },
+    updateBenefitRequest(state, action: PayloadAction<{ id: number; updatedInfo: object }>) {
+      state.loading = true;
+    },
+    updateBenefitSuccess(state) {
+      state.loading = false;
+    },
+    updateBenefitFailed(state) {
+      state.loading = false;
+    },
     setBenefitDetailsToNull(state) {
       state.benefitData = null;
+    },
+    setBenefitId(state, action: PayloadAction<number>) {
+      state.benefitId = action.payload;
+    },
+    setBenefitIdDefault(state) {
+      state.benefitId = null;
     },
   },
 });

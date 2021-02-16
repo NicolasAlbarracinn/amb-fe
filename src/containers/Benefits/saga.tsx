@@ -208,6 +208,34 @@ export function* deleteBenefit(action: PayloadAction<string>) {
   }
 }
 
+export function* updateBenefit(action: PayloadAction<{ id: number; updatedInfo: object }>) {
+  const token = cookies.get('token');
+
+  const requestURL = `${BENEFITS_URL}/${action.payload.id}`;
+
+  try {
+    const requestOptions: RequestInit = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(action.payload.updatedInfo),
+    };
+
+    yield call(request, requestURL, requestOptions);
+    yield put(actions.updateBenefitSuccess());
+    toast.success(`Se a agregado el documento a la prestacion nro: ${action.payload.id}`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (err) {
+    yield put(actions.updateBenefitFailed());
+    toast.error(err.message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
 export function* benefitsSaga() {
   yield takeLatest(actions.getPartnerInformationRequest.type, getPartnerInformation);
   yield takeLatest(actions.setBenefitRequest.type, setBenefitRequest);
@@ -217,4 +245,5 @@ export function* benefitsSaga() {
   yield takeLatest(actions.getBenefitDetailRequest.type, getBenefitDetail);
   yield takeLatest(actions.updateBenefitStatusRequest.type, updateBenefitStatus);
   yield takeLatest(actions.deleteBenefitRequest.type, deleteBenefit);
+  yield takeLatest(actions.updateBenefitRequest.type, updateBenefit);
 }

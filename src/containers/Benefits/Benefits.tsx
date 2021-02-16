@@ -25,10 +25,11 @@ const Benefits = () => {
   const benefitId = useSelector(selectFetchedBenefitId);
 
   useEffect(() => {
-    if (benefitId) {
-      history.push('dashboard');
-      return;
-    }
+    //TODO: improve this
+    // if (benefitId) {
+    //   history.push('dashboard');
+    //   return;
+    // }
 
     if (submitReady) {
       dispatch(

@@ -82,6 +82,7 @@ export const benefitStatusList = [
   { value: 'a', label: 'Aprobado' },
   { value: 'r', label: 'Rechazado' },
   { value: 'd', label: 'Desistido' },
+  { value: 'o', label: 'Otorgado' },
 ];
 
 export const benefitTypeList = [
