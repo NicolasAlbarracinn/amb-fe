@@ -180,4 +180,18 @@ export const useNotificationStyles = makeStyles((theme: Theme) => ({
   modalSmall: {
     width: '300px',
   },
+  modalMedium: {
+    maxWidth: '700px',
+    width: '600px',
+  },
+  modalFooter: {
+    padding: '15px',
+    textAlign: 'right',
+    paddingTop: '0',
+    margin: '0',
+  },
+  modalFooterCenter: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 }));
