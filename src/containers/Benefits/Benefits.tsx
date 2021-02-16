@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import BenefitsForm from 'pages/BenefitsPage/BenefitsForm';
+import BenefitList from 'pages/BenefitsPage/BenefitList';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer, actions } from './slice';
@@ -43,6 +44,7 @@ const Benefits = () => {
   return (
     <Switch>
       <Route path="/app/benefits/new" component={BenefitsForm} />
+      <Route path="/app/benefits/list" component={BenefitList} />
     </Switch>
   );
 };
