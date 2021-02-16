@@ -18,7 +18,7 @@ import Search from 'components/SearchBar/SearchBar';
 import { selectOffset, selectLimit } from 'components/Pagination/selectors';
 
 import { benefitStatusList } from 'utils/constants';
-//import DetailsModal from './Widgets/DetailModal';
+import DetailsModal from './Widgets/DetailModal';
 import { DeleteBtn, DetailBtn } from './Widgets/ActionBtn';
 
 const headers = () => [
@@ -47,7 +47,7 @@ const headers = () => [
       return (
         <div className="actions-right">
           <DetailBtn benefitId={props.row.values.benefitId} />
-          <DeleteBtn benefitId={props.row.values.benefitId} />
+          <DeleteBtn benefitId={props.row.original._id} />
         </div>
       );
     },
@@ -59,7 +59,6 @@ const BenefitList = () => {
   const columns = useMemo(headers, []);
 
   const list = useSelector(selectBenefitList);
-  //const details = useSelector(selectBenefitsData);
   const count = useSelector(selectBenefitCount);
   const limit = useSelector(selectLimit);
   const offset = useSelector(selectOffset);
@@ -67,9 +66,6 @@ const BenefitList = () => {
   useEffect(() => {
     dispatch(benefitActions.getBenefitListRequest({ limit, offset }));
   }, [limit, offset, dispatch]);
-
-  //TODO: add effect that runs when benefit details data is load
-  //and display modal if it has data open modal otherwise show error
 
   return (
     <>
@@ -91,6 +87,7 @@ const BenefitList = () => {
           </Card>
         </GridItem>
       </GridContainer>
+      <DetailsModal />
     </>
   );
 };

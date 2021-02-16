@@ -1,13 +1,19 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import Button from 'components/CustomButtons/Button';
 import Close from '@material-ui/icons/Close';
 import AllOutIcon from '@material-ui/icons/AllOut';
 import { Tooltip } from '@material-ui/core';
 
-export const DeleteBtn = (props: { benefitId: number }) => {
+import { actions as benefitActions } from 'containers/Benefits/slice';
+
+import Button from 'components/CustomButtons/Button';
+
+export const DeleteBtn = (props: { benefitId: string }) => {
+  const dispatch = useDispatch();
+
   const handleDelete = () => {
-    console.log(`delete: ${props.benefitId}`);
+    dispatch(benefitActions.deleteBenefitRequest(props.benefitId));
   };
 
   return (
@@ -20,9 +26,11 @@ export const DeleteBtn = (props: { benefitId: number }) => {
 };
 
 export const DetailBtn = (props: { benefitId: number }) => {
+  const dispatch = useDispatch();
+
   //TODO: dispatch fetch details action
   const handleFetchDetails = () => {
-    console.log(`fetching data for: ${props.benefitId}`);
+    dispatch(benefitActions.getBenefitDetailRequest(props.benefitId));
   };
 
   return (

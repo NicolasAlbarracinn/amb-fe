@@ -119,6 +119,7 @@ export function* getBenefitList(action: PayloadAction<QueryParameters>) {
     };
 
     const response = yield call(request, requestURL, requestOptions);
+
     yield put(actions.getBenefitListSuccess({ list: response.data, count: response.count }));
   } catch (err) {
     yield put(actions.getBenefitListFailed());
@@ -128,7 +129,7 @@ export function* getBenefitList(action: PayloadAction<QueryParameters>) {
   }
 }
 
-export function* getBenefitDetail(action: PayloadAction<string>) {
+export function* getBenefitDetail(action: PayloadAction<number>) {
   const token = cookies.get('token');
 
   const requestURL = `${BENEFITS_URL}/detail/${action.payload}`;
@@ -151,6 +152,62 @@ export function* getBenefitDetail(action: PayloadAction<string>) {
   }
 }
 
+export function* updateBenefitStatus(action: PayloadAction<{ id: number; status: string }>) {
+  const token = cookies.get('token');
+
+  const requestURL = `${BENEFITS_URL}/status/${action.payload.id}`;
+  try {
+    const requestOptions: RequestInit = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        status: action.payload.status,
+      }),
+    };
+
+    const respoanse = yield call(request, requestURL, requestOptions);
+    yield put(actions.updateBenefitStatusSuccess());
+    toast.success(`Se a cambiado el estado de la prestacion nro ${respoanse.data.id} a ${respoanse.data.status}`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (err) {
+    yield put(actions.updateBenefitStatusFailed());
+    toast.error(err.message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
+export function* deleteBenefit(action: PayloadAction<string>) {
+  const token = cookies.get('token');
+
+  const requestURL = `${BENEFITS_URL}/${action.payload}`;
+  try {
+    const requestOptions: RequestInit = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    yield call(request, requestURL, requestOptions);
+    yield put(actions.deleteBenefitSuccess(action.payload));
+    toast.success(`Se a eliminado la prestacion`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (err) {
+    yield put(actions.deleteBenefitFailed());
+
+    toast.error(err.message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
 export function* benefitsSaga() {
   yield takeLatest(actions.getPartnerInformationRequest.type, getPartnerInformation);
   yield takeLatest(actions.setBenefitRequest.type, setBenefitRequest);
@@ -158,4 +215,6 @@ export function* benefitsSaga() {
   yield takeLatest(actions.getPlanRequest.type, getPlanById);
   yield takeLatest(actions.getBenefitListRequest.type, getBenefitList);
   yield takeLatest(actions.getBenefitDetailRequest.type, getBenefitDetail);
+  yield takeLatest(actions.updateBenefitStatusRequest.type, updateBenefitStatus);
+  yield takeLatest(actions.deleteBenefitRequest.type, deleteBenefit);
 }

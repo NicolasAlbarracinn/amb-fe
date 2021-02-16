@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { actions as benefitActions } from 'containers/Benefits/slice';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { selectBenefitsData } from 'containers/Benefits/selectors';
+import { IBenefit } from 'containers/Benefits/types';
+import { actions } from 'containers/Benefits/slice';
 
 import Close from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,24 +15,15 @@ import GridItem from 'components/Grid/GridItem';
 import GridContainer from 'components/Grid/GridContainer';
 import { useNotificationStyles } from '../../PortfolioPage/styles';
 
-interface IDetailsModal {
-  isVisible: boolean;
-  closeModal: () => void;
-  benefitID: string;
-}
-
-const DetailsModal = ({ benefitID, isVisible, closeModal }: IDetailsModal) => {
+const DetailsModal = () => {
   const classes = useNotificationStyles();
   const dispatch = useDispatch();
-  const benefitDetail = useSelector(selectBenefitsData);
 
-  useEffect(() => {
-    dispatch(benefitActions.getBenefitDetailRequest(benefitID));
-  }, [dispatch, benefitID]);
+  const benefitDetail: IBenefit | null = useSelector(selectBenefitsData);
 
-  useEffect(() => {
-    console.log(benefitDetail);
-  }, [benefitDetail]);
+  const handleCloseModal = () => {
+    dispatch(actions.setBenefitDetailsToNull());
+  };
 
   return (
     <GridContainer justify="center">
@@ -40,8 +33,8 @@ const DetailsModal = ({ benefitID, isVisible, closeModal }: IDetailsModal) => {
             root: classes.center + ' ' + classes.modalRoot,
             paper: classes.modal + ' ' + classes.modalSmall,
           }}
-          open={isVisible}
-          onClose={() => closeModal()}
+          open={!!benefitDetail}
+          onClose={handleCloseModal}
         >
           <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
             <Button
@@ -50,7 +43,7 @@ const DetailsModal = ({ benefitID, isVisible, closeModal }: IDetailsModal) => {
               key="close"
               aria-label="Close"
               color="transparent"
-              onClick={() => closeModal()}
+              onClick={handleCloseModal}
             >
               <Close />
             </Button>

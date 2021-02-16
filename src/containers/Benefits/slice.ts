@@ -65,7 +65,7 @@ const BenefitSlice = createSlice({
     getPlanFailed(state) {
       state.loading = false;
     },
-    getBenefitDetailRequest(state, action: PayloadAction<string>) {
+    getBenefitDetailRequest(state, action: PayloadAction<number>) {
       state.loading = true;
     },
     getBenefitDetailSuccess(state, action: PayloadAction<IBenefit>) {
@@ -85,6 +85,28 @@ const BenefitSlice = createSlice({
     },
     getBenefitListFailed(state) {
       state.loading = false;
+    },
+    deleteBenefitRequest(state, action: PayloadAction<string>) {
+      state.loading = true;
+    },
+    deleteBenefitSuccess(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.benefitList = state.benefitList.filter(bl => bl._id !== action.payload);
+    },
+    deleteBenefitFailed(state) {
+      state.loading = false;
+    },
+    updateBenefitStatusRequest(state, action: PayloadAction<{ id: number; status: string }>) {
+      state.loading = true;
+    },
+    updateBenefitStatusSuccess(state) {
+      state.loading = false;
+    },
+    updateBenefitStatusFailed(state) {
+      state.loading = false;
+    },
+    setBenefitDetailsToNull(state) {
+      state.benefitData = null;
     },
   },
 });

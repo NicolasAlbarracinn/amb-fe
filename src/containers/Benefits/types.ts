@@ -59,6 +59,7 @@ export interface IBenefit extends IBenefitInfo {
 }
 
 export interface IBenefitList {
+  _id?: string;
   benefitId: number;
   portfolio: string;
   benefitStatus: string;
