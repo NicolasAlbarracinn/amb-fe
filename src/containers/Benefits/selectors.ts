@@ -15,3 +15,7 @@ export const selectIsDataFetched = createSelector([selectBenefits], ({ isBenefit
 
 export const selectPlanList = createSelector([selectBenefits], ({ plans }) => plans);
 export const selectPlan = createSelector([selectBenefits], ({ plan }) => plan);
+export const selectIsBenefitCreated = createSelector(
+  [selectBenefits],
+  ({ isSuccessfullyCreated }) => isSuccessfullyCreated,
+);

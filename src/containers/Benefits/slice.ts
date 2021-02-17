@@ -17,12 +17,25 @@ export const initialState: IBenefitsState = {
   benefitId: null,
   plans: [],
   plan: null,
+  isSuccessfullyCreated: false,
 };
 
 const BenefitSlice = createSlice({
   name: 'benefits',
   initialState,
   reducers: {
+    reset(state) {
+      state.loading = initialState.loading;
+      state.partnerInfo = initialState.partnerInfo;
+      state.benefitData = initialState.benefitData;
+      state.benefitList = initialState.benefitList;
+      state.benefitRecordCount = initialState.benefitRecordCount;
+      state.isBenefitDataFetched = initialState.isBenefitDataFetched;
+      state.benefitId = initialState.benefitId;
+      state.plans = initialState.plans;
+      state.plan = initialState.plan;
+      state.isSuccessfullyCreated = initialState.isSuccessfullyCreated;
+    },
     getPartnerInformationRequest(state, action: PayloadAction<string>) {
       state.loading = true;
     },
@@ -40,6 +53,7 @@ const BenefitSlice = createSlice({
     setBenefitData(state, action: PayloadAction<any>) {
       state.loading = false;
       state.benefitId = action.payload;
+      state.isSuccessfullyCreated = true;
     },
     setBenefitFailed(state) {
       state.loading = false;

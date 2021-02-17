@@ -16,6 +16,13 @@ const PortfolioSlice = createSlice({
   name: 'portfolios',
   initialState,
   reducers: {
+    reset(state) {
+      state.loading = initialState.loading;
+      state.portfolioData = initialState.portfolioData;
+      state.lendersNameList = initialState.lendersNameList;
+      state.planList = initialState.planList;
+      state.isSuccessfullyCreated = initialState.isSuccessfullyCreated;
+    },
     getPortfolioRequest(state) {
       state.loading = true;
     },

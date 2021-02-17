@@ -15,6 +15,12 @@ const LenderSlice = createSlice({
   name: 'lenders',
   initialState,
   reducers: {
+    reset(state) {
+      state.loading = initialState.loading;
+      state.lenderData = initialState.lenderData;
+      state.isLenderDataFetched = initialState.isLenderDataFetched;
+      state.isSuccessfullyCreated = initialState.isSuccessfullyCreated;
+    },
     getLenderRequest(state, action: PayloadAction<string>) {
       state.loading = true;
       state.isLenderDataFetched = false;

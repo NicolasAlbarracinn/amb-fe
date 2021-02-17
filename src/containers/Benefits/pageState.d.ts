@@ -8,6 +8,7 @@ export interface IBenefitsState {
   benefitList: IBenefitList[];
   benefitRecordCount: number;
   isBenefitDataFetched: boolean;
+  isSuccessfullyCreated: boolean;
   benefitId: number | null;
   plans: IPlan[];
   plan: IPlan | null;

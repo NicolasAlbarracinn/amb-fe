@@ -21,6 +21,7 @@ const WizardContainerSlice = createSlice({
       state.currentStepId = initialState.currentStepId;
       state.previousStepId = initialState.previousStepId;
       state.buttonType = initialState.buttonType;
+      state.stepsData = initialState.stepsData;
     },
     setStep(state, action: PayloadAction<any>) {
       state.stepsData = {
