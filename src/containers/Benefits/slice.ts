@@ -3,9 +3,8 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { QueryParameters } from 'types/types';
 
-import { IPlan, IBenefitList, IBenefit } from './types';
+import { IPlan, IBenefitList, IBenefit, IPartner } from './types';
 import { IBenefitsState } from './pageState';
-import { IPartnerDetail } from '../Partners/types';
 
 export const initialState: IBenefitsState = {
   loading: true,
@@ -39,7 +38,7 @@ const BenefitSlice = createSlice({
     getPartnerInformationRequest(state, action: PayloadAction<string>) {
       state.loading = true;
     },
-    getPartnerInformationSuccess(state, action: PayloadAction<IPartnerDetail>) {
+    getPartnerInformationSuccess(state, action: PayloadAction<IPartner | IBenefit>) {
       state.loading = false;
       state.partnerInfo = action.payload;
       state.isBenefitDataFetched = true;
@@ -52,7 +51,6 @@ const BenefitSlice = createSlice({
     },
     setBenefitData(state, action: PayloadAction<any>) {
       state.loading = false;
-      state.benefitId = action.payload;
       state.isSuccessfullyCreated = true;
     },
     setBenefitFailed(state) {
@@ -124,6 +122,7 @@ const BenefitSlice = createSlice({
     },
     updateBenefitSuccess(state) {
       state.loading = false;
+      state.isSuccessfullyCreated = true;
     },
     updateBenefitFailed(state) {
       state.loading = false;

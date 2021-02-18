@@ -18,7 +18,7 @@ import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks'
 import { documentTypeList, civilStateList, statusList } from 'utils/constants';
 import { selectPartnerData, selectIsDataFetched } from 'containers/Benefits/selectors';
 import { actions as benefitActions } from 'containers/Benefits/slice';
-import { IPartnerDetail } from 'containers/Partners/types';
+import { IPartner } from 'containers/Benefits/types';
 
 import { parseResponseData } from './parseResponseData';
 import { defaultPartner } from './defaultStates';
@@ -28,7 +28,7 @@ const PartnerDetail = () => {
   const { inputs: partner, onChangeHanlder, updateInputs } = useInputChange(defaultPartner);
   const { loadError, handleNext } = useWizardStep(partner, 'partnerDetail');
 
-  const partnertData: IPartnerDetail | null = useSelector(selectPartnerData);
+  const partnertData: IPartner | null = useSelector(selectPartnerData);
   const isDataFetched = useSelector(selectIsDataFetched);
   const dispatch = useDispatch();
 
@@ -42,15 +42,15 @@ const PartnerDetail = () => {
 
   useEffect(() => {
     if (isDataFetched && partnertData) {
-      const { personalData, createdAt, status } = partnertData;
-      const updatedInput = parseResponseData(personalData);
+      const { partnerDetail } = partnertData;
+      const updatedInput = parseResponseData(partnerDetail);
 
       updateInputs({
         ...updatedInput,
-        admissionDate: { value: createdAt, isValid: true },
+        admissionDate: { value: partnerDetail.admissionDate, isValid: true },
         //TODO: add this parameter on db partner schema
         status: {
-          value: status,
+          value: partnerDetail.status,
           isValid: true,
         },
       });

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { IPlan } from 'containers/Benefits/types';
-import { selectPlan, selectPlanList } from 'containers/Benefits/selectors';
+import { IPlan, IBenefit } from 'containers/Benefits/types';
+import { selectPlan, selectPlanList, selectPartnerData } from 'containers/Benefits/selectors';
 import { actions as benefitAction } from 'containers/Benefits/slice';
 
 import GridContainer from 'components/Grid/GridContainer';
@@ -16,6 +16,7 @@ import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks'
 import { benefitTypeList, portfoliosList, benefitStatusList } from 'utils/constants';
 import { defaultBenefit } from './defaultStates';
 import { useStyles } from 'components/Wizard/stepsStyles';
+import { parseResponseData } from './parseResponseData';
 
 const defaultPlanState = {
   plan: {
@@ -35,14 +36,21 @@ const defaultPlanState = {
 const BenefitDetail = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const partnerData: IBenefit | null = useSelector(selectPartnerData);
   const planList: IPlan[] = useSelector(selectPlanList);
   const plan: IPlan | null = useSelector(selectPlan);
   const { inputs: benefit, onChangeHanlder, updateInputs } = useInputChange(defaultBenefit);
   const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
 
   const setPlanDefaultValues = useCallback(() => {
+    if (partnerData?.benefitId) {
+      const updatedInput = parseResponseData(partnerData);
+      updateInputs(updatedInput);
+      return;
+    }
+
     updateInputs(defaultPlanState);
-  }, [updateInputs]);
+  }, [updateInputs, partnerData]);
 
   useEffect(() => {
     updateInputs({

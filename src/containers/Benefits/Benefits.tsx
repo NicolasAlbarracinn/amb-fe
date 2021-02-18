@@ -10,10 +10,9 @@ import BenefitList from 'pages/BenefitsPage/BenefitList';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer, actions } from './slice';
 import { benefitsSaga } from './saga';
-import { selectIsBenefitCreated } from './selectors';
+import { selectIsBenefitCreated, selectFetchedBenefitId } from './selectors';
 
 import { selectSubmitReady, selectStepsData } from 'containers/WizardContainer/selectors';
-import { isEmptyBindingElement } from 'typescript';
 
 const Benefits = () => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -25,13 +24,25 @@ const Benefits = () => {
   const submitReady = useSelector(selectSubmitReady);
   const data = useSelector(selectStepsData);
   const isBenefitCreated = useSelector(selectIsBenefitCreated);
-
-  useEffect(() => {
-    dispatch(actions.reset());
-  }, []);
+  const benefitId = useSelector(selectFetchedBenefitId);
 
   useEffect(() => {
     if (submitReady && !isEmpty(data)) {
+      if (benefitId) {
+        dispatch(
+          actions.updateBenefitRequest({
+            id: benefitId,
+            updatedInfo: {
+              ...data.benefitDetail,
+              distributionDetail: data.distributionDetail,
+              partnerDetail: data.partnerDetail,
+            },
+          }),
+        );
+
+        return;
+      }
+
       dispatch(
         actions.setBenefitRequest({
           ...data.benefitDetail,
@@ -40,7 +51,7 @@ const Benefits = () => {
         }),
       );
     }
-  }, [data, dispatch, submitReady]);
+  }, [data, dispatch, submitReady, benefitId]);
 
   useEffect(() => {
     if (isBenefitCreated) history.push('/');
@@ -48,8 +59,9 @@ const Benefits = () => {
 
   return (
     <Switch>
-      <Route path="/app/benefits/new" component={BenefitsForm} />
       <Route path="/app/benefits/list" component={BenefitList} />
+      <Route path="/app/benefits/new" component={BenefitsForm} />
+      <Route path="/app/benefits/:benefitId" component={BenefitsForm} />
     </Switch>
   );
 };

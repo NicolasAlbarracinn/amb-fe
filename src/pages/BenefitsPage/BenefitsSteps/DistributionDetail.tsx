@@ -10,7 +10,7 @@ import { useStyles } from 'components/Wizard/stepsStyles';
 
 import { selectPartnerData, selectIsDataFetched } from 'containers/Benefits/selectors';
 import { useInputChange, useWizardStep } from 'containers/WizardContainer/hooks';
-import { IPartnerDetail } from 'containers/Partners/types';
+import { IPartner } from 'containers/Benefits/types';
 
 import { ministriesList } from 'utils/constants';
 import { defaultDistribution } from './defaultStates';
@@ -21,13 +21,13 @@ const DistributionDetail = () => {
   const { inputs: distribution, onChangeHanlder, updateInputs } = useInputChange(defaultDistribution);
   const { loadError, handleNext, handlePrevious } = useWizardStep(distribution, 'distributionDetail');
 
-  const partnerData: IPartnerDetail | null = useSelector(selectPartnerData);
+  const partnerData: IPartner | null = useSelector(selectPartnerData);
   const isDataFetched = useSelector(selectIsDataFetched);
 
   useEffect(() => {
     if (isDataFetched && partnerData) {
-      const { workInfo, personalData } = partnerData;
-      const updatedInput = parseResponseData({ ...workInfo, ...personalData });
+      const { distributionDetail } = partnerData;
+      const updatedInput = parseResponseData(distributionDetail);
       updateInputs({
         ...updatedInput,
         //This value is wrong on the db

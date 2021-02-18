@@ -1,9 +1,8 @@
-import { IPlan, IBenefit, IBenefitList } from './types';
-import { IPartnerDetail } from '../Partners/types';
+import { IPlan, IBenefit, IBenefitList, IPartner } from './types';
 
 export interface IBenefitsState {
   loading: boolean;
-  partnerInfo: IPartnerDetail | null;
+  partnerInfo: IPartner | IBenefit | null;
   benefitData: IBenefit | null;
   benefitList: IBenefitList[];
   benefitRecordCount: number;

@@ -25,7 +25,20 @@ export function* getPartnerInformation(action: PayloadAction<any>) {
     };
 
     const response = yield call(request, requestURL, requestOptions);
-    yield put(actions.getPartnerInformationSuccess(response.data));
+    yield put(
+      actions.getPartnerInformationSuccess({
+        partnerDetail: {
+          ...response.data.personalData,
+          status: response.data.status,
+          admissionDate: response.data.createdAt,
+        },
+        distributionDetail: {
+          ...response.data.workInfo,
+          paymentType: response.data.personalData.paymentType,
+          recoveryPaymentType: response.data.personalData.recoveryPaymentType,
+        },
+      }),
+    );
   } catch (err) {
     yield put(actions.getPartnerInformationFailed());
     toast.error(err.message, {
@@ -225,7 +238,7 @@ export function* updateBenefit(action: PayloadAction<{ id: number; updatedInfo: 
 
     yield call(request, requestURL, requestOptions);
     yield put(actions.updateBenefitSuccess());
-    toast.success(`Se a agregado el documento a la prestacion nro: ${action.payload.id}`, {
+    toast.success(`Se a modificado la prestacion nro: ${action.payload.id}`, {
       position: toast.POSITION.TOP_CENTER,
     });
   } catch (err) {

@@ -53,10 +53,12 @@ export interface IBenefitInfo {
   statusDate: string;
 }
 
-export interface IBenefit extends IBenefitInfo {
+export interface IPartner {
   partnerDetail: IPartnerInfo;
   distributionDetail: IDistributionInfo;
 }
+
+export type IBenefit = IBenefitInfo & IPartner;
 
 export interface IBenefitList {
   _id?: string;

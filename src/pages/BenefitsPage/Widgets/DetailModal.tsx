@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { selectBenefitsData } from 'containers/Benefits/selectors';
 import { IBenefit } from 'containers/Benefits/types';
@@ -21,6 +22,7 @@ import { labelsDetails, labelsPartners, labelsRepartitions } from './DetailsLabe
 import { useModalStyles } from './styles';
 
 const DetailsModal = () => {
+  const history = useHistory();
   const classes = useNotificationStyles();
   const modalClasses = useModalStyles();
   const dispatch = useDispatch();
@@ -35,6 +37,14 @@ const DetailsModal = () => {
     if (benefitDetail) {
       dispatch(actions.updateBenefitStatusRequest({ id: benefitDetail.benefitId, status }));
       dispatch(actions.setBenefitDetailsToNull());
+    }
+  };
+
+  const handleSetFormData = () => {
+    if (benefitDetail) {
+      dispatch(actions.getPartnerInformationSuccess(benefitDetail));
+      dispatch(actions.setBenefitId(benefitDetail.benefitId));
+      history.push(`/app/benefits/${benefitDetail.benefitId}`);
     }
   };
 
@@ -117,7 +127,7 @@ const DetailsModal = () => {
             <Button onClick={() => handleChangeBenefitStatus('a')} color="success" simple>
               aprobar
             </Button>
-            <Button color="warning" simple>
+            <Button onClick={() => handleSetFormData()} color="warning" simple>
               modificar
             </Button>
             <Button onClick={() => handleChangeBenefitStatus('r')} color="danger" simple>
