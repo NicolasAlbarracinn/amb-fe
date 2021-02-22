@@ -7,6 +7,7 @@ import GridItem from 'components/Grid/GridItem';
 import PartnerDetail from './BenefitsSteps/PartnerDetail';
 import DistributionDetail from './BenefitsSteps/DistributionDetail';
 import BenefitDetail from './BenefitsSteps/BenefitDetail';
+import FileUpload from './BenefitsSteps/FileUpload';
 
 import WizardContainer from 'containers/WizardContainer/WizardContainer';
 
@@ -19,6 +20,7 @@ const BenefitsForm = () => {
             { stepName: 'Datos del socio', stepComponent: PartnerDetail, stepId: 'partnerDetail' },
             { stepName: 'Datos de reparticion', stepComponent: DistributionDetail, stepId: 'distributionDetail' },
             { stepName: 'Datos de la prestación', stepComponent: BenefitDetail, stepId: 'benefitDetail' },
+            { stepName: 'Generador de legajo', stepComponent: FileUpload, stepId: 'fileUpload' },
           ]}
           title="Agregar prestacion"
           subtitle="Complete los campos requeridos para crear un nuevo prestacion"

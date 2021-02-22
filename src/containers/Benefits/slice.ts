@@ -136,6 +136,15 @@ const BenefitSlice = createSlice({
     setBenefitIdDefault(state) {
       state.benefitId = null;
     },
+    getPDFFileRequest(state, action: PayloadAction<any>) {
+      state.loading = true;
+    },
+    getPDFFileSuccess(state) {
+      state.loading = false;
+    },
+    getPDFFileFailed(state) {
+      state.loading = false;
+    },
   },
 });
 

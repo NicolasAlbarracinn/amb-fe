@@ -40,7 +40,7 @@ const BenefitDetail = () => {
   const planList: IPlan[] = useSelector(selectPlanList);
   const plan: IPlan | null = useSelector(selectPlan);
   const { inputs: benefit, onChangeHanlder, updateInputs } = useInputChange(defaultBenefit);
-  const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
+  const { loadError, handleSubmit, handlePrevious, handleNext } = useWizardStep(benefit, 'benefitDetail');
 
   const setPlanDefaultValues = useCallback(() => {
     if (partnerData?.benefitId) {
@@ -291,7 +291,7 @@ const BenefitDetail = () => {
         </div>
         <div className={classes.right}>
           {true ? (
-            <Button color="rose" onClick={handleSubmit}>
+            <Button color="rose" onClick={handleNext}>
               Finalizar
             </Button>
           ) : null}

@@ -11,6 +11,7 @@ export const UPADTE_PARTNER_STATUS = `${BASE_URL}/partners/updateStatus`;
 export const LENDERS_URL = `${BASE_URL}/lenders`;
 export const PORTFOLIOS_URL = `${BASE_URL}/portfolios`;
 export const PLANS_URL = `${BASE_URL}/plans`;
+export const UTILITIES_URL = `${BASE_URL}/utilities`;
 
 export function getCurrentEnvironment() {
   const host = window.location.hostname;

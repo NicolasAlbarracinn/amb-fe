@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 
 import { request } from 'utils/request';
 import { queryBuilder } from 'utils/queryBuilder';
-import { BENEFITS_URL, PLANS_URL } from 'utils/endpoints';
+import { BENEFITS_URL, PLANS_URL, UTILITIES_URL } from 'utils/endpoints';
 import { QueryParameters } from 'types/types';
 
 import { actions } from './slice';
@@ -249,6 +249,36 @@ export function* updateBenefit(action: PayloadAction<{ id: number; updatedInfo: 
   }
 }
 
+export function* getPDFFileRequest(action: PayloadAction<any>) {
+  const token = cookies.get('token');
+  try {
+    const requestOptions: RequestInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(action.payload),
+    };
+
+    const response = yield call(request, UTILITIES_URL, requestOptions, true);
+
+    const blob = yield response.blob();
+    const fileURL = URL.createObjectURL(blob);
+    window.open(fileURL);
+
+    yield put(actions.getPDFFileSuccess());
+    toast.success(`Por favor firme el documento y vuelvalo a subirlo: ${action.payload.id}`, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  } catch (err) {
+    yield put(actions.getPDFFileFailed());
+    toast.error(err.message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
 export function* benefitsSaga() {
   yield takeLatest(actions.getPartnerInformationRequest.type, getPartnerInformation);
   yield takeLatest(actions.setBenefitRequest.type, setBenefitRequest);
@@ -259,4 +289,5 @@ export function* benefitsSaga() {
   yield takeLatest(actions.updateBenefitStatusRequest.type, updateBenefitStatus);
   yield takeLatest(actions.deleteBenefitRequest.type, deleteBenefit);
   yield takeLatest(actions.updateBenefitRequest.type, updateBenefit);
+  yield takeLatest(actions.getPDFFileRequest.type, getPDFFileRequest);
 }
