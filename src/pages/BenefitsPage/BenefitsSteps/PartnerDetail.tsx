@@ -42,7 +42,7 @@ const PartnerDetail = () => {
 
   useEffect(() => {
     if (isDataFetched && partnertData) {
-      const { partnerDetail } = partnertData;
+      const { partnerDetail, partnerObjectId } = partnertData;
       const updatedInput = parseResponseData(partnerDetail);
 
       updateInputs({
@@ -51,6 +51,10 @@ const PartnerDetail = () => {
         //TODO: add this parameter on db partner schema
         status: {
           value: partnerDetail.status,
+          isValid: true,
+        },
+        partnerObjectId: {
+          value: partnerObjectId,
           isValid: true,
         },
       });

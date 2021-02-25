@@ -47,6 +47,7 @@ const headers = () => [
     Cell: props => {
       return (
         <div className="actions-right">
+          <DetailBtn benefitId={props.row.values.benefitId} />
           {props.row.values.benefitStatus === 's' && <DetailBtn benefitId={props.row.values.benefitId} />}
           {props.row.values.benefitStatus === 'a' && <AttachmentBtn benefitId={props.row.original.benefitId} />}
           {props.row.values.benefitStatus !== 'o' && <DeleteBtn benefitId={props.row.original._id} />}

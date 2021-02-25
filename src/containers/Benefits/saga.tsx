@@ -27,15 +27,16 @@ export function* getPartnerInformation(action: PayloadAction<any>) {
     const response = yield call(request, requestURL, requestOptions);
     yield put(
       actions.getPartnerInformationSuccess({
+        partnerObjectId: response.data._id,
         partnerDetail: {
-          ...response.data.personalData,
-          status: response.data.status,
-          admissionDate: response.data.createdAt,
+          ...response.data.partner.personalData,
+          status: response.data.partner.status,
+          admissionDate: response.partner.data.createdAt,
         },
         distributionDetail: {
-          ...response.data.workInfo,
-          paymentType: response.data.personalData.paymentType,
-          recoveryPaymentType: response.data.personalData.recoveryPaymentType,
+          ...response.data.partner.workInfo,
+          paymentType: response.data.partner.personalData.paymentType,
+          recoveryPaymentType: response.data.partner.personalData.recoveryPaymentType,
         },
       }),
     );
@@ -156,7 +157,25 @@ export function* getBenefitDetail(action: PayloadAction<number>) {
     };
 
     const response = yield call(request, requestURL, requestOptions);
-    yield put(actions.getBenefitDetailSuccess(response.data));
+
+    if (response.data)
+      yield put(
+        actions.getBenefitDetailSuccess({
+          ...response.data,
+          partnerObjectId: response.data.partner._id,
+          partnerDetail: {
+            ...response.data.partner.personalData,
+            status: response.data.partner.status,
+            admissionDate: response.data.partner.createdAt,
+            partnerId: response.data.partner.partnerId,
+          },
+          distributionDetail: {
+            ...response.data.partner.workInfo,
+            paymentType: response.data.partner.personalData.paymentType,
+            recoveryPaymentType: response.data.partner.personalData.recoveryPaymentType,
+          },
+        }),
+      );
   } catch (err) {
     yield put(actions.getBenefitDetailFailed());
     toast.error(err.message, {

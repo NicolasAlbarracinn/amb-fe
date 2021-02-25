@@ -6,6 +6,7 @@ import { isEmpty } from 'lodash';
 
 import BenefitsForm from 'pages/BenefitsPage/BenefitsForm';
 import BenefitList from 'pages/BenefitsPage/BenefitList';
+import BenefitPreRequestForm from 'pages/BenefitsPage/BenefitPreRequestForm';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { sliceKey, reducer, actions } from './slice';
@@ -27,15 +28,14 @@ const Benefits = () => {
   const benefitId = useSelector(selectFetchedBenefitId);
 
   useEffect(() => {
-    if (submitReady && !isEmpty(data)) {
+    if (submitReady && !isEmpty(data) && !isBenefitCreated) {
       if (benefitId) {
         dispatch(
           actions.updateBenefitRequest({
             id: benefitId,
             updatedInfo: {
               ...data.benefitDetail,
-              distributionDetail: data.distributionDetail,
-              partnerDetail: data.partnerDetail,
+              partnerObjectId: data.partnerDetail.partnerObjectId,
             },
           }),
         );
@@ -46,21 +46,23 @@ const Benefits = () => {
       dispatch(
         actions.setBenefitRequest({
           ...data.benefitDetail,
-          distributionDetail: data.distributionDetail,
-          partnerDetail: data.partnerDetail,
+          partnerObjectId: data.partnerDetail.partnerObjectId,
+          paymentMethod: data.distributionDetail.paymentMethod,
+          paymentMethodRecovery: data.distributionDetail.paymentMethodRecovery,
         }),
       );
     }
-  }, [data, dispatch, submitReady, benefitId]);
+  }, [data, dispatch, submitReady, benefitId, isBenefitCreated]);
 
   useEffect(() => {
-    if (isBenefitCreated) history.push('/');
-  }, [isBenefitCreated, history]);
+    if (isBenefitCreated) history.push(`/app/benefits/preRequest/${benefitId}`);
+  }, [isBenefitCreated, history, benefitId]);
 
   return (
     <Switch>
       <Route path="/app/benefits/list" component={BenefitList} />
       <Route path="/app/benefits/new" component={BenefitsForm} />
+      <Route path="/app/benefits/preRequest/:benefitId" component={BenefitPreRequestForm} />
       <Route path="/app/benefits/:benefitId" component={BenefitsForm} />
     </Switch>
   );

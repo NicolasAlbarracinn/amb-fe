@@ -86,7 +86,7 @@ const DetailsModal = () => {
                         </div>
                       </GridItem>
                     ))}
-
+                  {/* 
                   <GridItem xs={12} sm={12}>
                     {' '}
                     <h3>Delegacion</h3>
@@ -116,7 +116,7 @@ const DetailsModal = () => {
                           <span>{benefitDetail.partnerDetail[k]}</span>
                         </div>
                       </GridItem>
-                    ))}
+                    ))} */}
                 </>
               ) : (
                 <div>No pudiemos encontrar datos</div>

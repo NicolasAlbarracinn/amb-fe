@@ -54,6 +54,7 @@ export interface IBenefitInfo {
 }
 
 export interface IPartner {
+  partnerObjectId: string;
   partnerDetail: IPartnerInfo;
   distributionDetail: IDistributionInfo;
 }

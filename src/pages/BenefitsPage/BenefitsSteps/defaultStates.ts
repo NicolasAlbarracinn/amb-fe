@@ -42,7 +42,7 @@ export const defaultBenefit = {
     isValid: true,
   },
   benefitStatus: {
-    value: 's',
+    value: 'ps',
     isValid: true,
   },
   commercializer: {
@@ -84,12 +84,12 @@ export const defaultDistribution = {
     value: '',
     isValid: false,
   },
-  paymentType: {
-    value: '',
+  paymentMethod: {
+    value: 'db',
     isValid: true,
   },
-  recoveryPaymentType: {
-    value: '',
+  paymentMethodRecovery: {
+    value: 'db',
     isValid: true,
   },
   bankName: {
@@ -129,6 +129,10 @@ export const defaultDistribution = {
 // repartition: "slta"
 
 export const defaultPartner = {
+  partnerObjectId: {
+    value: '',
+    isValid: true,
+  },
   partnerId: {
     value: '',
     isValid: false,

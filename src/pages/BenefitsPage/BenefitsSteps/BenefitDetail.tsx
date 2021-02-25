@@ -40,7 +40,7 @@ const BenefitDetail = () => {
   const planList: IPlan[] = useSelector(selectPlanList);
   const plan: IPlan | null = useSelector(selectPlan);
   const { inputs: benefit, onChangeHanlder, updateInputs } = useInputChange(defaultBenefit);
-  const { loadError, handleSubmit, handlePrevious, handleNext } = useWizardStep(benefit, 'benefitDetail');
+  const { loadError, handleSubmit, handlePrevious } = useWizardStep(benefit, 'benefitDetail');
 
   const setPlanDefaultValues = useCallback(() => {
     if (partnerData?.benefitId) {
@@ -77,7 +77,8 @@ const BenefitDetail = () => {
 
   useEffect(() => {
     if (benefit.duesQuantity.isValid) {
-      onChangeHanlder({ id: 'duesAmount', value: benefit.duesQuantity.value, isVAlid: true });
+      const dues = plan?.dues?.find(d => d.duesQuantity === benefit.duesQuantity.value);
+      onChangeHanlder({ id: 'duesAmount', value: dues?.duesAmount || 0, isVAlid: true });
     }
   }, [benefit.duesQuantity, onChangeHanlder]);
 
@@ -182,7 +183,7 @@ const BenefitDetail = () => {
             handleSelect={onChangeHanlder}
             items={
               plan?.dues?.map(d => ({
-                value: `${d.duesQuantity} cuotas de ${d.duesAmount}`,
+                value: d.duesQuantity,
                 label: `${d.duesQuantity} cuotas`,
               })) || []
             }
@@ -231,7 +232,7 @@ const BenefitDetail = () => {
             id="benefitStatus"
             label="Estado de la prestación"
             mainSelectLabel="estado de prestacion"
-            value={'s' ?? benefit.benefitStatus.value}
+            value={'ps' ?? benefit.benefitStatus.value}
             handleSelect={onChangeHanlder}
             items={benefitStatusList}
             isValid={true}
@@ -291,7 +292,7 @@ const BenefitDetail = () => {
         </div>
         <div className={classes.right}>
           {true ? (
-            <Button color="rose" onClick={handleNext}>
+            <Button color="rose" onClick={handleSubmit}>
               Finalizar
             </Button>
           ) : null}

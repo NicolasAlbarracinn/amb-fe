@@ -107,7 +107,7 @@ const DistributionDetail = () => {
           <SelectInput
             id="paymentMethod"
             label="Forma de cobro"
-            value={distribution.paymentType.value}
+            value={distribution.paymentMethod?.value || 'db'}
             items={[
               { value: 'db', label: 'Descuento bancario' },
               { value: 'dbic', label: 'Descuento BICA' },
@@ -116,14 +116,14 @@ const DistributionDetail = () => {
             ]}
             handleSelect={onChangeHanlder}
             loadError={loadError}
-            isValid={distribution.paymentType.isValid}
+            isValid={distribution.paymentMethod.isValid}
           />
         </GridItem>
         <GridItem xs={12} sm={3}>
           <SelectInput
             id="paymentMethodRecovery"
             label="Forma de Cobro Recupero"
-            value={distribution.recoveryPaymentType.value}
+            value={distribution.paymentMethodRecovery?.value || 'db'}
             items={[
               { value: 'db', label: 'Descuento bancario' },
               { value: 'dbic', label: 'Descuento BICA' },
@@ -133,7 +133,7 @@ const DistributionDetail = () => {
             ]}
             handleSelect={onChangeHanlder}
             loadError={loadError}
-            isValid={distribution.recoveryPaymentType.isValid}
+            isValid={distribution.paymentMethodRecovery.isValid}
           />
         </GridItem>
       </GridContainer>

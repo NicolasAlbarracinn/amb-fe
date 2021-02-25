@@ -78,6 +78,7 @@ export const portfoliosList = [
 ];
 
 export const benefitStatusList = [
+  { value: 'ps', label: 'Pre Solicitud' },
   { value: 's', label: 'Solicitud' },
   { value: 'a', label: 'Aprobado' },
   { value: 'r', label: 'Rechazado' },

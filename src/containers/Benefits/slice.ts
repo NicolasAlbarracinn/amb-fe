@@ -52,6 +52,7 @@ const BenefitSlice = createSlice({
     setBenefitData(state, action: PayloadAction<any>) {
       state.loading = false;
       state.isSuccessfullyCreated = true;
+      state.benefitId = action.payload;
     },
     setBenefitFailed(state) {
       state.loading = false;
