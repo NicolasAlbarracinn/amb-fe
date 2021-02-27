@@ -1,7 +1,7 @@
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
-import { LoginState } from 'containers/Login/pageState';
-import { AuthState } from 'containers/PrivateRoutes/pageState';
+import { LoginState } from 'features/authentication/store/pageState';
+import { AuthState } from 'features/PrivateRoutes/pageState';
 
 /* 
   Because the redux-injectors injects your reducers asynchronously somewhere in your code

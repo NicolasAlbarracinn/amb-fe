@@ -1,13 +1,13 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { call, put, takeLatest } from 'redux-saga/effects'; // select, delay
+import { call, put } from 'redux-saga/effects'; // select, delay
 import Cookies from 'universal-cookie';
 
 import { GET_USER_LOGIN } from 'utils/endpoints';
 import { request } from 'utils/request';
 
-import { actions } from './slice';
-import { GetLoginRequest } from './types';
+import { actions } from '../store/slice';
+import { GetLoginRequest } from '../types';
 
 export function* getLoginRequest(action: PayloadAction<GetLoginRequest>) {
   const cookies = new Cookies();
@@ -37,8 +37,4 @@ export function* getLoginRequest(action: PayloadAction<GetLoginRequest>) {
       position: toast.POSITION.TOP_CENTER,
     });
   }
-}
-
-export function* loginSaga() {
-  yield takeLatest(actions.getLoginRequest.type, getLoginRequest);
 }

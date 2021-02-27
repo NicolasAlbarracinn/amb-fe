@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Icon from '@material-ui/core/Icon';
 
@@ -12,26 +11,18 @@ import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardFooter from 'components/Card/CardFooter';
 
-import { useStyles } from './styles';
+import { useLoginForm } from './LoginFormStyles';
 
-import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginSaga } from './saga';
-import { actions, sliceKey, reducer } from './slice';
-import { Redirect } from 'react-router-dom';
-import { selectIsLoggedIn } from './selectors';
+interface ILoginFormProps {
+  submit: (args: { email: string; password: string }) => void;
+}
 
-const Login = () => {
-  useInjectReducer({ key: sliceKey, reducer: reducer });
-  useInjectSaga({ key: sliceKey, saga: loginSaga });
+const LoginForm = ({ submit }: ILoginFormProps) => {
+  const classes = useLoginForm();
+
   const [cardAnimaton, setCardAnimation] = useState('cardHidden');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const isLogged = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     let id = setTimeout(function () {
@@ -42,13 +33,11 @@ const Login = () => {
     };
   });
 
-  const handleSubmit = e => {
-    dispatch(actions.getLoginRequest({ email, password }));
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    submit({ email, password });
   };
-  if (isLogged) {
-    return <Redirect to="/app/dashboard" />;
-  }
+
   return (
     <form onSubmit={handleSubmit}>
       <Card login className={classes[cardAnimaton]}>
@@ -110,4 +99,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;

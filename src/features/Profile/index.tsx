@@ -3,8 +3,8 @@ import React from 'react';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useDispatch } from 'react-redux';
 import { profileSaga } from './saga';
-import { actions, sliceKey, reducer } from './slice';
-import UserProfile from 'pages/UserProfile/UserProfile';
+import { actions, sliceKey, reducer } from './store/slice';
+import ProfileContainer from './containers/ProfileContainer';
 
 const Profile = () => {
   useInjectReducer({ key: sliceKey, reducer: reducer });
@@ -14,7 +14,7 @@ const Profile = () => {
   const handleSubmit = profile => {
     dispatch(actions.getUpdateProfileRequest(profile));
   };
-  return <UserProfile handleSubmit={handleSubmit} />;
+  return <ProfileContainer handleSubmit={handleSubmit} />;
 };
 
 export default Profile;

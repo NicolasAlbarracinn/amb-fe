@@ -1,7 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core';
 import { cardTitle, grayColor, whiteColor } from 'utils/styles';
 
-export const useStyles = makeStyles((theme: Theme) => ({
+export const useLoginForm = makeStyles((theme: Theme) => ({
   cardTitle: {
     ...cardTitle,
     color: whiteColor,

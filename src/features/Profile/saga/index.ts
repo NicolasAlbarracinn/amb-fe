@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import { UPDATE_ACCOUNT_DATA } from 'utils/endpoints';
 import { request } from 'utils/request';
 
-import { actions } from './slice';
+import { actions } from '../store/slice';
 
 const cookies = new Cookies();
 
@@ -22,7 +22,7 @@ export function* getUpdateProfileRequest(action: PayloadAction<any>) {
       },
       body: JSON.stringify(action.payload),
     };
-    const response = yield call(request, requestURL, requestOptions);
+    yield call(request, requestURL, requestOptions);
     yield put(actions.getUpdateProfileSuccess());
     toast.success('Perfil Actualizado Correctamente!', {
       position: toast.POSITION.TOP_CENTER,

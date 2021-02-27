@@ -3,7 +3,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 
 import { ContainerState } from './pageState';
-import { GetLoginRequest } from './types';
+import { GetLoginRequest } from '../types';
 
 // The initial state of the GithubRepoForm container
 export const initialState: ContainerState = {

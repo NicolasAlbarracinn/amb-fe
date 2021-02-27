@@ -1,7 +1,7 @@
 // @material-ui/icons
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
-import Dashboard from 'pages/Dashboard/Dashboard';
+import Dashboard from 'features/dashboard';
 
 const dashRoutes = [
   {

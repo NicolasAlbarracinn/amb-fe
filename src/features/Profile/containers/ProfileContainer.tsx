@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import PermIdentity from '@material-ui/icons/PermIdentity';
 
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
-import CustomInput from 'components/CustomInput/CustomInput';
 import Clearfix from 'components/Clearfix/Clearfix';
 import Card from 'components/Card/Card';
 import CardBody from 'components/Card/CardBody';
@@ -14,7 +13,7 @@ import CardIcon from 'components/Card/CardIcon';
 import EmailInput from 'components/Form/EmailInput';
 import TextInput from 'components/Form/TextInput';
 
-import { useStyles } from './styles';
+import { useStyles } from '../styles';
 
 const initialForm = {
   email: '',
