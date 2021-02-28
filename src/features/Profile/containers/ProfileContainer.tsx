@@ -1,38 +1,39 @@
 import React from 'react';
+import * as yup from 'yup';
+import { Formik, Form, Field } from 'formik';
 
 import PermIdentity from '@material-ui/icons/PermIdentity';
 
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 import Button from 'components/CustomButtons/Button';
-import Clearfix from 'components/Clearfix/Clearfix';
 import Card from 'components/Card/Card';
 import CardBody from 'components/Card/CardBody';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
-import EmailInput from 'components/Form/EmailInput';
-import TextInput from 'components/Form/TextInput';
+import TextFormField from 'components/Form/TextField';
 
 import { useStyles } from '../styles';
+import { ILoginFormFields } from '../types';
 
-const initialForm = {
+const formSchema = yup.object().shape({
+  email: yup.string().required('campo requerido').email('Formato invalido'),
+  firstName: yup.string().required('campo requerido').min(3, 'minimo 3 caracteres'),
+  lastName: yup.string().required('campo requerido').min(3, 'minimo 3 caracteres'),
+});
+
+const initialForm: ILoginFormFields = {
   email: '',
   firstName: '',
   lastName: '',
 };
 
-const UserProfile = ({ handleSubmit }) => {
+interface IUserProfileProps {
+  handleSubmit: (args: ILoginFormFields) => void;
+}
+
+const UserProfile = ({ handleSubmit }: IUserProfileProps) => {
   const classes = useStyles();
-  let form = initialForm;
-
-  const onChangeHanlder = ({ id, value }) => {
-    form[id] = value;
-  };
-
-  const onSubmit = e => {
-    e.preventDefault();
-    handleSubmit(form);
-  };
 
   return (
     <div>
@@ -48,66 +49,22 @@ const UserProfile = ({ handleSubmit }) => {
               </h4>
             </CardHeader>
             <CardBody>
-              <form onSubmit={e => onSubmit(e)}>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <EmailInput isRequired={true} emailHandler={onChangeHanlder} />
-                  </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <TextInput
-                      length={[0, 25]}
-                      labelText="Nombre"
-                      id="firstName"
-                      isRequired={true}
-                      handler={onChangeHanlder}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <TextInput
-                      length={[0, 25]}
-                      labelText="Apellido"
-                      id="lastName"
-                      isRequired={true}
-                      handler={onChangeHanlder}
-                    />
-                  </GridItem>
-                </GridContainer>
-                {/*<GridContainer>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Ciudad"
-                      id="city"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Nacionalidad"
-                      id="country"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
-                      labelText="Codigo Postal"
-                      id="postal-code"
-                      formControlProps={{
-                        fullWidth: true,
-                      }}
-                    />
-                  </GridItem>
-                    </GridContainer>*/}
-                <Button type="submit" color="rose" className={classes.updateProfileButton}>
-                  Guardar Perfil
-                </Button>
-                <Clearfix />
-              </form>
+              <Formik
+                initialValues={initialForm}
+                validationSchema={formSchema}
+                onSubmit={values => {
+                  handleSubmit(values);
+                }}
+              >
+                <Form>
+                  <Field label="Email" name="email" component={TextFormField} />
+                  <Field label="Nombre" name="firstName" component={TextFormField} />
+                  <Field label="Apellido" name="lastName" component={TextFormField} />
+                  <Button type="submit" color="rose" className={classes.updateProfileButton}>
+                    Guardar Perfil
+                  </Button>
+                </Form>
+              </Formik>
             </CardBody>
           </Card>
         </GridItem>

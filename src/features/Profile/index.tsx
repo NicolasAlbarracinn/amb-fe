@@ -3,6 +3,7 @@ import React from 'react';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { useDispatch } from 'react-redux';
 import { profileSaga } from './saga';
+import { ILoginFormFields } from './types';
 import { actions, sliceKey, reducer } from './store/slice';
 import ProfileContainer from './containers/ProfileContainer';
 
@@ -11,7 +12,7 @@ const Profile = () => {
   useInjectSaga({ key: sliceKey, saga: profileSaga });
 
   const dispatch = useDispatch();
-  const handleSubmit = profile => {
+  const handleSubmit = (profile: ILoginFormFields) => {
     dispatch(actions.getUpdateProfileRequest(profile));
   };
   return <ProfileContainer handleSubmit={handleSubmit} />;

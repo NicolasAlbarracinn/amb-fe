@@ -18,6 +18,10 @@ export const useStyles = makeStyles((theme: Theme) => ({
     '& + p': {
       fontWeight: 300,
     },
+    '&$error:after': {
+      borderBottomColor: theme.palette.error.main,
+      transform: 'scaleX(1)', // error is always underlined in red
+    },
   },
   underlineError: {
     '&:after': {
