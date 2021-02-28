@@ -2,7 +2,9 @@
 
 import { LoginState } from 'features/authentication/store/pageState';
 import { AuthState } from 'features/PrivateRoutes/pageState';
+import { IBenefitsState } from 'features/benefits/store/pageState';
 
+import { SearchBarState } from 'components/SearchBar/pageState';
 /* 
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
   You have to declare them here manually
@@ -12,6 +14,8 @@ import { AuthState } from 'features/PrivateRoutes/pageState';
 export interface RootState {
   auth?: AuthState;
   login?: LoginState;
+  benefits?: IBenefitsState;
   profile?: any;
   wizard: any;
+  searchBar?: SearchBarState;
 }

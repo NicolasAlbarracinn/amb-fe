@@ -15,6 +15,7 @@ import Authentication from 'features/authentication';
 import Dashboard from 'features/dashboard';
 import Profile from 'features/Profile';
 import Partners from 'features/partners';
+import Benefits from 'features/benefits';
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
               <Switch>
                 <Route path="/app" exact render={() => <Redirect to="/app/dashboard" />} />
                 <Route path="/app/profile" component={Profile} />
+                <Route path="/app/benefits" component={Benefits} />
                 <Route path="/app/affiliates" component={Partners} />
                 <Route path="/app/dashboard" component={Dashboard} />
               </Switch>

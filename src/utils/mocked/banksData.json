@@ -1,0 +1,2051 @@
+[
+  {
+    "code": "6406",
+    "officeName": "25 DE MAYO",
+    "localidad": "25 DE MAYO",
+    "address": "CALLE 9 Nº 901 ESQUINA 28",
+    "postalCode": "B6660BVS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6723",
+    "officeName": "TREINTA DE AGOSTO",
+    "localidad": "30 DE AGOSTO",
+    "address": "LEANDRO N. ALEM S/N° E H. YRIGOYEN",
+    "postalCode": "B6405BFF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6358",
+    "officeName": "GONZALES CHAVES",
+    "localidad": "ADOLFO GONZALES CHAVES",
+    "address": "BARTOLOMÉ MITRE 299",
+    "postalCode": "B7513CQE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5025",
+    "officeName": "ADROGUE",
+    "localidad": "ADROGUÉ",
+    "address": "BARTOLOMÉ MITRE S/N° Y SOMELLERA 599",
+    "postalCode": "B1846BFA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6424",
+    "officeName": "ALBERTI",
+    "localidad": "ALBERTI",
+    "address": "AV. VACAREZZA 202",
+    "postalCode": "B6634CTP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5011",
+    "officeName": "ALDO BONZI",
+    "localidad": "ALDO BONZI",
+    "address": "AV. LINO LAGOS 1928 DARREGUEIRA, LIBERTAD Y ANA MARÍA JANER",
+    "postalCode": "B1770BST",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7002",
+    "officeName": "ALEJANDRO KORN",
+    "localidad": "ALEJANDRO KORN",
+    "address": "JUAN SAGARRA 67",
+    "postalCode": "B1864AUA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6789",
+    "officeName": "AMERICA ",
+    "localidad": "AMÉRICA",
+    "address": "SAN MARTÍN 300 ESQUINA M. CACHAU",
+    "postalCode": "B6237CAD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6532",
+    "officeName": "ARRECIFES",
+    "localidad": "ARRECIFES",
+    "address": "RICARDO GUTIERREZ 399",
+    "postalCode": "B2740BCG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6602",
+    "officeName": "ASCENSION",
+    "localidad": "ASCENSIÓN",
+    "address": "AV. SAN MARTÍN 127",
+    "postalCode": "B6003BTS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5026",
+    "officeName": "AVELLANEDA",
+    "localidad": "AVELLANEDA",
+    "address": "AVENIDA MITRE 498",
+    "postalCode": "B1870AAR",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6927",
+    "officeName": "AYACUCHO ",
+    "localidad": "AYACUCHO",
+    "address": "SAN MARTÍN 1199",
+    "postalCode": "B7150EAW ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6304",
+    "officeName": "DELEG. TRIBUNALES AZUL",
+    "localidad": "AZUL",
+    "address": "AV. PERÓN 525 MORENO, URIBURU Y OLAVARRÍA",
+    "postalCode": "B7300ILG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6328",
+    "officeName": "AZUL",
+    "localidad": "AZUL",
+    "address": "SAN MARTÍN 499 BOLÍVAR, URIBURU Y BURGOS",
+    "postalCode": "B7300BZG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6206",
+    "officeName": "DELEG. TRIBUNALES BAHIA BLANCA",
+    "localidad": "BAHÍA BLANCA",
+    "address": "ESTOMBA 32 COLÓN, MORENO Y V. LÓPEZ",
+    "postalCode": "B8000AAB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6200",
+    "officeName": "VILLA MITRE",
+    "localidad": "BAHÍA BLANCA",
+    "address": "ALBERDI 1462 GARIBALDI, 14 DE JULIO Y CASTELAR",
+    "postalCode": "B8001BPH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6202",
+    "officeName": "ALMAFUERTE (BAHIA BLANCA)",
+    "localidad": "BAHÍA BLANCA",
+    "address": "ALMAFUERTE 750 JUAN MOLINA, HOLDICH Y CISTOLAPIUR",
+    "postalCode": "B8000ASP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6207",
+    "officeName": "BARRIO UNIVERSITARIO (BAHIA BLANCA) ",
+    "localidad": "BAHÍA BLANCA",
+    "address": "ALEM 979 TRELEW Y SGO. DEL ESTERO Y 12 DE OCTUBRE",
+    "postalCode": "B8000COL",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6229",
+    "officeName": "BAHIA BLANCA",
+    "localidad": "BAHÍA BLANCA",
+    "address": "CHICLANA N° 565 UNDIANO, VILLARINO Y BROWN (ESQ.UNDIANO)",
+    "postalCode": "B8000",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6228",
+    "officeName": "CENTRO -BAHIA BLANCA",
+    "localidad": "BAHÍA BLANCA",
+    "address": "AVENIDA COLÓN 36/38",
+    "postalCode": "B8000FTN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6130",
+    "officeName": "BALCARCE",
+    "localidad": "BALCARCE",
+    "address": "AV. GONZÁLES CHAVES 501",
+    "postalCode": "B7620EED",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6659",
+    "officeName": "DELEG. BANDERALO",
+    "localidad": "BANDERALÓ",
+    "address": "CONRADO E. VILLEGAS 291",
+    "postalCode": "B6244",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5038",
+    "officeName": "BANFIELD ",
+    "localidad": "BANFIELD ",
+    "address": "AV. ALSINA 653/59 COCHABAMBA, MAIPÚ Y V. VERGARA",
+    "postalCode": "B1828ABM",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6531",
+    "officeName": "BARADERO",
+    "localidad": "BARADERO",
+    "address": "LAPRIDA 1036",
+    "postalCode": "B2942DXL",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5065",
+    "officeName": "BECCAR",
+    "localidad": "BECCAR",
+    "address": "AV. CENTENARIO 1940/52 J.B. JUSTO Y JOSÉ INGENIEROS-GARIBALDI",
+    "postalCode": " B1643CGT",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7159",
+    "officeName": "ESCOBAR",
+    "localidad": "BELÉN DE ESCOBAR",
+    "address": "EUGENIA TAPIA DE CRUZ 510",
+    "postalCode": "B1625AAS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5014",
+    "officeName": "BELLA VISTA",
+    "localidad": "BELLA VISTA",
+    "address": "SENADOR MORÓN 1276",
+    "postalCode": "B1661ION",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6361",
+    "officeName": "JUAREZ",
+    "localidad": "BENITO JUÁREZ",
+    "address": "ALSINA 77",
+    "postalCode": "B7020DUA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5033",
+    "officeName": "BERISSO",
+    "localidad": "BERISSO",
+    "address": "MONTEVIDEO 501 ESQ. 7",
+    "postalCode": "B1923HME",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5175",
+    "officeName": "Bernal",
+    "localidad": "BERNAL",
+    "address": "BELGRANO 347",
+    "postalCode": "B1876AFG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6604",
+    "officeName": "DELEG. BLAQUIER",
+    "localidad": "BLAQUIER",
+    "address": "SARMIENTO S/Nº",
+    "postalCode": "B6065AYD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6734",
+    "officeName": "Bolivar",
+    "localidad": "BOLIVAR",
+    "address": "AV. SAN MARTÍN 601",
+    "postalCode": "B6550CGG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5012",
+    "officeName": "BOULOGNE SUR MER",
+    "localidad": "BOULOGNE SUR MER",
+    "address": "BULNES 21 ROLÓN AVELINO Y ANTONIO SÁENZ-CASTIGLIA",
+    "postalCode": "B1609AWA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6435",
+    "officeName": "BRAGADO",
+    "localidad": "BRAGADO",
+    "address": "AV. PELLEGRINI 1399",
+    "postalCode": "B6640CCA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5079",
+    "officeName": "DELEG. PARQUE INDUSTRIAL ALMIRANTE BROWN-BURZACO",
+    "localidad": "BURZACO",
+    "address": "AV. HIPÓLITO IRIGOYEN Nº 16101 ESQ. PTE. ORTIZ",
+    "postalCode": "B1852EMW",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5029",
+    "officeName": "BURZACO",
+    "localidad": "BURZACO",
+    "address": "GENERAL ROCA 1161",
+    "postalCode": "B1852FCW",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6256",
+    "officeName": "CABILDO",
+    "localidad": "CABILDO",
+    "address": "LA PLATA ESQ. PRINGLES",
+    "postalCode": "B8118AWD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6345",
+    "officeName": "CACHARI",
+    "localidad": "CACHARÍ",
+    "address": "AV. SAN MARTÍN 1640",
+    "postalCode": "B7214COQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7136",
+    "officeName": "CAMPANA",
+    "localidad": "CAMPANA",
+    "address": "AV. ING. A. ROCA 98",
+    "postalCode": "B2804FYN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7037",
+    "officeName": "CAÑUELAS",
+    "localidad": "CAÑUELAS",
+    "address": "AV. LIBERTAD 702 ESQUINA SAN MARTÍN",
+    "postalCode": "B1814BDO",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7134",
+    "officeName": "CAPILLA DEL SEÑOR",
+    "localidad": "CAPILLA DEL SEÑOR",
+    "address": "ESTEBAN URCELAY 502 ESQUINA M. CASCO",
+    "postalCode": "B2812BOL",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6546",
+    "officeName": "CAPITAN SARMIENTO",
+    "localidad": "CAPITÁN SARMIENTO",
+    "address": "BARTOLOMÉ MITRE 301 Y MÁRMOL",
+    "postalCode": "B2752BVP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5154",
+    "officeName": "DELEG. CARAPACHAY",
+    "localidad": "CARAPACHAY",
+    "address": "INDEPENDENCIA 2992 ESQUINA ITUZAINGÓ Y GUIDO SPANO-PORTUGAL",
+    "postalCode": "B1606DNB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6823",
+    "officeName": "CARHUE",
+    "localidad": "CARHUE",
+    "address": "SAN MARTÍN 899 ESQUINA MITRE",
+    "postalCode": "B6430DIF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6738",
+    "officeName": "CARLOS CASARES",
+    "localidad": "CARLOS CASARES",
+    "address": "SAN MARTÍN S/N° Y RIVADAVIA",
+    "postalCode": "B6530AIQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6639",
+    "officeName": "CARLOS TEJEDOR",
+    "localidad": "CARLOS TEJEDOR",
+    "address": "ALBERTO H. ALMIRÓN 201 ESQUINA GARRÉ",
+    "postalCode": "B6455ADE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7140",
+    "officeName": "CARMEN DE ARECO",
+    "localidad": "CARMEN DE ARECO",
+    "address": "BELGRANO 651 ESQUINA SAN MARTÍN",
+    "postalCode": "B6725AIF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6281",
+    "officeName": "PATAGONES",
+    "localidad": "CARMEN DE PATAGONES",
+    "address": "ALSINA 50 Y C. RIVADAVIA",
+    "postalCode": "B8504BRF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6860",
+    "officeName": "CASBAS",
+    "localidad": "CASBAS",
+    "address": "HIPÓLITO YRIGOYEN S/N° ESQUINA J. CONDESSE 99",
+    "postalCode": "B6417BBD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5003",
+    "officeName": "CASEROS",
+    "localidad": "CASEROS",
+    "address": "URQUIZA 4719/25",
+    "postalCode": "B1678AEG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5022",
+    "officeName": "CASTELAR",
+    "localidad": "CASTELAR",
+    "address": "BUENOS AIRES 558",
+    "postalCode": "B1712JNB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6908",
+    "officeName": "CASTELLI",
+    "localidad": "CASTELLI",
+    "address": "AV. 25 DE MAYO S/N° Y MAIPÚ 2",
+    "postalCode": "B7114BOB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6441",
+    "officeName": "CHACABUCO",
+    "localidad": "CHACABUCO",
+    "address": "AV. ALSINA S/N° Y RIVADAVIA",
+    "postalCode": "B6740AAQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6942",
+    "officeName": "CHASCOMUS",
+    "localidad": "CHASCOMUS",
+    "address": "LIBRES DEL SUR 149",
+    "postalCode": "B7130ACC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6301",
+    "officeName": "CHILLAR",
+    "localidad": "CHILLAR",
+    "address": "M. T. CORTÁZAR 1100",
+    "postalCode": "B7311BCV",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6443",
+    "officeName": "CHIVILCOY",
+    "localidad": "CHIVILCOY",
+    "address": "C.PELLEGRINI 52 ESQ. RIVADAVIA",
+    "postalCode": "B6620KSB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5030",
+    "officeName": "CITY BELL ",
+    "localidad": "CITY BELL ",
+    "address": "PLAZA MANUEL BELGRANO 183",
+    "postalCode": "B1896IJC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5045",
+    "officeName": "CIUDAD EVITA ",
+    "localidad": "CIUDAD EVITA ",
+    "address": "AV. BEVILACQUA Nº 1981",
+    "postalCode": "B1778DBA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5034",
+    "officeName": "CIUDADELA",
+    "localidad": "CIUDADELA",
+    "address": "AV. RIVADAVIA 12802",
+    "postalCode": "B1702CHY",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6544",
+    "officeName": "COLON",
+    "localidad": "COLON",
+    "address": "CALLE 47 Nº 1048",
+    "postalCode": "B2720CJN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6180",
+    "officeName": "COMANDANTE NICANOR OTAMENDI (DIONISIA)",
+    "localidad": "COMANDANTE NICANOR OTAMENDI",
+    "address": "AV. GRAL. PUEYRREDÓN 2243",
+    "postalCode": "B7613BBK",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6507",
+    "officeName": "CONESA ",
+    "localidad": "CONESA ",
+    "address": "MENDOZA 106",
+    "postalCode": "B2907APD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6203",
+    "officeName": "COPETONAS ",
+    "localidad": "COPETONAS ",
+    "address": "AV. SAN MARTÍN 306",
+    "postalCode": "B7511AWQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7031",
+    "officeName": "BRANDSEN",
+    "localidad": "CORONEL BRANDSEN",
+    "address": "PEDRO J. FERRARI ESQUINA 301 ESQUINA LAS HERAS",
+    "postalCode": "B1980ADF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6658",
+    "officeName": "CORONEL CHARLONE",
+    "localidad": "CORONEL CHARLONE",
+    "address": "DR. M. UGARTE 518 Y DR. GARAY",
+    "postalCode": "B6223AHA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6245",
+    "officeName": "CORONEL DORREGO",
+    "localidad": "CORONEL DORREGO",
+    "address": "SAN MARTÍN 602",
+    "postalCode": "B8150DYL",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6603",
+    "officeName": "MARTINEZ DE HOZ ",
+    "localidad": "CORONEL MARTÍNEZ DE HOZ",
+    "address": "20 DE JUNIO S/N° ESQ. SAN MARTÍN",
+    "postalCode": "B6533XAB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6846",
+    "officeName": "CORONEL PRINGLES",
+    "localidad": "CORONEL PRINGLES",
+    "address": "BARTOLOMÉ MITRE 901 ESQUINA STEGMAN",
+    "postalCode": "B7530AMD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6847",
+    "officeName": "CORONEL SUAREZ",
+    "localidad": "CORONEL SUAREZ",
+    "address": "AV. ALSINA 99 ESQUINA BELGRANO",
+    "postalCode": "B7540GHA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6148",
+    "officeName": "CORONEL VIDAL",
+    "localidad": "CORONEL VIDAL",
+    "address": "GRAL. PAZ 299 E HIPÓLITO YRIGOYEN",
+    "postalCode": "B7174AXE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6824",
+    "officeName": "Daireaux",
+    "localidad": "DAIREAUX",
+    "address": "AV. JULIO A. ROCA ESQ. RIVADAVIA",
+    "postalCode": "B6555CDQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6803",
+    "officeName": "DARREGUEIRA",
+    "localidad": "DARREGUEIRA",
+    "address": "SARMIENTO S/Nº ESQUINA BOULEVARD H.YRIGOYEN",
+    "postalCode": "B8183CJH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6376",
+    "officeName": "DE LA GARMA ",
+    "localidad": "DE LA GARMA ",
+    "address": "DR. VÍCTOR H. BARRERA 297",
+    "postalCode": "B7515AWC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7184",
+    "officeName": "DELEG. DEL VISO",
+    "localidad": "DEL VISO",
+    "address": "AVENIDA E. MADERO 1333",
+    "postalCode": "B1669CKH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5031",
+    "officeName": "DOCK SUD ",
+    "localidad": "DOCK SUD ",
+    "address": "MANUEL ESTÉVEZ 1451/55",
+    "postalCode": "B1871CXK",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6949",
+    "officeName": "DOLORES",
+    "localidad": "DOLORES",
+    "address": "BELGRANO 235/RICO 102",
+    "postalCode": "B7100CBE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5064",
+    "officeName": "DON TORCUATO",
+    "localidad": "DON TORCUATO",
+    "address": "AV. ANGEL T. DE ALVEAR 708 (RUTA 202) MARÍA Y ELVIRA",
+    "postalCode": "B1611ELS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6436",
+    "officeName": "DUDIGNAC",
+    "localidad": "DUDIGNAC",
+    "address": "AV. BELGRANO N°61",
+    "postalCode": "B6505AGP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5021",
+    "officeName": "EL PALOMAR",
+    "localidad": "EL PALOMAR",
+    "address": "ITACUMBÚ 680/696",
+    "postalCode": "B1684GSB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5081",
+    "officeName": "DELEG. EL PATO",
+    "localidad": "EL PATO",
+    "address": "CALLE COLECTORA Y 613 (ALTURA RUTA 2, KM 38,500) (ALTURA RUTA 2, KM 38,500)",
+    "postalCode": "B1893DGR",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6600",
+    "officeName": "EMILIO V. BUNGE",
+    "localidad": "EMILIO V. BUNGE",
+    "address": "EMILIO V. BUNGE 457 ENTRE CABRAL Y EUROPA",
+    "postalCode": "B6241AEQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5017",
+    "officeName": "ENSENADA",
+    "localidad": "ENSENADA",
+    "address": "LA MERCED 186 MARQUÉS DE AVILÉS, ALBERDI Y DR. SIDOTI",
+    "postalCode": "B1925BSB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6605",
+    "officeName": "FERRE",
+    "localidad": "FERRE",
+    "address": "DON BOSCO Nº 96 CORRIENTES Y SANTA FE",
+    "postalCode": "B6027AON",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5042",
+    "officeName": "CRUCE DE FLORENCIO VARELA",
+    "localidad": "FLORENCIO VARELA",
+    "address": "AV. CALCHAQUÍ 6599 ESQ. BALCARCE, FINOCHIETO Y CAMINO GRAL. BELGRANO-RPNº 14 (ESQUINA BALCARCE)",
+    "postalCode": "B1888FNH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5114",
+    "officeName": "FLORENCIO VARELA",
+    "localidad": "FLORENCIO VARELA",
+    "address": "DR. BERNARDO DE MONTEAGUDO 3304 PTE. PERÓN (EX-228 JUAN VAZQUEZ), 226 N. BOCCUZI Y 205 J.B.ALBERDI",
+    "postalCode": "B1888ENR",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6644",
+    "officeName": "AMEGHINO",
+    "localidad": "FLORENTINO AMEGHINO",
+    "address": "ENRIQUE VIOLANTE 302 Y 9 DE JULIO",
+    "postalCode": "B6064AYH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5024",
+    "officeName": "Florida",
+    "localidad": "FLORIDA",
+    "address": "AV. SAN MARTÍN 2870/80 VALLE GRANDE, BEIRÓ Y V. VERGARA",
+    "postalCode": "B1602DFS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6700",
+    "officeName": "DELEG. FRANCISCO MADERO",
+    "localidad": "FRANCISCO MADERO",
+    "address": "H. YRIGOYEN S/N° ENTRE DARDO ROCHA Y SÁENZ PEÑA",
+    "postalCode": "B6472AKH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7102",
+    "officeName": "GARIN ",
+    "localidad": "GARÍN",
+    "address": "MANUEL BELGRANO 555",
+    "postalCode": "B1619AVK",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6350",
+    "officeName": "GENERAL ALVEAR",
+    "localidad": "GENERAL ALVEAR",
+    "address": "SAN MARTÍN 802",
+    "postalCode": "B7623BVV",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6624",
+    "officeName": "GENERAL ARENALES",
+    "localidad": "GENERAL ARENALES",
+    "address": "DR. VALENTÍN CURUCHET 102 ESQUINA TUCUMÁN",
+    "postalCode": "B6005ANQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7025",
+    "officeName": "GENERAL BELGRANO",
+    "localidad": "GENERAL BELGRANO",
+    "address": "AV. SAN MARTÍN 477 Y JULIO LLANOS",
+    "postalCode": "B7223BPW",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6905",
+    "officeName": "DELEG. TORDILLO",
+    "localidad": "GENERAL CONESA",
+    "address": "SAN MARTÍN 299 Y BARTOLOMÉ MITRE",
+    "postalCode": "B7101ACA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6922",
+    "officeName": "DELEG. GENERAL GUIDO ",
+    "localidad": "GENERAL GUIDO",
+    "address": "BELGRANO 404",
+    "postalCode": "B7118AGA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6952",
+    "officeName": "GENERAL MADARIAGA",
+    "localidad": "GENERAL JUAN MADARIAGA",
+    "address": "AVELLANEDA 199 ESQUINA SARMIENTO",
+    "postalCode": "B7163EEC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6851",
+    "officeName": "GENERAL LA MADRID",
+    "localidad": "GENERAL LAMADRID",
+    "address": "BARTOLOMÉ MITRE 599",
+    "postalCode": "B7406BAK",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7012",
+    "officeName": "GENERAL LAS HERAS",
+    "localidad": "GENERAL LAS HERAS",
+    "address": "AV. VILLAMAYOR ESQUINA 25 DE MAYO",
+    "postalCode": "B1741CWO",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6907",
+    "officeName": "DELEG. GENERAL LAVALLE",
+    "localidad": "GENERAL LAVALLE",
+    "address": "BARTOLOMÉ MITRE 924",
+    "postalCode": "B7103AEP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6972",
+    "officeName": "BARTOLOME BAVIO",
+    "localidad": "GENERAL MANSILLA",
+    "address": "MONTEVIDEO S/N° ESQ. SAN JULIÁN",
+    "postalCode": "B1911BRQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6485",
+    "officeName": "GENERAL O'BRIEN ",
+    "localidad": "GENERAL O'BRIEN ",
+    "address": "RIVADAVIA 360",
+    "postalCode": "B6646ALF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5008",
+    "officeName": "GENERAL PACHECO",
+    "localidad": "GENERAL PACHECO",
+    "address": "HIPÓLITO YRIGOYEN 714",
+    "postalCode": "B1617FRU",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6654",
+    "officeName": "GENERAL PINTO",
+    "localidad": "GENERAL PINTO",
+    "address": "AV. BARTOLOMÉ MITRE 501 ESQ. ADOLFO ALSINA",
+    "postalCode": "B6050AVP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7137",
+    "officeName": "General Rodríguez",
+    "localidad": "GENERAL RODRÍGUEZ",
+    "address": "AV. SAN MARTÍN 205",
+    "postalCode": "B1749DVC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6657",
+    "officeName": "GENERAL VILLEGAS",
+    "localidad": "GENERAL VILLEGAS",
+    "address": "BELGRANO 424",
+    "postalCode": "B6230ALH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5048",
+    "officeName": "GLEW",
+    "localidad": "GLEW",
+    "address": "PATRIA 69",
+    "postalCode": "B1856BXA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5067",
+    "officeName": "GONZALEZ CATAN",
+    "localidad": "GONZALEZ CATAN",
+    "address": "PUERTO ARGENTINO 4182 LEÓN LARRE, MAESTRA VALLE Y CASTAÑARES",
+    "postalCode": "",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5144",
+    "officeName": "GRAND BOURG",
+    "localidad": "GRAND BOURG",
+    "address": "EL PLUMERILLO Nº 1423",
+    "postalCode": "B1615DDE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5058",
+    "officeName": "GREGORIO DE LAFERRERE",
+    "localidad": "GREGORIO DE LAFERRERE",
+    "address": "PADRE M. LOPEZ MAY 3146 OLEGARIO ANDRADE, LURO Y AV. GRAL. ROJO (RPNº 21)",
+    "postalCode": "B1757DHF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6859",
+    "officeName": "GUAMINI",
+    "localidad": "GUAMINÍ",
+    "address": "FREYRE 99",
+    "postalCode": "B6435AIA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7005",
+    "officeName": "GUERNICA ",
+    "localidad": "GUERNICA",
+    "address": "CALLE Nº 5 S/N° ENTRE 30 Y 33",
+    "postalCode": "B1862LFD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5086",
+    "officeName": "DELEG. HUDSON",
+    "localidad": "GUILLERMO E. HUDSON",
+    "address": "CALLE 55 S/N° ESQUINA CALLE 153",
+    "postalCode": "B1885",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5039",
+    "officeName": "HAEDO",
+    "localidad": "HAEDO",
+    "address": "RIVADAVIA 15956/58",
+    "postalCode": "B1706AYU",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6760",
+    "officeName": "HENDERSON",
+    "localidad": "HENDERSON",
+    "address": "FLORIDA 501",
+    "postalCode": "B6465ATK",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6327",
+    "officeName": "DELEG. HINOJO",
+    "localidad": "HINOJO",
+    "address": "CALLE 14 S/Nº",
+    "postalCode": "B7318AAA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6801",
+    "officeName": "HUANGUELEN",
+    "localidad": "HUANGUELÉN",
+    "address": "CALLE 27 Y 10 Nº 501 Y 10",
+    "postalCode": "B7545AYJ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5040",
+    "officeName": "HURLINGHAM",
+    "localidad": "HURLINGHAM",
+    "address": "ARTURO JAURETCHE 1550",
+    "postalCode": "B1686FDH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6232",
+    "officeName": "DELEG. INGENIERO WHITE",
+    "localidad": "INGENIERO WHITE",
+    "address": "AV. SAN MARTÍN 3666",
+    "postalCode": "B8103CEZ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5010",
+    "officeName": "ISIDRO CASANOVA",
+    "localidad": "ISIDRO CASANOVA",
+    "address": "BRIG. JUAN MANUEL DE ROSAS (ANTES PROVINCIAS UNIDAS) 6699 SINCLAIR, MADRID Y LIMA",
+    "postalCode": "B1765",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5023",
+    "officeName": "ITUZAINGO",
+    "localidad": "ITUZAINGÓ",
+    "address": "SOLER 310",
+    "postalCode": "B1714LVH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5018",
+    "officeName": "JOSE C. PAZ",
+    "localidad": "JOSÉ C. PAZ",
+    "address": "AV. ALTUBE 1932",
+    "postalCode": "B1665BKP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5028",
+    "officeName": "JOSE INGENIEROS",
+    "localidad": "JOSÉ INGENIEROS",
+    "address": "EDUARDO COMESAÑA 2520",
+    "postalCode": "B1703BAF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5006",
+    "officeName": "JOSE LEON SUAREZ",
+    "localidad": "JOSÉ LEÓN SUÁREZ",
+    "address": "AV. BRIG. GRAL. J.M. ROSAS 2500 ESQ. BOULEVARD BALLESTER Y BUENOS AIRES-ROCA",
+    "postalCode": "B1655ABN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5184",
+    "officeName": "JOSE MARIA EZEIZA",
+    "localidad": "JOSÉ MARÍA EZEIZA",
+    "address": "AVDA. NESTOR KIRCHNER N 879/890 ESQ. JULIO ARGENTINO ROCA",
+    "postalCode": "B1804AIB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6788",
+    "officeName": "JUAN JOSE PASO",
+    "localidad": "JUAN JOSÉ PASO",
+    "address": "L. N. ALEM S/N° Y SARMIENTO",
+    "postalCode": "B6474APD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6601",
+    "officeName": "DELEG. VILLA GENERAL BELGRANO (JUNIN)",
+    "localidad": "JUNÍN",
+    "address": "PRIMERA JUNTA 849 PADRE GUIO, JUAN B. JUSTO Y NECOCHEA",
+    "postalCode": "B6202CRG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6662",
+    "officeName": "JUNIN",
+    "localidad": "JUNÍN",
+    "address": "CALLE MAYOR LÓPEZ 16",
+    "postalCode": "B6000AFB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "2000",
+    "officeName": "CASA MATRIZ - LA PLATA- ",
+    "localidad": "LA PLATA",
+    "address": "AV. 7 (ING. LUIS MONTEVERDE Nº 726) ENTRE CALLES 46 Y 47",
+    "postalCode": "B1900TFS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5208",
+    "officeName": "DELEG. PLAZA MATHEU",
+    "localidad": "LA PLATA",
+    "address": "AVENIDA 1 N° 302 ESQ.67",
+    "postalCode": "",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5204",
+    "officeName": "DELEG. LA LOMA",
+    "localidad": "LA PLATA",
+    "address": "AV. 44 Nº 1359 CALLES 22 Y 23",
+    "postalCode": "B1900ACB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5210",
+    "officeName": "LISANDRO OLMOS",
+    "localidad": "LA PLATA",
+    "address": "CALLE 44 S/N° Y CALLE 197",
+    "postalCode": "",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5207",
+    "officeName": "MERIDIANO V",
+    "localidad": "LA PLATA",
+    "address": "CALLE 70 N° 1851",
+    "postalCode": "B1900",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5206",
+    "officeName": "PLAZA MANUEL BELGRANO",
+    "localidad": "LA PLATA",
+    "address": "CALLE 13 Nº 421 E/40 Y 41",
+    "postalCode": "B1900",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5200",
+    "officeName": "PLAZA SAN MARTIN",
+    "localidad": "LA PLATA",
+    "address": "AV. 7 Nº 1031 Y CALLE 54",
+    "postalCode": "",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5059",
+    "officeName": "AVENIDA 44 (LA PLATA)",
+    "localidad": "LA PLATA",
+    "address": "AV. 44 Nº 1631 CALLE 28, 27 Y CALLE 43",
+    "postalCode": "B1902ACG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5053",
+    "officeName": "ZONA ESTE (LA PLATA)",
+    "localidad": "LA PLATA",
+    "address": "CALLE 1 Nº 1389 CALLE 60, 61 Y CALLE 2",
+    "postalCode": "B1900",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5015",
+    "officeName": "CALLE 12 (LA PLATA)",
+    "localidad": "LA PLATA",
+    "address": "CALLE 12 Nº 1269/1275 CALLE 59, 58 Y CALLE 13",
+    "postalCode": " B1900DSA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "2050",
+    "officeName": "TRIBUNALES LA PLATA",
+    "localidad": "LA PLATA",
+    "address": "AV. 13 Nº 801 CALLE 49, 48 (ESQ.) Y CALLE 14",
+    "postalCode": "B1900TLH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6703",
+    "officeName": "DELEG. BONIFACIO",
+    "localidad": "LAGUNA ALSINA",
+    "address": "HIPÓLITO YRIGOYEN S/N° ESQUINA ESPAÑA",
+    "postalCode": "B6439BDA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5063",
+    "officeName": "LANUS",
+    "localidad": "LANÚS ESTE",
+    "address": "AV. 9 DE JULIO 1165 29 DE SEPTIEMBRE, ANATOLE FRANCE Y MARGARITA WEILD",
+    "postalCode": "B1824KJA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5054",
+    "officeName": "DELEG. LANUS OESTE",
+    "localidad": "LANÚS OESTE",
+    "address": "AV. SAN MARTÍN 3415 MANUEL CASTRO, LITUANIA E ISLANDIA",
+    "postalCode": "B1824EKA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5083",
+    "officeName": "DELEG. PLAZA LANUS",
+    "localidad": "LANÚS OESTE",
+    "address": "AV. HIPÓLITO YRIGOYEN 4282 TUCUMÁN, SITIO DE MONTEVIDEO Y VELEZ SARSFIELD",
+    "postalCode": "B1824AAY",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5050",
+    "officeName": "VILLA DIAMANTE",
+    "localidad": "LANÚS OESTE",
+    "address": "JOSÉ I. RUCCI 2352/62 MANUELA PEDRAZA, CNEL. WARNES Y FLORIDA",
+    "postalCode": "B1824GYF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6816",
+    "officeName": "LAPRIDA",
+    "localidad": "LAPRIDA",
+    "address": "AV. SAN MARTÍN 1102",
+    "postalCode": "B7414BWW",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6504",
+    "officeName": "DELEG. ESTACION CARABELAS (ROJAS)",
+    "localidad": "LAS CARABELAS",
+    "address": "SARMIENTO 312 ENTRE BELGRANO Y 25 DE MAYO",
+    "postalCode": "B2703ASF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7064",
+    "officeName": "LAS FLORES",
+    "localidad": "LAS FLORES",
+    "address": "AV. SAN MARTÍN 406 Y GRAL. PAZ",
+    "postalCode": "B7200BOR",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5047",
+    "officeName": "LIBERTAD",
+    "localidad": "LIBERTAD",
+    "address": "AV. EVA PERÓN 3861",
+    "postalCode": "B1716CHD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6665",
+    "officeName": "LINCOLN",
+    "localidad": "LINCOLN",
+    "address": "LEANDRO N. ALEM 1000 ESQUINA MITRE",
+    "postalCode": "B6070AFW",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5069",
+    "officeName": "DELEG. LLAVALLOL",
+    "localidad": "LLAVALLOL",
+    "address": "AV. ANTÁRTIDA ARGENTINA S/N° ESQUINA CHARLONE, FLORIDA O DOYHENARD Y DIEGO GIBSON",
+    "postalCode": "B1836AOW",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6166",
+    "officeName": "LOBERIA",
+    "localidad": "LOBERÍA",
+    "address": "AV. SARMIENTO Nº 1 ESQUINA MITRE",
+    "postalCode": "B7635BIA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7067",
+    "officeName": "LOBOS",
+    "localidad": "LOBOS",
+    "address": "9 DE JULIO Y RIVADAVIA",
+    "postalCode": "B7240FAF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5061",
+    "officeName": "VILLA LOMA HERMOSA ",
+    "localidad": "LOMA HERMOSA",
+    "address": "RUTA 8 Nº 9765",
+    "postalCode": "B1657ABD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5068",
+    "officeName": "LOMAS DE ZAMORA",
+    "localidad": "LOMAS DE ZAMORA",
+    "address": "F. LAPRIDA 200 ESQUINA ESPAÑA, MEEKS O CARLOS PELLEGRINI Y JOSÉ I. GORRITI",
+    "postalCode": "B1832HOD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5036",
+    "officeName": "LOMAS DEL MIRADOR",
+    "localidad": "LOMAS DEL MIRADOR",
+    "address": "BRIG. JUAN MANUEL DE ROSAS (ANTES PROVINCIAS UNIDAS) 1044 ESQUINA AMANCIO ALCORTA, LAS HERAS Y EDUARDO MADERO",
+    "postalCode": "B1752AYV",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7135",
+    "officeName": "DELEG. LOS CARDALES",
+    "localidad": "LOS CARDALES",
+    "address": "SAN MARTÍN 10",
+    "postalCode": "B2814CMN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5203",
+    "officeName": "DELEG. AVENIDA 66 ",
+    "localidad": "LOS HORNOS",
+    "address": "CALLE 137 Nº 1651 ESQ. AV.66",
+    "postalCode": "B1910TEQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5020",
+    "officeName": "LOS HORNOS",
+    "localidad": "LOS HORNOS",
+    "address": "AV. 137 Nº 1392 CALLE 60 Y 61",
+    "postalCode": "B1900AMR",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5044",
+    "officeName": "LOS POLVORINES ",
+    "localidad": "LOS POLVORINES",
+    "address": "25 DE MAYO Nº 2631 ESQ. GRAL. SAVIO, PTE. PERÓN Y SAN MARTÍN",
+    "postalCode": "B1613FNL",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6656",
+    "officeName": "LOS TOLDOS",
+    "localidad": "LOS TOLDOS",
+    "address": "AV. SAN MARTÍN 701 Y M. MOLINA",
+    "postalCode": "B6015XAA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7169",
+    "officeName": "LUJAN",
+    "localidad": "LUJÁN",
+    "address": "SAN MARTÍN 498 ESQUINA COLÓN",
+    "postalCode": "B6700APJ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6970",
+    "officeName": "MAGDALENA",
+    "localidad": "MAGDALENA",
+    "address": "HIPÓLITO YRIGOYEN 901",
+    "postalCode": "B1913BRQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6971",
+    "officeName": "MAIPU",
+    "localidad": "MAIPÚ",
+    "address": "SARMIENTO 399",
+    "postalCode": "B7160CCH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5209",
+    "officeName": "GONNET",
+    "localidad": "MANUEL B. GONNET",
+    "address": "AV. CAMINO CENTENARIO Nº 2663 CALLE 505 Y 506",
+    "postalCode": "B1897AVC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6961",
+    "officeName": "MANUEL J. COBO (LEZAMA)",
+    "localidad": "MANUEL J. COBO",
+    "address": "CALLE LIBERTAD 207 ESQUINA H. YRIGOYEN",
+    "postalCode": "B7116APF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6902",
+    "officeName": "MAR DE AJO",
+    "localidad": "MAR DE AJÓ - NUEVA ATLANTIS",
+    "address": "HIPÓLITO YRIGOYEN 303/09",
+    "postalCode": "B7109GDF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "4200",
+    "officeName": "MAR DEL PLATA",
+    "localidad": "MAR DEL PLATA",
+    "address": "SAN MARTÍN 2563 Y CÓRDOBA",
+    "postalCode": "",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6100",
+    "officeName": "LURO (MAR DEL PLATA)",
+    "localidad": "MAR DEL PLATA",
+    "address": "AV. PEDRO LURO 3869 GUIDO, DORREGO Y 25 DE MAYO",
+    "postalCode": "B7600GVC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6101",
+    "officeName": "Güemes (MAR DEL PLATA)",
+    "localidad": "MAR DEL PLATA",
+    "address": "ALSINA N° 2632 / 40, MAR DEL PLATA",
+    "postalCode": "B7600EKL",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6102",
+    "officeName": "TRIBUNALES MAR DEL PLATA",
+    "localidad": "MAR DEL PLATA",
+    "address": "ALMIRANTE BROWN 2048 BUENOS AIRES, TUCUMÁN Y FALUCHA",
+    "postalCode": "B7600FUB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6105",
+    "officeName": "EL MONOLITO (MAR DEL PLATA)",
+    "localidad": "MAR DEL PLATA",
+    "address": "AV. LURO 6107 CHAMPAGNAT, VICTORIANO MONTE Y 25 DE MAYO",
+    "postalCode": "B7604BXX",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6154",
+    "officeName": "PUERTO (MAR DEL PLATA)",
+    "localidad": "MAR DEL PLATA",
+    "address": "12 DE OCTUBRE 3545",
+    "postalCode": "B7603GXM",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6189",
+    "officeName": "INDEPENDENCIA",
+    "localidad": "MAR DEL PLATA",
+    "address": "AV. INDEPENDENCIA 3205 Y SAN LORENZO",
+    "postalCode": "B7602BOE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6106",
+    "officeName": "BARRIO EL GAUCHO (MAR DEL PLATA)",
+    "localidad": "MAR DEL PLATA",
+    "address": "AV. JUAN B. JUSTO 6015 VICTORIANO MONTE, JUNCAL Y FORMOSA",
+    "postalCode": "B7604AAK",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6107",
+    "officeName": "AVENIDA CONSTITUCION",
+    "localidad": "MAR DEL PLATA",
+    "address": "AV. CONSTITUCIÓN 5102 ROLDÁN, INGENIEROS Y VALENCIA (ESQ. INGENIEROS)",
+    "postalCode": "B7604EJO",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6190",
+    "officeName": "BARRIO EL MARTILLO",
+    "localidad": "MAR DEL PLATA",
+    "address": "AV JACINTO PERALTA RAMOS 1890 ARANA Y GOIRI, CARAZA Y FLORENCIO SANCHEZ",
+    "postalCode": "B7608CGN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7101",
+    "officeName": "MARCOS PAZ",
+    "localidad": "MAR DEL PLATA",
+    "address": "SARMIENTO 2132",
+    "postalCode": "B1727IDP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5117",
+    "officeName": "DELEG. MARIANO ACOSTA",
+    "localidad": "MAR DEL PLATA",
+    "address": "FIGUEROA ALCORTA 8964",
+    "postalCode": "B1724KEJ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5151",
+    "officeName": "MARTINEZ",
+    "localidad": "MAR DEL PLATA",
+    "address": "AV. SANTA FE 1527 SÁENZ VALIENTE Y JUNCAL",
+    "postalCode": "B1640IFC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5145",
+    "officeName": "MARTINEZ OESTE",
+    "localidad": "MAR DEL PLATA",
+    "address": "SIR ALEXANDER FLEMING 1944 CONTINUACIÓN ROLÓN ENTRE H. YRIGOYEN Y RODRIGUEZ PEÑA",
+    "postalCode": "B1640CSY",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6263",
+    "officeName": "MAYOR BURATOVICH",
+    "localidad": "MAYOR BURATOVICH",
+    "address": "AV. MITRE 1099 ESQUINA SARMIENTO",
+    "postalCode": "B8146ANA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6104",
+    "officeName": "DELEG. MECHONGUE",
+    "localidad": "MECHONGUÉ",
+    "address": "CALLE 4 Nº 152 ESQUINA AVENIDA 1",
+    "postalCode": "B7605XAA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6274",
+    "officeName": "MEDANOS",
+    "localidad": "MÉDANOS",
+    "address": "BARTOLOMÉ MITRE 319",
+    "postalCode": "B8132BID",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7106",
+    "officeName": "DELEG. TRIBUNALES MERCEDES",
+    "localidad": "MERCEDES",
+    "address": "CALLE 26 ESQUINA 27 Nº 600 ESQUINA 27, CALLE 28 Y CALLE 25 (EDIFICIO TRIBUNALES) ",
+    "postalCode": "B6600GXN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7175",
+    "officeName": "MERCEDES",
+    "localidad": "MERCEDES",
+    "address": "AV. 29 Nº 521 CALLE 22, CALLE 24 Y CALLE 31",
+    "postalCode": "B6600AAK",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5118",
+    "officeName": "MERLO",
+    "localidad": "MERLO",
+    "address": "AV. LIBERTADOR GRAL. SAN MARTÍN 699",
+    "postalCode": "B1722ERG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5119",
+    "officeName": "PARQUE SAN MARTIN (MERLO",
+    "localidad": "MERLO",
+    "address": "AV. SAN MARTÍN 2461",
+    "postalCode": "B1721HUO",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6176",
+    "officeName": "MIRAMAR",
+    "localidad": "MIRAMAR",
+    "address": "CALLE 21 Nº 1209 ESQUINA CALLE 24",
+    "postalCode": "B7607GFM",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5056",
+    "officeName": "DELEG. MONTE CHINGOLO",
+    "localidad": "MONTE CHINGOLO",
+    "address": "AV. EVA PERON 3356 GRAL. PICO, CENTENARIO URUGUAYO Y GRAL. GUIDO",
+    "postalCode": "B1824IDB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5001",
+    "officeName": "MONTE GRANDE",
+    "localidad": "MONTE GRANDE",
+    "address": "SOFÍA TERRERO DE SANTAMARINA 475",
+    "postalCode": "B1842CCA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6246",
+    "officeName": "MONTE HERMOSO",
+    "localidad": "MONTE HERMOSO",
+    "address": "NÉLIDA MARÍA FOSSATTY 43",
+    "postalCode": "B8153COA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6402",
+    "officeName": "MOQUEHUA",
+    "localidad": "MOQUEHUÁ",
+    "address": "RIVADAVIA 202 ESQUINA RIVADAVIA, 25 DE MAYO Y SAN LORENZO",
+    "postalCode": "B6625AID",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5126",
+    "officeName": "MORENO",
+    "localidad": "MORENO",
+    "address": "AV. LIBERTADOR 310 ESQUINA INDEPENDENCIA",
+    "postalCode": "B1744AAQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5098",
+    "officeName": "MORON",
+    "localidad": "MORÓN",
+    "address": "RIVADAVIA 18101",
+    "postalCode": "B1708JFD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5153",
+    "officeName": "MUNRO",
+    "localidad": "MUNRO",
+    "address": "AV. VÉLEZ SARFIELD 4448 ARMENIA Y BERNARDINO RIVADAVIA-GUILLERMO MARCONI",
+    "postalCode": "B1605BQH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7072",
+    "officeName": "NAVARRO",
+    "localidad": "NAVARRO",
+    "address": "CALLE 24 N° 301",
+    "postalCode": "B6605CNE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6103",
+    "officeName": "VILLA DIAZ VELEZ (NECOCHEA)",
+    "localidad": "NECOCHEA",
+    "address": "AV. 79 Nº 270",
+    "postalCode": "B7630XAC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6177",
+    "officeName": "NECOCHEA",
+    "localidad": "NECOCHEA",
+    "address": "CALLE 64 Nº 3000",
+    "postalCode": "B7630CIR",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6162",
+    "officeName": "NICANOR OLIVERA (ESTACION LA DULCE)",
+    "localidad": "NICANOR OLIVERA",
+    "address": "CALLE 24 Nº 798 ESQUINA 33",
+    "postalCode": "B7637XAA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7003",
+    "officeName": "NORBERTO DE LA RIESTRA",
+    "localidad": "NORBERTO DE LA RIESTRA",
+    "address": "BELGRANO 365",
+    "postalCode": "B6663",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6478",
+    "officeName": "9 DE JULIO",
+    "localidad": "NUEVE DE JULIO",
+    "address": "AV. MITRE 1305",
+    "postalCode": "B6500ABA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6503",
+    "officeName": "O'HIGGINS",
+    "localidad": "O HIGGINS",
+    "address": "BOULEVARD SARMIENTO 81 SARMIENTO 81",
+    "postalCode": "B6748ANQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6305",
+    "officeName": "PUEBLO NUEVO (OLAVARRIA)",
+    "localidad": "OLAVARRÍA",
+    "address": "HORNOS 1997",
+    "postalCode": "B7400XAI",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6379",
+    "officeName": "OLAVARRIA",
+    "localidad": "OLAVARRÍA",
+    "address": "VICENTE LÓPEZ 3006",
+    "postalCode": "B7400CRP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5080",
+    "officeName": "OLIVOS ",
+    "localidad": "OLIVOS",
+    "address": "AV. MAIPÚ 2598 GUTIERREZ Y UGARTE-JUAN DE GARAY",
+    "postalCode": "B1636AAS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6230",
+    "officeName": "ORENSE",
+    "localidad": "ORENSE",
+    "address": "AV. SAN MARTÍN 299",
+    "postalCode": "B7503BSC",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5019",
+    "officeName": "PASO DEL REY",
+    "localidad": "PASO DEL REY",
+    "address": "BARTOLOMÉ MITRE 1362",
+    "postalCode": "B1742EKN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6666",
+    "officeName": "DELEG. PASTEUR",
+    "localidad": "PASTEUR",
+    "address": "SAN MARTÍN S/Nº",
+    "postalCode": "B6077AJF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7004",
+    "officeName": "DELEG. PEDERNALES",
+    "localidad": "PEDERNALES",
+    "address": "AV. SARMIENTO 515",
+    "postalCode": "B6665AKA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6264",
+    "officeName": "DELEG. PEDRO LURO",
+    "localidad": "PEDRO LURO",
+    "address": "CALLE 7 Nº 1245",
+    "postalCode": "B8148CHE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6782",
+    "officeName": "PEHUAJO",
+    "localidad": "PEHUAJO",
+    "address": "HIPÓLITO YRIGOYEN 500",
+    "postalCode": "B6450BDJ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6783",
+    "officeName": "PELLEGRINI",
+    "localidad": "PELLEGRINI",
+    "address": "SAN MARTÍN 1 ESQUINA A. ALSINA",
+    "postalCode": "B6346CKA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6583",
+    "officeName": "DELEG. BARRIO CENTENARIO",
+    "localidad": "PERGAMINO",
+    "address": "JUAN B. JUSTO 1799 MONROE, EMILIO R. CONI Y 9 DE JULIO",
+    "postalCode": "B2700KZE",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6501",
+    "officeName": "EL CRUCE (PERGAMINO)",
+    "localidad": "PERGAMINO",
+    "address": "AV. HIPÓLITO YRIGOYEN Nº 405 ISAAC ANNAN (ESQ.), VENEZUELA Y SANTIAGO DEL ESTERO",
+    "postalCode": "B2702FUP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6584",
+    "officeName": "PERGAMINO",
+    "localidad": "PERGAMINO",
+    "address": "SAN NICOLÁS Nº 499 Y PUEYRREDÓN",
+    "postalCode": "B2700LAP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6800",
+    "officeName": "PIGÜÉ",
+    "localidad": "PIGÜÉ",
+    "address": "AV. CASEY 374",
+    "postalCode": "B8170AAQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6906",
+    "officeName": "PILA",
+    "localidad": "PILA",
+    "address": "AV. SAN MARTIN 590 ",
+    "postalCode": "B7110",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7185",
+    "officeName": "PILAR",
+    "localidad": "PILAR",
+    "address": "AV. RIVADAVIA Nº 701 ESQ. LORENZO LÓPEZ",
+    "postalCode": "B1629AAF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7183",
+    "officeName": "PARQUE INDUSTRIAL PILAR",
+    "localidad": "PILAR",
+    "address": "CALLE 9 N° 1683 -PARQUE INDUSTRIAL- ESQ CALLE 10 -PARQUE INDUSTRIAL-",
+    "postalCode": "B1629MXA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6904",
+    "officeName": "PINAMAR",
+    "localidad": "PINAMAR",
+    "address": "AV. SHAW 126 Y AV. CONSTITUCIÓN",
+    "postalCode": "B7167ADQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5005",
+    "officeName": "PIÑEYRO",
+    "localidad": "PIÑEYRO",
+    "address": "AV. GALICIA 776",
+    "postalCode": "B1868BGU",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6728",
+    "officeName": "PIROVANO ",
+    "localidad": "PIROVANO",
+    "address": "AV. RODOLFO PIROVANO S/N° Y CARLOS CASARES",
+    "postalCode": "B6551BAP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5084",
+    "officeName": "DELEG. PONTEVEDRA",
+    "localidad": "PONTEVEDRA",
+    "address": "AV. DE LA UNIÓN S/Nº ESQUINA DE LOS FRANCESES",
+    "postalCode": "B1761EAA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7105",
+    "officeName": "PRESIDENTE DERQUI",
+    "localidad": "PRESIDENTE DERQUI",
+    "address": "RIVADAVIA 511",
+    "postalCode": "B1635AGR",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6886",
+    "officeName": "PUAN",
+    "localidad": "PUAN",
+    "address": "AV. SAN MARTÍN 504",
+    "postalCode": "B8180BGS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6201",
+    "officeName": "PUNTA ALTA",
+    "localidad": "PUNTA ALTA",
+    "address": "BERNARDO DE IRIGOYEN 645",
+    "postalCode": "B8109FXM",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6178",
+    "officeName": "DELEG. QUEQUEN",
+    "localidad": "QUEQUÉN",
+    "address": "CALLE 509 Nº1405",
+    "postalCode": "B7631",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5087",
+    "officeName": "QUILMES",
+    "localidad": "QUILMES",
+    "address": "RIVADAVIA S/N° ESQUINA ALMIRANTE BROWN",
+    "postalCode": "B1878KJH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5009",
+    "officeName": "QUILMES OESTE ",
+    "localidad": "QUILMES",
+    "address": "AV. 12 DE OCTUBRE 405/11 ROQUE SAENZ PEÑA, BDO. DE IRIGOYEN Y CÓRDOBA (EX-PTE. PERÓN)",
+    "postalCode": "B1879AAH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5088",
+    "officeName": "AVENIDA CALCHAQUI (QUILMES) ",
+    "localidad": "QUILMES OESTE",
+    "address": "12 DE OCTUBRE 2731 GRAL. ACHA, JUAN B. JUSTO Y CÓRDOBA (EX-PTE. PERÓN)",
+    "postalCode": "B1879AAQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5046",
+    "officeName": "RAFAEL CALZADA",
+    "localidad": "RAFAEL CALZADA",
+    "address": "ALTAMIRA 1779",
+    "postalCode": "B1847BGK",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6570",
+    "officeName": "RAMALLO",
+    "localidad": "RAMALLO",
+    "address": "EVA PERÓN 904",
+    "postalCode": "B2915BVT",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5129",
+    "officeName": "RAMOS MEJIA",
+    "localidad": "RAMOS MEJÍA",
+    "address": "BELGRANO 34 BOLÍVAR, AV. MAYO Y ALSINA",
+    "postalCode": "B1704ETB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7053",
+    "officeName": "RANCHOS",
+    "localidad": "RANCHOS",
+    "address": "HIPÓLITO YRIGOYEN S/N° Y LEOPOLDO CASAL",
+    "postalCode": "B1987",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6388",
+    "officeName": "RAUCH",
+    "localidad": "RAUCH",
+    "address": "SAN MARTÍN 395",
+    "postalCode": "B7203BPD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6421",
+    "officeName": "RAWSON",
+    "localidad": "RAWSON",
+    "address": "GUILLERMO RAWSON S/N° Y 9 DE JULIO",
+    "postalCode": "B6734ADA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5181",
+    "officeName": "REMEDIOS DE ESCALADA",
+    "localidad": "REMEDIOS DE ESCALADA",
+    "address": "AV. HIPÓLITO YRIGOYEN 5951 MONSEÑOR RÓMULO DIGIORNO, DR. LUIS MÁSPERO Y ENRIQUE DEL VALLE IBERLUCEA",
+    "postalCode": "B1826DQG",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5202",
+    "officeName": "DELEG. NINI",
+    "localidad": "RINGUELET",
+    "address": "CALLE 520 S/N° ENTRE 23 Y 25",
+    "postalCode": "B1906FZS",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6892",
+    "officeName": "RIVERA",
+    "localidad": "RIVERA",
+    "address": "TUCUMÁN 1",
+    "postalCode": "B6441ASA",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6590",
+    "officeName": "ROJAS",
+    "localidad": "ROJAS",
+    "address": "BARTOLOMÉ MITRE 400",
+    "postalCode": "B2705CIH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7001",
+    "officeName": "ROQUE PEREZ",
+    "localidad": "ROQUE PÉREZ",
+    "address": "ALBERDI 1285",
+    "postalCode": "B7245AJO",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6891",
+    "officeName": "DELEG. SAAVEDRA",
+    "localidad": "SAAVEDRA",
+    "address": "ESPAÑA 94 Y CHACABUCO 101",
+    "postalCode": "B8174ARB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7092",
+    "officeName": "SALADILLO",
+    "localidad": "SALADILLO",
+    "address": "AV. BELGRANO 3207",
+    "postalCode": "B7260ARF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6802",
+    "officeName": "SALAZAR",
+    "localidad": "SALAZAR",
+    "address": "AV. SAN MARTÍN S/Nº",
+    "postalCode": "B6471AJP",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6715",
+    "officeName": "SALLIQUELO",
+    "localidad": "SALLIQUELÓ",
+    "address": "RIVADAVIA 102",
+    "postalCode": "B6339CFD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6572",
+    "officeName": "SALTO",
+    "localidad": "SALTO",
+    "address": "BUENOS AIRES S/N° ESQ. ALVEAR",
+    "postalCode": "B2741AAF",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7193",
+    "officeName": "SAN ANDRES DE GILES",
+    "localidad": "SAN ANDRÉS DE GILES",
+    "address": "SAN MARTÍN 607",
+    "postalCode": "B6720AGM",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "7194",
+    "officeName": "SAN ANTONIO DE ARECO ",
+    "localidad": "SAN ANTONIO DE ARECO",
+    "address": "ALSINA 150",
+    "postalCode": "B2760ACD",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5002",
+    "officeName": "SAN ANTONIO DE PADUA",
+    "localidad": "SAN ANTONIO DE PADUA",
+    "address": "JUAN D. PERÓN 23800 (EX AV. RIVADAVIA) ESQUINA DIRECTORIO",
+    "postalCode": "B1718FWH",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6909",
+    "officeName": "SAN BERNARDO",
+    "localidad": "SAN BERNARDO",
+    "address": "CHIOZZA 2351",
+    "postalCode": "B7111BBQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6117",
+    "officeName": "SAN CAYETANO",
+    "localidad": "SAN CAYETANO",
+    "address": "25 DE MAYO 301 ESQUINA BELGRANO",
+    "postalCode": "B7521AFN",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "6900",
+    "officeName": "SAN CLEMENTE DEL TUYU",
+    "localidad": "SAN CLEMENTE DEL TUYÚ",
+    "address": "AVENIDA 1 Nº 2258",
+    "postalCode": "B7105AED",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5095",
+    "officeName": "SAN FERNANDO",
+    "localidad": "SAN FERNANDO",
+    "address": "CONSTITUCIÓN 899",
+    "postalCode": "B1646CXQ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5057",
+    "officeName": "SAN FRANCISCO SOLANO",
+    "localidad": "SAN FRANCISCO SOLANO",
+    "address": "AV. 844 Nº 2544",
+    "postalCode": "",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5099",
+    "officeName": "DELEG. TRIBUNALES SAN ISIDRO",
+    "localidad": "SAN ISIDRO",
+    "address": "ITUZAINGÓ 340 ACASSUSO Y RIVADAVIA",
+    "postalCode": "B1642DPJ",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5096",
+    "officeName": "SAN ISIDRO",
+    "localidad": "SAN ISIDRO",
+    "address": "9 DE JULIO 302 Y ACASSUSO",
+    "postalCode": "B1642DLB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5120",
+    "officeName": "SAN JUSTO",
+    "localidad": "SAN JUSTO",
+    "address": "ALMAFUERTE 3086 E HIPÓLITO YRIGOYEN",
+    "postalCode": "B1754ASB",
+    "state": "BUENOS AIRES"
+  },
+  {
+    "code": "5100",
+    "officeName": "DELEG. TRIBUNALES SAN MARTIN",
+    "localidad": "SAN MARTIN",
+    "address": "DR. R. BALBÍN 1753 46 LINCOLN, 44 JUAREZ Y 99 GRAL. ROCA",
+    "postalCode": "B1650AAE",
+    "state": "BUENOS AIRES"
+  },
+  { "code": "", "officeName": "", "localidad": "", "address": "", "postalCode": "", "state": "" }
+]

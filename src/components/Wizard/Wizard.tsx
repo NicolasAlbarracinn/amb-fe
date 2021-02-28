@@ -1,5 +1,3 @@
-import { Card } from '@material-ui/core';
-
 import cx from 'classnames';
 import React, { useRef, memo, useCallback, useEffect, useState } from 'react';
 

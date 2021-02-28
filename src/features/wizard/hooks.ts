@@ -1,31 +1,20 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { actions as wizardActions } from './slice';
 
-export const useWizardStep = (inputs: object, stepId: string) => {
-  const [loadError, setLoadError] = useState(false);
+export const useWizardStep = (stepId: string) => {
   const dispatch = useDispatch();
 
-  const handleNext = () => {
-    const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
-    if (isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId, data: inputs, isValid: false }));
-      setLoadError(true);
-    } else {
-      dispatch(wizardActions.setStep({ stepId, data: inputs, isValid: true, type: 'next' }));
-    }
+  const handleNext = (inputs: object) => {
+    dispatch(wizardActions.setStep({ stepId, data: inputs, isValid: true, type: 'next' }));
   };
 
-  const handlePrevious = () => {
+  const handlePrevious = (inputs: object) => {
     dispatch(wizardActions.setStep({ stepId, data: inputs, isValid: true, type: 'previous' }));
   };
 
-  const handleSubmit = () => {
-    const isFormInvalid = Object.entries(inputs).some(key => key[1].isValid === false);
-    if (!isFormInvalid) {
-      dispatch(wizardActions.setStep({ stepId, data: inputs, isValid: true, type: 'submit' }));
-    }
+  const handleSubmit = (inputs: object) => {
+    dispatch(wizardActions.setStep({ stepId, data: inputs, isValid: true, type: 'submit' }));
   };
 
-  return { loadError, handleNext, handlePrevious, handleSubmit };
+  return { handleNext, handlePrevious, handleSubmit };
 };
