@@ -13,4 +13,5 @@ export interface RootState {
   auth?: AuthState;
   login?: LoginState;
   profile?: any;
+  wizard: any;
 }
