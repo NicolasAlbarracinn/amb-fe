@@ -1,5 +1,6 @@
 import moment from 'moment';
 import * as yup from 'yup';
+import { IBenefitInfo } from './types';
 
 export enum WizardStepsConfig {
   PARTER_STEP = 'partnerDetail',
@@ -7,7 +8,7 @@ export enum WizardStepsConfig {
   DETAILS_STEP = 'benefitDetail',
 }
 
-export const defaultBenefit = {
+export const defaultBenefit: IBenefitInfo = {
   benefitType: '',
   certificateNumber: '',
   applicationDate: moment(new Date()).format('MM/DD/YYYY'),
@@ -21,7 +22,7 @@ export const defaultBenefit = {
   benefitStatus: 'ps',
   commercializer: '',
   grantedPeriod: '',
-  proceedingGranted: '',
+  fileGranted: '',
   statusDate: moment(new Date()).format('MM/DD/YYYY'),
 };
 
@@ -31,8 +32,8 @@ export const defaultDistribution = {
   dependence: 'no específcica dependencia',
   fileNumber: '',
   fileItem: '',
-  paymentType: '',
-  recoveryPaymentType: '',
+  paymentMethod: '',
+  paymentMethodRecovery: '',
   bankName: '',
   cbu: '',
   bankBranchName: '',
@@ -67,7 +68,7 @@ export const formBenefitSchema = yup.object().shape({
   observations: yup.string().notRequired(),
   commercializer: yup.string().required('campo requerido'),
   grantedPeriod: yup.date().nullable().required('campo requerido'),
-  proceedingGranted: yup.date().nullable().required('campo requerido'),
+  fileGranted: yup.date().nullable().required('campo requerido'),
 });
 
 export const partnerValidationSchema = yup.object().shape({
@@ -82,4 +83,20 @@ export const partnerValidationSchema = yup.object().shape({
   civilState: yup.string().required('Campo Requerido'),
   status: yup.string().required('Campo Requerido'),
   email: yup.string().required('Campo Requerido'),
+});
+
+export const distributionValidationSchema = yup.object().shape({
+  repartition: yup.string().required('Campo Requerido'),
+  distributionCode: yup.string().notRequired(),
+  dependence: yup.string().notRequired(),
+  fileNumber: yup.string().required('Campo Requerido'),
+  fileItem: yup.string().required('Campo Requerido'),
+  paymentMethod: yup.string().required('Campo Requerido'),
+  paymentMethodRecovery: yup.string().required('Campo Requerido'),
+  bankName: yup.string().required('Campo Requerido'),
+  cbu: yup.string().required('Campo Requerido'),
+  bankBranchName: yup.string().required('Campo Requerido'),
+  bankAccountNumber: yup.string().required('Campo Requerido'),
+  programCode: yup.string().notRequired(),
+  sequenceNumber: yup.string().notRequired(),
 });

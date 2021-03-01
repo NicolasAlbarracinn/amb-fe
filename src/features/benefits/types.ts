@@ -35,7 +35,7 @@ export interface IDistributionInfo {
 }
 
 export interface IBenefitInfo {
-  benefitId: number;
+  benefitId?: number;
   lotNumber?: string;
   benefitType: string;
   certificateNumber: string;
@@ -48,6 +48,7 @@ export interface IBenefitInfo {
   amountGranted: string;
   observations: string;
   benefitStatus: string;
+  commercializer: string;
   grantedPeriod: string;
   fileGranted: string;
   statusDate: string;
