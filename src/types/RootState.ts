@@ -5,6 +5,7 @@ import { AuthState } from 'features/PrivateRoutes/pageState';
 import { IBenefitsState } from 'features/benefits/store/pageState';
 
 import { SearchBarState } from 'components/SearchBar/pageState';
+import { PaginationState } from 'components/Pagination/pageState';
 /* 
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
   You have to declare them here manually
@@ -18,4 +19,5 @@ export interface RootState {
   profile?: any;
   wizard: any;
   searchBar?: SearchBarState;
+  pagination?: PaginationState;
 }

@@ -2,6 +2,7 @@
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import AllOut from '@material-ui/icons/AllOut';
+import ListIcon from '@material-ui/icons/List';
 import Dashboard from 'features/dashboard';
 
 const dashRoutes = [
@@ -38,6 +39,13 @@ const dashRoutes = [
         name: 'Crear Prestacion',
         mini: 'CP',
         component: AllOut,
+        layout: '/app/benefits',
+      },
+      {
+        path: '/list',
+        name: 'Listado de prestaciones',
+        mini: 'CP',
+        component: ListIcon,
         layout: '/app/benefits',
       },
     ],
