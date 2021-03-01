@@ -48,13 +48,14 @@ export interface IBenefitInfo {
   amountGranted: string;
   observations: string;
   benefitStatus: string;
-  commercializer: string;
   grantedPeriod: string;
   fileGranted: string;
   statusDate: string;
+  commercializer: string;
 }
 
 export interface IPartner {
+  partnerObjectId: string;
   partnerDetail: IPartnerInfo;
   distributionDetail: IDistributionInfo;
 }

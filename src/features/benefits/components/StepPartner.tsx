@@ -10,6 +10,8 @@ import SearchBar from 'components/SearchBar/SearchBar';
 import { useStyles } from 'components/Wizard/styles';
 import { selectParameterWasSubmited, selectSearchParameter } from 'components/SearchBar/selectors';
 
+import { CivilStateList, GenderList, PartnerStatusList } from 'utils/constants';
+
 import { useWizardStep } from '../../wizard/hooks';
 
 import { actions as benefitActions } from '../store/slice';
@@ -35,7 +37,13 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (isDataFetched && partnerData) {
-      setInputFields({ ...partnerData.partnerDetail, partnerId: searchParam });
+      setInputFields({
+        ...partnerData.partnerDetail,
+        partnerId: searchParam,
+        gender: GenderList[partnerData.partnerDetail.gender.toLocaleLowerCase()],
+        civilState: CivilStateList[partnerData.partnerDetail.civilState],
+        status: PartnerStatusList[partnerData.partnerDetail.status],
+      });
     }
   }, [isDataFetched, partnerData, searchParam]);
 
@@ -43,7 +51,7 @@ const UserProfile = () => {
     <div>
       <Formik
         initialValues={inputFields}
-        onSubmit={values => handleNext(values)}
+        onSubmit={values => handleNext({ ...values, partnerObjectId: partnerData?.partnerObjectId })}
         validationSchema={partnerValidationSchema}
         enableReinitialize={true}
       >

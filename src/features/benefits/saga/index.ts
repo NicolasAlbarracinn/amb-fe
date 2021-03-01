@@ -27,8 +27,10 @@ export function* getPartnerInformation(action: PayloadAction<any>) {
     };
 
     const response = yield call(request, requestURL, requestOptions);
+    console.log(response.data);
     yield put(
       actions.getPartnerInformationSuccess({
+        partnerObjectId: response.data._id,
         partnerDetail: {
           ...response.data.personalData,
           status: response.data.status,

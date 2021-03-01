@@ -3,6 +3,11 @@ export enum SortByCriterias {
   ASC = 'asc',
 }
 
+export const genderList = [
+  { value: 'm', label: 'Masculino' },
+  { value: 'f', label: 'Femenino' },
+];
+
 export const situacionCrediticiaList = [
   { value: 's1', label: 'Situación 1' },
   { value: 's2', label: 'Situación 2' },
@@ -91,7 +96,7 @@ export const benefitTypeList = [
   { value: 'cm', label: 'Cuota Membresia' },
 ];
 
-export const statusList = [
+export const partnerStatusList = [
   { value: 'a', label: 'Alta' },
   { value: 'b', label: 'Baja' },
   { value: 'f', label: 'Fallecido' },
@@ -108,3 +113,28 @@ export const paymentMethod = [
   { value: 'dr', label: 'Descuento RGM' },
   { value: 'pv', label: 'Pago Voluntario' },
 ];
+
+export const GenderList: { [key: string]: string } = {
+  m: 'Masculino',
+  f: 'Femenino',
+};
+
+export const CivilStateList: { [key: string]: string } = {
+  c: 'Casado/a',
+  co: 'Convivencia',
+  di: 'Divorciado/a',
+  se: 'Separada de hecho',
+  s: 'Soltero/a',
+  vi: 'Viudo/a',
+  si: 'Sin información',
+};
+
+export const PartnerStatusList: { [key: string]: string } = {
+  a: 'Alta',
+  b: 'Baja',
+  f: 'Fallecido',
+  q: 'Quiebra',
+  r: 'Renuncia',
+  s: 'Suspendido',
+  t: 'Transitorio',
+};
