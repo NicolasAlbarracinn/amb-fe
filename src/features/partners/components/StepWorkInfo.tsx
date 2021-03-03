@@ -42,7 +42,10 @@ const StepWorkInfo = () => {
       if (!hasError) {
         const bankData = getCbuValues(field.target.value);
         if (!!bankData) {
-          setInputFields(prevState => ({ ...prevState, ...bankData }));
+          props.setFormikState(prevState => ({
+            ...prevState,
+            values: { ...prevState.values, ...bankData, bankName: defaultWork.bankName },
+          }));
         }
       }
     };
@@ -75,7 +78,7 @@ const StepWorkInfo = () => {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Field name="bankName" label="Banco" component={TextFormField} />
+                  <Field disabled name="bankName" label="Banco" component={TextFormField} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                   <Field name="bankBranchName" label="Nombre Sucursal" component={TextFormField} />

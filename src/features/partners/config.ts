@@ -33,7 +33,7 @@ export const defaultPersonalData: IPesonalData = {
 };
 
 export const defaultAddress = {
-  streetAdress: '',
+  streetAddress: '',
   floor: '',
   aptNumber: '',
   department: '',
@@ -48,7 +48,7 @@ export const defaultWork = {
   fileNumber: '',
   fileItem: '',
   cbu: '',
-  bankName: '',
+  bankName: 'Banco Provincia de Buenos Aires',
   bankBranchName: '',
   bankBranchCode: '',
   bankAccountNumber: '',
@@ -76,7 +76,7 @@ export const formPersonalDataSchema = yup.object().shape({
 });
 
 export const formAddressSchema = yup.object().shape({
-  streetAdress: yup.string().required('campo requerido'),
+  streetAddress: yup.string().required('campo requerido'),
   floor: yup.string().required('campo requerido'),
   aptNumber: yup.string().required('campo requerido'),
   department: yup.string().required('campo requerido'),

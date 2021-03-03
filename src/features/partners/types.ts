@@ -67,7 +67,7 @@ export interface IPartnerDetail {
   partnerId: number;
   status: string;
   personalData: IPesonalData;
-  adress: IAddress;
+  address: IAddress;
   workInfo: IWorkInfo;
   createdBy: string;
   modifiedBy: string;

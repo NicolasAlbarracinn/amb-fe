@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 // core components
 import GridContainer from 'components/Grid/GridContainer';
@@ -9,10 +11,34 @@ import StepAddress from '../components/StepAddress';
 import StepWorkInfo from '../components/StepWorkInfo';
 
 import WizardContainer from '../../wizard/WizardContainer';
+import { selectStepsData, selectSubmitReady } from '../../wizard/selectors';
+
+import { actions } from '../store/slice';
+import { selectNewPartnerId } from '../store/selectors';
 
 import { WizardStepsConfig } from '../config';
 
 const PartnerFormContainer = () => {
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+  const submitReady = useSelector(selectSubmitReady);
+  const data = useSelector(selectStepsData);
+  const newPartnerId = useSelector(selectNewPartnerId);
+
+  useEffect(() => {
+    if (submitReady) {
+      console.log(data);
+      dispatch(actions.getSavePartnerRequest(data));
+    }
+  }, [data, dispatch, history, submitReady]);
+
+  useEffect(() => {
+    if (newPartnerId !== '') {
+      history.push('list');
+    }
+  }, [history, newPartnerId]);
+
   return (
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>

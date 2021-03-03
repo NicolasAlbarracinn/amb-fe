@@ -27,7 +27,6 @@ const BenefitFormContainer = () => {
   const benefitId = useSelector(selectFetchedBenefitId);
 
   useEffect(() => {
-    console.log(data);
     if (submitReady && !isEmpty(data) && !isBenefitCreated) {
       if (benefitId) {
         dispatch(

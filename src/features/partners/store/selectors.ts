@@ -14,7 +14,7 @@ export const selectPersonalData = createSelector(
   [selectPartners],
   partnersState => partnersState.renaperData.personalData,
 );
-export const selectAddress = createSelector([selectPartners], partnersState => partnersState.renaperData.adress);
+export const selectAddress = createSelector([selectPartners], partnersState => partnersState.renaperData.address);
 export const selectWorkInfo = createSelector([selectPartners], partnersState => partnersState.renaperData.workInfo);
 export const selectFetchedRenaperData = createSelector(
   [selectPartners],

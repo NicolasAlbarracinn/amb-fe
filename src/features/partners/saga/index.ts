@@ -76,7 +76,7 @@ export function* getSavePartnerRequest(action: PayloadAction<any>) {
     });
   } catch (err) {
     yield put(actions.getSavePartnerFailed());
-    toast.error('Algo salio mal.', {
+    toast.error(err.message, {
       position: toast.POSITION.TOP_CENTER,
     });
   }

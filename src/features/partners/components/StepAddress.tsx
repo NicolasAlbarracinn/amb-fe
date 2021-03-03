@@ -41,7 +41,7 @@ const StepAddress = () => {
             <Form>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={3}>
-                  <Field disabled name="streetAdress" label="Calle y N" component={TextFormField} />
+                  <Field disabled name="streetAddress" label="Calle y N" component={TextFormField} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <Field disabled name="floor" label="Piso" component={TextFormField} />
