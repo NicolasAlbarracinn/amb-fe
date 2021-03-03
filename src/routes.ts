@@ -1,6 +1,6 @@
 // @material-ui/icons
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
+// import PeopleIcon from '@material-ui/icons/People';
 import AllOut from '@material-ui/icons/AllOut';
 import ListIcon from '@material-ui/icons/List';
 import Dashboard from 'features/dashboard';
@@ -15,16 +15,23 @@ const dashRoutes = [
   },
   {
     collapse: true,
-    name: 'Afiliados',
-    icon: PeopleIcon,
+    name: 'Socios',
+    icon: AllOut,
     state: 'pageCollapse',
     views: [
       {
         path: '/new',
-        name: 'Crear Afiliado',
-        mini: 'PP',
-        component: PeopleIcon,
-        layout: '/app/affiliates',
+        name: 'Crear Socio',
+        mini: 'SP',
+        component: AllOut,
+        layout: '/app/partners',
+      },
+      {
+        path: '/list',
+        name: 'Lista de Socios',
+        mini: 'LS',
+        component: ListIcon,
+        layout: '/app/partners',
       },
     ],
   },
@@ -44,7 +51,7 @@ const dashRoutes = [
       {
         path: '/list',
         name: 'Listado de prestaciones',
-        mini: 'CP',
+        mini: 'LP',
         component: ListIcon,
         layout: '/app/benefits',
       },

@@ -3,6 +3,7 @@
 import { LoginState } from 'features/authentication/store/pageState';
 import { AuthState } from 'features/PrivateRoutes/pageState';
 import { IBenefitsState } from 'features/benefits/store/pageState';
+import { IPartnersState } from 'features/partners/store/pageState';
 
 import { SearchBarState } from 'components/SearchBar/pageState';
 import { PaginationState } from 'components/Pagination/pageState';
@@ -16,6 +17,7 @@ export interface RootState {
   auth?: AuthState;
   login?: LoginState;
   benefits?: IBenefitsState;
+  partners?: IPartnersState;
   profile?: any;
   wizard: any;
   searchBar?: SearchBarState;
