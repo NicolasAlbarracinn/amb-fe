@@ -57,5 +57,20 @@ const dashRoutes = [
       },
     ],
   },
+  {
+    collapse: true,
+    name: 'Fondeadores',
+    icon: AllOut,
+    state: 'lenderCollapse',
+    views: [
+      {
+        path: '/new',
+        name: 'Cargar Fondeador',
+        mini: 'CF',
+        component: AllOut,
+        layout: '/app/lender',
+      },
+    ],
+  },
 ];
 export default dashRoutes;

@@ -16,6 +16,7 @@ import Dashboard from 'features/dashboard';
 import Profile from 'features/Profile';
 import Partners from 'features/partners';
 import Benefits from 'features/benefits';
+import Lender from 'features/Lender';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
                 <Route path="/app/profile" component={Profile} />
                 <Route path="/app/benefits" component={Benefits} />
                 <Route path="/app/partners" component={Partners} />
+                <Route path="/app/lender" component={Lender} />
                 <Route path="/app/dashboard" component={Dashboard} />
               </Switch>
             </AdminLayout>

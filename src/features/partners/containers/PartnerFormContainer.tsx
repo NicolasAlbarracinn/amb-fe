@@ -28,7 +28,6 @@ const PartnerFormContainer = () => {
 
   useEffect(() => {
     if (submitReady) {
-      console.log(data);
       dispatch(actions.getSavePartnerRequest(data));
     }
   }, [data, dispatch, history, submitReady]);
