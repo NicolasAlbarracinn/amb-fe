@@ -13,7 +13,7 @@ import { useWizardStep } from '../../wizard/hooks';
 import { defaultEconomic, WizardStepsConfig, formEconomicSchema } from '../config';
 
 const StepEconomic = () => {
-  const { handleNext, handlePrevious } = useWizardStep(WizardStepsConfig.ADDRESS_STEP);
+  const { handleNext, handlePrevious } = useWizardStep(WizardStepsConfig.ECONOMIC_STEP);
   const classes = useStyles();
 
   return (

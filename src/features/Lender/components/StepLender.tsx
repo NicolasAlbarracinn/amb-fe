@@ -20,7 +20,7 @@ import { Defaultlender, WizardStepsConfig, formLenderSchema } from '../config';
 
 const StepLender = () => {
   //   const [inputFields, setInputFields] = useState(Defaultlender);
-  const { handleNext, handlePrevious } = useWizardStep(WizardStepsConfig.ADDRESS_STEP);
+  const { handleNext, handlePrevious } = useWizardStep(WizardStepsConfig.LENDER_STEP);
 
   const classes = useStyles();
   const dispatch = useDispatch();
