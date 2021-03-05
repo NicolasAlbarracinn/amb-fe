@@ -72,5 +72,20 @@ const dashRoutes = [
       },
     ],
   },
+  {
+    collapse: true,
+    name: 'Planes',
+    icon: AllOut,
+    state: 'portfolioCollapse',
+    views: [
+      {
+        path: '/new',
+        name: 'Crear plan',
+        mini: 'CPL',
+        component: AllOut,
+        layout: '/app/portfolio',
+      },
+    ],
+  },
 ];
 export default dashRoutes;

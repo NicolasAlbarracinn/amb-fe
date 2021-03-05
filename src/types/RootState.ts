@@ -5,6 +5,7 @@ import { AuthState } from 'features/PrivateRoutes/pageState';
 import { IBenefitsState } from 'features/benefits/store/pageState';
 import { IPartnersState } from 'features/partners/store/pageState';
 import { ILenderState } from 'features/Lender/store/pageState';
+import { IPortfolioState } from 'features/portfolios/store/pageState';
 
 import { SearchBarState } from 'components/SearchBar/pageState';
 import { PaginationState } from 'components/Pagination/pageState';
@@ -20,6 +21,7 @@ export interface RootState {
   benefits?: IBenefitsState;
   partners?: IPartnersState;
   lenders?: ILenderState;
+  portfolios?: IPortfolioState;
   profile?: any;
   wizard: any;
   searchBar?: SearchBarState;

@@ -18,7 +18,7 @@ const DateFormField: React.FC<
     value: string;
     onChange: (date: MaterialUiPickersDate) => void;
   }
-> = ({ field, form, format, maxDate, minDate, value, onChange, ...props }) => {
+> = ({ field, form, format = 'DD/MM/YYYY', maxDate, minDate, value, onChange, ...props }) => {
   const classes = useStyles();
   const errorText = getIn(form.touched, field.name) && getIn(form.errors, field.name);
 
@@ -35,7 +35,9 @@ const DateFormField: React.FC<
         KeyboardButtonProps={{
           'aria-label': 'change date',
         }}
-        format="DD/MM/YYYY"
+        maxDate={maxDate}
+        minDate={minDate}
+        format={format}
         InputLabelProps={{
           classes: {
             root: classes.labelRoot,
