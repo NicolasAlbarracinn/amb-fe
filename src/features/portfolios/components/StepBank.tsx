@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Formik, Form, Field, FormikProps } from 'formik';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { Formik, Form, Field } from 'formik';
 
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
@@ -9,11 +8,11 @@ import TextFormField from 'components/Form/TextField';
 import SelectFormField from 'components/Form/SelectField';
 import { useStyles } from 'components/Wizard/styles';
 
-import { ministriesList } from 'utils/constants';
+import { calculusTypeOption } from 'utils/constants';
 
 import { useWizardStep } from '../../wizard/hooks';
 
-import { defaultLiquidation, WizardStepsConfig } from '../config';
+import { defaultLiquidationBank, formLiquidationSchema, WizardStepsConfig } from '../config';
 
 const StepBank = () => {
   const { handleNext, handlePrevious } = useWizardStep(WizardStepsConfig.BANK_LIQUIDATION);
@@ -21,7 +20,11 @@ const StepBank = () => {
 
   return (
     <div>
-      <Formik enableReinitialize={true} initialValues={defaultLiquidation} onSubmit={values => handleNext(values)}>
+      <Formik
+        initialValues={defaultLiquidationBank}
+        validationSchema={formLiquidationSchema}
+        onSubmit={values => handleNext(values)}
+      >
         {props => {
           return (
             <Form>
@@ -53,7 +56,12 @@ const StepBank = () => {
                   <Field name="percentBankingExpenses" label="Gastos Bancarios %" component={TextFormField} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
-                  <Field name="typeOfCalculation" label="Tipo de Cálculo" component={TextFormField} />
+                  <Field
+                    name="typeOfCalculation"
+                    label="Tipo de Cálculo"
+                    options={calculusTypeOption}
+                    component={SelectFormField}
+                  />
                 </GridItem>
               </GridContainer>
 

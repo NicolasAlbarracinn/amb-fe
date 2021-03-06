@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Formik, Form, Field, FormikProps } from 'formik';
+import React, { useEffect } from 'react';
+import { Formik, Form, Field } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
@@ -11,12 +11,12 @@ import SelectFormField from 'components/Form/SelectField';
 import DateFormField from 'components/Form/DateField';
 import { useStyles } from 'components/Wizard/styles';
 
-import { actions } from '../store/slice';
-import { selectLenderNameList } from '../store/selectors';
+import { planListOptions } from 'utils/constants';
 
 import { useWizardStep } from '../../wizard/hooks';
-
-import { defaultDetails, WizardStepsConfig } from '../config';
+import { actions } from '../store/slice';
+import { selectLenderNameList } from '../store/selectors';
+import { defaultDetails, WizardStepsConfig, formDetailSchema } from '../config';
 
 const StepPorfolio = () => {
   const classes = useStyles();
@@ -31,7 +31,11 @@ const StepPorfolio = () => {
 
   return (
     <div>
-      <Formik enableReinitialize={true} initialValues={defaultDetails} onSubmit={values => handleNext(values)}>
+      <Formik
+        initialValues={defaultDetails}
+        validationSchema={formDetailSchema}
+        onSubmit={values => handleNext(values)}
+      >
         {props => {
           return (
             <Form>
@@ -45,9 +49,14 @@ const StepPorfolio = () => {
                   />
                 </GridItem>
               </GridContainer>
-              <GridContainer>
+              <GridContainer alignItems="center">
                 <GridItem xs={12} sm={12} md={3}>
-                  <Field name="portfolioTypes" label="tipo de cartera" component={TextFormField} />
+                  <Field
+                    name="portfolioTypes"
+                    label="tipo de cartera"
+                    options={planListOptions}
+                    component={SelectFormField}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <Field name="minCapital" label="minCapital" component={TextFormField} />
@@ -75,7 +84,7 @@ const StepPorfolio = () => {
                 </GridItem>
               </GridContainer>
 
-              <GridContainer>
+              <GridContainer alignItems="center">
                 <GridItem xs={12} sm={12} md={3}>
                   <Field
                     name="validSince"
@@ -96,7 +105,15 @@ const StepPorfolio = () => {
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
-                  <Field name="showsAmountAwarded" label="Muestra monto ortogado" component={TextFormField} />
+                  <Field
+                    name="showsAmountAwarded"
+                    label="Muestra monto ortogado"
+                    options={[
+                      { value: 'si', label: 'Si' },
+                      { value: 'no', label: 'No' },
+                    ]}
+                    component={SelectFormField}
+                  />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={3}>
                   <Field name="description" label="descripcion Breve" component={TextFormField} />

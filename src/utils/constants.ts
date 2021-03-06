@@ -114,6 +114,17 @@ export const paymentMethod = [
   { value: 'pv', label: 'Pago Voluntario' },
 ];
 
+export const planListOptions = [
+  { value: 'Sin fines determinados', label: 'Sin fines determinados' },
+  { value: 'Ayudas economicas', label: 'Ayudas economicas' },
+  { value: 'Vacaciones', label: 'Vacaciones' },
+];
+
+export const calculusTypeOption = [
+  { value: 'Por lo enviado', label: 'Por lo enviado' },
+  { value: 'Por lo debitado', label: 'Por lo debitado' },
+];
+
 export const GenderList: { [key: string]: string } = {
   m: 'Masculino',
   f: 'Femenino',

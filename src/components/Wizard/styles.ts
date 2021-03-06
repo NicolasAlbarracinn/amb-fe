@@ -10,6 +10,8 @@ import {
   warningColor,
   whiteColor,
   hexToRgb,
+  infoBoxShadow,
+  defaultFont,
 } from 'utils/styles';
 
 export const useStyles = makeStyles(() => ({
@@ -172,5 +174,27 @@ export const useStyles = makeStyles(() => ({
       content: '" "',
     },
     clear: 'both',
+  },
+  tagContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    ...infoBoxShadow,
+    ...defaultFont,
+    fontSize: '12px',
+    backgroundColor: primaryColor[1],
+    padding: '5px 15px',
+    color: '#fbf3f3',
+    borderRadius: 5,
+    marginTop: '10px',
+  },
+  icons: {
+    width: '16px',
+    height: '16px',
+    marginLeft: '5px',
+    cursor: 'pointer',
+  },
+  cardPadding: {
+    padding: '20px 60px',
   },
 }));
