@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { FieldProps } from 'formik';
-import RegularButton from '../CustomButtons/Button';
-import { makeStyles, Theme } from '@material-ui/core';
-import { defaultFont, grayColor } from 'utils/styles';
-
+import { FieldProps, getIn } from 'formik';
+import { makeStyles, Theme, FormHelperText, FormControl } from '@material-ui/core';
 import Attachment from '@material-ui/icons/Attachment';
+
+import RegularButton from '../CustomButtons/Button';
+import { defaultFont, grayColor } from 'utils/styles';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   uploadContainer: {
@@ -39,6 +39,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const FileUploadField: React.FC<FieldProps & { label: string }> = ({ field, form, label, ...props }) => {
+  const errorText = getIn(form.touched, field.name) && getIn(form.errors, field.name);
   const classes = useStyles();
   const [file, setFile] = useState<File | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -64,19 +65,22 @@ const FileUploadField: React.FC<FieldProps & { label: string }> = ({ field, form
   };
 
   return (
-    <div className={classes.uploadContainer}>
-      <div className={classes.fileDescription}>
-        <h1 className={classes.description}>{label}</h1>
-        {file && <span className={classes.fileName}>{file.name}</span>}
-      </div>
+    <FormControl margin="normal" fullWidth error={!!errorText}>
+      <div className={classes.uploadContainer}>
+        <div className={classes.fileDescription}>
+          <h1 className={classes.description}>{label}</h1>
+          {file && <span className={classes.fileName}>{file.name}</span>}
+        </div>
 
-      <div>
-        <RegularButton size="sm" color="primary" onClick={handleClick}>
-          <Attachment className={classes.icons} /> adjuntar
-        </RegularButton>
-        <input ref={inputRef} type="file" onChange={handleUploload} style={{ display: 'none' }} />
+        <div>
+          <RegularButton size="sm" color="primary" onClick={handleClick}>
+            <Attachment className={classes.icons} /> adjuntar
+          </RegularButton>
+          <input ref={inputRef} type="file" onChange={handleUploload} style={{ display: 'none' }} />
+        </div>
       </div>
-    </div>
+      <FormHelperText>{errorText}</FormHelperText>
+    </FormControl>
   );
 };
 

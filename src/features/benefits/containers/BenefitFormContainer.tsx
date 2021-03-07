@@ -15,7 +15,7 @@ import WizardContainer from '../../wizard/WizardContainer';
 
 import { WizardStepsConfig } from '../config';
 import { selectStepsData, selectSubmitReady } from 'features/wizard/selectors';
-import { selectFetchedBenefitId, selectIsBenefitCreated } from '../store/selectors';
+import { selectIsBenefitCreated } from '../store/selectors';
 import { actions } from '../store/slice';
 
 const BenefitFormContainer = () => {
@@ -25,38 +25,24 @@ const BenefitFormContainer = () => {
   const submitReady = useSelector(selectSubmitReady);
   const data = useSelector(selectStepsData);
   const isBenefitCreated = useSelector(selectIsBenefitCreated);
-  const benefitId = useSelector(selectFetchedBenefitId);
 
   useEffect(() => {
     if (submitReady && !isEmpty(data) && !isBenefitCreated) {
-      if (benefitId) {
-        dispatch(
-          actions.updateBenefitRequest({
-            id: benefitId,
-            updatedInfo: {
-              ...data.benefitDetail,
-              partnerObjectId: data.partnerDetail.partnerObjectId,
-            },
-          }),
-        );
-
-        return;
-      }
-
       dispatch(
         actions.setBenefitRequest({
           ...data.benefitDetail,
           partnerObjectId: data.partnerDetail.partnerObjectId,
           paymentMethod: data.distributionDetail.paymentMethod,
           paymentMethodRecovery: data.distributionDetail.paymentMethodRecovery,
+          files: data.documentation,
         }),
       );
     }
-  }, [data, dispatch, submitReady, benefitId, isBenefitCreated]);
+  }, [data, dispatch, submitReady, isBenefitCreated]);
 
   useEffect(() => {
-    if (isBenefitCreated) history.push(`/app/benefits/preRequest/${benefitId}`);
-  }, [isBenefitCreated, history, benefitId]);
+    if (isBenefitCreated) history.push(`/app/benefits/list`);
+  }, [isBenefitCreated, history]);
 
   return (
     <GridContainer justify="center">

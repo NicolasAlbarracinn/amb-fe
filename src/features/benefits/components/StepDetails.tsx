@@ -102,7 +102,7 @@ const StepDetails = () => {
                   <Field name="certificateNumber" label="N° Certificado" component={TextFormField} />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
-                  <Field name="applicationDate" label="Fecha de solicitud" component={TextFormField} />
+                  <Field disabled name="applicationDate" label="Fecha de solicitud" component={TextFormField} />
                 </GridItem>
               </GridContainer>
 
@@ -198,7 +198,7 @@ const StepDetails = () => {
                 </div>
                 <div className={classes.right}>
                   <Button type="submit" color="rose">
-                    Finalizar
+                    Proximo
                   </Button>
                 </div>
                 <div className={classes.clearfix} />

@@ -12,6 +12,7 @@ const cookies = new Cookies();
 
 export function* getPDFFileRequest(action: PayloadAction<any>) {
   const token = cookies.get('token');
+  const REQUEST_URL = `${UTILITIES_URL}/generateFile`;
   try {
     const requestOptions: RequestInit = {
       method: 'POST',
@@ -19,10 +20,15 @@ export function* getPDFFileRequest(action: PayloadAction<any>) {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(action.payload),
+      body: JSON.stringify({
+        ...action.payload.benefitDetail,
+        partnerObjectId: action.payload.partnerDetail.partnerObjectId,
+        paymentMethod: action.payload.distributionDetail.paymentMethod,
+        paymentMethodRecovery: action.payload.distributionDetail.paymentMethodRecovery,
+      }),
     };
 
-    const response = yield call(request, UTILITIES_URL, requestOptions, true);
+    const response = yield call(request, REQUEST_URL, requestOptions, true);
 
     const blob = yield response.blob();
     const fileURL = URL.createObjectURL(blob);

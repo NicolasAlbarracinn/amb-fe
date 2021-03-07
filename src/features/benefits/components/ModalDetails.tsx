@@ -40,8 +40,6 @@ const ModalDetails = () => {
     { label: 'rechzar', onClick: () => handleChangeBenefitStatus('r'), color: 'danger' },
   ];
 
-  console.log(benefitDetail);
-
   return (
     <Modal
       openState={!!benefitDetail}

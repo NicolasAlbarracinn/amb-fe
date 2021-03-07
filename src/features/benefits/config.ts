@@ -12,7 +12,7 @@ export enum WizardStepsConfig {
 export const defaultBenefit: IBenefitInfo = {
   benefitType: '',
   certificateNumber: '',
-  applicationDate: moment(new Date()).format('MM/DD/YYYY'),
+  applicationDate: moment(new Date()).format('DD/MM/YYYY'),
   portfolio: '',
   plan: '',
   signatureAmount: '',
@@ -20,11 +20,11 @@ export const defaultBenefit: IBenefitInfo = {
   duesAmount: '',
   amountGranted: '',
   observations: '',
-  benefitStatus: 'ps',
+  benefitStatus: 's',
   commercializer: '',
   grantedPeriod: '',
   fileGranted: '',
-  statusDate: moment(new Date()).format('MM/DD/YYYY'),
+  statusDate: moment(new Date()).format('DD/MM/YYYY'),
 };
 
 export const defaultDistribution = {

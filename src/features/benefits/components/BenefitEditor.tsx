@@ -89,8 +89,6 @@ const BenefitEditor = ({ benefitData }: IBenefitEditorProps) => {
         innerRef={formikRef}
       >
         {props => {
-          console.log(props);
-
           const areValuesEmpty = !props.values.amountGranted && !props.values.signatureAmount;
 
           if (plan?.signatureAmount && plan.amountGranted && areValuesEmpty) {

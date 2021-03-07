@@ -16,7 +16,6 @@ const Benefits = () => {
     <Switch>
       <Route path="/app/benefits/list" component={BenefitList} />
       <Route path="/app/benefits/new" component={BenefitsForm} />
-      <Route path="/app/benefits/:benefitId" component={BenefitsForm} />
     </Switch>
   );
 };

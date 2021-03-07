@@ -1,59 +1,22 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
-
-import { makeStyles, Theme } from '@material-ui/core';
-
-import { selectStepsData } from '../../wizard/selectors';
-import { actions } from '../store/slice';
+import * as yup from 'yup';
 
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-
 import Button from 'components/CustomButtons/Button';
 import FileUploadField from 'components/Form/FileUploadField';
+import { useStyles } from 'components/Wizard/styles';
 
-import { cardTitle, successColor, dangerColor } from 'utils/styles';
+import { useWizardStep } from '../../wizard/hooks';
+import { selectStepsData } from '../../wizard/selectors';
+import { actions } from '../store/slice';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  cardIconTitle: {
-    ...cardTitle,
-    marginTop: '15px',
-    marginBottom: '0px',
-  },
-  staticFormGroup: {
-    marginLeft: '0',
-    marginRight: '0',
-    paddingBottom: '10px',
-    margin: '8px 0 0 0',
-    position: 'relative',
-    '&:before,&:after': {
-      display: 'table',
-      content: '" "',
-    },
-    '&:after': {
-      clear: 'both',
-    },
-  },
-  staticFormControl: {
-    marginBottom: '0',
-    paddingTop: '8px',
-    paddingBottom: '8px',
-    minHeight: '34px',
-  },
-  inputAdornment: {
-    marginRight: '8px',
-    position: 'relative',
-  },
-  inputAdornmentIconSuccess: {
-    color: successColor[0] + '!important',
-  },
-  inputAdornmentIconError: {
-    color: dangerColor[0] + '!important',
-  },
-}));
+import { WizardStepsConfig } from '../config';
 
 const StepPDFCreator = () => {
+  const { handleSubmit, handlePrevious } = useWizardStep(WizardStepsConfig.DOCUMENTATION_STEP);
   const classes = useStyles();
   const data = useSelector(selectStepsData);
   const dispatch = useDispatch();
@@ -66,15 +29,14 @@ const StepPDFCreator = () => {
     <Formik
       initialValues={{ benefitFile: null }}
       onSubmit={values => {
-        //TODO: add submit function
-        console.log(values);
+        handleSubmit(values);
       }}
       enableReinitialize={true}
+      validationSchema={yup.object().shape({ benefitFile: yup.mixed().required('campo requerido') })}
     >
       {props => {
         return (
           <Form>
-            <h4 className={classes.cardIconTitle}>Creacion y carga de documentacion</h4>
             <Button color="primary" onClick={handleGeneratePdf}>
               generar legajo
             </Button>
@@ -84,8 +46,19 @@ const StepPDFCreator = () => {
                 <Field name="benefitFile" label="Legajo de solicitud de prestacion" component={FileUploadField} />
               </GridItem>
             </GridContainer>
-
-            <Button color="rose">Solicitar prestacion</Button>
+            <div className={classes.footer}>
+              <div className={classes.left}>
+                <Button color="rose" onClick={handlePrevious}>
+                  Anterior
+                </Button>
+              </div>
+              <div className={classes.right}>
+                <Button type="submit" color="rose">
+                  Solicitar prestacion
+                </Button>
+              </div>
+              <div className={classes.clearfix} />
+            </div>
           </Form>
         );
       }}
