@@ -17,7 +17,7 @@ import { selectPartnerData, selectIsDataFetched } from '../store/selectors';
 import { defaultDistribution, distributionValidationSchema, WizardStepsConfig } from '../config';
 import { IPartner } from '../types';
 
-export const StepDistribution = () => {
+const StepDistribution = () => {
   const [inputFields, setInputFields] = useState(defaultDistribution);
   const { handleNext, handlePrevious } = useWizardStep(WizardStepsConfig.DISTRIBUTION_STEP);
 
@@ -132,3 +132,5 @@ export const StepDistribution = () => {
     </div>
   );
 };
+
+export default StepDistribution;

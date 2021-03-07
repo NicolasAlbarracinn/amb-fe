@@ -7,8 +7,9 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
 
 import StepPartner from '../components/StepPartner';
-import { StepDistribution } from '../components/StepDistribution';
+import StepDistribution from '../components/StepDistribution';
 import StepDetails from '../components/StepDetails';
+import StepPDFCreator from '../components/StepPDFCreator';
 
 import WizardContainer from '../../wizard/WizardContainer';
 
@@ -69,6 +70,7 @@ const BenefitFormContainer = () => {
               stepId: WizardStepsConfig.DISTRIBUTION_STEP,
             },
             { stepName: 'Datos de la prestación', stepComponent: StepDetails, stepId: WizardStepsConfig.DETAILS_STEP },
+            { stepName: 'Documentacion', stepComponent: StepPDFCreator, stepId: WizardStepsConfig.DOCUMENTATION_STEP },
           ]}
           title="Agregar prestacion"
           subtitle="Complete los campos requeridos para crear un nuevo prestacion"

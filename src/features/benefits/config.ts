@@ -6,6 +6,7 @@ export enum WizardStepsConfig {
   PARTER_STEP = 'partnerDetail',
   DISTRIBUTION_STEP = 'distributionDetail',
   DETAILS_STEP = 'benefitDetail',
+  DOCUMENTATION_STEP = 'documentation',
 }
 
 export const defaultBenefit: IBenefitInfo = {

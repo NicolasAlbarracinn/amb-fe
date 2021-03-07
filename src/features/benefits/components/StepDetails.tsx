@@ -21,7 +21,7 @@ import { IBenefitInfo, IPlan } from '../types';
 
 const StepDetails = () => {
   const formikRef = useRef<FormikProps<IBenefitInfo>>(null);
-  const { handleSubmit, handlePrevious } = useWizardStep(WizardStepsConfig.DETAILS_STEP);
+  const { handleNext, handlePrevious } = useWizardStep(WizardStepsConfig.DETAILS_STEP);
 
   const partnerData: IBenefitInfo | null = useSelector(selectPartnerData);
   const planList: IPlan[] = useSelector(selectPlanList);
@@ -73,7 +73,7 @@ const StepDetails = () => {
     <div>
       <Formik
         initialValues={defaultBenefit}
-        onSubmit={values => handleSubmit(values)}
+        onSubmit={values => handleNext(values)}
         validationSchema={formBenefitSchema}
         enableReinitialize={true}
         innerRef={formikRef}
