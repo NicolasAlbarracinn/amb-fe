@@ -85,14 +85,14 @@ const grayColor = [
   '#3C4858',
   '#AAAAAA',
   '#D2D2D2',
-  '#DDD',
+  '#DDD', //Puede ser
   '#555555',
   '#333',
-  '#eee',
+  '#eee', //Puede ser
   '#ccc',
   '#e4e4e4',
   '#E5E5E5',
-  '#f9f9f9',
+  '#f9f9f9', //Puede ser
   '#f5f5f5',
   '#495057',
   '#e7e7e7',

@@ -125,6 +125,7 @@ export const calculusTypeOption = [
   { value: 'Por lo debitado', label: 'Por lo debitado' },
 ];
 
+//TODO: convert all this to maps
 export const GenderList: { [key: string]: string } = {
   m: 'Masculino',
   f: 'Femenino',
@@ -149,3 +150,5 @@ export const PartnerStatusList: { [key: string]: string } = {
   s: 'Suspendido',
   t: 'Transitorio',
 };
+
+export const MinisteriesMap = new Map(ministriesList.map(ml => [ml.value, ml.label]));

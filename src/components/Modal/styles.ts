@@ -1,5 +1,5 @@
 import { makeStyles, Theme } from '@material-ui/core';
-import { grayColor, defaultFont } from 'utils/styles';
+import { grayColor, defaultFont, hexToRgb, blackColor } from 'utils/styles';
 
 export const modalStyle = (theme: Theme) => ({
   modalRoot: {
@@ -138,12 +138,17 @@ export const useNotificationStyles = makeStyles((theme: Theme) => ({
     height: 'fit-content',
   },
   modalHeader: {
-    borderBottom: 'none',
-    paddingTop: '24px',
-    paddingRight: '24px',
-    paddingBottom: '0',
-    paddingLeft: '24px',
+    boxShadow: '0 1px 4px 0 rgba(' + hexToRgb(blackColor) + ', 0.14)',
+    borderBottom: '1px solid ',
+    padding: '20px',
     minHeight: '16.43px',
+    backgroundColor: grayColor[2],
+    color: grayColor[12],
+    textTransform: 'uppercase',
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   modalCloseButton: {
     color: grayColor[0],
@@ -184,6 +189,10 @@ export const useNotificationStyles = makeStyles((theme: Theme) => ({
     maxWidth: '700px',
     width: '600px',
   },
+  modalLarge: {
+    maxWidth: '900px',
+    width: '900px',
+  },
   modalFooter: {
     padding: '15px',
     textAlign: 'right',
@@ -193,5 +202,9 @@ export const useNotificationStyles = makeStyles((theme: Theme) => ({
   modalFooterCenter: {
     marginLeft: 'auto',
     marginRight: 'auto',
+  },
+  closeIcon: {
+    width: '16px',
+    height: '16px',
   },
 }));

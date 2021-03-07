@@ -1,29 +1,26 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+
+import { makeStyles, Theme } from '@material-ui/core';
+import DialogContent from '@material-ui/core/DialogContent';
 
 import { selectBenefitsData } from '../store/selectors';
-import { IBenefit } from '../types';
 import { actions } from '../store/slice';
+import { IBenefit, IDistributionInfo, IPartnerInfo } from '../types';
+import { labelsRepartitions, labelsPartners } from '../config';
 
-import Close from '@material-ui/icons/Close';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
-
-import Button from 'components/CustomButtons/Button';
+import Modal, { ButtonConfig } from 'components/Modal/Modal';
 import GridItem from 'components/Grid/GridItem';
 import GridContainer from 'components/Grid/GridContainer';
 
-import { useNotificationStyles, useModalStyles } from '../styles';
-import { labelsDetails } from '../config';
+import Accordion from 'components/Accordion/Accordion';
+import { grayColor, primaryBoxShadow, hexToRgb, blackColor } from 'utils/styles';
+
+import BenefitEditor from './BenefitEditor';
 
 const ModalDetails = () => {
-  const history = useHistory();
-  const classes = useNotificationStyles();
-  const modalClasses = useModalStyles();
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const benefitDetail: IBenefit | null = useSelector(selectBenefitsData);
 
@@ -38,105 +35,134 @@ const ModalDetails = () => {
     }
   };
 
-  const handleSetFormData = () => {
-    if (benefitDetail && benefitDetail.benefitId) {
-      dispatch(actions.getPartnerInformationSuccess(benefitDetail));
-      dispatch(actions.setBenefitId(benefitDetail.benefitId));
-      history.push(`/app/benefits/${benefitDetail.benefitId}`);
-    }
-  };
+  const buttonConfig: Array<ButtonConfig> = [
+    { label: 'aprobar', onClick: () => handleChangeBenefitStatus('a'), color: 'success' },
+    { label: 'rechzar', onClick: () => handleChangeBenefitStatus('r'), color: 'danger' },
+  ];
+
+  console.log(benefitDetail);
 
   return (
-    <GridContainer justify="center">
-      <GridItem xs={12} sm={12} md={12} className={classes.center}>
-        <Dialog
-          classes={{
-            root: classes.center + ' ' + classes.modalRoot,
-            paper: classes.modal + ' ' + classes.modalMedium,
-          }}
-          open={!!benefitDetail}
-          onClose={handleCloseModal}
-        >
-          <DialogTitle id="classic-modal-slide-title" disableTypography className={classes.modalHeader}>
-            <Button
-              className={classes.modalCloseButton}
-              justIcon
-              key="close"
-              aria-label="Close"
-              color="transparent"
-              onClick={handleCloseModal}
-            >
-              <Close />
-            </Button>
-            <h4 className={classes.modalTitle}>Detalle de prestacion</h4>
-          </DialogTitle>
-          <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
-            <GridContainer justify="center">
-              {/* TODO: Add a mofication form here */}
-              {benefitDetail ? (
-                <>
-                  {Object.keys(benefitDetail)
-                    .filter(k => labelsDetails[k] && benefitDetail[k])
-                    .map(k => (
-                      <GridItem xs={12} sm={4}>
-                        <div className={modalClasses.dataContainer}>
-                          <label className={modalClasses.title}>{labelsDetails[k]}</label>
-                          <span>{benefitDetail[k]}</span>
-                        </div>
-                      </GridItem>
-                    ))}
-                  {/* 
-                  <GridItem xs={12} sm={12}>
-                    {' '}
-                    <h3>Delegacion</h3>
-                  </GridItem>
-
-                  {Object.keys(benefitDetail.distributionDetail)
-                    .filter(k => labelsRepartitions[k] && benefitDetail.distributionDetail[k])
-                    .map(k => (
-                      <GridItem xs={12} sm={4}>
-                        <div className={modalClasses.dataContainer}>
-                          <label className={modalClasses.title}>{labelsRepartitions[k]}</label>
-                          <span>{benefitDetail.distributionDetail[k]}</span>
-                        </div>
-                      </GridItem>
-                    ))}
-
-                  <GridItem xs={12} sm={12}>
-                    {' '}
-                    <h3>Datos del socio</h3>
-                  </GridItem>
-                  {Object.keys(benefitDetail.partnerDetail)
-                    .filter(k => labelsPartners[k] && benefitDetail.partnerDetail[k])
-                    .map(k => (
-                      <GridItem xs={12} sm={4}>
-                        <div className={modalClasses.dataContainer}>
-                          <label className={modalClasses.title}>{labelsPartners[k]}</label>
-                          <span>{benefitDetail.partnerDetail[k]}</span>
-                        </div>
-                      </GridItem>
-                    ))} */}
-                </>
-              ) : (
-                <div>No pudiemos encontrar datos</div>
-              )}
-            </GridContainer>
-          </DialogContent>
-          <DialogActions className={classes.modalFooter + ' ' + classes.modalFooterCenter}>
-            <Button onClick={() => handleChangeBenefitStatus('a')} color="success" simple>
-              aprobar
-            </Button>
-            <Button onClick={() => handleSetFormData()} color="warning" simple>
-              modificar
-            </Button>
-            <Button onClick={() => handleChangeBenefitStatus('r')} color="danger" simple>
-              rechazar
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </GridItem>
-    </GridContainer>
+    <Modal
+      openState={!!benefitDetail}
+      handleCloseModal={handleCloseModal}
+      title={`Detalle de prestacion N° ${benefitDetail?.benefitId || '-'}`}
+      buttonsList={buttonConfig}
+    >
+      <DialogContent id="classic-modal-slide-description" className={classes.modalBody}>
+        <GridContainer justify="center">
+          {/* TODO: Add a mofication form here */}
+          {benefitDetail ? (
+            <Accordion
+              defaultTab={0}
+              collapses={[
+                {
+                  title: 'Detalle de la prestacion',
+                  content: <BenefitEditor benefitData={benefitDetail} />,
+                },
+                {
+                  title: 'Detalle del socio',
+                  content: <PartnerDetails partner={benefitDetail.partnerDetail} />,
+                },
+                {
+                  title: 'Detalle de la reparticion',
+                  content: <DistributionDetails distribution={benefitDetail.distributionDetail} />,
+                },
+              ]}
+            />
+          ) : (
+            <div>No pudiemos encontrar datos</div>
+          )}
+        </GridContainer>
+      </DialogContent>
+    </Modal>
   );
 };
 
 export default ModalDetails;
+
+export const useStyles = makeStyles((theme: Theme) => ({
+  dataContainer: {
+    ...primaryBoxShadow,
+    display: 'flex',
+    flexDirection: 'column',
+    marginBottom: '18px',
+    backgroundColor: grayColor[2],
+    padding: '10px',
+    color: '#fff',
+    boxShadow: '0 1px 4px 0 rgba(' + hexToRgb(blackColor) + ', 0.14)',
+    borderRadius: '6px',
+  },
+
+  title: {
+    fontSize: '14px',
+    color: grayColor[12],
+    textTransform: 'uppercase',
+  },
+  values: {
+    color: grayColor[4],
+    fontSize: '14px',
+  },
+  modalBody: {
+    paddingTop: '24px',
+    paddingRight: '24px',
+    paddingBottom: '16px',
+    paddingLeft: '24px',
+    position: 'relative',
+    overflow: 'visible',
+  },
+  itemsContainer: {
+    width: '100%',
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+}));
+
+const LabaledItems = (props: { label: string; value: string }) => {
+  const classes = useStyles();
+
+  return (
+    <GridItem xs={12} sm={4}>
+      <div className={classes.dataContainer}>
+        <label className={classes.title}>{props.label}</label>
+        <span className={classes.values}>{props.value}</span>
+      </div>
+    </GridItem>
+  );
+};
+
+const PartnerDetails = (props: { partner: IPartnerInfo }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.itemsContainer}>
+      {Object.keys(props.partner)
+        .filter(k => labelsPartners[k] && props.partner[k])
+        .map(k => (
+          <LabaledItems label={labelsPartners[k]} value={props.partner[k]} />
+        ))}
+    </div>
+  );
+};
+
+const DistributionDetails = (props: { distribution: IDistributionInfo }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.itemsContainer}>
+      {Object.keys(props.distribution)
+        .filter(k => labelsRepartitions[k] && props.distribution[k])
+        .map(k => (
+          <LabaledItems label={labelsRepartitions[k]} value={props.distribution[k]} />
+        ))}
+    </div>
+  );
+};
+
+// const BenefitDetail = (benefit: IBenefitInfo) => (
+//   <div>
+//     {Object.keys(benefit)
+//       .filter(k => labelsDetails[k] && benefit[k])
+//       .map(k => (
+//         <LabaledItems label={labelsDetails[k]} value={benefit[k]} />
+//       ))}
+//   </div>
+// );

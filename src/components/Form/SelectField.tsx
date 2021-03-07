@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   selectFormControl: {
-    margin: '7px 0 17px 0',
+    margin: '16px 0 7px 0',
     '& > div': {
       '&:hover:not($disabled):before,&:before': {
         borderColor: grayColor[4] + '!important',
@@ -137,7 +137,7 @@ const SelectFormField: React.FC<
 
   const errorText = getIn(form.touched, field.name) && getIn(form.errors, field.name);
   return (
-    <FormControl fullWidth error={!!errorText} className={classes.selectFormControl}>
+    <FormControl margin="normal" fullWidth error={!!errorText} className={classes.selectFormControl}>
       {label && <InputLabel className={classes.selectLabel}>{label}</InputLabel>}
       <Select
         fullWidth

@@ -8,6 +8,43 @@ import Button from '@material-ui/core/Button';
 
 import { useStyles } from './styles';
 
+export type ColorType =
+  | 'primary'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'rose'
+  | 'white'
+  | 'twitter'
+  | 'facebook'
+  | 'google'
+  | 'linkedin'
+  | 'pinterest'
+  | 'youtube'
+  | 'tumblr'
+  | 'github'
+  | 'behance'
+  | 'dribbble'
+  | 'reddit'
+  | 'transparent';
+
+export type SizeType = 'sm' | 'lg';
+
+export interface IRegularButtonProps {
+  color?: ColorType;
+  size?: SizeType;
+  simple?: boolean;
+  round?: boolean;
+  fullWidth?: boolean;
+  disabled?: boolean;
+  block?: boolean;
+  link?: boolean;
+  justIcon?: boolean;
+  className?: boolean;
+  muiClasses?: object;
+}
+
 const RegularButton = forwardRef((props: any, ref) => {
   const classes = useStyles();
   const {

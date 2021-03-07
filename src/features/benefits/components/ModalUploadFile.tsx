@@ -16,7 +16,7 @@ import GridItem from 'components/Grid/GridItem';
 import GridContainer from 'components/Grid/GridContainer';
 import FileUpload from 'components/CustomUpload/FileUpload';
 
-import { useNotificationStyles } from '../styles';
+import { useNotificationStyles } from 'components/Modal/styles';
 
 const UploadModal = () => {
   const [uploadedFiles, setFile] = useState({ bankTransfer: '' });
